@@ -7,6 +7,6 @@
 <title>index</title>
 </head>
 <body>
-<h2>임성찬</h2>
+
 </body>
 </html>
