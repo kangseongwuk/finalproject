@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import kr.co.ezen.mapper.BoardMapper;
 import kr.co.ezen.mapper.MemberMapper;
 
 
@@ -30,6 +31,7 @@ import kr.co.ezen.mapper.MemberMapper;
 @ComponentScan("kr.co.ezen.dao")
 @ComponentScan("kr.co.ezen.service")
 @PropertySource("/WEB-INF/properties/db.properties")
+@ComponentScan("kr.co.ezen.controller_test")
 public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Value("${db.classname}")//oracle.jdbc.OracleDriver
@@ -57,8 +59,10 @@ public class ServletAppContext implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		WebMvcConfigurer.super.addResourceHandlers(registry);
-		registry.addResourceHandler("/**").addResourceLocations("/resources/");
+//		WebMvcConfigurer.super.addResourceHandlers(registry);
+        registry
+        .addResourceHandler("/**","board/**")
+        .addResourceLocations("/resources/"); 
 	}
 	
 	//데이터베이스 접속 정보 관리하는 빈 등록
@@ -123,6 +127,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 	public StandardServletMultipartResolver multipartResolver() {
 		
 		return new StandardServletMultipartResolver(); 
+	}
+	
+	//Query 실행을 위한 객체를 관리 - BoardMapper 등록
+	@Bean
+	public MapperFactoryBean<BoardMapper> getMapperFactoryBean(SqlSessionFactory factory) {
+		MapperFactoryBean<BoardMapper> factoryBean = new MapperFactoryBean<BoardMapper>(BoardMapper.class);
+		
+		factoryBean.setSqlSessionFactory(factory);
+		
+		
+		return factoryBean;
 	}
 }
 
