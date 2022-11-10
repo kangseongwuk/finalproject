@@ -463,21 +463,3 @@ insert into FAQBoardT(fb_no,fb_title,fb_contentsQ,fb_contentsA)
 
 
 commit;
-
-
-select a_memberNo, a_name, a_location, a_locationDetail, a_tele, a_joinDate, a_classify, a_infoExpose, 
-        a_introduce, a_mainImg, a_file, a_gradeMin, a_gradeMax, a_shuttle, a_openTime, a_closeTime
-    from academyMemberT natural join academyInfoT
-    where a_memberNo = 100001
-    order by a_joinDate desc;
-
-select r_no, r_writerNo, r_writerId, r_contents, r_score, r_writeTime
-    from reviewT
-    where a_memberNo = 100001
-    order by r_no desc;
-
-select a_memberNo, a_subject
-    from academySubjectT
-    where a_memberNo = 100001
-    order by a_subject;
-
