@@ -81,7 +81,7 @@
   <div class="navigation w-100">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark p-0">
-        <a class="navbar-brand" href="index.jsp"><img src="images/logo.png" alt="logo"></a>
+        <a class="navbar-brand" href="${root }index"><img src="images/logo.png" alt="logo"></a>
         <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
           aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -109,9 +109,9 @@
                 고객센터
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="${root }teacher">공지사항</a></li>
+                <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
                 <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
-                <li><a class="dropdown-item" href="${root }board/askBoard">문의하기</a></li>
+                <li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite">문의하기</a></li>
                 
            <!--    <li><a class="dropdown-item" href="notice-single.html">블랙리스트</a></li> -->
                

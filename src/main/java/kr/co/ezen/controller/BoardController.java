@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.AcademySubjectBean;
+import kr.co.ezen.beans.AcademyTeacherBean;
 import kr.co.ezen.service.BoardService;
 
 @Controller
@@ -42,21 +43,23 @@ public class BoardController {
 		AcademyMemberBean academyInfoBasic = boardService.getAcademyInfoBasic(a_memberNo);
 		List<AcademyReviewBean> academyInfoReview = boardService.getAcademyInfoReview(a_memberNo);
 		List<AcademySubjectBean> academyInfoSubject = boardService.getAcademyInfoSubject(a_memberNo);
+		List<AcademyTeacherBean> academyInfoTeacher = boardService.getAcademyInfoTeacher(a_memberNo);
 		
 		model.addAttribute("academyInfoBasic",academyInfoBasic);
 		model.addAttribute("academyInfoReview",academyInfoReview);
 		model.addAttribute("academyInfoSubject",academyInfoSubject);
+		model.addAttribute("academyInfoTeacher",academyInfoTeacher);
 		
 		
 		return "board/gBoardRead";
 	}
 	
 	//임시 코드
-	@GetMapping("/teacher")
-	public String teacher() {
+	@GetMapping("/gBoardRead_teacher")
+	public String gBoardRead_teacher() {
 		
 		
-		return "teacher";
+		return "board/gBoardRead_teacher";
 	}
 	
 	//문의게시판 목록 호출
