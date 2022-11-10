@@ -12,20 +12,33 @@
 </head>
 <body>
 
-<!-- ===============================  header  =============================== -->
-<%--    <c:import url="/WEB-INF/views/include/header.jsp"/> --%>
-<!-- ===============================  header  =============================== -->
+<!-- 헤더 자리 -->
 
+	<h2>문의하기 (사용자 화면)</h2>
 	<div>
 		<form:form action="${root }serviceBoard/siteAskWrite_pro" method="post" modelAttribute="saWriteBean"
 		enctype="multipart/form-data">
+		<div>
+			<form:label path="m_id">아이디</form:label>
+			<form:input path="m_id" />
+			<form:errors path="m_id" style="color:red"></form:errors>
+		</div>
+		<div>
+			<form:label path="m_name">이름</form:label>
+			<form:input path="m_name" />
+			<form:errors path="m_name" style="color:red"></form:errors>
+		</div>
 		
 		<div>
 			<form:label path="sa_tele">휴대폰</form:label>
 			<form:input path="sa_tele" />
 			<form:errors path="sa_tele" style="color:red"></form:errors>
 		</div>
-		
+		<div>
+			<form:label path="m_email">이메일</form:label>
+			<form:input path="m_email" />
+			<form:errors path="m_email" style="color:red"></form:errors>
+		</div>
 		<div>
 			<form:label path="sa_title">제목</form:label>
 			<form:input path="sa_title" />
@@ -48,9 +61,7 @@
 			</form:form>
 	</div>
 
-<!-- ===============================  footer  =============================== -->
-<%--  <c:import url="/WEB-INF/views/include/footer.jsp"/> --%>
-<!-- ===============================  footer  =============================== -->
+<!-- 푸터 자리 -->
 
 
 </body>

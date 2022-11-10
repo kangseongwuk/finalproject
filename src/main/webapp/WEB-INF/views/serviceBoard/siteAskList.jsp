@@ -12,7 +12,7 @@
 <body>
 
 <!-- 게시글 리스트 -->
-			<h4> : 문 의 사 항 : </h4>			
+			<h4> : 문 의 사 항 : (관리자 화면) </h4>			
 			
 			<c:forEach var="str" items="${salist}">
 			
@@ -22,7 +22,6 @@
         		<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${str.sa_time}" /><br>
 			</c:forEach>
 			<div>
-				<a href="${root}serviceBoard/siteAskWrite">글쓰기</a>
 				<a href="${root}index">돌아가기</a>
 			</div>
 			
