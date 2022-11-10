@@ -11,9 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.service.MemberService;
 
+@RequestMapping("/member")
 @Controller
 public class MemberController {
 	
@@ -23,6 +26,7 @@ public class MemberController {
 	@Autowired
 	@Lazy
 	MemberBean loginMemberBean;
+	
 	
 	
 	

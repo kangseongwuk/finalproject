@@ -21,7 +21,7 @@ public interface MemberMapper {
 	@Delete("delete from memberT where m_memberNo = #{m_memberNo}")
 	 void deleteMemeber(int m_memberNo);
 	
-	@Insert("insert into membert(m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_recommend,m_email) "
-			+ "values(m_sq.nextval, #{m_id}, #{m_pw}, #{m_name}, #{m_birth}, #{m_gender}, #{m_tele}, #{m_recommend},#{m_email})")
+	@Insert("insert into membert(m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email) "
+			+ "values(m_sq.nextval, #{m_id}, #{m_pw}, #{m_name}, #{m_birth}, #{m_gender}, #{m_tele},#{m_email})")
 	 void joinMember(MemberBean joinMemberBean);
 }

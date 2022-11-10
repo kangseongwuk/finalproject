@@ -109,30 +109,3 @@
 	});
 
 })(jQuery);
-
-// scroll_move
-
-$(document).ready(function($) {
-            $(".scroll_move").click(function(event){
-                console.log(".scroll_move");         
-                event.preventDefault();
-                $('html,body').animate({scrollTop:$(this.hash).offset().top-90}, 900);
-            });
-
-        });
- // carousel
-$('.carousel.carousel-multi-item.v-2 .carousel-item').each(function(){
-  var next = $(this).next();
-  if (!next.length) {
-    next = $(this).siblings(':first');
-  }
-  next.children(':first-child').clone().appendTo($(this));
-
-  for (var i=0;i<4;i++) {
-    next=next.next();
-    if (!next.length) {
-      next=$(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo($(this));
-  }
-});

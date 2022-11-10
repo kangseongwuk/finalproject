@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:url var='root' value='/'/>
 <!DOCTYPE html>
 
@@ -80,18 +81,18 @@
 						<h4>회원 로그인</h4>
 					</div>
 					<div class="d-flex flex-column text-center">
-						<form>
+					<!-- ==================로그인================== -->
+						<form:form action="${root}member/login_pro" method="post" modelAttribute="loginMemberBean">
 							<div class="form-group">
-								<input type="text" class="form-control" id="id" name="id"
-									placeholder="ID">
+								<form:input path="m_id" class="form-control" placeholder="ID"/>
+									<form:errors path="m_id" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Password">
+								<form:input path="m_pw" class="form-control"  placeholder="Password"/>
+									<form:errors path="m_pw" style="color:red"/>
 							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
+							<form:button type="submit" class="btn btn-primary">로그인</form:button>
+						</form:form>
 						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
 						<div class="d-flex justify-content-center social-buttons">
 							<button type="button" class="btn btn-secondary btn-round"
@@ -108,6 +109,7 @@
 							</button>
 						</div>
 					</div>
+					<!-- ==================로그인================== -->
 				</div>
 			</div>
 		</div>

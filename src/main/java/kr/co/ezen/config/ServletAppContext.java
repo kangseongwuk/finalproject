@@ -59,7 +59,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		// TODO Auto-generated method stub
 //		WebMvcConfigurer.super.addResourceHandlers(registry);
         registry
-        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**")
+        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**","member/**")
         .addResourceLocations("/resources/"); 
 	}
 	

@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Select;
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.AcademySubjectBean;
-import kr.co.ezen.beans.AcademyTeacherBean;
 
 
 public interface BoardMapper {
@@ -44,9 +43,4 @@ public interface BoardMapper {
 			+ "order by a_subject")
 	List<AcademySubjectBean> getAcademyInfoSubject(int a_memberNo);
 	
-	//학원별 강사 조회
-	@Select("select a_memberNo, t_name, t_subject, t_contents, t_file "
-			+ "from academyTeacherT "
-			+ "where a_memberNo = #{a_memberNo}")
-	List<AcademyTeacherBean> getAcademyInfoTeacher(int a_memberNo);
 }
