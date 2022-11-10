@@ -6,14 +6,20 @@ import org.springframework.web.multipart.MultipartFile;
 public class ServiceCenterBean {
 
 	private int nb_no;
+	
+	//@NotBlank
 	private String nb_title;
+	
+	//@NotBlank
 	private String nb_contents;
-	private String nb_writer;
+	
 	private Timestamp nb_writeTime;
 	private Timestamp nb_modifyTime;
 	private String nb_file;
-	private String nb_lookCount;
+	private String nb_viewCount;
 	
+	private String nb_writer;
+		
 	private MultipartFile upload_file;	 
 	 
 	public int getNb_no() {
@@ -52,11 +58,11 @@ public class ServiceCenterBean {
 	public void setNb_file(String nb_file) {
 		this.nb_file = nb_file;
 	}
-	public String getNb_lookCount() {
-		return nb_lookCount;
+	public String getNb_viewCount() {
+		return nb_viewCount;
 	}
-	public void setNb_lookCount(String nb_lookCount) {
-		this.nb_lookCount = nb_lookCount;
+	public void setNb_lookCount(String nb_viewCount) {
+		this.nb_viewCount = nb_viewCount;
 	}
 	public String getNb_writer() {
 		return nb_writer;
@@ -70,6 +76,6 @@ public class ServiceCenterBean {
 	public void setUpload_file(MultipartFile upload_file) {
 		this.upload_file = upload_file;
 	}
-	
+
 }
 

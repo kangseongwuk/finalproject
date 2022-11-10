@@ -20,6 +20,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import kr.co.ezen.mapper.BoardMapper;
 import kr.co.ezen.mapper.FaqMapper;
 import kr.co.ezen.mapper.MemberMapper;
+import kr.co.ezen.mapper.ServiceCenterMapper;
+import kr.co.ezen.mapper.SiteAskMapper;
 
 @Configuration
 //Controller
@@ -57,7 +59,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		// TODO Auto-generated method stub
 //		WebMvcConfigurer.super.addResourceHandlers(registry);
         registry
-        .addResourceHandler("/**","board/**","faq/**")
+        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**")
         .addResourceLocations("/resources/"); 
 	}
 	
@@ -145,6 +147,29 @@ public class ServletAppContext implements WebMvcConfigurer{
 				
 		return factoryBean;
 				
+	}
+	
+	//Query 실행을 위한 객체를 관리(Mapper 관리) -- 공지사항 Mapper등록
+	@Bean
+	public MapperFactoryBean<ServiceCenterMapper> getServiceCenterMapper(SqlSessionFactory factory){
+		MapperFactoryBean<ServiceCenterMapper> factoryBean = new MapperFactoryBean<ServiceCenterMapper>(ServiceCenterMapper.class);
+		
+		factoryBean.setSqlSessionFactory(factory); 
+		
+		return factoryBean;
+		
+	}	
+	
+	
+// 문의하기 Mapper등록	
+	@Bean
+	public MapperFactoryBean<SiteAskMapper> getSiteAskMapper(SqlSessionFactory factory){
+		MapperFactoryBean<SiteAskMapper> factoryBean = new MapperFactoryBean<SiteAskMapper>(SiteAskMapper.class);
+		
+		factoryBean.setSqlSessionFactory(factory); 
+		
+		return factoryBean;
+		
 	}
 }
 

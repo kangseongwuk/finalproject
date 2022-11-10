@@ -390,9 +390,20 @@ CREATE TABLE siteAskT(
     sa_file varchar2(3000)
 );
 
+
+
+
+
 -- 사이트 문의 예시 (현재 없음)
 
+insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
+values('10000001', '01011112222', '빨리 해결해주세요', '아이디랑 비밀번호를 모르겠어요. 제 계정 정보 좀 알려주세요');
 
+insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
+values('10000001', '01011112222', '아직인가요?', '저 로그인 해야해요');
+
+insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
+values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
 
 
 --16.0 공지사항 게시물 번호 시퀀스
