@@ -10,7 +10,7 @@
   <!-- Basic Page Needs
 	================================================== -->
   <meta charset="utf-8">
-  <title>questions.jsp</title>
+  <title>askBoard</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -92,31 +92,20 @@
             <li class="nav-item @@events">
               <a class="nav-link" href="courses">예체능</a>
             </li> 
-            <li class="nav-item @@contact">
+            <!-- <li class="nav-item @@contact">
               <a class="nav-link" href="contact.html">이벤트</a>
-            </li>             
+            </li> -->             
             <li class="nav-item dropdown view">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 고객센터
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="teacher">공지사항</a></li>
-                <li><a class="dropdown-item" href="teacher">FAQ</a></li>
-                <li><a class="dropdown-item" href="questions">문의하기</a></li>
+                <li><a class="dropdown-item" href="faqBoard">FAQ</a></li>
+                <li><a class="dropdown-item" href="askBoard">문의하기</a></li>
                 
            <!--    <li><a class="dropdown-item" href="notice-single.html">블랙리스트</a></li> -->
                
-                
-                <!-- <li class="dropdown-item dropdown dropleft">
-                  <a class="dropdown-toggle" href="#" id="navbarDropdownSubmenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sub Menu
-                  </a>
-                  <ul class="dropdown-menu dropdown-submenu" aria-labelledby="navbarDropdownSubmenu">
-                    <li><a class="dropdown-item" href="#!">Sub Menu 01</a></li>
-                    <li><a class="dropdown-item" href="#!">Sub Menu 02</a></li>
-                    <li><a class="dropdown-item" href="#!">Sub Menu 03</a></li>
-                  </ul>
-                </li> -->
               </ul>
             </li>
           </ul>
@@ -126,69 +115,104 @@
   </div>
 </header>
 <!-- /header -->
+
 <!-- Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content rounded-0 border-0 p-4">
-            <div class="modal-header border-0">
-                <h3>Register</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="login">
-                    <form action="#" class="row">
-                        <div class="col-12">
-                            <input type="text" class="form-control mb-3" id="signupPhone" name="signupPhone" placeholder="Phone">
-                        </div>
-                        <div class="col-12">
-                            <input type="text" class="form-control mb-3" id="signupName" name="signupName" placeholder="Name">
-                        </div>
-                        <div class="col-12">
-                            <input type="email" class="form-control mb-3" id="signupEmail" name="signupEmail" placeholder="Email">
-                        </div>
-                        <div class="col-12">
-                            <input type="password" class="form-control mb-3" id="signupPassword" name="signupPassword" placeholder="Password">
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">SIGN UP</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content rounded-0 border-0 p-4">
-            <div class="modal-header border-0">
-                <h3>Login</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="#" class="row">
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="loginPhone" name="loginPhone" placeholder="Phone">
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="loginName" name="loginName" placeholder="Name">
-                    </div>
-                    <div class="col-12">
-                        <input type="password" class="form-control mb-3" id="loginPassword" name="loginPassword" placeholder="Password">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">LOGIN</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header border-bottom-0">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-title text-center">
+						<h4>회원 로그인</h4>
+					</div>
+					<div class="d-flex flex-column text-center">
+						<form>
+							<div class="form-group">
+								<input type="text" class="form-control" id="id" name="id"
+									placeholder="ID">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" id="password"
+									name="password" placeholder="Password">
+							</div>
+							<button type="button" class="btn btn-info btn-block btn-round"
+								type="submit">로그인</button>
+						</form>
+						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
+						<div class="d-flex justify-content-center social-buttons">
+							<button type="button" class="btn btn-secondary btn-round"
+								data-toggle="tooltip" data-placement="top" title="Google">
+								<i class="fab fa-google"></i>
+							</button>
+							<button type="button" class="btn btn-secondary btn-round"
+								data-toggle="tooltip" data-placement="top" title="Facebook">
+								<i class="fab fa-facebook"></i>
+							</button>
+							<button type="button" class="btn btn-secondary btn-round"
+								data-toggle="tooltip" data-placement="top" title="twitter">
+								<i class="fab fa-twitter"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 학원 로그인 -->
+	<div class="modal fade" id="loginModal2" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header border-bottom-0">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-title text-center">
+						<h4>학원 로그인</h4>
+					</div>
+					<div class="d-flex flex-column text-center">
+						<form>
+							<div class="form-group">
+								<input type="text" class="form-control" id="id2" name="id2"
+									placeholder="ID">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" id="password2"
+									name="password2" placeholder="Password">
+							</div>
+							<button type="button" class="btn btn-info btn-block btn-round"
+								type="submit">로그인</button>
+						</form>
+						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
+						<div class="d-flex justify-content-center social-buttons">
+							<button type="button" class="btn btn-secondary btn-round"
+								data-toggle="tooltip" data-placement="top" title="Google">
+								<i class="fab fa-google"></i>
+							</button>
+							<button type="button" class="btn btn-secondary btn-round"
+								data-toggle="tooltip" data-placement="top" title="Facebook">
+								<i class="fab fa-facebook"></i>
+							</button>
+							<button type="button" class="btn btn-secondary btn-round"
+								data-toggle="tooltip" data-placement="top" title="twitter">
+								<i class="fab fa-twitter"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <!-- page title -->
 <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
@@ -196,7 +220,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index.html">Home</a></li>
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">문의사항</li>
         </ul>
@@ -235,13 +259,6 @@
 </section>
 <!-- /contact -->
 
-<!-- gmap -->
-<!-- <section class="section pt-0">
-  Google Map
-  <div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
-</section> -->
-<!-- /gmap -->
-
 <!-- footer -->
 <footer>
 <!-- copyright -->
@@ -253,8 +270,8 @@
           <a class="logo-footer" href="index"><img class="img-fluid mb-4" src="images/logo.png" alt="logo"></a>
           <ul class="list-inline">
             <li class="list-inline-item"><a class="d-inline-block p-2" href="about"><h4>회사 소개</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="https://twitter.com/themefisher"><h4>FAQ</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="questions"><h4>문의하기</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="faqBoard"><h4>FAQ</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="askBoard"><h4>문의하기</h4></a></li>
           </ul>
         </div>
       </div>

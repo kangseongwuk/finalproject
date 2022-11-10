@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 
 <!--
@@ -16,7 +16,7 @@
   <!-- Basic Page Needs
 	================================================== -->
   <meta charset="utf-8">
-  <title> SKYCASTLE 회사소개</title>
+  <title>faqBoard</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -42,6 +42,7 @@
 
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/faqstyle.css" rel="stylesheet">
 
   <!--Favicon-->
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
@@ -59,6 +60,7 @@
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
+
 <!-- Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -157,14 +159,16 @@
 		</div>
 	</div>
 
+
 <!-- page title -->
 <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
   <div class="container">
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary">Home</a></li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">회사소개</li>
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">FAQ</li>
         </ul>
       </div>
     </div>
@@ -172,83 +176,116 @@
 </section>
 <!-- /page title -->
 
-<!-- about -->
- <section class="section">
+<!-- blogs -->
+<section class="section">
   <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <img class="img-fluid w-100 mb-4" src="images/about/about-page.png" alt="about image">
-        <h2 class="section-title"><span class="text-muted">SKYCASTLE</span>은 교육의 미래를 선도합니다</h2>
-        <p>대한민국 최대의 학원정보공유 기업인 SKYCASTLE은 끊임없이 변화하는 교육의 패러다임 속에서 다양한 정책과 시스템의 변화를 통해 현재의 모습으로 진화해 왔습니다. 서울에서 경기, 인천에 이르기까지 국내 1위 교육기업으로서 전국적으로 사업을 확장해왔고, 학원 사업에서 출판, 온라인사업 분야까지 보다 넓은 분야로 확대해 나가고 있습니다. 하지만 이러한 진화는 변화에 발 빠르게 대처하기 위한 수단이 아니라, 장기적인 안목으로 교육을 변화시키고자 하는 미래 교육을 목표로 한 것이었습니다.
-           교육의 변화를 따라가기보다 교육환경의 흐름을 연구하는 기업입니다. 이를 통해 학생들에게 ‘도달해야 할 목표’가 아닌 ‘목표로 가는 방법’을 제시하고자 합니다. 또 학생들과 함께 그 길을 걷고자 합니다.</p>
-        <p>공교육과 사교육, 좋은 교육과 나쁜 교육의 경계는 경제적 개념과 구조에서 나오는 것이 아니라 어떤 교육 컨텐츠를 제공하느냐, 교육에 얼마나 기여하느냐에 달려있다고 생각하고 있습니다. 이것이 지금 이 시간에도 타임교육이 교육적 연구를 멈추지 않는 이유이기도 합니다.
-        <br>세계에 내 놓아도 부끄럽지 않은 교육, 세계 교육을 선도하는 기업을 실현하겠습니다.</p>
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6">
+        <div class="section-title text-center">
+          <h2>Frequently Asked Questions</h2>
+        </div>
       </div>
     </div>
-  </div>
-</section> 
- 
-<!-- /about -->
-
-<!-- banner-feature -->
-<section class="bg-white overflow-md-hidden">
-  <!-- <img src="images/backgrounds/wave-bg.svg" class="wave-bg"> -->
-  <div class="container">
-    <div class="row justify-content-around align-items-center">
-      <div class="col-12 mb-5 text-center">
-        <h2>회사의 주요 임무는 무엇입니까</h2>
+   
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="accordion accordion-border-bottom" id="accordionFAQ">
+          <div class="accordion-item">
+            <h2 class="accordion-header accordion-button h5 border-0 active"
+              id="heading-ebd23e34fd2ed58299b32c03c521feb0b02f19d9" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse-ebd23e34fd2ed58299b32c03c521feb0b02f19d9" aria-expanded="true"
+              aria-controls="collapse-ebd23e34fd2ed58299b32c03c521feb0b02f19d9">Can I apply if my credit isn&rsquo;t
+              perfect?
+            </h2>
+            <div id="collapse-ebd23e34fd2ed58299b32c03c521feb0b02f19d9"
+              class="accordion-collapse collapse border-0 show"
+              aria-labelledby="heading-ebd23e34fd2ed58299b32c03c521feb0b02f19d9" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body py-0 content">The difference between and premium product consist number of
+                components, plugins, page in each. The Free versions contain only a few elements and pages that.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header accordion-button h5 border-0 "
+              id="heading-a443e01b4db47b3f4a1267e10594576d52730ec1" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse-a443e01b4db47b3f4a1267e10594576d52730ec1" aria-expanded="false"
+              aria-controls="collapse-a443e01b4db47b3f4a1267e10594576d52730ec1">How do I know that I have been approved?
+            </h2>
+            <div id="collapse-a443e01b4db47b3f4a1267e10594576d52730ec1" class="accordion-collapse collapse border-0 "
+              aria-labelledby="heading-a443e01b4db47b3f4a1267e10594576d52730ec1" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body py-0 content">The difference between and premium product consist number of
+                components, plugins, page in each. The Free versions contain only a few elements and pages that.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header accordion-button h5 border-0 "
+              id="heading-4b82be4be873c8ad699fa97049523ac86b67a8bd" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse-4b82be4be873c8ad699fa97049523ac86b67a8bd" aria-expanded="false"
+              aria-controls="collapse-4b82be4be873c8ad699fa97049523ac86b67a8bd">Do I need to fax or email any documents?
+            </h2>
+            <div id="collapse-4b82be4be873c8ad699fa97049523ac86b67a8bd" class="accordion-collapse collapse border-0 "
+              aria-labelledby="heading-4b82be4be873c8ad699fa97049523ac86b67a8bd" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body py-0 content">The difference between and premium product consist number of
+                components, plugins, page in each. The Free versions contain only a few elements and pages that.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header accordion-button h5 border-0 "
+              id="heading-3e13e9676a9cd6a6f8bfbe6e1e9fc0881ef247b3" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse-3e13e9676a9cd6a6f8bfbe6e1e9fc0881ef247b3" aria-expanded="false"
+              aria-controls="collapse-3e13e9676a9cd6a6f8bfbe6e1e9fc0881ef247b3">Do you provide loans to military
+              personnel?
+            </h2>
+            <div id="collapse-3e13e9676a9cd6a6f8bfbe6e1e9fc0881ef247b3" class="accordion-collapse collapse border-0 "
+              aria-labelledby="heading-3e13e9676a9cd6a6f8bfbe6e1e9fc0881ef247b3" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body py-0 content">The difference between and premium product consist number of
+                components, plugins, page in each. The Free versions contain only a few elements and pages that.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header accordion-button h5 border-0 "
+              id="heading-0c2f829793a1f0562fea97120357dd2d43319164" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse-0c2f829793a1f0562fea97120357dd2d43319164" aria-expanded="false"
+              aria-controls="collapse-0c2f829793a1f0562fea97120357dd2d43319164">Can I remove footer credit purchase ?
+            </h2>
+            <div id="collapse-0c2f829793a1f0562fea97120357dd2d43319164" class="accordion-collapse collapse border-0 "
+              aria-labelledby="heading-0c2f829793a1f0562fea97120357dd2d43319164" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body py-0 content">The difference between and premium product consist number of
+                components, plugins, page in each. The Free versions contain only a few elements and pages that.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header accordion-button h5 border-0 "
+              id="heading-8fe6730e26db16f15763887c30a614caa075f518" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse-8fe6730e26db16f15763887c30a614caa075f518" aria-expanded="false"
+              aria-controls="collapse-8fe6730e26db16f15763887c30a614caa075f518">What is the difference the free
+              versions?
+            </h2>
+            <div id="collapse-8fe6730e26db16f15763887c30a614caa075f518" class="accordion-collapse collapse border-0 "
+              aria-labelledby="heading-8fe6730e26db16f15763887c30a614caa075f518" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body py-0 content">The difference between and premium product consist number of
+                components, plugins, page in each. The Free versions contain only a few elements and pages that.</div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div class="col-lg-4 col-md-6 text-center">
-         <img src="images/icon/view.gif">
-            <h3 class="mb-xl-4 mb-lg-3 mb-4">사용자 입장으로 운영</h3>
-        <p class="mx-lg-3">우리는 사용자가 되어 다양한 방면으로의 사용 경험을 데이터 삼아 최적의 환경을 만듭니다.</p>
-      </div>
-      
-       <div class="col-lg-4 col-md-6 text-center">
-         <img src="images/icon/folder.gif">
-            <h3 class="mb-xl-4 mb-lg-3 mb-4">신속한 정보 업데이트</h3>
-        <p class="mx-lg-3">신속한 업데이트로 정보를 <br>놓치지 않도록 공유합니다</p>
-      </div>
-      
-     <div class="col-lg-4 col-md-6 text-center">
-         <img src="images/icon/chat.gif">
-            <h3 class="mb-xl-4 mb-lg-3 mb-4">문의사항 신속 답변</h3>
-        <p class="mx-lg-3">문의사항에 대한 답변의 진행상황과 결과를 <br>신속하고 정확하게 소통하고 공유합니다</p>
-      </div>
-      
     </div>
   </div>
 </section>
-<!-- /banner-feature -->
-<!-- cta -->
-<section class="section bg-primary">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title text-dark">최고의 서비스를 제공합니다. 사용해보세요!</h2>
-         <a href="join" class="btn btn-light">가입하기</a> 
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- /cta -->
-
+<!-- /blogs -->
 
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>
 <!-- ===============================  footer  =============================== -->
 
-
 <!-- jQuery -->
 <script src="plugins/jQuery/jquery.min.js"></script>
+<script src="plugins/jQuery/faqjquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="plugins/bootstrap/bootstrap.min.js"></script>
+<script src="plugins/bootstrap/faqbootstrap.min.js"></script>
 <!-- slick slider -->
 <script src="plugins/slick/slick.min.js"></script>
+<script src="plugins/slick/faqslick.min.js"></script>
 <!-- aos -->
 <script src="plugins/aos/aos.js"></script>
 <!-- venobox popup -->
@@ -258,9 +295,12 @@
 <!-- google map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
 <script src="plugins/google-map/gmap.js"></script>
+<!-- # JS Plugins -->
+<script src="plugins/scrollmenu/scrollmenu.min.js"></script>
 
 <!-- Main Script -->
 <script src="js/script.js"></script>
+<script src="js/faqscript.js"></script>
 
 </body>
 </html>
