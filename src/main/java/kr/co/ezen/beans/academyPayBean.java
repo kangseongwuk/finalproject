@@ -2,7 +2,7 @@ package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
 
-public class academyPayBean {
+public class AcademyPayBean {
 
 	private int a_memberNo;
 	private Timestamp a_payStart;

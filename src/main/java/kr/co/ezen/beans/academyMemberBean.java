@@ -2,7 +2,7 @@ package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
 
-public class academyMemberBean {
+public class AcademyMemberBean {
 
 	//학원 기본 정보
 	private int a_memberNo;
@@ -26,6 +26,7 @@ public class academyMemberBean {
 	private String a_shuttle;
 	private String a_openTime;
 	private String a_closeTime;
+	
 	
 	public int getA_memberNo() {
 		return a_memberNo;

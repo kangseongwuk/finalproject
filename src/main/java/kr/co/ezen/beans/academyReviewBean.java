@@ -2,7 +2,7 @@ package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
 
-public class academyReviewBean {
+public class AcademyReviewBean {
 
 	private int a_memberNo;
 	private int r_no;

@@ -1,6 +1,6 @@
 package kr.co.ezen.beans;
 
-public class academySubjectBean {
+public class AcademySubjectBean {
 
 	private int a_memberNo;
 	private String a_subject;
