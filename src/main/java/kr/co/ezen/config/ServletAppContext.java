@@ -18,11 +18,8 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kr.co.ezen.mapper.BoardMapper;
+import kr.co.ezen.mapper.FaqMapper;
 import kr.co.ezen.mapper.MemberMapper;
-
-
-
-
 
 @Configuration
 //Controller
@@ -31,7 +28,6 @@ import kr.co.ezen.mapper.MemberMapper;
 @ComponentScan("kr.co.ezen.dao")
 @ComponentScan("kr.co.ezen.service")
 @PropertySource("/WEB-INF/properties/db.properties")
-@ComponentScan("kr.co.ezen.controller_test")
 public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Value("${db.classname}")//oracle.jdbc.OracleDriver
@@ -61,7 +57,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		// TODO Auto-generated method stub
 //		WebMvcConfigurer.super.addResourceHandlers(registry);
         registry
-        .addResourceHandler("/**","board/**")
+        .addResourceHandler("/**","board/**","faq/**")
         .addResourceLocations("/resources/"); 
 	}
 	
@@ -138,6 +134,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		
 		return factoryBean;
+	}
+	
+	//FaqMapper 등록
+	@Bean
+	public MapperFactoryBean<FaqMapper> getFaqMapper(SqlSessionFactory factory){
+		MapperFactoryBean<FaqMapper> factoryBean = new MapperFactoryBean<FaqMapper>(FaqMapper.class);
+				
+		factoryBean.setSqlSessionFactory(factory);
+				
+		return factoryBean;
+				
 	}
 }
 

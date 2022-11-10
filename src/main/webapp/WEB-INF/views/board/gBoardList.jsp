@@ -154,7 +154,7 @@
           <h4 class="card-title">${gList.a_name }</h4>
         </a>
         <p class="card-text mb-4">${gList.a_introduce }</p>
-        <a href="course-single.html" class="btn btn-primary btn-sm">Apply now</a>
+        <a href="gBoardRead?a_memberNo=${gList.a_memberNo }" class="btn btn-primary btn-sm">상세 보기</a>
       </div>
     </div>
   </div>

@@ -13,7 +13,7 @@ drop table mBoardT; --삭제
 drop table gBoardReviewT; --삭제
 drop table gBoardT; --삭제
 
-
+--위는 이전 버전 삭제
 
 drop SEQUENCE fb_sq;
 drop SEQUENCE nb_sq;
@@ -200,19 +200,14 @@ insert into academyPayT(a_memberNo,a_payStart,a_payEnd)
 
 --6. 학원 리뷰 테이블
 CREATE TABLE reviewT(
-    a_memberNo  number(6),
-        CONSTRAINT review_a_memberNo_fk foreign key(a_memberNo)
-            REFERENCES academyMemberT(a_memberNo),
+    a_memberNo  number(6)
+        not null,
     r_no    number(4)
         not null,
     r_writerNo  number(8)
         not null,
-        CONSTRAINT review_r_writerNo_fk foreign key(r_writerNo)
-            REFERENCES memberT(m_memberNo),
     r_writerId  varchar2(40)
         not null,
-        CONSTRAINT review_r_writerId_fk foreign key(r_writerId)
-            REFERENCES memberT(m_id),
     r_contents  varchar2(1500),
     r_score number(1)
         not null,
@@ -275,13 +270,12 @@ insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
 
 --9. 강사 리뷰 정보 테이블
 CREATE TABLE teacherReviewT(
-    a_memberNo  number(6)   not null,
-    t_name  varchar2(30)    not null,
-        CONSTRAINT teacherReview_teacher_fk foreign key(a_memberNo,t_name)
-            REFERENCES academyTeacherT(a_memberNo, t_name),
-    m_memberNo  number(8)   not null,
-        CONSTRAINT teacherReview_m_memberNo_fk foreign key(m_memberNo)
-            REFERENCES memberT(m_memberNo),
+    a_memberNo  number(6)
+        not null,
+    t_name  varchar2(30)
+        not null,
+    m_memberNo  number(8)
+        not null,
     t_score number(1)
         not null,
     constraint t_review_pk primary key(a_memberNo, t_name, m_memberNo)
@@ -296,12 +290,10 @@ insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_score)
 
 --10. 신고/블랙리스트 관리 정보 테이블
 CREATE TABLE blacklistT(
-    m_memberNo  number(8)   not null,
-        CONSTRAINT black_m_memberNo_fk foreign key(m_memberNo)
-            REFERENCES memberT(m_memberNo),
-    a_memberNo  number(6)   not null,
-        CONSTRAINT black_a_memberNo_fk foreign key(a_memberNo)
-            REFERENCES academyMemberT(a_memberNo),
+    m_memberNo  number(8)
+        not null,
+    a_memberNo  number(6)
+        not null,
     black_contents  varchar2(3000)
         not null,
     black_time  timestamp
@@ -316,12 +308,10 @@ CREATE TABLE blacklistT(
 
 --11. 학생-학원 연결 정보 테이블
 CREATE TABLE memberConnectionT(
-    m_memberNo  number(8)   not null,
-        CONSTRAINT conn_m_memberNo_fk foreign key(m_memberNo)
-            REFERENCES memberT(m_memberNo),
-    a_memberNo  number(6)   not null,
-        CONSTRAINT conn_a_memberNo_fk foreign key(a_memberNo)
-            REFERENCES academyMemberT(a_memberNo),
+    m_memberNo  number(8)
+        not null,
+    a_memberNo  number(6)
+        not null,
     m_connDate  timestamp
         DEFAULT systimestamp not null,
     constraint conn_pk primary key(a_memberNo, m_memberNo)
@@ -368,12 +358,10 @@ insert into topMenuT(menu_no,menu_name)
 
 --14. 학원상담 예약문의
 CREATE TABLE counselReservationT(
-    a_memberNo  number(6)   not null,
-        CONSTRAINT counsel_a_memberNo_fk foreign key(a_memberNo)
-            REFERENCES academyMemberT(a_memberNo),
-    m_memberNo  number(8)   not null,
-        CONSTRAINT counsel_m_memberNo_fk foreign key(m_memberNo)
-            REFERENCES memberT(m_memberNo),
+    a_memberNo  number(6)
+        not null,
+    m_memberNo  number(8)
+        not null,
     cr_name varchar2(30)
         not null,
     cr_childName    varchar2(30),
@@ -395,6 +383,8 @@ CREATE TABLE siteAskT(
     sa_tele varchar2(11),
     sa_time timestamp
         default systimestamp not null,
+    sa_title    varchar2(100)
+        not null,
     sa_contents varchar2(1500)
         not null,
     sa_file varchar2(3000)
@@ -462,4 +452,21 @@ insert into FAQBoardT(fb_no,fb_title,fb_contentsQ,fb_contentsA)
 
 
 commit;
+
+
+select a_memberNo, a_name, a_location, a_locationDetail, a_tele, a_joinDate, a_classify, a_infoExpose, 
+        a_introduce, a_mainImg, a_file, a_gradeMin, a_gradeMax, a_shuttle, a_openTime, a_closeTime
+    from academyMemberT natural join academyInfoT
+    where a_memberNo = 100001
+    order by a_joinDate desc;
+
+select r_no, r_writerNo, r_writerId, r_contents, r_score, r_writeTime
+    from reviewT
+    where a_memberNo = 100001
+    order by r_no desc;
+
+select a_memberNo, a_subject
+    from academySubjectT
+    where a_memberNo = 100001
+    order by a_subject;
 

@@ -15,16 +15,13 @@
   <div class="copyright py-4 bg-footer">
     <div class="container">
       <div class="row">
-        <!-- logo -->
-          <a class="logo-footer" href="index.html"><img class="img-fluid mb-4" src="images/logo.png" alt="logo"></a>
-       
         <div class="col-sm-5 text-sm-left text-center">
-        
+        <!-- logo -->
+          <a class="logo-footer" href="index"><img class="img-fluid mb-4" src="images/logo.png" alt="logo"></a>
           <ul class="list-inline">
-
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="https://facebook.com/themefisher/"><h4>회사 소개</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="https://twitter.com/themefisher"><h4>FAQ</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="https://github.com/themefisher"><h4>문의하기</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="about"><h4>회사 소개</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="faqBoard"><h4>FAQ</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="askBoard"><h4>문의하기</h4></a></li>
           </ul>
         </div>
       </div>
