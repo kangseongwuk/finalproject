@@ -31,13 +31,13 @@ public class MemberController {
 		
 		model.addAttribute("loginMemberBean", loginMemberBean);
 		
-		return "login";
+		return "member/login";
 	}
 	
 	@PostMapping("/login_pro")
 	public String login_pro(@ModelAttribute("loginMemberBean") MemberBean loginMemberBean, BindingResult result, HttpServletRequest request){
 		if(result.hasErrors()) {
-			return "login";
+			return "member/login";
 		}
 		memberService.getLoginMember(loginMemberBean);
 		
@@ -45,10 +45,10 @@ public class MemberController {
 			 HttpSession session = request.getSession();
 			 session.setAttribute("loginMemberBean", loginMemberBean);
 			loginMemberBean.setMemberlogin(true);
-			return "login_success";
+			return "member/login_success";
 		}else {
 			loginMemberBean.setMemberlogin(false);
-			return "login_fail";
+			return "member/login_fail";
 		}
 		
 		
@@ -59,12 +59,12 @@ public class MemberController {
 		
 		memberService.getModifyMember(modifyMemberBean);
 		
-		return "modify";
+		return "member/modify";
 	}
 	@PostMapping("/modify_pro")
 	public String modify_pro(@ModelAttribute("modifyMemberBean") MemberBean modifyMemberBean, BindingResult result) {
 		if(result.hasErrors()) {
-			return "modify";
+			return "member/modify";
 		}
 		memberService.updateMember(modifyMemberBean);
 		return "modify_success";
@@ -74,20 +74,20 @@ public class MemberController {
 		
 		memberService.deleteMemeber(loginMemberBean.getM_memberNo());
 		session.invalidate();
-		return "delete";
+		return "member/delete";
 	}
 	
 	@GetMapping("/join")
 	public String join(@ModelAttribute("joinMemberBean") MemberBean joinMemberBean) {
 		
 		
-		return "join";
+		return "member/join";
 	}
 	@PostMapping("/join_pro")
 	public String join_pro(@ModelAttribute("joinMemberBean") MemberBean joinMemberBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "join";
+			return "member/join";
 		}
 		memberService.joinMember(joinMemberBean);
 		return "index";

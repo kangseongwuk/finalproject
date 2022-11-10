@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
-<c:url var='root' value='/'/>  
+<!-- <c:url var='root' value='/'/> --> 
+<c:set var='root' value="${pageContext.request.contextPath }/"/> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +41,7 @@
   <link rel="stylesheet" href="plugins/aos/aos.css">
   <!-- veskycastlelogo.pngnobox popup -->
   <link rel="stylesheet" href="plugins/venobox/venobox.css">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
 
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
@@ -57,7 +59,6 @@
   </div>
   <!-- preloader end -->
 
-<!-- header -->
 <header class="fixed-top header">
   <!-- top header -->
   <div class="top-header py-2 bg-white">
@@ -68,8 +69,9 @@
         </div>
         <div class="col-lg-8 text-center text-lg-right">
           <ul class="list-inline">
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">로그인</a></li>
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#signupModal" data-toggle="modal" data-target="#signupModal">회원가입</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">회원 로그인</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal2" data-toggle="modal" data-target="#loginModal2">학원 로그인</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }join" >회원가입</a></li>
           </ul>
         </div>
       </div>
@@ -79,7 +81,7 @@
   <div class="navigation w-100">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark p-0">
-        <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+        <a class="navbar-brand" href="index.jsp"><img src="images/logo.png" alt="logo"></a>
         <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
           aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -87,29 +89,29 @@
 
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="navbar-nav ml-auto text-center">
-            <li class="nav-item active">
-              <a class="nav-link" href="">회사 소개</a> <!-- 바꿀 예정 -->
+            <li class="nav-item @@active">
+              <a class="nav-link" href="${root }about">회사 소개</a> 
             </li>
             <li class="nav-item @@about">
-              <a class="nav-link" href="board/gBoardList">종합</a>
+              <a class="nav-link" href="${root }board/gBoardList">종합</a>
             </li>
             <li class="nav-item @@courses">
-              <a class="nav-link" href="courses.html">단과</a>
+              <a class="nav-link" href="${root }courses">단과</a>
             </li>
             <li class="nav-item @@events">
-              <a class="nav-link" href="events.html">예체능</a>
+              <a class="nav-link" href="${root }courses">예체능</a>
             </li> 
-            <li class="nav-item @@contact">
+            <!-- <li class="nav-item @@contact">
               <a class="nav-link" href="contact.html">이벤트</a>
-            </li>             
+            </li>  -->            
             <li class="nav-item dropdown view">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 고객센터
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="teacher.html">공지사항</a></li>
-                <li><a class="dropdown-item" href="teacher-single.html">FAQ</a></li>
-                <li><a class="dropdown-item" href="notice.html">문의하기</a></li>
+                <li><a class="dropdown-item" href="${root }teacher">공지사항</a></li>
+                <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                <li><a class="dropdown-item" href="${root }board/askBoard">문의하기</a></li>
                 
            <!--    <li><a class="dropdown-item" href="notice-single.html">블랙리스트</a></li> -->
                
