@@ -64,4 +64,10 @@ public class BoardController {
 	public String askBoard() {
 		return "board/askBoard";
 	}
+	
+	//학원소개
+	@GetMapping("/about")
+	public String index() {
+		return "board/about";
+	}
 }

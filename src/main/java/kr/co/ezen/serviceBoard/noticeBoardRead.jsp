@@ -37,8 +37,8 @@
 					</c:if>
 					<div>
 						<div>
-							<a href="${root }noticeBoardList">목록보기</a>
-							<a href="${root }index">돌아가기</a>
+							<a href="${root }serviceBoard/noticeBoardList">목록보기</a>
+							<a href="${root}index">돌아가기</a>
 							<a href="${root }noticeBoardModify?nb_no=${nbReadBean.nb_no}">수정하기</a>
 							<a href="${root }noticeBoardDelete?nb_no=${nbReadBean.nb_no}">삭제하기</a>
 							

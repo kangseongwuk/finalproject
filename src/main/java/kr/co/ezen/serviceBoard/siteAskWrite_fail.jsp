@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의 실패</title>
 </head>
 <body>
-<h2>로그인실패</h2>
+
+ <h2>ㅇㅇ 오류있는듯 ㅋㅋ</h2>
 </body>
 </html>

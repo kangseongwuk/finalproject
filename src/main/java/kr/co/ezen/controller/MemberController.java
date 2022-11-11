@@ -1,5 +1,7 @@
 package kr.co.ezen.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.MemberChildBean;
 import kr.co.ezen.service.MemberService;
-
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -26,7 +28,6 @@ public class MemberController {
 	@Autowired
 	@Lazy
 	MemberBean loginMemberBean;
-	
 	
 	
 	
@@ -71,10 +72,10 @@ public class MemberController {
 			return "member/modify";
 		}
 		memberService.updateMember(modifyMemberBean);
-		return "modify_success";
+		return "member/modify_success";
 	}
 	@GetMapping("/delete")
-	public String delete(int m_memberNo, HttpSession session) {
+	public String delete(HttpSession session) {
 		
 		memberService.deleteMemeber(loginMemberBean.getM_memberNo());
 		session.invalidate();
@@ -100,5 +101,14 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "index";
+	}
+	@GetMapping("/mypage")
+	public String mypage(@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean,@ModelAttribute("memberChildBean") MemberChildBean memberChildBean , Model model) {
+		System.out.println(loginMemberBean.getM_memberNo());
+		List<MemberChildBean> memberChildlist = memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
+	 	model.addAttribute("memberChildlist", memberChildlist);
+		memberService.getMypageMember(mypageMemberBean);
+		
+		return "member/mypage";
 	}
 }

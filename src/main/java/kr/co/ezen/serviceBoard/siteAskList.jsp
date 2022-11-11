@@ -7,22 +7,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>문의사항</title>
 </head>
 <body>
 
 <!-- 게시글 리스트 -->
-			<h4> : 공 지 사 항 : </h4>			
-			<br>
-			<c:forEach var="st" items="${nblist }">
-				${st.nb_no} &nbsp;&nbsp;
-			<a href="${root }serviceBoard/noticeBoardRead?nb_no=${st.nb_no}">${st.nb_title}</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${st.nb_viewCount}<br>
-			<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.nb_writeTime}" /><br><br><hr>
+			<h4> : 문 의 사 항 : (관리자 화면) </h4>			
+			
+			<c:forEach var="str" items="${salist}">
+			
+        		${str.sa_memberNo}<br>
+        		<a href="${root }serviceBoard/siteAskRead?sa_time=${str.sa_time}">${str.sa_title}</a><br>
+        		
+        		<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${str.sa_time}" /><br>
 			</c:forEach>
 			<div>
-				<a href="${root}serviceBoard/noticeBoardWrite">글쓰기</a>
 				<a href="${root}index">돌아가기</a>
 			</div>
 			
 </body>
 </html>
+

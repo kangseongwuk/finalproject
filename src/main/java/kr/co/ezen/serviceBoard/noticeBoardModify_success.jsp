@@ -9,11 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>로그인 성공</h2>
-<h2>${sessionScope.loginMemberBean.m_id }</h2>
-<h2>${sessionScope.loginMemberBean.m_pw }</h2>
-<a href="${root }member/mypage?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }">my page</a>
-<a href="${root }member/logout">로그아웃</a>
-<a href="${root }faq/faqlist">faqlist</a>
+<h2> ㅇㅅㅇㅋ 수정 성공 ㅇㅁㅇ</h2>
+<a href="${root}index">돌아가기</a>
 </body>
 </html>

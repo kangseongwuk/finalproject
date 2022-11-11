@@ -12,16 +12,15 @@ import kr.co.ezen.beans.MemberBean;
 
 
 @Controller
-public class HomeController {
+public class MainController {
 	
 	@Autowired
 	@Lazy
 	private MemberBean loginMemberBean;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String home(@ModelAttribute("loginMemberBean") MemberBean loginMemberBean, Model model) {
 		model.addAttribute("loginMemberBean", loginMemberBean);
-		System.out.println("home");
 		return "index";
 	}
 	

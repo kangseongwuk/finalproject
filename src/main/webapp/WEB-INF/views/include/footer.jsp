@@ -19,7 +19,7 @@
         <!-- logo -->
           <a class="logo-footer" href="index"><img class="img-fluid mb-4" src="images/logo.png" alt="logo"></a>
           <ul class="list-inline">
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="about"><h4>회사 소개</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root }board/about"><h4>회사 소개</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root }faq/faqBoard"><h4>FAQ</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root }serviceBoard/siteAskWrite"><h4>문의하기</h4></a></li>
           </ul>
