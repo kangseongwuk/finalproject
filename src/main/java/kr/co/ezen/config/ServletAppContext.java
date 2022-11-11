@@ -193,7 +193,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 			InterceptorRegistration registration2 = registry.addInterceptor(checkLoginInterceptor);
 			
 			registration2.addPathPatterns("/**");// 인터셉서 통과하도록 유도
-			registration2.excludePathPatterns("/serviceBoard/noticeBoardList"); // 인터셉터 제외
+//			registration2.excludePathPatterns("/serviceBoard/noticeBoardList"); // 인터셉터 제외
 			
 		}
 }

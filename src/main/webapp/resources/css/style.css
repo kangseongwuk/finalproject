@@ -326,6 +326,7 @@ a h4:hover {
     padding-bottom: 100px;
 }
 
+
 .text-primary {
   color: #008000 !important;
 }
@@ -978,151 +979,120 @@ link:focus,
   padding: 0.3rem 0rem;
 }
 
----------------------
+/*noticeBoard  2022.11.11 ¼öÁ¤*/
 
-.accordion-item {
-  border: 0;
-}
-.accordion-item .accordion-button {
-  margin-bottom: 0;
-}
-.accordion-item:last-child {
-  margin-bottom: 0 !important;
-}
-.accordion-item .accordion-button:not(.collapsed) {
-  color: #040404;
-  background-color: transparent;
-  box-shadow: none;
-}
-.accordion-item .accordion-button::after {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000000'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
-  transform: rotateX(0);
-}
-.accordion-item .accordion-button.active::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22 fill=%22%23000%22%3E%3Cpath fill-rule=%22evenodd%22 d=%22M1.646 4.646a.5.5.0 01.708.0L8 10.293l5.646-5.647a.5.5.0 01.708.708l-6 6a.5.5.0 01-.708.0l-6-6a.5.5.0 010-.708z%22/%3E%3C/svg%3E") !important;
-  transform: rotateX(180deg);
+table {
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.accordion-border-bottom .accordion-item:not(:last-child) {
-  border-bottom: 1px solid #D6D6D6;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+th {
+  text-align: center;
 }
-.accordion-border-bottom .accordion-item:not(:last-child) .content {
-  padding-bottom: 30px;
+  
+thead {
+  font-weight: bold;
+  color: #fff;
+  background: #73685d;
+}
+  
+ td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
+  
+}
+  
+ td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
+  text-align: center;
 }
 
---------
-
-
-.accordion-button {
-  position: relative;
+a {
+  color: #73685d;
+}
+  
+ @media all and (max-width: 768px) {
+    
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  th {
+    text-align: right;
+  }
+  
+  table {
+    position: relative; 
+    padding-bottom: 0;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+  }
+  
+  thead {
+    float: left;
+    white-space: nowrap;
+  }
+  
+  tbody {
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  tr {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  th {
+    border-bottom: 1px solid #a39485;
+  }
+  
+  td {
+    border-bottom: 1px solid #e5e5e5;
+  }
+ 
+ .search-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 40px;
+  height: 40px;
+  padding: 10px;
+}
+ .search-btn {
+  color: #EDEDED;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #949BA0;
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 1rem 1.25rem;
-  font-size: 1rem;
-  color: #fff;
-  text-align: left;
-  background-color: #fff;
-  border: 0;
-  border-radius: 0;
-  overflow-anchor: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+  justify-content: center;
 }
-@media (prefers-reduced-motion: reduce) {
-  .accordion-button {
-    transition: none;
-  }
+ .search-txt {
+  float: left;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 15px;
+  line-height: 40px;
 }
-.accordion-button:not(.collapsed) {
-  color: #0c63e4;
-  background-color: #e7f1ff;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
-}
-.accordion-button:not(.collapsed)::after {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-  transform: rotate(-180deg);
-}
-.accordion-button::after {
-  flex-shrink: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-left: auto;
-  content: "";
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-size: 1.25rem;
-  transition: transform 0.2s ease-in-out;
-}
-@media (prefers-reduced-motion: reduce) {
-  .accordion-button::after {
-    transition: none;
-  }
-}
-.accordion-button:hover {
-  z-index: 2;
-}
-.accordion-button:focus {
-  z-index: 3;
-  border-color: #86b7fe;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
+ }
+  
 
-.accordion-header {
-  margin-bottom: 0;
-}
 
-.accordion-item {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
-.accordion-item:first-of-type {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-}
-.accordion-item:first-of-type .accordion-button {
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px);
-}
-.accordion-item:not(:first-of-type) {
-  border-top: 0;
-}
-.accordion-item:last-of-type {
-  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-}
-.accordion-item:last-of-type .accordion-button.collapsed {
-  border-bottom-right-radius: calc(0.25rem - 1px);
-  border-bottom-left-radius: calc(0.25rem - 1px);
-}
-.accordion-item:last-of-type .accordion-collapse {
-  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-}
-
-.accordion-body {
-  padding: 1rem 1.25rem;
-}
-
-.accordion-flush .accordion-collapse {
-  border-width: 0;
-}
-.accordion-flush .accordion-item {
-  border-right: 0;
-  border-left: 0;
-  border-radius: 0;
-}
-.accordion-flush .accordion-item:first-child {
-  border-top: 0;
-}
-.accordion-flush .accordion-item:last-child {
-  border-bottom: 0;
-}
-.accordion-flush .accordion-item .accordion-button {
-  border-radius: 0;
-}
 
 /* /modal */
 /*# sourceMappingURL=style.css.map */
