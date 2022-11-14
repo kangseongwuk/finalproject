@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.AcademySubjectBean;
+import kr.co.ezen.beans.AcademyTeacherBean;
 import kr.co.ezen.dao.BoardDAO;
 
 @Service
@@ -34,5 +35,10 @@ public class BoardService {
 	//학원 과목 조회
 	public List<AcademySubjectBean> getAcademyInfoSubject(int a_memberNo) {
 		return boardDAO.getAcademyInfoSubject(a_memberNo);
+	}
+	
+	//학원별 강사 조회
+	public List<AcademyTeacherBean> getAcademyInfoTeacher(int a_memberNo){
+		return boardDAO.getAcademyInfoTeacher(a_memberNo);
 	}
 }
