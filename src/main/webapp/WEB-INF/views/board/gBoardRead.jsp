@@ -59,69 +59,8 @@
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
-<!-- Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content rounded-0 border-0 p-4">
-            <div class="modal-header border-0">
-                <h3>Register</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="login">
-                    <form action="#" class="row">
-                        <div class="col-12">
-                            <input type="text" class="form-control mb-3" id="signupPhone" name="signupPhone" placeholder="Phone">
-                        </div>
-                        <div class="col-12">
-                            <input type="text" class="form-control mb-3" id="signupName" name="signupName" placeholder="Name">
-                        </div>
-                        <div class="col-12">
-                            <input type="email" class="form-control mb-3" id="signupEmail" name="signupEmail" placeholder="Email">
-                        </div>
-                        <div class="col-12">
-                            <input type="password" class="form-control mb-3" id="signupPassword" name="signupPassword" placeholder="Password">
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">SIGN UP</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content rounded-0 border-0 p-4">
-            <div class="modal-header border-0">
-                <h3>Login</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="#" class="row">
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="loginPhone" name="loginPhone" placeholder="Phone">
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="loginName" name="loginName" placeholder="Name">
-                    </div>
-                    <div class="col-12">
-                        <input type="password" class="form-control mb-3" id="loginPassword" name="loginPassword" placeholder="Password">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">LOGIN</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 
 <!-- page title -->
 <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
@@ -129,10 +68,10 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="courses.html">Our Courses</a></li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">Photography</li>
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="courses.html">Home</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">종합 학원</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">학원 상세페이지</li>
         </ul>
-        <p class="text-lighten mb-0">Our courses offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
       </div>
     </div>
   </div>
@@ -151,7 +90,7 @@
     <!-- course info -->
     <div class="row align-items-center mb-5">
       <div class="col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0">
-        <h2>Photography</h2>
+        <h2>${academyInfoBasic.a_name }</h2>
       </div>
       <div class="col-xl-6 order-sm-3 order-xl-2 col-12 order-2">
         <ul class="list-inline text-xl-center">
@@ -159,8 +98,8 @@
             <div class="d-flex align-items-center">
               <i class="ti-book text-primary icon-md mr-2"></i>
               <div class="text-left">
-                <h6 class="mb-0">COURSES</h6>
-                <p class="mb-0">06 Month</p>
+                <h6 class="mb-0">지역</h6>
+                <p class="mb-0">${academyInfoBasic.a_location }</p>
               </div>
             </div>
           </li>
@@ -168,8 +107,8 @@
             <div class="d-flex align-items-center">
               <i class="ti-alarm-clock text-primary icon-md mr-2"></i>
               <div class="text-left">
-                <h6 class="mb-0">DURATION</h6>
-                <p class="mb-0">03 Hours</p>
+                <h6 class="mb-0">전화번호</h6>
+                <p class="mb-0">${academyInfoBasic.a_tele }</p>
               </div>
             </div>
           </li>
@@ -177,54 +116,104 @@
             <div class="d-flex align-items-center">
               <i class="ti-wallet text-primary icon-md mr-2"></i>
               <div class="text-left">
-                <h6 class="mb-0">FEE</h6>
-                <p class="mb-0">From: $699</p>
+                <h6 class="mb-0">학원분류</h6>
+                <p class="mb-0">${academyInfoBasic.a_classify}</p>
               </div>
             </div>
           </li>
         </ul>
       </div>
+       
       <div class="col-xl-3 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
-        <a href="teacher" class="btn btn-primary">다음(임시)</a>
+        <a href="course-single.html" class="btn btn-primary">찜하기</a>
+        <a href="course-single.html" class="btn btn-primary">상담예약</a>
       </div>
       <!-- border -->
       <div class="col-12 mt-4 order-4">
         <div class="border-bottom border-primary"></div>
       </div>
     </div>
+   
+   <!-- scroll -->
+  
+  <div>
+  <ul class="list">
+    <li><a href="#scroll1" class="scroll_move">학원소개</a><li>
+    <li><a href="#scroll2" class="scroll_move">강사소개</a><li>
+    <li><a href="#scroll3" class="scroll_move">리뷰</a><li>
+    <!-- <li><a href="#scroll4" class="scroll_move">scroll4</a><li> -->
+  </ul>
+</div>
+<div class="listbox">
+
+<!-- /scroll -->  
+
     <!-- course details -->
+    
     <div class="row">
       <div class="col-12 mb-4">
-        <h3>About Course</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-          nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-          anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-          laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-          dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-          consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-          ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-          labore et dolore magnam aliquam quaerat voluptatem.</p>
+      <div class="scroll1" id="scroll1"></div>
+        <h3>학원소개</h3>
+        
+        <p>${academyInfoBasic.a_introduce }</p>
       </div>
       <div class="col-12 mb-4">
-        <h3 class="mb-3">Requirements</h3>
+        <h3 class="mb-3">과목</h3>
         <div class="col-12 px-0">
           <div class="row">
             <div class="col-md-6">
               <ul class="list-styled">
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                <c:forEach var="sub" items="${academyInfoSubject }">
+                	<li>${sub.a_subject }</li>
+                </c:forEach>
               </ul>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">상세주소</h3>
+        <div class="col-12 px-0">
+          <div class="row">
             <div class="col-md-6">
               <ul class="list-styled">
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                <li>${academyInfoBasic.a_location } / ${academyInfoBasic.a_locationDetail }</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">수업 학년</h3>
+        <div class="col-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-styled">
+                <li>${academyInfoBasic.a_gradeMin } ~ ${academyInfoBasic.a_gradeMax }</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">학원 운영 시간</h3>
+        <div class="col-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-styled">
+                <li> ${academyInfoBasic.a_openTime } ~ ${academyInfoBasic.a_closeTime }</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">셔틀 유무</h3>
+        <div class="col-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-styled">
+                <li> ${academyInfoBasic.a_shuttle }</li>
               </ul>
             </div>
           </div>
@@ -245,114 +234,76 @@
             dolor. Lorem, ipsum.</li>
         </ul>
       </div>
-      <div class="col-12 mb-5">
-        <h3>Fees and Funding</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-          nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-          anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-          laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-          dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-          consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-          ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-          labore et dolore magnam aliquam quaerat voluptatem.</p>
-      </div>
-      <!-- teacher -->
-      <div class="col-12">
-        <h5 class="mb-3">Teacher</h5>
-        <div class="d-flex justify-content-between align-items-center flex-wrap">
-          <div class="media mb-2 mb-sm-0">
-            <img class="mr-4 img-fluid" src="images/teacher.jpg" alt="Teacher">
-            <div class="media-body">
-              <h4 class="mt-0">Sam Somrat</h4>
-              Photographer
-            </div>
-          </div>
-          <div class="social-link">
-            <h6 class="d-none d-sm-block">Social Link</h6>
-            <ul class="list-inline">
-              <li class="list-inline-item"><a class="d-inline-block text-light p-1" href="https://themefisher.com/"><i class="ti-facebook"></i></a></li>
-              <li class="list-inline-item"><a class="d-inline-block text-light p-1" href="https://themefisher.com/"><i class="ti-twitter-alt"></i></a></li>
-              <li class="list-inline-item"><a class="d-inline-block text-light p-1" href="https://themefisher.com/"><i class="ti-linkedin"></i></a></li>
-              <li class="list-inline-item"><a class="d-inline-block text-light p-1" href="https://themefisher.com/"><i class="ti-instagram"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="border-bottom border-primary mt-4"></div>
-      </div>
+      </div>      
     </div>
   </div>
 </section>
 <!-- /section -->
 
-<!-- related course -->
-<section class="section pt-0">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="section-title">Related Course</h2>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <!-- course item -->
-      <div class="col-lg-4 col-sm-6 mb-5">
-        <div class="card p-0 border-primary rounded-0 hover-shadow">
-          <img class="card-img-top rounded-0" src="images/courses/course-1.jpg" alt="course thumb">
-          <div class="card-body">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>02-14-2018</li>
-              <li class="list-inline-item"><a class="text-color" href="course-single.html">Humanities</a></li>
-            </ul>
-            <a href="course-single.html">
-              <h4 class="card-title">Photography</h4>
-            </a>
-            <p class="card-text mb-4"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna.</p>
-            <a href="course-single.html" class="btn btn-primary btn-sm">Apply now</a>
-          </div>
-        </div>
-      </div>
-      <!-- course item -->
-      <div class="col-lg-4 col-sm-6 mb-5">
-        <div class="card p-0 border-primary rounded-0 hover-shadow">
-          <img class="card-img-top rounded-0" src="images/courses/course-2.jpg" alt="course thumb">
-          <div class="card-body">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>02-14-2018</li>
-              <li class="list-inline-item"><a class="text-color" href="course-single.html">Humanities</a></li>
-            </ul>
-            <a href="course-single.html">
-              <h4 class="card-title">Programming</h4>
-            </a>
-            <p class="card-text mb-4"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna.</p>
-            <a href="course-single.html" class="btn btn-primary btn-sm">Apply now</a>
-          </div>
-        </div>
-      </div>
-      <!-- course item -->
-      <div class="col-lg-4 col-sm-6 mb-5">
-        <div class="card p-0 border-primary rounded-0 hover-shadow">
-          <img class="card-img-top rounded-0" src="images/courses/course-3.jpg" alt="course thumb">
-          <div class="card-body">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>02-14-2018</li>
-              <li class="list-inline-item"><a class="text-color" href="course-single.html">Humanities</a></li>
-            </ul>
-            <a href="course-single.html">
-              <h4 class="card-title">Lifestyle Archives</h4>
-            </a>
-            <p class="card-text mb-4"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna.</p>
-            <a href="course-single.html" class="btn btn-primary btn-sm">Apply now</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- teachers carousel -->
+<section class="section text-center">
+<h2>강사진</h2>
+<div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+  <!--Controls-->
+  <div class="controls-top">
+      <a class="carousel-control-prev" href="#carousel-example-multi" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+      </a>
+      	<a class="carousel-control-next" href="#carousel-example-multi" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
+  <!--/.Controls-->
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>
+    <% int i = 0; %>
+    <c:forEach items="${academyInfoTeacher}">
+    	<% i++; %>
+    	<li data-target="#carousel-example-multi" data-slide-to=<%=i %>></li>
+    </c:forEach>
+  </ol>
+  <!--/.Indicators-->
+
+  <div class="carousel-inner v-2" role="listbox">
+
+    <div class="carousel-item active">
+      <div class="col-12 col-md-4">
+        <div class="card mb-2">
+          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (36).jpg"
+            alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title font-weight-bold">마음에 드는 강사에게 리뷰를 남겨주세요.</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btn-md btn-rounded">Button</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <c:forEach var="ait" items="${academyInfoTeacher}">
+	    <div class="carousel-item">
+	      <div class="col-12 col-md-4">
+	        <div class="card mb-2">
+	          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
+	            alt="Card image cap">
+	          <div class="card-body">
+	            <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
+	            <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
+	            <p class="card-text">${ait.t_contents }</p>
+	            <a class="btn btn-primary btn-md btn-rounded">상세보기</a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+    </c:forEach>
+  </div>
+</div>
 </section>
-<!-- /related course -->
+<!-- /teachers carousel -->
+
 
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>
