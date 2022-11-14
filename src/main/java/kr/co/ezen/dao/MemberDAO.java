@@ -1,9 +1,12 @@
 package kr.co.ezen.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.MemberChildBean;
 import kr.co.ezen.mapper.MemberMapper;
 @Repository
 public class MemberDAO {
@@ -30,5 +33,13 @@ public class MemberDAO {
 	
 	public void joinMember(MemberBean joinMemberBean) {
 		memberMapper.joinMember(joinMemberBean);
+	}
+	
+	public MemberBean getMypageMember(int m_memberNo) {
+		return memberMapper.getMypageMember(m_memberNo);
+	}
+	
+	public List<MemberChildBean> getMypageMemberChild(int m_memberNo) {
+		return memberMapper.getMypageMemberChild(m_memberNo);
 	}
 }

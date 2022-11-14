@@ -55,6 +55,14 @@ public class SiteAskService {
 		siteAskDAO.addSaContent(saWriteBean);
 	}
 	
+	/*
+	public SiteAskBean getSaContentPage(int m_memberNo) {
+		
+		return siteAskDAO.getSaContentPage(m_memberNo);	
+	}
+	*/
+	
+	
 	//글목록
 	 public List<SiteAskBean> getSaList(){		   
 		  return siteAskDAO.getSaList(); 			  

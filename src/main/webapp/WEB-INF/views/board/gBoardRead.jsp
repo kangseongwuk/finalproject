@@ -60,103 +60,6 @@
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
 
-<!-- Modal -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>회원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id" name="id"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 학원 로그인 -->
-	<div class="modal fade" id="loginModal2" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>학원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id2" name="id2"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password2"
-									name="password2" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 <!-- page title -->
@@ -252,35 +155,65 @@
       <div class="scroll1" id="scroll1"></div>
         <h3>학원소개</h3>
         
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-          nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-          anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-          laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-          dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-          consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-          ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-          labore et dolore magnam aliquam quaerat voluptatem.</p>
+        <p>${academyInfoBasic.a_introduce }</p>
       </div>
       <div class="col-12 mb-4">
-        <h3 class="mb-3">Requirements</h3>
+        <h3 class="mb-3">과목</h3>
         <div class="col-12 px-0">
           <div class="row">
             <div class="col-md-6">
               <ul class="list-styled">
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                <c:forEach var="sub" items="${academyInfoSubject }">
+                	<li>${sub.a_subject }</li>
+                </c:forEach>
               </ul>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">상세주소</h3>
+        <div class="col-12 px-0">
+          <div class="row">
             <div class="col-md-6">
               <ul class="list-styled">
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                <li>${academyInfoBasic.a_location } / ${academyInfoBasic.a_locationDetail }</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">수업 학년</h3>
+        <div class="col-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-styled">
+                <li>${academyInfoBasic.a_gradeMin } ~ ${academyInfoBasic.a_gradeMax }</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">학원 운영 시간</h3>
+        <div class="col-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-styled">
+                <li> ${academyInfoBasic.a_openTime } ~ ${academyInfoBasic.a_closeTime }</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">셔틀 유무</h3>
+        <div class="col-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-styled">
+                <li> ${academyInfoBasic.a_shuttle }</li>
               </ul>
             </div>
           </div>
@@ -327,11 +260,11 @@
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-multi" data-slide-to="1"></li>
-    <li data-target="#carousel-example-multi" data-slide-to="2"></li>
-    <li data-target="#carousel-example-multi" data-slide-to="3"></li>
-    <li data-target="#carousel-example-multi" data-slide-to="4"></li>
-    <li data-target="#carousel-example-multi" data-slide-to="5"></li>
+    <% int i = 0; %>
+    <c:forEach items="${academyInfoTeacher}">
+    	<% i++; %>
+    	<li data-target="#carousel-example-multi" data-slide-to=<%=i %>></li>
+    </c:forEach>
   </ol>
   <!--/.Indicators-->
 
@@ -343,84 +276,29 @@
           <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (36).jpg"
             alt="Card image cap">
           <div class="card-body">
-            <h4 class="card-title font-weight-bold">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
+            <h4 class="card-title font-weight-bold">마음에 드는 강사에게 리뷰를 남겨주세요.</h4>
+            <p class="card-text"></p>
             <a class="btn btn-primary btn-md btn-rounded">Button</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="carousel-item">
-      <div class="col-12 col-md-4">
-        <div class="card mb-2">
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
-            alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title font-weight-bold">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-            <a class="btn btn-primary btn-md btn-rounded">Button</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class="col-12 col-md-4">
-        <div class="card mb-2">
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (38).jpg"
-            alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title font-weight-bold">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-            <a class="btn btn-primary btn-md btn-rounded">Button</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class="col-12 col-md-4">
-        <div class="card mb-2">
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-            alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title font-weight-bold">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-            <a class="btn btn-primary btn-md btn-rounded">Button</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class="col-12 col-md-4">
-        <div class="card mb-2">
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (30).jpg"
-            alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title font-weight-bold">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-            <a class="btn btn-primary btn-md btn-rounded">Button</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class="col-12 col-md-4">
-        <div class="card mb-2">
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (27).jpg"
-            alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title font-weight-bold">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-            <a class="btn btn-primary btn-md btn-rounded">Button</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <c:forEach var="ait" items="${academyInfoTeacher}">
+	    <div class="carousel-item">
+	      <div class="col-12 col-md-4">
+	        <div class="card mb-2">
+	          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
+	            alt="Card image cap">
+	          <div class="card-body">
+	            <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
+	            <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
+	            <p class="card-text">${ait.t_contents }</p>
+	            <a class="btn btn-primary btn-md btn-rounded">상세보기</a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+    </c:forEach>
   </div>
 </div>
 </section>
