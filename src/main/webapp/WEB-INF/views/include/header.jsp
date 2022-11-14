@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <!-- <c:url var='root' value='/'/> --> 
 <c:set var='root' value="${pageContext.request.contextPath }/"/> 
 <!DOCTYPE html>
@@ -73,7 +71,7 @@
           <ul class="list-inline">
             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">회원 로그인</a></li>
             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal2" data-toggle="modal" data-target="#loginModal2">학원 로그인</a></li>
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/join" >회원가입</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }join" >회원가입</a></li>
           </ul>
         </div>
       </div>
@@ -92,7 +90,7 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="navbar-nav ml-auto text-center">
             <li class="nav-item @@active">
-              <a class="nav-link" href="${root }board/about">회사 소개</a> 
+              <a class="nav-link" href="${root }about">회사 소개</a> 
             </li>
             <li class="nav-item @@about">
               <a class="nav-link" href="${root }board/gBoardList">종합</a>
@@ -137,103 +135,5 @@
   </div>
 </header>
 <!-- /header -->
-<!-- Modal -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>회원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-					<!-- ==================로그인================== -->
-						<form:form action="${root}member/login_pro" method="post" modelAttribute="loginMemberBean">
-							<div class="form-group">
-								<form:input path="m_id" class="form-control" placeholder="ID"/>
-									<form:errors path="m_id" style="color:red"/>
-							</div>
-							<div class="form-group">
-								<form:input path="m_pw" class="form-control"  placeholder="Password"/>
-									<form:errors path="m_pw" style="color:red"/>
-							</div>
-							<form:button type="submit" class="btn btn-primary">로그인</form:button>
-						</form:form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-					<!-- ==================로그인================== -->
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 학원 로그인 -->
-	<div class="modal fade" id="loginModal2" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>학원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id2" name="id2"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password2"
-									name="password2" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

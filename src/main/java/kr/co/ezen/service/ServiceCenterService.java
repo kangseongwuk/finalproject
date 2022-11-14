@@ -64,12 +64,6 @@ public class ServiceCenterService {
 		  return serviceCenterDAO.getNbInfo(nb_no); 
 	  }
 	
-	//수정 페이지 출력 화면
-		public ServiceCenterBean getNbModifyPage(int nb_no){
-			
-			return serviceCenterDAO.getNbModifyPage(nb_no);
-		}
-	
 	//수정
 	public void modifyNbInfo(ServiceCenterBean nbModifyBean){
 		
@@ -88,11 +82,4 @@ public class ServiceCenterService {
 		
 		serviceCenterDAO.delNbInfo(nb_no);
 	}
-	
-
-	public void viewCountNbInfo(int nb_no) {
-		serviceCenterDAO.viewCountNbInfo(nb_no);
-	}
-	
-	
 }

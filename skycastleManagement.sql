@@ -144,11 +144,11 @@ CREATE TABLE academyMemberT(
 
 --학원 회원 등록 예시
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
-    values(a_sq.nextval,'aca01','12345678','a종합학원','1234567891','서울시 관악구 신림동','이젠 601호','01099998888',1);
+    values(a_sq.nextval,'aca01','12345678','aca_user1','1234567891','서울시 관악구 신림동','이젠 601호','01099998888',1);
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
-    values(a_sq.nextval,'aca02','12345678','b단과학원','1234567892','서울시 관악구 신림동','이젠 602호','01099997777',2);
+    values(a_sq.nextval,'aca02','12345678','aca_user2','1234567892','서울시 관악구 신림동','이젠 602호','01099997777',2);
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
-    values(a_sq.nextval,'aca03','12345678','c미술학원','1234567893','서울시 관악구 신림동','이젠 603호','01099996666',3);
+    values(a_sq.nextval,'aca03','12345678','aca_user3','1234567893','서울시 관악구 신림동','이젠 603호','01099996666',3);
 
 
 
@@ -390,7 +390,11 @@ CREATE TABLE siteAskT(
     sa_file varchar2(3000)
 );
 
--- 사이트 문의 예시
+
+
+
+
+-- 사이트 문의 예시 (현재 없음)
 
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
 values('10000001', '01011112222', '빨리 해결해주세요', '아이디랑 비밀번호를 모르겠어요. 제 계정 정보 좀 알려주세요');
@@ -400,7 +404,6 @@ values('10000001', '01011112222', '아직인가요?', '저 로그인 해야해�
 
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
 values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
-
 
 
 --16.0 공지사항 게시물 번호 시퀀스
