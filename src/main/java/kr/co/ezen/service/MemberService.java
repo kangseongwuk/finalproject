@@ -77,5 +77,38 @@ public class MemberService {
 	public List<MemberChildBean> getMypageMemberChild(int m_memberNo) {
 		return memberDAO.getMypageMemberChild(m_memberNo);
 	}
+	
+	public void insertChild(MemberChildBean insertChildBean) {
+		memberDAO.insertChild(insertChildBean);
+ 	}
+	
+	public MemberChildBean getModifyChild(MemberChildBean modifyChildBean) {
+		modifyChildBean.setM_memberNo(loginMemberBean.getM_memberNo());
+ 		MemberChildBean modifyChildBean2 = memberDAO.getModifyChild(modifyChildBean);
+ 		
+ 		modifyChildBean.setC_name(modifyChildBean2.getC_name());
+ 		modifyChildBean.setC_grade(modifyChildBean2.getC_grade());
+ 		modifyChildBean.setC_gender(modifyChildBean2.getC_gender());
+ 		modifyChildBean.setC_level(modifyChildBean2.getC_level());
+ 		return modifyChildBean;
+ 			
+ 	}
+	
+	public void modifyChild(MemberChildBean modifyChild) {
+		
+		memberDAO.modifyChild(modifyChild);
+ 	}
+	
+	public void deleteChild(MemberChildBean deleteChildBean) {
+		
+		memberDAO.deleteChild(deleteChildBean);
+ 	}
 
+	public void deleteAllChild(int m_memberNo) {
+		memberDAO.deleteAllChild(m_memberNo);
+ 	}
+	
+	public void deleteWishList(int m_memberNo) {
+		memberDAO.deleteWishList(m_memberNo);
+ 	}
 }

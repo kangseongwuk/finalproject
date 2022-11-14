@@ -20,13 +20,15 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import kr.co.ezen.beans.AcademyMemberBean;
+import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.interceptor.CheckLoginInterceptor;
+import kr.co.ezen.mapper.AcademyMemberMapper;
 import kr.co.ezen.mapper.BoardMapper;
 import kr.co.ezen.mapper.FaqMapper;
 import kr.co.ezen.mapper.MemberMapper;
 import kr.co.ezen.mapper.ServiceCenterMapper;
 import kr.co.ezen.mapper.SiteAskMapper;
-import kr.co.ezen.beans.MemberBean;
 
 @Configuration
 //Controller
@@ -52,6 +54,9 @@ public class ServletAppContext implements WebMvcConfigurer{
 	@Autowired
 	private MemberBean loginMemberBean;
 	
+	@Autowired
+	private AcademyMemberBean loginAcademyMemberBean;
+	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		// TODO Auto-generated method stub
@@ -65,7 +70,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		// TODO Auto-generated method stub
 //		WebMvcConfigurer.super.addResourceHandlers(registry);
         registry
-        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**","member/**")
+        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**","member/**","academymember/**")
         .addResourceLocations("/resources/"); 
 	}
 	
@@ -106,6 +111,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factoryBean;
 				
 	}
+	
+	//아카데미Mapper 등록
+	@Bean
+	public MapperFactoryBean<AcademyMemberMapper> getAcademyMemberMapper(SqlSessionFactory factory){
+		MapperFactoryBean<AcademyMemberMapper> factoryBean = new MapperFactoryBean<AcademyMemberMapper>(AcademyMemberMapper.class);
+							
+		factoryBean.setSqlSessionFactory(factory);
+							
+		return factoryBean;
+							
+		}
 			
 		//
 	
@@ -188,7 +204,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 				
 			
 			//CheckLoginInterceptor 등록 : 정보수정, 로그아웃
-			CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginMemberBean);
+			CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginMemberBean, loginAcademyMemberBean);
 			
 			InterceptorRegistration registration2 = registry.addInterceptor(checkLoginInterceptor);
 			

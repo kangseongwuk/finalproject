@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.annotation.SessionScope;
 
+import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
 
 
@@ -19,4 +20,10 @@ public class RootAppContext {
 	public MemberBean loginMemberBean() {
 		return new MemberBean();
 	}
+	
+	@Bean("loginAcademyMemberBean")
+	   @SessionScope
+	   public AcademyMemberBean loginAcademyMemberBean() {
+	      return new AcademyMemberBean();
+	   }
 }

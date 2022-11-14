@@ -18,6 +18,7 @@ public class AcademyMemberBean {
 	private String a_infoExpose;
 	
 	//학원 소개 정보
+	
 	private String a_introduce;
 	private String a_mainImg;
 	private String a_file;
@@ -27,7 +28,18 @@ public class AcademyMemberBean {
 	private String a_openTime;
 	private String a_closeTime;
 	
+	private boolean academymemberlogin;
 	
+	public AcademyMemberBean() {
+		this.academymemberlogin = false;
+	}
+	
+	public boolean isAcademymemberlogin() {
+		return academymemberlogin;
+	}
+	public void setAcademymemberlogin(boolean academymemberlogin) {
+		this.academymemberlogin = academymemberlogin;
+	}
 	public int getA_memberNo() {
 		return a_memberNo;
 	}

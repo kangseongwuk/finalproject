@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
 
 //로그인인지 아닌지 확인하여 통과여부 결정 하기 위하여
@@ -12,9 +13,11 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 
 	// 처리대상 
 	private MemberBean loginMemberBean;
+	private AcademyMemberBean loginAcademyMemberBean;
 	
-	public CheckLoginInterceptor(MemberBean loginMemberBean) {
-		this.loginMemberBean = loginMemberBean;		
+	public CheckLoginInterceptor(MemberBean loginMemberBean, AcademyMemberBean loginAcademyMemberBean) {
+		this.loginMemberBean = loginMemberBean;
+		this.loginAcademyMemberBean = loginAcademyMemberBean;
 	}
 	
 	@Override
@@ -29,6 +32,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 //			return false;
 //		}
 		request.setAttribute("loginMemberBean", loginMemberBean);
+		request.setAttribute("loginAcademyMemberBean", loginAcademyMemberBean);
 		return true;
 	}
 }

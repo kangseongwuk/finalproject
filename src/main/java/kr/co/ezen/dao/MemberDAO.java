@@ -42,4 +42,28 @@ public class MemberDAO {
 	public List<MemberChildBean> getMypageMemberChild(int m_memberNo) {
 		return memberMapper.getMypageMemberChild(m_memberNo);
 	}
+	
+ 	public void insertChild(MemberChildBean insertChildBean) {
+ 		memberMapper.insertChild(insertChildBean);
+ 	}
+ 	
+ 	public MemberChildBean getModifyChild(MemberChildBean modifyChildBean) {
+ 		return memberMapper.getModifyChild(modifyChildBean);
+ 	}
+ 	
+ 	public void modifyChild(MemberChildBean modifyChild) {
+ 		memberMapper.modifyChild(modifyChild);
+ 	}
+ 	
+ 	public void deleteChild(MemberChildBean deleteChildBean) {
+ 		memberMapper.deleteChild(deleteChildBean);
+ 	}
+ 	
+ 	public void deleteAllChild(int m_memberNo) {
+ 		memberMapper.deleteAllChild(m_memberNo);
+ 	}
+ 	
+ 	public void deleteWishList(int m_memberNo) {
+ 		memberMapper.deleteWishList(m_memberNo);
+ 	}
 }

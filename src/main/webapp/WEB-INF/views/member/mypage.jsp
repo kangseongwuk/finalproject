@@ -51,8 +51,8 @@
 				<form:input path="c_level" value="${str.c_level }" readonly="true"/>
 			</div>		
 		</form:form>
-		<a href="member/modifyChild?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }&c_name=${str.c_name}">수정하기</a>
-		<a href="member/deleteChild?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }&c_name=${str.c_name}">삭제하기</a>
+		<a href="${root}member/modifyChild?c_name=${str.c_name}">수정하기</a>
+		<a href="${root}member/deleteChild?c_name=${str.c_name}">삭제하기</a>
 	</div>
 	</c:forEach>
 	<a href="${root }member/insertChild?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">자녀정보입력</a>	
