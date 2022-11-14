@@ -432,8 +432,6 @@ CREATE TABLE noticeBoardT(
 
 select * from noticeBoardT;
 
-insert into noticeBoardT values(nb_viewCount)
-
 
 --공지사항 게시판 예시
 insert into noticeBoardT(nb_no,nb_title,nb_contents,nb_file)
