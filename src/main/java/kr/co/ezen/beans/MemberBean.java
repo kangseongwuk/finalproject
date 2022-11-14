@@ -19,9 +19,17 @@ public class MemberBean {
 	
 	private boolean memberlogin;
 	
+	private boolean userIdExist;
+	
+	private boolean userlogin;
+	
+	
+	//생성자 주입 단, 한번만 실행
 	public MemberBean() {
-		this.memberlogin = false;
+		this.userIdExist = false;
+		this.userlogin = false;
 	}
+	
 	
 	public String getM_pw2() {
 		return m_pw2;
@@ -109,6 +117,11 @@ public class MemberBean {
 	public void setM_confirm(String m_confirm) {
 		this.m_confirm = m_confirm;
 	}
-	
+	public boolean isUserlogin() {
+		return userlogin;
+	}
+	public void setUserlogin(boolean userlogin) {
+		this.userlogin = userlogin;
+	}
 	
 }

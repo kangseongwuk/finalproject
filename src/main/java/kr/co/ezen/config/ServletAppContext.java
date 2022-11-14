@@ -4,6 +4,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,15 +14,19 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import kr.co.ezen.interceptor.CheckLoginInterceptor;
 import kr.co.ezen.mapper.BoardMapper;
 import kr.co.ezen.mapper.FaqMapper;
 import kr.co.ezen.mapper.MemberMapper;
 import kr.co.ezen.mapper.ServiceCenterMapper;
 import kr.co.ezen.mapper.SiteAskMapper;
+import kr.co.ezen.beans.MemberBean;
 
 @Configuration
 //Controller
@@ -44,7 +49,8 @@ public class ServletAppContext implements WebMvcConfigurer{
 	@Value("${db.password}")
 	private String db_password;
 	
-	
+	@Autowired
+	private MemberBean loginMemberBean;
 	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -59,7 +65,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		// TODO Auto-generated method stub
 //		WebMvcConfigurer.super.addResourceHandlers(registry);
         registry
-        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**")
+        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**","member/**")
         .addResourceLocations("/resources/"); 
 	}
 	
@@ -171,6 +177,25 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factoryBean;
 		
 	}
+	
+	// 인터셉터 ( 헤더에있는 로그인 정보를 컨트롤러 전에 주입)
+		// 모든 요청 주소는 무조건 인터셉터를 통과하도록 해야 합니다.(/**) 
+		
+		public void addInterceptors(InterceptorRegistry registry) {
+			
+			WebMvcConfigurer.super.addInterceptors(registry);	
+			
+				
+			
+			//CheckLoginInterceptor 등록 : 정보수정, 로그아웃
+			CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginMemberBean);
+			
+			InterceptorRegistration registration2 = registry.addInterceptor(checkLoginInterceptor);
+			
+			registration2.addPathPatterns("/**");// 인터셉서 통과하도록 유도
+//			registration2.excludePathPatterns("/serviceBoard/noticeBoardList"); // 인터셉터 제외
+			
+		}
 }
 
 

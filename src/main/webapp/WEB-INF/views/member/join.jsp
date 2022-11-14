@@ -39,7 +39,7 @@
       <!-- Form area Sign Up -->
       <div class="organize-form form-area-signup">
         <h2>회원가입</h2>
-        <form:form class="form" action="${root }join" method="post" modelAttribute="joinMemberBean">
+        <form:form class="form" action="${root }member/join_pro" method="post" modelAttribute="joinMemberBean">
           <div class="form-field">
             <form:label path="m_id">ID</form:label>
             <form:input type="text" path="m_id"/>

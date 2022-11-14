@@ -12,9 +12,9 @@
 <h2>로그인 성공</h2>
 <h2>${sessionScope.loginMemberBean.m_id }</h2>
 <h2>${sessionScope.loginMemberBean.m_pw }</h2>
-
-<a href="${root }modify?m_id=${loginMemberBean.m_id}">회원정보수정</a>
-<a href="${root }delete?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">회원탈퇴</a>
-<a href="${root }logout">로그아웃</a>
+<a href="${root }member/mypage?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }">my page</a>
+<a href="${root }member/logout">로그아웃</a>
+<a href="${root }faq/faqlist">faqlist</a>
+<a href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }">my page</a>
 </body>
 </html>

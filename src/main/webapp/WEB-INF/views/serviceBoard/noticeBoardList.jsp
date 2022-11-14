@@ -1,28 +1,160 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>공지사항</title>
+<meta charset="utf-8">
+<title>noticeRead</title>
+
+  <!-- Mobile Specific Metas
+	================================================== -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Construction Html5 Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="author" content="Themefisher">
+  <meta name="generator" content="Themefisher Educenter HTML Template v1.0">
+
+  <!-- ** Plugins Needed for the Project ** -->
+  <!-- serachbar -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="plugins/slick/slick.css">
+  <!-- themefy-icon -->
+  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+  <!-- animation css -->
+  <link rel="stylesheet" href="plugins/animate/animate.css">
+  <!-- aos -->
+  <link rel="stylesheet" href="plugins/aos/aos.css">
+  <!-- venobox popup -->
+  <link rel="stylesheet" href="plugins/venobox/venobox.css">
+
+  <!-- Main Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  
 </head>
+
 <body>
 
-<!-- 게시글 리스트 -->
-			<h4> : 공 지 사 항 : </h4>			
-			
-			<c:forEach var="str" items="${nblist }">
-			<a href="${root }serviceBoard/noticeBoardRead?nb_no=${str.nb_no}">${str.nb_title}</a> <br>
-				${str.nb_contents} <br>
-				${str.nb_viewCount} <br>
-			
-			</c:forEach>
-			<div>
-				<a href="${root}serviceBoard/noticeBoardWrite">글쓰기</a>
-				<a href="${root}index">돌아가기</a>
-			</div>
-			
+<!-- ===============================  header  =============================== -->
+   <c:import url="/WEB-INF/views/include/header.jsp"/>
+<!-- ===============================  header  =============================== -->
+
+	
+<!-- page title -->
+<section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /page title -->
+
+<!-- Board -->    
+<section class="section bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+       <div class="section-title text-center">
+          <h2>공지사항</h2>
+          </div>
+      </div>
+    </div>
+<table>
+    <thead>
+    <tr>
+        <th>no</th>
+        <th >제목</th>
+        <th>조회수</th>
+       <th>작성일자</th>
+
+    </tr>
+    </thead>
+    <tbody>
+<c:forEach var="st" items="${nblist }">
+    <tr>
+        <td>${st.nb_no} &nbsp;&nbsp;</td>
+        <td><a href="${root }serviceBoard/noticeBoardRead?nb_no=${st.nb_no}">${st.nb_title}</a></td>
+<td>${st.nb_viewCount}</td>        
+<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.nb_writeTime}" /></td>
+    </tr>
+</c:forEach>
+<tr>
+<td colspan="2" align="center"><a href="${root}serviceBoard/noticeBoardWrite">글쓰기</a></td>
+<td colspan="2"  align="center"><a href="${root}index">돌아가기</a></td>
+</tr>
+</table>
+
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&raquo;</font></font></a>
+    </li>
+  </ul>
+  
+  
+  <div class="search-box">
+  <form action="." method="post">
+    <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
+    <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+  </form>
+</div>
+</div>
+
+</section>
+<!-- /Board -->
+
+
+<!-- ===============================  footer  =============================== -->
+ <c:import url="/WEB-INF/views/include/footer.jsp"/>
+<!-- ===============================  footer  =============================== -->
+
+<!-- jQuery -->
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- aos -->
+<script src="plugins/aos/aos.js"></script>
+<!-- venobox popup -->
+<script src="plugins/venobox/venobox.min.js"></script>
+<!-- filter -->
+<script src="plugins/filterizr/jquery.filterizr.min.js"></script>
+<!-- google map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
+<script src="plugins/google-map/gmap.js"></script>
+
+<!-- Main Script -->
+<script src="js/script.js"></script>
+
 </body>
 </html>

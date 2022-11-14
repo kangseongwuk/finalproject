@@ -54,7 +54,7 @@ public class BoardController {
 		return "board/gBoardRead";
 	}
 	
-	//임시 코드
+	//강사 상세보기
 	@GetMapping("/gBoardRead_teacher")
 	public String gBoardRead_teacher() {
 		
@@ -66,5 +66,11 @@ public class BoardController {
 	@GetMapping("/askBoard")
 	public String askBoard() {
 		return "board/askBoard";
+	}
+	
+	//학원소개
+	@GetMapping("/about")
+	public String index() {
+		return "board/about";
 	}
 }
