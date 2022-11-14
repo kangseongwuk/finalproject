@@ -40,8 +40,6 @@ public class ServiceCenterController {
 	public String read(@RequestParam("nb_no") int nb_no,
 						Model model) {
 		
-		serviceCenterService.viewCountNbInfo(nb_no);
-		
 		ServiceCenterBean nbReadBean = serviceCenterService.getNbInfo(nb_no);
 		model.addAttribute("nbReadBean", nbReadBean);
 		
@@ -79,10 +77,21 @@ public class ServiceCenterController {
 						@ModelAttribute("nbModifyBean") ServiceCenterBean nbModifyBean,
 						Model model) {
 		
-		nbModifyBean = serviceCenterService.getNbModifyPage(nb_no);
-		model.addAttribute("nbModifyBean", nbModifyBean);
+		nbModifyBean = serviceCenterService.getNbInfo(nb_no);
+		model.addAttribute("modifyNbBean", nbModifyBean);
 		
-				
+		model.addAttribute("loginMemberBean", loginMemberBean);
+		
+		//게시들 내용 수정 모드로 불러오기
+		ServiceCenterBean serviceBean = serviceCenterService.getNbInfo(nb_no);
+		
+		nbModifyBean.setNb_writer(serviceBean.getNb_writer());
+		nbModifyBean.setNb_modifyTime(serviceBean.getNb_writeTime());
+		nbModifyBean.setNb_title(serviceBean.getNb_title());
+		nbModifyBean.setNb_contents(serviceBean.getNb_contents());
+		nbModifyBean.setNb_file(serviceBean.getNb_file());
+		
+		
 		//idx가 0인 오류는 아래처럼 해줍니다.
 		nbModifyBean.setNb_no(nb_no);	
 		

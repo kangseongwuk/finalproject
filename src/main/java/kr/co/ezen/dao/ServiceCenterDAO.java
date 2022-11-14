@@ -2,7 +2,7 @@ package kr.co.ezen.dao;
 
 import java.util.List;
 
-
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,21 +36,11 @@ public class ServiceCenterDAO {
 			serviceCenterMapper.modifyNbInfo(nbModifyBean);
 		}
 		
-		public ServiceCenterBean getNbModifyPage(int nb_no) {
-		
-			return serviceCenterMapper.getNbModifyPage(nb_no);
-
-		}
 		
 		public void delNbInfo(int nb_no) {
 			
 			serviceCenterMapper.delNbInfo( nb_no);
 			
-		}
-		
-		
-		public void viewCountNbInfo(int nb_no) {
-			serviceCenterMapper.viewCountNbInfo(nb_no);
 		}
 
 }

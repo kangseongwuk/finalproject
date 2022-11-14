@@ -16,17 +16,9 @@ public class SiteAskDAO {
 		private SiteAskMapper siteAskMapper;	
 		
 		  public void addSaContent(SiteAskBean saWriteBean) {			  
-			 			  
+			 
 			  siteAskMapper.addSaContent(saWriteBean);		  		 
 		  }	
-		  
-		  /*
-		  public SiteAskBean getSaContentPage(int sa_memberNo) {
-			 
-			  return siteAskMapper.getSaContentPage(sa_memberNo);
-		  }
-		  */
-		  
 		 
 		  public List<SiteAskBean> getSaList(){		   
 			
@@ -36,6 +28,6 @@ public class SiteAskDAO {
 		  public SiteAskBean getSaInfo(Timestamp sa_time) { 
 			
 			return siteAskMapper.getSaInfo(sa_time); 
-		  }
+		  }	  
 
 }

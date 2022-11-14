@@ -47,13 +47,8 @@ public class SiteAskController {
 	}	
 	
 	@GetMapping("/siteAskWrite")
-	public String write(@RequestParam("m_memberNo") int m_memberNo,
-						@ModelAttribute("saWriteBean") SiteAskBean saWriteBean,
-						Model model) {
+	public String write(@ModelAttribute("saWriteBean") SiteAskBean saWriteBean) {
 				
-		//saWriteBean = siteAskService.getSaContentPage(m_memberNo);
-		model.addAttribute("saWriteBean", saWriteBean);
-		
 		return "serviceBoard/siteAskWrite";
 	}
 	

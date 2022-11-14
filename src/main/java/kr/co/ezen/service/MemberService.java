@@ -1,12 +1,9 @@
 package kr.co.ezen.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.ezen.beans.MemberBean;
-import kr.co.ezen.beans.MemberChildBean;
 import kr.co.ezen.dao.MemberDAO;
 @Service
 public class MemberService {
@@ -30,6 +27,7 @@ public class MemberService {
 			loginMemberBean.setM_gender(loginMemberBean2.getM_gender());
 			loginMemberBean.setM_tele(loginMemberBean2.getM_tele());
 			loginMemberBean.setM_joinDate(loginMemberBean2.getM_joinDate());
+			loginMemberBean.setM_recommend(loginMemberBean2.getM_recommend());
 			loginMemberBean.setM_email(loginMemberBean2.getM_email());
 			loginMemberBean.setM_confirm(loginMemberBean2.getM_confirm());
 			
@@ -61,21 +59,4 @@ public class MemberService {
 	public void joinMember(MemberBean joinMemberBean) {
 		memberDAO.joinMember(joinMemberBean);
 	}
-	
-	public MemberBean getMypageMember(MemberBean mypageMemberBean) {
-		
-		MemberBean mypageMemberBean2 = memberDAO.getMypageMember(loginMemberBean.getM_memberNo());
-		
-		
-		mypageMemberBean.setM_id(mypageMemberBean2.getM_id());
-		mypageMemberBean.setM_name(mypageMemberBean2.getM_name());
-		mypageMemberBean.setM_tele(mypageMemberBean2.getM_tele());
-		mypageMemberBean.setM_email(mypageMemberBean2.getM_email());
-		
-		return mypageMemberBean;
-	}
-	public List<MemberChildBean> getMypageMemberChild(int m_memberNo) {
-		return memberDAO.getMypageMemberChild(m_memberNo);
-	}
-
 }

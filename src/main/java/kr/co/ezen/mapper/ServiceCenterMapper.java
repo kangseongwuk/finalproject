@@ -28,22 +28,14 @@ public interface ServiceCenterMapper {
 			+ "where nb_no = #{nb_no} ")
 		ServiceCenterBean getNbInfo(int nb_no);	
 
-	//수정
-	@Select("select nb_no, nb_title, nb_contents, nb_file "
-			+ "from noticeBoardT where nb_no = #{nb_no}")
-		ServiceCenterBean getNbModifyPage(int nb_no);
-	
 	@Update("update noticeBoardT set nb_title = #{nb_title}, nb_contents = #{nb_contents}, "
 			+ "nb_file = #{nb_file, jdbcType=VARCHAR} "
 			+ "where nb_no = #{nb_no}")
 		void modifyNbInfo(ServiceCenterBean nbModifyBean);
 	
-	//삭제
 	@Delete("delete from noticeBoardT where nb_no = #{nb_no}")
 		void delNbInfo(int nb_no);
 	
-	@Update("update noticeBoardT set nb_viewCount = nb_viewCount + 1 "
-			+ "where nb_no = #{nb_no}")
-		void viewCountNbInfo(int nb_no);
+	
 	
 }
