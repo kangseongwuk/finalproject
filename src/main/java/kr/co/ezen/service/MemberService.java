@@ -1,10 +1,14 @@
 package kr.co.ezen.service;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.apache.commons.mail.HtmlEmail;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.MemberChildBean;
 import kr.co.ezen.dao.MemberDAO;
@@ -111,4 +115,80 @@ public class MemberService {
 	public void deleteWishList(int m_memberNo) {
 		memberDAO.deleteWishList(m_memberNo);
  	}
+	
+	// 이메일발송
+		public void sendEmail(MemberBean memberBean, String div) throws Exception {
+			// Mail Server 설정
+			String charSet = "utf-8";
+			String hostSMTP = "smtp.naver.com"; // 네이버 이용시 smtp.naver.com
+			String hostSMTPid = "moma417@naver.com";
+			String hostSMTPpwd = "3M5PE4G346VL";
+			
+			// 보내는 사람 EMail, 제목, 내용
+			String fromEmail = "moma417@naver.com";
+			String fromName = "SkyCastle";
+			String subject = "";
+			String msg = "";
+
+			if (div.equals("findpw")) {
+				subject = "스카이캐슬 임시 비밀번호 입니다.";
+				msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+				msg += "<h3 style='color: blue;'>";
+				msg += memberBean.getM_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+				msg += "<p>임시 비밀번호 : ";
+				msg += memberBean.getM_pw() + "</p></div>";
+			}
+
+			// 받는 사람 E-Mail 주소
+			String mail = memberBean.getM_email();
+			try {
+				HtmlEmail email = new HtmlEmail();
+				email.setDebug(true);
+				email.setCharset(charSet);
+				email.setSSL(true);
+				email.setHostName(hostSMTP);
+				email.setSmtpPort(465); // 네이버 이용시 587
+
+				email.setAuthentication(hostSMTPid, hostSMTPpwd);
+				email.setTLS(true);
+				email.addTo(mail, charSet);
+				email.setFrom(fromEmail, fromName, charSet);
+				email.setSubject(subject);
+				email.setHtmlMsg(msg);
+				email.send();
+			} catch (Exception e) {
+				System.out.println("메일발송 실패 : " + e);
+			}
+		}
+
+		//비밀번호찾기
+		public void findPw(HttpServletResponse response, MemberBean memberBean) throws Exception {
+			response.setContentType("text/html;charset=utf-8");
+			MemberBean ck = memberDAO.readMember(memberBean.getM_id());
+			PrintWriter out = response.getWriter();
+			// 가입된 아이디가 없으면
+			if (memberDAO.readMember(memberBean.getM_id()) == null) {
+				out.print("등록되지 않은 아이디입니다.");
+				out.close();
+			}
+			// 가입된 이메일이 아니면
+			else if (!memberBean.getM_email().equals(ck.getM_email())) {
+				out.print("등록되지 않은 이메일입니다.");
+				out.close();
+			} else {
+				// 임시 비밀번호 생성
+				String pw = "";
+				for (int i = 0; i < 12; i++) {
+					pw += (char) ((Math.random() * 26) + 97);
+				}
+				memberBean.setM_pw(pw);
+				// 비밀번호 변경
+				memberDAO.updatePw(memberBean);
+				// 비밀번호 변경 메일 발송
+				sendEmail(memberBean, "findpw");
+
+				out.print("이메일로 임시 비밀번호를 발송하였습니다.");
+				out.close();
+			}
+		}
 }

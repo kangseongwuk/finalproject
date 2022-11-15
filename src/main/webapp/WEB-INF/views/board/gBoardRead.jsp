@@ -77,8 +77,8 @@ $(document).ready(function() {
 });
 
 </script>
-
 <body>
+
 
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -141,7 +141,7 @@ $(document).ready(function() {
               <i class="ti-wallet text-primary icon-md mr-2"></i>
               <div class="text-left">
                 <h6 class="mb-0">학원분류</h6>
-                <p class="mb-0" id="a_classifySpace">${academyInfoBasic.a_classify}</p>
+               <p class="mb-0" id="a_classifySpace">${academyInfoBasic.a_classify}</p>
               </div>
             </div>
           </li>
@@ -208,7 +208,8 @@ $(document).ready(function() {
           <div class="row">
             <div class="col-md-6">
               <ul class="list-styled">
-                <li>${academyInfoBasic.a_location } / ${academyInfoBasic.a_locationDetail }</li>
+                <li>${academyInfoBasic.a_location } / ${academyInfoBasic.a_locationDetail }
+                <div id="map" style="width:100%;height:350px;"></div></li>
               </ul>
             </div>
           </div>
@@ -220,7 +221,7 @@ $(document).ready(function() {
           <div class="row">
             <div class="col-md-6">
               <ul class="list-styled">
-                <li id="gradeSpace" >${academyInfoBasic.a_gradeMin } ~ ${academyInfoBasic.a_gradeMax }</li>
+              <li id="gradeSpace" >${academyInfoBasic.a_gradeMin } ~ ${academyInfoBasic.a_gradeMax }</li>
               </ul>
             </div>
           </div>
@@ -321,6 +322,9 @@ $(document).ready(function() {
 	          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
 	            alt="Card image cap">
 	          <div class="card-body">
+	          <!-- ==================================================================================================================================================================================================================================================================================================================================================== -->
+	          <%-- ${ait.t_subject } --%>
+	          <input type="hidden" id="aaa" value="이젠컴퓨터학원">
 	            <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
 	            <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
 	            <p class="card-text">${ait.t_contents }</p>
@@ -334,7 +338,6 @@ $(document).ready(function() {
 </div>
 </section>
 <!-- /teachers carousel -->
-
 <!-- comment -->
 
 <div class="col-lg-12">
@@ -375,7 +378,7 @@ $(document).ready(function() {
 							<div class="comment-thumb">
 								<img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
 							</div>
-							<div class="block">
+								<div class="block">
 								<div class="comment-info">
 									<h5 class="mb-1">${air.r_writerId }</h5>
 									<span class="date-comm"> | <fmt:formatDate value="${air.r_writeTime }" pattern="yy/MM/dd hh:mm"/></span>
@@ -388,7 +391,7 @@ $(document).ready(function() {
 								</div>
 							</div>
 						</div>
-					</li>
+						</li>
 				</c:forEach>
 			</ul>
 		</div>
@@ -416,8 +419,63 @@ $(document).ready(function() {
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
 <script src="plugins/google-map/gmap.js"></script>
 
-<!-- Main Script -->
+<!-- Main Script  카카오지도-->
 <script src="js/script.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3956e6905ec44bb521e5f39eaaf2977&libraries=services"></script>
+<script>
+// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 장소 검색 객체를 생성합니다
+var ps = new kakao.maps.services.Places(); 
+
+// 키워드로 장소를 검색합니다
+var aaa = document.getElementById('aaa').value;
+ps.keywordSearch(aaa, placesSearchCB); 
+
+// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds = new kakao.maps.LatLngBounds();
+
+        for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+    } 
+}
+
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(place) {
+    
+    // 마커를 생성하고 지도에 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    });
+
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        infowindow.open(map, marker);
+    });
+}
+</script>
 </body>
 </html>

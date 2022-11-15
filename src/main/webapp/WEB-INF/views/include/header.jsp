@@ -166,6 +166,7 @@
 							<form:button type="submit" class="btn btn-primary">로그인</form:button>
 						</form:form>
 						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
+						<div class="text-center text-muted delimiter"><a href="member/findpw">비밀번호 찾기</a></div>
 						<div class="d-flex justify-content-center social-buttons">
 							<button type="button" class="btn btn-secondary btn-round"
 								data-toggle="tooltip" data-placement="top" title="Google">
@@ -175,7 +176,7 @@
 								data-toggle="tooltip" data-placement="top" title="Facebook">
 								<i class="fab fa-facebook"></i>
 							</button>
-							<button type="button" class="btn btn-secondary btn-round"
+							<button type="button" onclick class="btn btn-secondary btn-round"
 								data-toggle="tooltip" data-placement="top" title="twitter">
 								<i class="fab fa-twitter"></i>
 							</button>

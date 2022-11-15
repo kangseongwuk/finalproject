@@ -66,4 +66,15 @@ public class MemberDAO {
  	public void deleteWishList(int m_memberNo) {
  		memberMapper.deleteWishList(m_memberNo);
  	}
+ 	
+ 	//임시비밀번호변경
+ 	 	public int updatePw(MemberBean memberBean) throws Exception {		
+ 	 		return memberMapper.updatePw(memberBean);
+ 			
+ 	 	}
+
+ 		//멤버전체정보 조회 -> 아이디 대조용
+ 		public MemberBean readMember(String m_id) {
+ 			return memberMapper.readMember(m_id);
+ 		}
 }

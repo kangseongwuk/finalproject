@@ -52,6 +52,13 @@ public interface MemberMapper {
 	//자녀정보삭제
 	@Delete("delete from memberChildT where m_memberNo = #{m_memberNo} and c_name = #{c_name}")
 	 void deleteChild(MemberChildBean deleteChildBean);
+	//임시비밀번호로 변경
+	@Update("update memberT set m_pw = #{m_pw} where m_id = #{m_id} and m_email = #{m_email}")
+	int updatePw(MemberBean memberBean);
+	
+	//id로 멤버정보 호출 - > id 비교
+	@Select("select * from memberT where m_id = #{m_id}")
+	MemberBean readMember(String m_id);
 	
 	 
 }

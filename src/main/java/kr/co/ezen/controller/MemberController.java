@@ -3,6 +3,7 @@ package kr.co.ezen.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.MemberChildBean;
@@ -159,4 +162,17 @@ public class MemberController {
 		memberService.deleteChild(deleteChildBean);
 		return "member/login_success";
 	}
+	
+	//비밀번호 찾기 
+		@RequestMapping(value = "/findpw", method = RequestMethod.GET)
+		public void findPwGET(){
+			
+		}
+
+		@RequestMapping(value = "/findpw.jjjjjjjjjjjjjjjjjjjjjjjjjjjjj", method = RequestMethod.POST)
+		@ResponseBody
+		public void findPwPOST(@ModelAttribute MemberBean memberBean, HttpServletResponse response) throws Exception{
+			System.out.println(memberBean);
+			memberService.findPw(response, memberBean);
+		}
 }
