@@ -6,7 +6,15 @@ public class TeacherReviewBean {
 	private String t_name;
 	private int m_memberNo;
 	private int t_score;
+	private String t_reviewContents;
 	
+		
+	public String getT_reviewContents() {
+		return t_reviewContents;
+	}
+	public void setT_reviewContents(String t_reviewContents) {
+		this.t_reviewContents = t_reviewContents;
+	}
 	public int getA_memberNo() {
 		return a_memberNo;
 	}
