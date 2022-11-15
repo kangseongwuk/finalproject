@@ -419,7 +419,7 @@ a h4:hover {
 
 /* page title */
 .page-title-section {
-  padding: 200px 0 80px;
+  padding: 200px 0 25px;
 }
 
 .custom-breadcrumb li.nasted {
@@ -670,11 +670,11 @@ link:focus,
 }
 
 .hero-section {
-  padding: 250px 0 290px;
+  padding: 70px 0 200px;
 }
 @media (max-width: 991px) {
   .hero-section {
-    padding: 250px 0 200px;
+    padding: 70px 0 200px;
   }
 }
 
@@ -1444,5 +1444,38 @@ a {color: #333; text-decoration: none;}
 	opacity: 0.5;
 }
 /* /carousel */
+
+
+/* component */
+
+.star-rating {
+  border:solid 1px #ccc;
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:1.5em;
+  justify-content:space-around;
+  padding:0 .2em;
+  text-align:center;
+  width:5em;
+}
+
+.star-rating input {
+  display:none;
+}
+
+.star-rating label {
+  color:#ccc;
+  cursor:pointer;
+}
+
+.star-rating :checked ~ label {
+  color:#f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
+}
+
 
 /*# sourceMappingURL=style.css.map */

@@ -48,6 +48,34 @@
   <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	var convertData = {
+		"grade": [
+			"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
+		],
+		"a_classify": {
+			"1":"종합",
+			"2":"단과",
+			"3":"예체능(기타)"
+		}
+	}
+	
+	window.onload = convertPro();
+	
+	function convertPro() {
+		$('#gradeSpace').html(convertData.grade[${academyInfoBasic.a_gradeMin }] + " ~ " + convertData.grade[${academyInfoBasic.a_gradeMax }]);
+		$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
+		//alert("이건 되냐?");
+		//alert(convertData.a_classify[${academyInfoBasic.a_classify }]);
+		
+	}
+});
+
+</script>
 
 <body>
   <!-- preloader start -->
@@ -117,7 +145,7 @@
               <i class="ti-wallet text-primary icon-md mr-2"></i>
               <div class="text-left">
                 <h6 class="mb-0">학원분류</h6>
-                <p class="mb-0">${academyInfoBasic.a_classify}</p>
+                <p class="mb-0" id="a_classifySpace">${academyInfoBasic.a_classify}</p>
               </div>
             </div>
           </li>
@@ -189,7 +217,7 @@
           <div class="row">
             <div class="col-md-6">
               <ul class="list-styled">
-                <li>${academyInfoBasic.a_gradeMin } ~ ${academyInfoBasic.a_gradeMax }</li>
+                <li id="gradeSpace" >${academyInfoBasic.a_gradeMin } ~ ${academyInfoBasic.a_gradeMax }</li>
               </ul>
             </div>
           </div>
@@ -304,6 +332,86 @@
 </section>
 <!-- /teachers carousel -->
 
+<!-- comment -->
+
+<div class="col-lg-12">
+		<form class="comment-form my-5" id="comment-form">
+			<h4 class="mb-4">리뷰남기기</h4>
+			<div class="row">
+			</div>
+
+
+			<textarea class="form-control mb-4" name="comment" id="comment" cols="30" rows="5"
+				placeholder="Comment"></textarea>
+		   <div class="star-rating">
+  <input type="radio" id="5-stars" name="rating" value="5" />
+  <label for="5-stars" class="star">&#9733;</label>
+  <input type="radio" id="4-stars" name="rating" value="4" />
+  <label for="4-stars" class="star">&#9733;</label>
+  <input type="radio" id="3-stars" name="rating" value="3" />
+  <label for="3-stars" class="star">&#9733;</label>
+  <input type="radio" id="2-stars" name="rating" value="2" />
+  <label for="2-stars" class="star">&#9733;</label>
+  <input type="radio" id="1-star" name="rating" value="1" />
+  <label for="1-star" class="star">&#9733;</label>
+</div>
+
+			<input class="btn btn-main-2 btn-round-full" type="submit" name="submit-contact" id="submit_contact"
+				value="댓글 쓰기">
+		</form>
+	</div>
+
+
+<div class="col-lg-12">
+		<div class="comment-area mt-4 mb-5">
+			<h4 class="mb-4">2개의 리뷰가 있습니다. </h4>
+			<ul class="comment-tree list-unstyled">
+				<li class="mb-5">
+					<div class="comment-area-box d-block d-sm-flex">
+						<div class="comment-thumb">
+							<img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
+						</div>
+						<div class="block">
+							<div class="comment-info">
+								<h5 class="mb-1">임성찬</h5>
+								<span class="date-comm">| 2022.11.14 16:28</span>
+							</div>
+							<div class="comment-meta mt-2">
+							</div>
+
+							<div class="comment-content mt-3">
+								<p>학원 재미없어요 </p>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li>
+					<div class="comment-area-box d-block d-sm-flex">
+						<div class="comment-thumb">
+							<img alt="" src="images/blog/testimonial2.jpg" style="width: 70px">
+						</div>
+
+						<div class="block">
+							<div class="comment-info">
+								<h5 class="mb-1">강성욱</h5>
+								<span class="date-comm">| 2022.11.13 13:11</span>
+							</div>
+
+							<div class="comment-meta mt-2">
+							</div>
+
+							<div class="comment-content mt-3">
+								<p>현대빈 너무 하네요 </p>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<!-- /comment -->
 
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>
