@@ -215,6 +215,13 @@ img {
     width: 40%;
 }
 
+.content-img {
+    vertical-align: middle;
+    border: 0;
+    width: 10%;
+}
+
+
 a,
 a:hover,
 a:focus {
@@ -267,8 +274,16 @@ a h4:hover {
   padding-bottom: 40px;
 }
 .section-title {
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
+
+.section-img {
+  margin-bottom: 42px;
+    position: fixed;
+    left: 63%;
+    top: 30%;
+}
+
 .section-title:span {
    color: #008000 !important;
 }
@@ -766,6 +781,7 @@ link:focus,
 }
 
 /* /banner feature */
+
 /* course */
 .card-btn {
   font-size: 12px;
@@ -870,6 +886,145 @@ link:focus,
 }
 
 /* /events */
+
+
+
+
+
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+.contact .info-box {
+  color: #2d405f;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 20px 0 30px 0;
+  background: #fff;
+}
+
+.contact .info-box i {
+  font-size: 32px;
+  color: #3b4ef8;
+  padding: 8px;
+}
+
+.contact .info-box h3 {
+  font-size: 20px;
+  color: #777777;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.contact .info-box p {
+  padding: 0;
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.contact .php-email-form {
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 30px;
+  background: #fff;
+}
+
+.contact .php-email-form .error-message {
+  display: none;
+  color: #fff;
+  background: #ed3c0d;
+  text-align: left;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .php-email-form .error-message br+br {
+  margin-top: 25px;
+}
+
+.contact .php-email-form .sent-message {
+  display: none;
+  color: #fff;
+  background: #18d26e;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .php-email-form .loading {
+  display: none;
+  background: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+.contact .php-email-form .loading:before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid #18d26e;
+  border-top-color: #eee;
+  -webkit-animation: animate-loading 1s linear infinite;
+  animation: animate-loading 1s linear infinite;
+}
+
+.contact .php-email-form input,
+.contact .php-email-form textarea {
+  border-radius: 5px;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.contact .php-email-form input:focus,
+.contact .php-email-form textarea:focus {
+  border-color: #8ea5ca;
+}
+
+.contact .php-email-form input {
+  padding: 10px 15px;
+}
+
+.contact .php-email-form textarea {
+  padding: 12px 15px;
+}
+
+.contact .php-email-form button[type=submit] {
+  background: #3b4ef8;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 5px;
+}
+
+.contact .php-email-form button[type=submit]:hover {
+  background: #0a22f6;
+}
+
+@-webkit-keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+ /* /contact  */
+
 /* teacher */
 .teacher-info {
   width: 70%;
@@ -1478,4 +1633,177 @@ a {color: #333; text-decoration: none;}
 }
 
 
+/* like button*/
+
+.like-btn {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+.like-btn:active{
+  transform: scale(0.9, 0.9);
+}
+.like-btn.active{
+  animation: pop 0.6s 1;
+}
+.like-btn path {
+  fill: #767676;
+}
+.like-btn.active path{
+  fill: #ec3e3e;
+}
+
+.clone{
+  position: absolute;
+  animation: moveOutwards 0.9s 1;
+  opacity: 0;
+}
+
+@keyframes moveOutwards{
+  from {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  
+}
+  /* Content */
+#copyright {
+				padding-top: 0;
+				margin-top: 4em;
+				border-top: 0;
+			}
+@media screen and (max-width: 1680px){
+.row > .col-6 {
+			width: 50%;
+		}
+.row > .col-12 {
+			width: 100%;
+		}
+}
+.feature-list section {
+			border-top: solid 1px #eee;
+			padding-top: 3em;
+			padding-left: 5em;
+			position: relative;
+		}
+		
+section > :last-child,
+	article > :last-child,
+	section:last-child,
+	article:last-child {
+		margin-bottom: 0;
+	}
+	
+/* Feature List */
+
+	.feature-list {
+		max-width: 58em;
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+		top: 0.75em;
+	}
+
+		.feature-list section {
+			border-top: solid 1px #eee;
+			padding-top: 3em;
+			padding-left: 5em;
+			position: relative;
+		}
+
+		@media screen and (min-width: 981px) {
+
+			.feature-list > .row > :nth-child(-n + 2) > section {
+				border-top: 0;
+				padding-top: 0;
+			}
+
+		}
+
+		.feature-list h3 {
+			color: #e97770 !important;
+			margin: -0.35em 0 0.75em 0;
+			font-size: 1.15em;
+			letter-spacing: 0.05em;
+		}
+
+			.feature-list h3:before {
+				display: block;
+				color: #fff;
+				background: #2f333b url("images/overlay.png");
+				border-radius: 2.5em;
+				text-align: center;
+				width: 2.5em;
+				height: 2.5em;
+				line-height: 2.5em;
+				margin-right: 0.75em;
+				position: absolute;
+				left: 0;
+				margin-top: -0.5em;
+			}
+
+		.feature-list.small section {
+			padding-left: 3.5em;
+		}
+
+		.feature-list.small h3:before {
+			font-size: 0.8em;
+		}
+
+/* Icons */
+
+	.icon {
+		text-decoration: none;
+		text-decoration: none;
+	}
+
+		.icon:before {
+			-moz-osx-font-smoothing: grayscale;
+			-webkit-font-smoothing: antialiased;
+			display: inline-block;
+			font-style: normal;
+			font-variant: normal;
+			text-rendering: auto;
+			line-height: 1;
+			text-transform: none !important;
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 400;
+		}
+
+		.icon:before {
+			line-height: inherit;
+			font-size: 1.25em;
+		}
+
+		.icon > .label {
+			display: none;
+		}
+
+		.icon.solid:before {
+			font-weight: 900;
+		}
+
+		.icon.brands:before {
+			font-family: 'Font Awesome 5 Brands';
+		}
+		
+		input[type="button"].style1,
+		input[type="submit"].style1,
+		input[type="reset"].style1,
+		button.style1,
+		.button.style1 {
+			background: #e97770 url("images/overlay.png");
+			 font-size: 16px;
+		}
+		
+		input[type="button"].style2,
+		input[type="submit"].style2,
+		input[type="reset"].style2,
+		button.style2,
+		.button.style2 {
+			background: none;
+			color: #606167;
+			box-shadow: inset 0px 0px 2px 0px #a0a1a7;
+		}
+		
 /*# sourceMappingURL=style.css.map */

@@ -50,74 +50,12 @@
   <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <body>
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
-<!-- Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content rounded-0 border-0 p-4">
-            <div class="modal-header border-0">
-                <h3>Register</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="login">
-                    <form action="#" class="row">
-                        <div class="col-12">
-                            <input type="text" class="form-control mb-3" id="signupPhone" name="signupPhone" placeholder="Phone">
-                        </div>
-                        <div class="col-12">
-                            <input type="text" class="form-control mb-3" id="signupName" name="signupName" placeholder="Name">
-                        </div>
-                        <div class="col-12">
-                            <input type="email" class="form-control mb-3" id="signupEmail" name="signupEmail" placeholder="Email">
-                        </div>
-                        <div class="col-12">
-                            <input type="password" class="form-control mb-3" id="signupPassword" name="signupPassword" placeholder="Password">
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">SIGN UP</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content rounded-0 border-0 p-4">
-            <div class="modal-header border-0">
-                <h3>Login</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="#" class="row">
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="loginPhone" name="loginPhone" placeholder="Phone">
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="loginName" name="loginName" placeholder="Name">
-                    </div>
-                    <div class="col-12">
-                        <input type="password" class="form-control mb-3" id="loginPassword" name="loginPassword" placeholder="Password">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">LOGIN</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- page title -->
 <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
@@ -128,7 +66,6 @@
           <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index.html">Home</a></li>
           <li class="list-inline-item text-white h3 font-secondary nasted">Our Courses</li>
         </ul>
-        <p class="text-lighten mb-0">Our courses offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
       </div>
     </div>
   </div>
@@ -141,6 +78,33 @@
     <!-- course list -->
 <div class="row justify-content-center">
 	<c:forEach var="gList" items="${gBoardList }">
+		<script type="text/javascript">
+	
+			$(document).ready(function() {
+				
+				var convertData = {
+					"grade": [
+						"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
+					],
+					"a_classify": {
+						"1":"종합",
+						"2":"단과",
+						"3":"예체능(기타)"
+					}
+				}
+				
+				window.onload = convertPro();
+				
+				function convertPro() {
+					$('#gradeSpace').html(convertData.grade[${gList.a_gradeMin }] + " ~ " + convertData.grade[${gList.a_gradeMax }]);
+					//$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
+					//alert("이건 되냐?");
+					//alert(convertData.a_classify[${academyInfoBasic.a_classify }]);
+					
+				}
+			});
+		
+		</script>
   <!-- course item -->
   <div class="col-lg-4 col-sm-6 mb-5">
     <div class="card p-0 border-primary rounded-0 hover-shadow">
@@ -148,13 +112,23 @@
       <div class="card-body">
         <ul class="list-inline mb-2">
           <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>${gList.a_location }</li>
-          <li class="list-inline-item"><a class="text-color" href="course-single.html">${gList.a_gradeMin } ~ ${gList.a_gradeMax }</a></li>
+          <li class="list-inline-item"><a class="text-color" href="course-single.html" id="gradeSpace">${gList.a_gradeMin } ~ ${gList.a_gradeMax }</a></li>
         </ul>
         <a href="course-single.html">
           <h4 class="card-title">${gList.a_name }</h4>
         </a>
         <p class="card-text mb-4">${gList.a_introduce }</p>
         <a href="gBoardRead?a_memberNo=${gList.a_memberNo }" class="btn btn-primary btn-sm">상세 보기</a>
+	<!--  like button  -->
+		<p class="card-text mb-4">
+			<a href="#" class="like-btn">
+				<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
+					5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
+				</svg>
+			</a>
+		</p>
+	<!--  /like button  -->
       </div>
     </div>
   </div>

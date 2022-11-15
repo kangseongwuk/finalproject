@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <!--
@@ -78,11 +79,6 @@ $(document).ready(function() {
 </script>
 
 <body>
-  <!-- preloader start -->
-  <div class="preloader">
-    <img src="images/preloader.gif" alt="preloader">
-  </div>
-  <!-- preloader end -->
 
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -153,7 +149,14 @@ $(document).ready(function() {
       </div>
        
       <div class="col-xl-3 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
-        <a href="course-single.html" class="btn btn-primary">찜하기</a>
+	<!--  like button  -->
+		<a href="#" class="like-btn">
+			<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 
+				5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
+			</svg>
+		</a>
+	<!--  /like button  -->
         <a href="course-single.html" class="btn btn-primary">상담예약</a>
       </div>
       <!-- border -->
@@ -306,7 +309,7 @@ $(document).ready(function() {
           <div class="card-body">
             <h4 class="card-title font-weight-bold">마음에 드는 강사에게 리뷰를 남겨주세요.</h4>
             <p class="card-text"></p>
-            <a class="btn btn-primary btn-md btn-rounded">Button</a>
+            <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher">Button</a>
           </div>
         </div>
       </div>
@@ -344,17 +347,17 @@ $(document).ready(function() {
 			<textarea class="form-control mb-4" name="comment" id="comment" cols="30" rows="5"
 				placeholder="Comment"></textarea>
 		   <div class="star-rating">
-  <input type="radio" id="5-stars" name="rating" value="5" />
-  <label for="5-stars" class="star">&#9733;</label>
-  <input type="radio" id="4-stars" name="rating" value="4" />
-  <label for="4-stars" class="star">&#9733;</label>
-  <input type="radio" id="3-stars" name="rating" value="3" />
-  <label for="3-stars" class="star">&#9733;</label>
-  <input type="radio" id="2-stars" name="rating" value="2" />
-  <label for="2-stars" class="star">&#9733;</label>
-  <input type="radio" id="1-star" name="rating" value="1" />
-  <label for="1-star" class="star">&#9733;</label>
-</div>
+			  <input type="radio" id="5-stars" name="rating" value="5" />
+			  <label for="5-stars" class="star">&#9733;</label>
+			  <input type="radio" id="4-stars" name="rating" value="4" />
+			  <label for="4-stars" class="star">&#9733;</label>
+			  <input type="radio" id="3-stars" name="rating" value="3" />
+			  <label for="3-stars" class="star">&#9733;</label>
+			  <input type="radio" id="2-stars" name="rating" value="2" />
+			  <label for="2-stars" class="star">&#9733;</label>
+			  <input type="radio" id="1-star" name="rating" value="1" />
+			  <label for="1-star" class="star">&#9733;</label>
+			</div>
 
 			<input class="btn btn-main-2 btn-round-full" type="submit" name="submit-contact" id="submit_contact"
 				value="댓글 쓰기">
@@ -364,49 +367,29 @@ $(document).ready(function() {
 
 <div class="col-lg-12">
 		<div class="comment-area mt-4 mb-5">
-			<h4 class="mb-4">2개의 리뷰가 있습니다. </h4>
+			<h4 class="mb-4">2(미구현)개의 리뷰가 있습니다. </h4>
 			<ul class="comment-tree list-unstyled">
-				<li class="mb-5">
-					<div class="comment-area-box d-block d-sm-flex">
-						<div class="comment-thumb">
-							<img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
-						</div>
-						<div class="block">
-							<div class="comment-info">
-								<h5 class="mb-1">임성찬</h5>
-								<span class="date-comm">| 2022.11.14 16:28</span>
+				<c:forEach var="air" items="${academyInfoReview}">
+					<li class="mb-5">
+						<div class="comment-area-box d-block d-sm-flex">
+							<div class="comment-thumb">
+								<img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
 							</div>
-							<div class="comment-meta mt-2">
-							</div>
-
-							<div class="comment-content mt-3">
-								<p>학원 재미없어요 </p>
-							</div>
-						</div>
-					</div>
-				</li>
-
-				<li>
-					<div class="comment-area-box d-block d-sm-flex">
-						<div class="comment-thumb">
-							<img alt="" src="images/blog/testimonial2.jpg" style="width: 70px">
-						</div>
-
-						<div class="block">
-							<div class="comment-info">
-								<h5 class="mb-1">강성욱</h5>
-								<span class="date-comm">| 2022.11.13 13:11</span>
-							</div>
-
-							<div class="comment-meta mt-2">
-							</div>
-
-							<div class="comment-content mt-3">
-								<p>현대빈 너무 하네요 </p>
+							<div class="block">
+								<div class="comment-info">
+									<h5 class="mb-1">${air.r_writerId }</h5>
+									<span class="date-comm"> | <fmt:formatDate value="${air.r_writeTime }" pattern="yy/MM/dd hh:mm"/></span>
+								</div>
+								<div class="comment-meta mt-2">
+								</div>
+	
+								<div class="comment-content mt-3">
+									<p>[${air.r_score }점] | ${air.r_contents }</p>
+								</div>
 							</div>
 						</div>
-					</div>
-				</li>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 	</div>

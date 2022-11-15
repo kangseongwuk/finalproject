@@ -162,9 +162,9 @@ CREATE TABLE academyInfoT(
         not null,
     a_mainImg   varchar2(3000),
     a_file  varchar2(3000),
-    a_gradeMin  varchar2(2),
-    a_gradeMax  varchar2(2),
-    a_shuttle   varchar2(1)
+    a_gradeMin  varchar2(6),
+    a_gradeMax  varchar2(6),
+    a_shuttle   varchar2(3)
         default 'n',
     a_openTime  varchar2(8),
     a_closeTime varchar2(8)
@@ -278,14 +278,15 @@ CREATE TABLE teacherReviewT(
         not null,
     t_score number(1)
         not null,
+    t_reviewContents    varchar2(1500),
     constraint t_review_pk primary key(a_memberNo, t_name, m_memberNo)
 );
 
 --강사 리뷰 예시
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_score)
-    values(100001,'박강산',10000001,'5');
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_score)
-    values(100001,'박강산',1001,'2');
+insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
+    values(100001,'박강산',10000001,'오홓홓 좋아요','5');
+insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
+    values(100001,'박강산',1001,'그냥 싫어요','2');
 
 
 --10. 신고/블랙리스트 관리 정보 테이블
@@ -460,3 +461,4 @@ insert into FAQBoardT(fb_no,fb_title,fb_contentsQ,fb_contentsA)
 
 
 commit;
+
