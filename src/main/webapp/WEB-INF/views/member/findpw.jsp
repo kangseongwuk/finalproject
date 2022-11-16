@@ -15,7 +15,7 @@
 	$(function(){
 		$("#findBtn").click(function(){
 			$.ajax({
-				url : "${root}member/findpw.jjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+				url : "${root}member/findpw.do",
 				type : "POST",
 				data : {
 					m_id : $("#id").val(),

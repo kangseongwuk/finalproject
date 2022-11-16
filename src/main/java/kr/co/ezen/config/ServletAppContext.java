@@ -24,6 +24,7 @@ import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.interceptor.CheckLoginInterceptor;
 import kr.co.ezen.mapper.AcademyMemberMapper;
+import kr.co.ezen.mapper.BlackListMapper;
 import kr.co.ezen.mapper.BoardMapper;
 import kr.co.ezen.mapper.FaqMapper;
 import kr.co.ezen.mapper.MemberMapper;
@@ -70,7 +71,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		// TODO Auto-generated method stub
 //		WebMvcConfigurer.super.addResourceHandlers(registry);
         registry
-        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**","member/**","academymember/**")
+        .addResourceHandler("/**","board/**","faq/**","serviceBoard/**","member/**","academymember/**","blackList/**")
         .addResourceLocations("/resources/"); 
 	}
 	
@@ -212,6 +213,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 //			registration2.excludePathPatterns("/serviceBoard/noticeBoardList"); // 인터셉터 제외
 			
 		}
+		
+		//BlackListMapper 등록
+		   @Bean
+		   public MapperFactoryBean<BlackListMapper> getBlackListMapper(SqlSessionFactory factory){
+		      MapperFactoryBean<BlackListMapper> factoryBean = new MapperFactoryBean<BlackListMapper>(BlackListMapper.class);
+		      
+		      factoryBean.setSqlSessionFactory(factory); 
+		      
+		      return factoryBean;
+		      
+		   } 
 }
 
 

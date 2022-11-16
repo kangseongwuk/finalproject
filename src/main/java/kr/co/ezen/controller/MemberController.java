@@ -169,7 +169,7 @@ public class MemberController {
 			
 		}
 
-		@RequestMapping(value = "/findpw.jjjjjjjjjjjjjjjjjjjjjjjjjjjjj", method = RequestMethod.POST)
+		@RequestMapping(value = "/findpw.do", method = RequestMethod.POST)
 		@ResponseBody
 		public void findPwPOST(@ModelAttribute MemberBean memberBean, HttpServletResponse response) throws Exception{
 			System.out.println(memberBean);

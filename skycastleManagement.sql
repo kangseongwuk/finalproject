@@ -304,7 +304,8 @@ CREATE TABLE blacklistT(
 
 -- 신고/블랙리스트 관리 예시(현재 없음)
 
-
+insert into blacklistT(m_memberNo,a_memberNo,black_contents)
+   values(1001,100001,'너무 싫어요 너무싫어 진상');
 
 
 --11. 학생-학원 연결 정보 테이블

@@ -55,6 +55,49 @@
 </head>
 
 <body>
+<!-- Channel Plugin Scripts -->
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "ae255e6e-f6f6-4695-ac0f-186990ce3633"
+  });
+</script>
+<!-- End Channel Plugin -->
+
   <!-- preloader start -->
   <div class="preloader">
     <img src="images/preloader.gif" alt="preloader">
@@ -111,9 +154,11 @@
                 고객센터
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              
                 <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
                 <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
                 <li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite">문의하기</a></li>
+                <li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a></li>
                 
            <!--    <li><a class="dropdown-item" href="notice-single.html">블랙리스트</a></li> -->
                
@@ -166,7 +211,7 @@
 							<form:button type="submit" class="btn btn-primary">로그인</form:button>
 						</form:form>
 						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="text-center text-muted delimiter"><a href="member/findpw">비밀번호 찾기</a></div>
+						<div class="text-center text-muted delimiter"><a href="${root }member/findpw">비밀번호 찾기</a></div>
 						<div class="d-flex justify-content-center social-buttons">
 							<button type="button" class="btn btn-secondary btn-round"
 								data-toggle="tooltip" data-placement="top" title="Google">

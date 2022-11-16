@@ -15,12 +15,12 @@
 <head>
 
   <!-- Basic Page Needs
-	================================================== -->
+   ================================================== -->
   <meta charset="utf-8">
   <title>Educenter - Education HTML Template</title>
 
   <!-- Mobile Specific Metas
-	================================================== -->
+   ================================================== -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Construction Html5 Template">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -53,27 +53,27 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	
-	var convertData = {
-		"grade": [
-			"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
-		],
-		"a_classify": {
-			"1":"종합",
-			"2":"단과",
-			"3":"예체능(기타)"
-		}
-	}
-	
-	window.onload = convertPro();
-	
-	function convertPro() {
-		$('#gradeSpace').html(convertData.grade[${academyInfoBasic.a_gradeMin }] + " ~ " + convertData.grade[${academyInfoBasic.a_gradeMax }]);
-		$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
-		//alert("이건 되냐?");
-		//alert(convertData.a_classify[${academyInfoBasic.a_classify }]);
-		
-	}
+   
+   var convertData = {
+      "grade": [
+         "미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
+      ],
+      "a_classify": {
+         "1":"종합",
+         "2":"단과",
+         "3":"예체능(기타)"
+      }
+   }
+   
+   window.onload = convertPro();
+   
+   function convertPro() {
+      $('#gradeSpace').html(convertData.grade[${academyInfoBasic.a_gradeMin }] + " ~ " + convertData.grade[${academyInfoBasic.a_gradeMax }]);
+      $('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
+      //alert("이건 되냐?");
+      //alert(convertData.a_classify[${academyInfoBasic.a_classify }]);
+      
+   }
 });
 
 </script>
@@ -149,14 +149,14 @@ $(document).ready(function() {
       </div>
        
       <div class="col-xl-3 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
-	<!--  like button  -->
-		<a href="#" class="like-btn">
-			<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 
-				5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
-			</svg>
-		</a>
-	<!--  /like button  -->
+   <!--  like button  -->
+      <a href="#" class="like-btn">
+         <svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 
+            5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
+         </svg>
+      </a>
+   <!--  /like button  -->
         <a href="course-single.html" class="btn btn-primary">상담예약</a>
       </div>
       <!-- border -->
@@ -195,7 +195,7 @@ $(document).ready(function() {
             <div class="col-md-6">
               <ul class="list-styled">
                 <c:forEach var="sub" items="${academyInfoSubject }">
-                	<li>${sub.a_subject }</li>
+                   <li>${sub.a_subject }</li>
                 </c:forEach>
               </ul>
             </div>
@@ -282,7 +282,7 @@ $(document).ready(function() {
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
       </a>
-      	<a class="carousel-control-next" href="#carousel-example-multi" role="button" data-slide="next">
+         <a class="carousel-control-next" href="#carousel-example-multi" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
@@ -294,8 +294,8 @@ $(document).ready(function() {
     <li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>
     <% int i = 0; %>
     <c:forEach items="${academyInfoTeacher}">
-    	<% i++; %>
-    	<li data-target="#carousel-example-multi" data-slide-to=<%=i %>></li>
+       <% i++; %>
+       <li data-target="#carousel-example-multi" data-slide-to=<%=i %>></li>
     </c:forEach>
   </ol>
   <!--/.Indicators-->
@@ -316,23 +316,23 @@ $(document).ready(function() {
       </div>
     </div>
     <c:forEach var="ait" items="${academyInfoTeacher}">
-	    <div class="carousel-item">
-	      <div class="col-12 col-md-4">
-	        <div class="card mb-2">
-	          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
-	            alt="Card image cap">
-	          <div class="card-body">
-	          <!-- ==================================================================================================================================================================================================================================================================================================================================================== -->
-	          <%-- ${ait.t_subject } --%>
-	          <input type="hidden" id="aaa" value="이젠컴퓨터학원">
-	            <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
-	            <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
-	            <p class="card-text">${ait.t_contents }</p>
-	            <a class="btn btn-primary btn-md btn-rounded">상세보기</a>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
+       <div class="carousel-item">
+         <div class="col-12 col-md-4">
+           <div class="card mb-2">
+             <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
+               alt="Card image cap">
+             <div class="card-body">
+             <!-- ==================================================================================================================================================================================================================================================================================================================================================== -->
+             <%-- ${ait.t_subject } --%>
+             <input type="hidden" id="loc" value="${academyInfoBasic.a_location } ${academyInfoBasic.a_name }" >
+               <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
+               <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
+               <p class="card-text">${ait.t_contents }</p>
+               <a class="btn btn-primary btn-md btn-rounded">상세보기</a>
+             </div>
+           </div>
+         </div>
+       </div>
     </c:forEach>
   </div>
 </div>
@@ -341,61 +341,61 @@ $(document).ready(function() {
 <!-- comment -->
 
 <div class="col-lg-12">
-		<form class="comment-form my-5" id="comment-form">
-			<h4 class="mb-4">리뷰남기기</h4>
-			<div class="row">
-			</div>
+      <form class="comment-form my-5" id="comment-form">
+         <h4 class="mb-4">리뷰남기기</h4>
+         <div class="row">
+         </div>
 
 
-			<textarea class="form-control mb-4" name="comment" id="comment" cols="30" rows="5"
-				placeholder="Comment"></textarea>
-		   <div class="star-rating">
-			  <input type="radio" id="5-stars" name="rating" value="5" />
-			  <label for="5-stars" class="star">&#9733;</label>
-			  <input type="radio" id="4-stars" name="rating" value="4" />
-			  <label for="4-stars" class="star">&#9733;</label>
-			  <input type="radio" id="3-stars" name="rating" value="3" />
-			  <label for="3-stars" class="star">&#9733;</label>
-			  <input type="radio" id="2-stars" name="rating" value="2" />
-			  <label for="2-stars" class="star">&#9733;</label>
-			  <input type="radio" id="1-star" name="rating" value="1" />
-			  <label for="1-star" class="star">&#9733;</label>
-			</div>
+         <textarea class="form-control mb-4" name="comment" id="comment" cols="30" rows="5"
+            placeholder="Comment"></textarea>
+         <div class="star-rating">
+           <input type="radio" id="5-stars" name="rating" value="5" />
+           <label for="5-stars" class="star">&#9733;</label>
+           <input type="radio" id="4-stars" name="rating" value="4" />
+           <label for="4-stars" class="star">&#9733;</label>
+           <input type="radio" id="3-stars" name="rating" value="3" />
+           <label for="3-stars" class="star">&#9733;</label>
+           <input type="radio" id="2-stars" name="rating" value="2" />
+           <label for="2-stars" class="star">&#9733;</label>
+           <input type="radio" id="1-star" name="rating" value="1" />
+           <label for="1-star" class="star">&#9733;</label>
+         </div>
 
-			<input class="btn btn-main-2 btn-round-full" type="submit" name="submit-contact" id="submit_contact"
-				value="댓글 쓰기">
-		</form>
-	</div>
+         <input class="btn btn-main-2 btn-round-full" type="submit" name="submit-contact" id="submit_contact"
+            value="댓글 쓰기">
+      </form>
+   </div>
 
 
 <div class="col-lg-12">
-		<div class="comment-area mt-4 mb-5">
-			<h4 class="mb-4">2(미구현)개의 리뷰가 있습니다. </h4>
-			<ul class="comment-tree list-unstyled">
-				<c:forEach var="air" items="${academyInfoReview}">
-					<li class="mb-5">
-						<div class="comment-area-box d-block d-sm-flex">
-							<div class="comment-thumb">
-								<img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
-							</div>
-								<div class="block">
-								<div class="comment-info">
-									<h5 class="mb-1">${air.r_writerId }</h5>
-									<span class="date-comm"> | <fmt:formatDate value="${air.r_writeTime }" pattern="yy/MM/dd hh:mm"/></span>
-								</div>
-								<div class="comment-meta mt-2">
-								</div>
-	
-								<div class="comment-content mt-3">
-									<p>[${air.r_score }점] | ${air.r_contents }</p>
-								</div>
-							</div>
-						</div>
-						</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
+      <div class="comment-area mt-4 mb-5">
+         <h4 class="mb-4">2(미구현)개의 리뷰가 있습니다. </h4>
+         <ul class="comment-tree list-unstyled">
+            <c:forEach var="air" items="${academyInfoReview}">
+               <li class="mb-5">
+                  <div class="comment-area-box d-block d-sm-flex">
+                     <div class="comment-thumb">
+                        <img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
+                     </div>
+                        <div class="block">
+                        <div class="comment-info">
+                           <h5 class="mb-1">${air.r_writerId }</h5>
+                           <span class="date-comm"> | <fmt:formatDate value="${air.r_writeTime }" pattern="yy/MM/dd hh:mm"/></span>
+                        </div>
+                        <div class="comment-meta mt-2">
+                        </div>
+   
+                        <div class="comment-content mt-3">
+                           <p>[${air.r_score }점] | ${air.r_contents }</p>
+                        </div>
+                     </div>
+                  </div>
+                  </li>
+            </c:forEach>
+         </ul>
+      </div>
+   </div>
 
 <!-- /comment -->
 
@@ -439,8 +439,8 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var ps = new kakao.maps.services.Places(); 
 
 // 키워드로 장소를 검색합니다
-var aaa = document.getElementById('aaa').value;
-ps.keywordSearch(aaa, placesSearchCB); 
+var loc = document.getElementById('loc').value;
+ps.keywordSearch(loc, placesSearchCB); 
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {
