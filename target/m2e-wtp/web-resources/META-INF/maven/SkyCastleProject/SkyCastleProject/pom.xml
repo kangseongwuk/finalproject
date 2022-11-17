@@ -157,30 +157,19 @@
          <artifactId>commons-email</artifactId>
          <version>1.2</version>
       </dependency>
-      <!-- json object[s] -->
-      <dependency>
-         <groupId>net.sf.json-lib</groupId>
-         <artifactId>json-lib</artifactId>
-         <classifier>jdk15</classifier>
-         <version>2.4</version>
-      </dependency>
-
-      <dependency>
-         <groupId>org.codehaus.jackson</groupId>
-         <artifactId>jackson-mapper-asl</artifactId>
-         <version>1.9.13</version>
-      </dependency>
-      <dependency>
-         <groupId>org.codehaus.jackson</groupId>
-         <artifactId>jackson-core-asl</artifactId>
-         <version>1.9.13</version>
-      </dependency>
-      <!-- json object[e] -->
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-mail</artifactId>
-         <version>2.2.13.RELEASE</version>
-      </dependency>
+       
+	      <dependency>
+	    <groupId>com.googlecode.json-simple</groupId>
+	    <artifactId>json-simple</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
+      
+         <dependency> 
+         <groupId>com.google.code.gson</groupId> 
+             <artifactId>gson</artifactId> 
+          <version>2.8.7</version> 
+         </dependency>
+      
 	</dependencies>
 
 </project>

@@ -1,6 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
 <!-- <c:url var='root' value='/'/> --> 
@@ -212,7 +212,19 @@
 						</form:form>
 						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
 						<div class="text-center text-muted delimiter"><a href="${root }member/findpw">비밀번호 찾기</a></div>
+  <!-- 카카오 로그인 -->
+         <c:if test="${userId eq null}">
+            <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d74b9f388e687f66d7d888fd0bb9d36b&redirect_uri=http://localhost:8700/member/kakao&response_type=code">
+           <img src="images/kakao_login_medium_narrow.png" style="height:60px"/>
+         </a>
+      </c:if>
+      <c:if test="${userId ne null}">
+             <h1>로그인 성공입니다</h1>
+           <input type="button" value="로그아웃" onclick="location.href='${root }member/logout'">
+       </c:if>
+
 						<div class="d-flex justify-content-center social-buttons">
+						
 							<button type="button" class="btn btn-secondary btn-round"
 								data-toggle="tooltip" data-placement="top" title="Google">
 								<i class="fab fa-google"></i>
