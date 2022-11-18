@@ -46,4 +46,16 @@ public interface ServiceCenterMapper {
 			+ "where nb_no = #{nb_no}")
 		void viewCountNbInfo(int nb_no);
 	
+	//검색 : 쿼리문 주의 확실하지 않음
+	@Select("select nb_no, nb_title, nb_writeTime, nb_viewCount "
+			+ "from noticeBoardT "
+			+ "where nb_title like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%' ")
+		List<ServiceCenterBean> getNbSearchList(String searchKeyword);
+	
+	//총 게시글 갯수
+	@Select("select count(*) from noticeBoardT")
+	int getListCnt(ServiceCenterBean nbSearchBean);
+	
+	@Select("select count(*) from noticeBoardT where nb_title like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'")
+	int getSearchListCnt(ServiceCenterBean nbSearchBean);
 }

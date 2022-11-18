@@ -3,7 +3,7 @@ package kr.co.ezen.beans;
 import java.sql.Timestamp;
 import org.springframework.web.multipart.MultipartFile;
 
-public class ServiceCenterBean {
+public class ServiceCenterBean{
 
 	private int nb_no;
 	
@@ -17,11 +17,13 @@ public class ServiceCenterBean {
 	private Timestamp nb_modifyTime;
 	private String nb_file;
 	private String nb_viewCount;
+
 	
+	//DB에 없음
 	private String nb_writer;
+	private MultipartFile upload_file;
+	private String searchKeyword;
 		
-	private MultipartFile upload_file;	 
-	 
 	public int getNb_no() {
 		return nb_no;
 	}
@@ -76,5 +78,11 @@ public class ServiceCenterBean {
 	public void setUpload_file(MultipartFile upload_file) {
 		this.upload_file = upload_file;
 	}
-
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	
 }

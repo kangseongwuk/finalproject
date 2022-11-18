@@ -5,8 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class SiteAskBean {
 	
-	private int sa_no;
-	private String sa_memberNo;
+	private int sa_memberNo;
 	private String sa_tele;
 	private Timestamp sa_time;
 	private String sa_title;
@@ -15,6 +14,13 @@ public class SiteAskBean {
 	
 	private MultipartFile upload_file;	 
 	
+	private int m_memberNo;
+	public int getM_memberNo() {
+		return m_memberNo;
+	}
+	public void setM_memberNo(int m_memberNo) {
+		this.m_memberNo = m_memberNo;
+	}
 	private String m_id;
 	private String m_name;
 	private String m_email;
@@ -38,10 +44,10 @@ public class SiteAskBean {
 	public void setM_email(String m_email) {
 		this.m_email = m_email;
 	}
-	public String getSa_memberNo() {
+	public int getSa_memberNo() {
 		return sa_memberNo;
 	}
-	public void setSa_memberNo(String sa_memberNo) {
+	public void setSa_memberNo(int sa_memberNo) {
 		this.sa_memberNo = sa_memberNo;
 	}
 	public String getSa_tele() {
@@ -80,12 +86,6 @@ public class SiteAskBean {
 	}
 	public void setUpload_file(MultipartFile upload_file) {
 		this.upload_file = upload_file;
-	}
-	public int getSa_no() {
-		return sa_no;
-	}
-	public void setSa_no(int sa_no) {
-		this.sa_no = sa_no;
 	}
 	
 }

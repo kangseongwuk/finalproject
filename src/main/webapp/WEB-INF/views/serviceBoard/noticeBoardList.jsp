@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
 <html lang="ko">
@@ -121,11 +122,11 @@
   </ul>
   
   
-  <div class="search-box">
-  <form action="." method="post">
-    <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
-    <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-  </form>
+		  <div class="search-box">
+		  <form:form action="${root }serviceBoard/noticeBoardSearchList_pro" modelAttribute="nbSearchBean" method="get">
+		    <form:input class="search-txt" path="searchKeyword" placeholder="검색어를 입력해 주세요" value = "" />
+		    <form:button class="search-btn" type="submit"><i class="fas fa-search"></i></form:button>
+		  </form:form>
 </div>
 </div>
 

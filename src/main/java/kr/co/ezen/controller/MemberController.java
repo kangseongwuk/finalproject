@@ -1,5 +1,6 @@
 package kr.co.ezen.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.MemberChildBean;
+import kr.co.ezen.beans.SiteAskBean;
+import kr.co.ezen.beans.UserAskBean;
+import kr.co.ezen.beans.UserFavoriteBean;
 import kr.co.ezen.service.MemberService;
 @RequestMapping("/member")
 @Controller
@@ -52,12 +57,12 @@ public class MemberController {
 		
 		if(loginMemberBean.isMemberlogin() == true) {
 			 HttpSession session = request.getSession();
-			 session.setAttribute("loginMemberBean", loginMemberBean);
+			 session.setAttribute("loginMemberBean", this.loginMemberBean);
 			loginMemberBean.setMemberlogin(true);
-			return "member/login_success";
+			return "index";
 		}else {
 			loginMemberBean.setMemberlogin(false);
-			return "member/index";
+			return "index";
 		}
 		
 		
@@ -77,7 +82,7 @@ public class MemberController {
 			return "member/modify";
 		}
 		memberService.updateMember(modifyMemberBean);
-		return "member/login_success";
+		return "member/mypage";
 	}
 	//회원탈퇴
 	@GetMapping("/delete")
@@ -86,11 +91,11 @@ public class MemberController {
 		memberService.deleteAllChild(loginMemberBean.getM_memberNo());
 		memberService.deleteMemeber(loginMemberBean.getM_memberNo());
 		session.invalidate();
-		return "member/index";
+		return "index";
 	}
 	//회원가입페이지 이동
 	@GetMapping("/join")
-	public String join(@ModelAttribute("joinMemberBean") MemberBean joinMemberBean) {
+	public String join(@ModelAttribute("joinMemberBean") MemberBean joinMemberBean, @ModelAttribute("joinAcademyMemberBean") AcademyMemberBean joinAcademyMemberBean) {
 		
 		
 		return "member/join";
@@ -175,5 +180,102 @@ public class MemberController {
 			System.out.println(memberBean);
 			memberService.findPw(response, memberBean);
 		}
+		//내가 쓴 문의사항
+		@GetMapping("/mypage_siteAsk")
+		public String myAsk(Model model) {
+			
+			List<SiteAskBean> myasklist = memberService.getMyaskList(loginMemberBean.getM_memberNo());
+			model.addAttribute("myasklist", myasklist);
+			
+			return "member/mypage_siteAsk";
+		}
 		
+		@GetMapping("/mypage_siteAskRead")
+		public String myAskRead(@RequestParam("sa_time") Timestamp sa_time, 
+								Model model) {
+			
+			SiteAskBean myaskreadBean = memberService.getMyaskRead(sa_time, loginMemberBean.getM_memberNo());
+			
+			model.addAttribute("myaskreadBean", myaskreadBean);
+			
+			return "member/mypage_siteAskRead";
+		}
+		
+		//관리자 마이페이지
+		@GetMapping("/mypageAdmin")
+		public String adminPage(Model model) {
+							
+			return "member/mypageAdmin";
+		}
+			
+		//관리자 회원 목록 페이지
+		@GetMapping("/mypageAdmin_member")
+		public String abMemberList(Model model) {
+			
+			List<MemberBean> abMemberlist = memberService.getAbMemberList();
+		 	model.addAttribute("abMemberlist", abMemberlist);
+					
+			return "member/mypageAdmin_member";
+		}
+		
+		//관리자 학원 목록 페이지
+		@GetMapping("/mypageAdmin_academy")
+		public String abAacademyList(Model model) {
+				
+			List<AcademyMemberBean> abAcademylist = memberService.getAbAcademyList();
+			model.addAttribute("abAcademylist", abAcademylist);
+						
+			return "member/mypageAdmin_academy";
+		}
+			
+			
+		//관리자 문의사항 수신 목록	
+		@GetMapping("/mypageAdmin_siteAsk")
+		public String abSiteAskList(Model model) {
+				
+			List<SiteAskBean> abSiteAskList = memberService.getAbSiteAskList();
+			model.addAttribute("abSiteAskList", abSiteAskList);
+						
+			return "member/mypageAdmin_siteAsk";
+			}
+		
+			/*
+			 * //마이페이지 목록
+			 * 
+			 * @GetMapping("/mypage") public String
+			 * mypage(@ModelAttribute("mypageMemberBean") MemberBean
+			 * mypageMemberBean,@ModelAttribute("memberChildBean") MemberChildBean
+			 * memberChildBean , Model model) {
+			 * System.out.println(loginMemberBean.getM_memberNo()); List<MemberChildBean>
+			 * memberChildlist =
+			 * memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
+			 * model.addAttribute("memberChildlist", memberChildlist);
+			 * memberService.getMypageMember(mypageMemberBean);
+			 * 
+			 * return "member/mypage"; }
+			 */
+		
+		//학생정보
+		@GetMapping("/studentinfo")
+		public String studentinfo(@ModelAttribute("memberChildBean") MemberChildBean memberChildBean , Model model) {
+			List<MemberChildBean> memberChildlist = memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
+		 	model.addAttribute("memberChildlist", memberChildlist);
+		 	
+		 	return "member/studentinfo";
+		}
+		
+		//찜목록
+		@GetMapping("/myfavorite")
+		public String myfavorite(@ModelAttribute("userFavoriteBean") UserFavoriteBean userFavoriteBean, Model model) {
+			
+			return "member/myfavorite";
+		}
+		
+		//내문의사항
+		@GetMapping("/myaskboard")
+		public String myaskboard(@ModelAttribute("userAskBean") UserAskBean userAskBean, Model model) {
+			
+			return "member/myaskboard";
+		}
+
 }

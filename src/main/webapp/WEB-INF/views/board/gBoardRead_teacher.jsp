@@ -39,11 +39,6 @@
 </head>
 
 <body>
-  <!-- preloader start -->
-  <div class="preloader">
-    <img src="images/preloader.gif" alt="preloader">
-  </div>
-  <!-- preloader end -->
 
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -72,21 +67,12 @@
         <img class="img-fluid w-100" src="images/teachers/teacher-1.png" alt="teacher">
       </div>
       <div class="col-md-6 mb-5">
-        <h3>차해나</h3>
-        <h6 class="text-color">국어</h6>
-        <p class="mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque accusamus tenetur ea harum
-          delectus ab consequatur excepturi, odit qui in quo quia voluptate nam optio, culpa aspernatur. Error placeat
-          iusto officia voluptas quae.</p>
-        <div class="row">
-          <div class="col-md-6 mb-5 mb-md-0">
-            <h4 class="mb-4">인적사항:</h4>
-            <ul class="list-unstyled">
-              <li class="mb-3"><a class="text-color" href="mailto:johndoe@email.com"><i class="ti-email mr-2"></i>johndoe@email.com</a></li>
-              <li class="mb-3"><a class="text-color" href="tel:+120345876"><i class="ti-mobile mr-2"></i>+120 345 876</a></li>
-              <li class="mb-3"><a class="text-color" href="http://maps.google.com/"><i class="ti-location-pin mr-2"></i>1313 Boulevard
-                  Cremazie,Quebec</a></li>
-            </ul>
-          </div>
+        <h3>${teacherInfo.t_name }</h3>
+        <h6 class="text-color">${teacherInfo.t_subject }</h6>
+        <br>
+        <h4 class="mb-4">한줄 소개</h4>
+        <p class="mb-5">${teacherInfo.t_contents }</p>
+        <!-- <div class="row">
           <div class="col-md-6">
             <h4 class="mb-4">담당 과목</h4>
             <ul class="list-unstyled">
@@ -94,7 +80,7 @@
               <li class="mb-3">논술</li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

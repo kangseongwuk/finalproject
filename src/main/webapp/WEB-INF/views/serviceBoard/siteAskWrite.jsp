@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:url var='root' value='/'/> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -73,16 +75,23 @@
     </div>
     <div class="row">
       <div class="col-lg-7 mb-4 mb-lg-0">
-        <form action="/contact.html" method="POST">
-          <input type="text" class="form-control mb-3" id="name" name="name" placeholder="이름" required>
-          <input type="text" class="form-control mb-3" id="id" name="id" placeholder="아이디" required>
-          <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="제목" required>
-          <textarea name="message" id="message" class="form-control mb-3" placeholder="문의내용" required></textarea>
+        <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"
+        enctype="multipart/form-data">
+          <form:input class="form-control mb-3" path="m_name" value="${sessionScope.loginMemberBean.m_name }" readonly="true" />
+          <form:input class="form-control mb-3" path="m_id"  value="${sessionScope.loginMemberBean.m_id}"  readonly="true" />
+          <form:input class="form-control mb-3" path="m_email"  value="${sessionScope.loginMemberBean.m_email }"  readonly="true" />
+          </form:form>
+          
+          <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"
+          enctype="multipart/form-data">
+          <form:hidden path="sa_memberNo" />
+          <form:input class="form-control mb-3" path="sa_tele" placeholder="휴대폰" />
+          <form:input class="form-control mb-3" path="sa_title" placeholder="제목" />
+          <form:textarea path="sa_contents" class="form-control mb-3" placeholder="문의내용" ></form:textarea>
          <!-- 2022.11.11 01시 수정 -->
-          <input type="file" class="form-control mb-3" id="formFile" name="subject" placeholder="첨부내용" required>
-
-          <button type="submit" value="send" class="btn btn-primary">작성완료</button>
-        </form>
+          <form:input type="file" class="form-control mb-3" path="upload_file" placeholder="첨부내용" accept="image/*"/>
+          <form:button type="submit" class="btn btn-primary" >작성완료</form:button>
+        </form:form>
       </div>
       <div class="col-lg-5">
         <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit recusandae voluptates doloremque veniam temporibus porro culpa ipsa, nisi soluta minima saepe laboriosam debitis nesciunt. Dolore, labore. Accusamus nulla sed cum aliquid exercitationem debitis error harum porro maxime quo iusto aliquam dicta modi earum fugiat, vel possimus commodi, deleniti et veniam, fuga ipsum praesentium. Odit unde optio nulla ipsum quae obcaecati! Quod esse natus quibusdam asperiores quam vel, tempore itaque architecto ducimus expedita</p>

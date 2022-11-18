@@ -25,25 +25,19 @@ const el = {
 el.signUpHome.addEventListener('click', function(e) {
   showSign(e, 'signup');
 });
-el.linkUp.addEventListener('click', function(e) {
-  showSign(e, 'signup');
-});
+
 
 // Show the page sign in
 el.signInHome.addEventListener('click', function(e) {
   showSign(e, 'signin');
 });
-el.linkIn.addEventListener('click', function(e) {
-  showSign(e, 'signin');
-});
+
 el.btnSignUp.addEventListener('click', function(e) {
   showSign(e, 'signin');
 });
 
 // Show the page Home
 el.btnHome.addEventListener('click', showHome);
-
-
 // Functions Events
 // function to show screen Home
 function showHome(event) {

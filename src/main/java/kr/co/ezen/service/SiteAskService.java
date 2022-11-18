@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.SiteAskBean;
+import kr.co.ezen.dao.MemberDAO;
 import kr.co.ezen.dao.SiteAskDAO;
 
 @Service
@@ -21,12 +22,11 @@ public class SiteAskService {
 	@Value("${path.upload}")
 	private String path_upload;
 	
+	@Autowired
+	private MemberBean loginMemberBean;
 	
 	@Autowired
 	private SiteAskDAO siteAskDAO;
-	
-	@Autowired
-	private MemberBean loginMemberBean;
 	
 	@SuppressWarnings("unused")
 	private String saveUploadfile(MultipartFile upload_file) {
@@ -51,9 +51,13 @@ public class SiteAskService {
 			String file_name = saveUploadfile(upload_file);					
 			saWriteBean.setSa_file(file_name); 			
 		}
+
+		saWriteBean.setM_memberNo(loginMemberBean.getM_memberNo());
+		saWriteBean.setSa_memberNo(loginMemberBean.getM_memberNo());
 		
 		siteAskDAO.addSaContent(saWriteBean);
 	}
+	
 	
 	/*
 	public SiteAskBean getSaContentPage(int m_memberNo) {

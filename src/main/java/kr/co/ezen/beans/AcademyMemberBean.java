@@ -2,6 +2,8 @@ package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class AcademyMemberBean {
 
 	//학원 기본 정보
@@ -28,12 +30,31 @@ public class AcademyMemberBean {
 	private String a_openTime;
 	private String a_closeTime;
 	
+	
+	//upload
+	private MultipartFile upload_file;
+	private MultipartFile upload_file2;
+	public MultipartFile getUpload_file2() {
+		return upload_file2;
+	}
+
+	public void setUpload_file2(MultipartFile upload_file2) {
+		this.upload_file2 = upload_file2;
+	}
 	private boolean academymemberlogin;
 	
+	public MultipartFile getUpload_file() {
+		return upload_file;
+	}
+
+	public void setUpload_file(MultipartFile upload_file) {
+		this.upload_file = upload_file;
+	}
+
 	public AcademyMemberBean() {
 		this.academymemberlogin = false;
 	}
-	
+
 	public boolean isAcademymemberlogin() {
 		return academymemberlogin;
 	}
@@ -154,5 +175,8 @@ public class AcademyMemberBean {
 	public void setA_closeTime(String a_closeTime) {
 		this.a_closeTime = a_closeTime;
 	}
+	
+
+
 	
 }

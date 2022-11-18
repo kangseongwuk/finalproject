@@ -149,6 +149,8 @@ insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locati
     values(a_sq.nextval,'aca02','12345678','b단과학원','1234567892','서울시 관악구 신림동','이젠 602호','01099997777',2);
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
     values(a_sq.nextval,'aca03','12345678','c미술학원','1234567893','서울시 관악구 신림동','이젠 603호','01099996666',3);
+insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
+    values(a_sq.nextval,'aca04','12345678','D종합학원','1234567894','서울시 관악구 신림동','이젠 601호','01099998888',1);
 
 
 
@@ -175,6 +177,8 @@ insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gr
     values(100001,'종합 학원입니다.','','','4','9','y','14:00','20:30');
 insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
     values(100002,'단과 학원입니다.','','','7','13','n','16:00','');
+insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
+    values(100004,'종합 학원입니다.','','','7','12','y','15:00','21:30');
 
 
 
@@ -304,8 +308,7 @@ CREATE TABLE blacklistT(
 
 -- 신고/블랙리스트 관리 예시(현재 없음)
 
-insert into blacklistT(m_memberNo,a_memberNo,black_contents)
-   values(1001,100001,'너무 싫어요 너무싫어 진상');
+
 
 
 --11. 학생-학원 연결 정보 테이블
@@ -336,6 +339,10 @@ CREATE TABLE wishListT(
             REFERENCES academyMemberT(a_memberNo),
     constraint wish_pk primary key(m_memberNo, a_memberNo)
 );
+
+--12. 학원 찜 예시
+insert into wishListT(m_memberNo,a_memberNo)
+    values(10000001,100001);
 
 
 --13. 게시판명(상단메뉴) 테이블
@@ -461,5 +468,8 @@ insert into FAQBoardT(fb_no,fb_title,fb_contentsQ,fb_contentsA)
     values(fb_sq.nextval,'FAQ 테스트1','이 사이트는 뭐 하는 곳이죠?','저도 모릅니다.');
 
 
-commit;
+commit
+
+
+
 

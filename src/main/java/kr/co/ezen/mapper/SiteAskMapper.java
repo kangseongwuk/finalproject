@@ -14,18 +14,14 @@ public interface SiteAskMapper {
 	
 		
 	@Insert("insert into siteAskT(sa_memberNo, sa_tele, sa_title, sa_contents, sa_file )"
-			+ "values(#{sa_memberNo, jdbcType=VARCHAR}, #{sa_tele}, #{sa_title}, #{sa_contents}, #{sa_file, jdbcType=VARCHAR})"
+			+ "values(#{sa_memberNo}, #{sa_tele}, #{sa_title}, #{sa_contents}, #{sa_file, jdbcType=VARCHAR})"
 			)
 	void addSaContent(SiteAskBean saWriteBean);
 	
-	/*
-	@Select("select m_id, m_name, m_email from memberT "
-			+ "where m_memberNo = #{m_memberNo}")
-		SiteAskBean getSaContentPage(int m_memberNo);	
-	*/
-	
 	// 문의글 목록
-	@Select("select sa_memberNo, sa_title, sa_time from siteAskT")	
+	@Select("select sa_memberNo, sa_title, sa_time"
+			+ " from siteAskT natural join memberT "
+			+ " and sa_memberNo = m_memberNo")	
 		List<SiteAskBean> getSaList(); 
 		
 		// 문의글 상세보기

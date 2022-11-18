@@ -9,6 +9,8 @@ import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.AcademySubjectBean;
 import kr.co.ezen.beans.AcademyTeacherBean;
+import kr.co.ezen.beans.TeacherReviewBean;
+import kr.co.ezen.beans.WishListBean;
 import kr.co.ezen.mapper.BoardMapper;
 
 @Repository
@@ -41,4 +43,29 @@ public class BoardDAO {
 	public List<AcademyTeacherBean> getAcademyInfoTeacher(int a_memberNo){
 		return boardMapper.getAcademyInfoTeacher(a_memberNo);
 	}
+	
+	//개별 강사 조회
+		public AcademyTeacherBean getTeacherInfo(int a_memberNo, String t_name) {
+			return boardMapper.getTeacherInfo(a_memberNo, t_name);
+		}
+		
+		//개별 강사 리뷰 조회
+		public List<TeacherReviewBean> getTeacherReviewInfo(int a_memberNo, String t_name) {
+			return boardMapper.getTeacherReviewInfo(a_memberNo, t_name);
+		}
+		
+		//찜목록 확인(학원리스트)
+		public WishListBean getWishIs(int m_memberNo, int a_memberNo) {
+			return boardMapper.getWishIs(m_memberNo, a_memberNo);
+		}
+		
+		//찜목록 삭제
+		public void deleteWish(int m_memberNo, int a_memberNo) {
+			boardMapper.deleteWish(m_memberNo, a_memberNo);
+		}
+		
+		//찜목록 등록
+		public void insertWish(int m_memberNo, int a_memberNo) {
+			boardMapper.insertWish(m_memberNo, a_memberNo);
+		}
 }

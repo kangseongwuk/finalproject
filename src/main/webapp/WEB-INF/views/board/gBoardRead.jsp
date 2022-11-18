@@ -209,7 +209,9 @@ $(document).ready(function() {
             <div class="col-md-6">
               <ul class="list-styled">
                 <li>${academyInfoBasic.a_location } / ${academyInfoBasic.a_locationDetail }
-                <div id="map" style="width:100%;height:350px;"></div></li>
+                <div id="map" style="width:100%;height:350px;"></div>
+                <input type="hidden" id="loc" value="${academyInfoBasic.a_location } ${academyInfoBasic.a_name }" >
+                </li>
               </ul>
             </div>
           </div>
@@ -322,13 +324,10 @@ $(document).ready(function() {
              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
                alt="Card image cap">
              <div class="card-body">
-             <!-- ==================================================================================================================================================================================================================================================================================================================================================== -->
-             <%-- ${ait.t_subject } --%>
-             <input type="hidden" id="loc" value="${academyInfoBasic.a_location } ${academyInfoBasic.a_name }" >
                <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
                <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
                <p class="card-text">${ait.t_contents }</p>
-               <a class="btn btn-primary btn-md btn-rounded">상세보기</a>
+               <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher?a_memberNo=${ait.a_memberNo}&t_name=${ait.t_name}">상세보기</a>
              </div>
            </div>
          </div>
@@ -370,7 +369,11 @@ $(document).ready(function() {
 
 <div class="col-lg-12">
       <div class="comment-area mt-4 mb-5">
-         <h4 class="mb-4">2(미구현)개의 리뷰가 있습니다. </h4>
+         <h4 class="mb-4">
+         	<% i=0; %>
+         	<c:forEach items="${academyInfoReview}"><% i++; %></c:forEach>
+         	<%=i %>개의 리뷰가 있습니다.
+         </h4>
          <ul class="comment-tree list-unstyled">
             <c:forEach var="air" items="${academyInfoReview}">
                <li class="mb-5">

@@ -13,6 +13,7 @@ import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.AcademySubjectBean;
 import kr.co.ezen.beans.AcademyTeacherBean;
+import kr.co.ezen.beans.TeacherReviewBean;
 import kr.co.ezen.service.BoardService;
 
 @Controller
@@ -55,12 +56,19 @@ public class BoardController {
 	}
 	
 	//강사 상세보기
-	@GetMapping("/gBoardRead_teacher")
-	public String gBoardRead_teacher() {
-		
-		
-		return "board/gBoardRead_teacher";
-	}
+		@GetMapping("/gBoardRead_teacher")
+		public String gBoardRead_teacher(@RequestParam("a_memberNo") int a_memberNo,
+										@RequestParam("t_name") String t_name,
+										Model model) {
+			
+			AcademyTeacherBean teacherInfo = boardService.getTeacherInfo(a_memberNo, t_name);
+			List<TeacherReviewBean> teacherReviewInfo = boardService.getTeacherReviewInfo(a_memberNo, t_name);
+			
+			model.addAttribute("teacherInfo",teacherInfo);
+			model.addAttribute("teacherReviewInfo",teacherReviewInfo);
+			
+			return "board/gBoardRead_teacher";
+		}
 	
 	//문의게시판 목록 호출
 	@GetMapping("/askBoard")

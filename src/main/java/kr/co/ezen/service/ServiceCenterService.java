@@ -1,6 +1,8 @@
 package kr.co.ezen.service;
 
 import java.io.File;
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.ServiceCenterBean;
+import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.dao.ServiceCenterDAO;
 
 @Service
@@ -19,7 +22,6 @@ public class ServiceCenterService {
 
 	@Value("${path.upload}")
 	private String path_upload;
-	
 	
 	@Autowired
 	private ServiceCenterDAO serviceCenterDAO;
@@ -55,10 +57,25 @@ public class ServiceCenterService {
 	}
 	
 	//글목록
-	 public List<ServiceCenterBean> getNbList(){		   
+	 public List<ServiceCenterBean> getNbList(){
+		 		 
 		  return serviceCenterDAO.getNbList(); 			  
 	  }
+	 
+	 
+	//검색
+	 public List<ServiceCenterBean> getNbSearchList(String searchKeyword){
+			return serviceCenterDAO.getNbSearchList(searchKeyword);
+		}
+	 
+	//게시글 수
+	public int getListCnt(ServiceCenterBean nbSearchBean){
+		 return serviceCenterDAO.getListCnt(nbSearchBean);
+	 }
 	
+	public int getSearchListCnt(ServiceCenterBean nbSearchBean) {
+		return serviceCenterDAO.getSearchListCnt(nbSearchBean);
+	}
 	
 	public ServiceCenterBean getNbInfo(int nb_no) { 
 		  return serviceCenterDAO.getNbInfo(nb_no); 
@@ -89,10 +106,10 @@ public class ServiceCenterService {
 		serviceCenterDAO.delNbInfo(nb_no);
 	}
 	
-
+	
 	public void viewCountNbInfo(int nb_no) {
 		serviceCenterDAO.viewCountNbInfo(nb_no);
 	}
 	
-	
+
 }

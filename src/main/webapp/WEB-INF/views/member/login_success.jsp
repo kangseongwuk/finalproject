@@ -15,6 +15,6 @@
 <a href="${root }member/mypage?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }">my page</a>
 <a href="${root }member/logout">로그아웃</a>
 <a href="${root }faq/faqlist">faqlist</a>
-<a href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }">my page</a>
+<a href="${root }member/mypageAdmin?m_memberNo=${sessionScope.loginMemberBean.m_memberNo }">관리자 마이페이지</a>
 </body>
 </html>

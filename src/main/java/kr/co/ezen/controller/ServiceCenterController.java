@@ -1,6 +1,11 @@
 package kr.co.ezen.controller;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.RequestContextUtils;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.ServiceCenterBean;
@@ -28,13 +38,37 @@ public class ServiceCenterController {
 	
 	
 	@GetMapping("/noticeBoardList")
-	public String main(Model model) {
-	
+	public String main(@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean,
+						Model model) {
+		
 		List<ServiceCenterBean> nblist =  serviceCenterService.getNbList();		
 		model.addAttribute("nblist", nblist);
 		
+		int totCnt = serviceCenterService.getListCnt(nbSearchBean);
+		model.addAttribute("totCnt", totCnt);
+		
 		return "serviceBoard/noticeBoardList";
+		
 	}
+	
+	@GetMapping("/noticeBoardSearchList_pro")
+	public String nbSearchList_pro(@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean,
+								@RequestParam("searchKeyword") String searchKeyword,
+								Model model) {
+	
+		List<ServiceCenterBean> nbsearchList = serviceCenterService.getNbSearchList(searchKeyword);
+		nbSearchBean.setSearchKeyword(nbSearchBean.getSearchKeyword());
+		
+		int searchCnt = serviceCenterService.getSearchListCnt(nbSearchBean);
+		model.addAttribute("searchCnt", searchCnt);
+		
+		model.addAttribute("nbsearchList", nbsearchList);
+		model.addAttribute("nbSearchBean", nbSearchBean);
+		
+		return "serviceBoard/noticeBoardSearchList";
+	}	
+	
+	
 	
 	@GetMapping("/noticeBoardRead")
 	public String read(@RequestParam("nb_no") int nb_no,

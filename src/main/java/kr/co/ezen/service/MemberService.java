@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,13 +20,10 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import java.io.FileReader;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-
+import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.MemberChildBean;
+import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.dao.MemberDAO;
 @Service
 public class MemberService {
@@ -136,8 +134,8 @@ public class MemberService {
 			// Mail Server 설정
 			String charSet = "utf-8";
 			String hostSMTP = "smtp.naver.com"; // 네이버 이용시 smtp.naver.com
-			String hostSMTPid = "moma417@naver.com";
-			String hostSMTPpwd = "3M5PE4G346VL";
+			String hostSMTPid = ""; //moma417@naver.com
+			String hostSMTPpwd = ""; //3M5PE4G346VL
 			
 			// 보내는 사람 EMail, 제목, 내용
 			String fromEmail = "moma417@naver.com";
@@ -265,5 +263,33 @@ public class MemberService {
 				e.printStackTrace();
 			}
 			return access_Token;
+		}
+		
+		//내가 쓴 문의사항
+		public List<SiteAskBean> getMyaskList(int m_memberNo){
+			return memberDAO.getMyaskList(m_memberNo);
+		}	
+		public SiteAskBean getMyaskRead(Timestamp sa_time, int m_memberNo){
+			return memberDAO.getMyaskRead(sa_time, m_memberNo);
+		}
+		
+		//관리자 마이페이지
+		//public List<MemberBean> getAdminPageList() {
+		//	return memberDAO.getAdminPageList();
+		//}
+		
+		//관리자 회원목록 페이지
+		public List<MemberBean> getAbMemberList(){
+			return memberDAO.getAbMemberList();
+		}
+		
+		//관리자 학원 목록 페이지
+		public List<AcademyMemberBean> getAbAcademyList(){
+			return memberDAO.getAbAcademyList();	
+		}	
+		
+		//문의사항 수신
+		public List<SiteAskBean> getAbSiteAskList(){
+			return memberDAO.getAbSiteAskList();
 		}
 }

@@ -6,14 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.SiteAskBean;
+import kr.co.ezen.mapper.MemberMapper;
 import kr.co.ezen.mapper.SiteAskMapper;
 
 @Repository
 public class SiteAskDAO {
 	
 		@Autowired
-		private SiteAskMapper siteAskMapper;	
+		private SiteAskMapper siteAskMapper;
+		private MemberMapper memberMapper;
 		
 		  public void addSaContent(SiteAskBean saWriteBean) {			  
 			 			  

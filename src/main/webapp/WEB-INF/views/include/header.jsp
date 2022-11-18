@@ -10,9 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-<head>
 
   <!-- Basic Page Needs
 	================================================== -->
@@ -53,7 +50,24 @@
   <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
 </head>
-
+<body>
+<script>
+	$(function(){
+		$("#kakao").click(function(){
+			$.ajax({
+				url : "${root}member/kakao",
+				type : "POST",
+				data : {
+					m_id : $("#id").val(),
+					m_email : $("#email").val()
+				},
+				success : function(result) {
+					alert(result);
+				}
+			})
+		});
+	})
+</script>
 <body>
 <!-- Channel Plugin Scripts -->
 <script>
@@ -114,9 +128,15 @@
         </div>
         <div class="col-lg-8 text-center text-lg-right">
           <ul class="list-inline">
+            <c:if test="${sessionScope.loginMemberBean.m_memberNo == null }">
             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">회원 로그인</a></li>
             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal2" data-toggle="modal" data-target="#loginModal2">학원 로그인</a></li>
             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/join" >회원가입</a></li>
+            </c:if>
+            <c:if test="${sessionScope.loginMemberBean.m_memberNo != null }">
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
+          	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage" >마이페이지</a></li>
+          	</c:if>
           </ul>
         </div>
       </div>
@@ -157,8 +177,13 @@
               
                 <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
                 <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
-                <li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite">문의하기</a></li>
+                <c:if test="${sessionScope.loginMemberBean.m_memberNo != null }">
+                <li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">문의하기</a></li>
+                </c:if>
+                <!-- 블랙리스트는 학원 로그인 시에만 출력될 수 있도록 -->
+                <c:if test="${sessionScope.loginMemberBean.m_memberNo != null }">
                 <li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a></li>
+                </c:if>
                 
            <!--    <li><a class="dropdown-item" href="notice-single.html">블랙리스트</a></li> -->
                
@@ -214,12 +239,12 @@
 						<div class="text-center text-muted delimiter"><a href="${root }member/findpw">비밀번호 찾기</a></div>
   <!-- 카카오 로그인 -->
          <c:if test="${userId eq null}">
-            <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d74b9f388e687f66d7d888fd0bb9d36b&redirect_uri=http://localhost:8700/member/kakao&response_type=code">
-           <img src="images/kakao_login_medium_narrow.png" style="height:60px"/>
+            <a class="p-2"  id="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=d74b9f388e687f66d7d888fd0bb9d36b&redirect_uri=http://localhost:8700/member/kakao&response_type=code">
+           <img src="images/kakao_login_large_narrow.png" style="width:100%"/>
          </a>
       </c:if>
       <c:if test="${userId ne null}">
-             <h1>로그인 성공입니다</h1>
+             <h3>로그인 성공입니다</h3>
            <input type="button" value="로그아웃" onclick="location.href='${root }member/logout'">
        </c:if>
 

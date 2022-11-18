@@ -3,6 +3,7 @@ package kr.co.ezen.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.mapper.AcademyMemberMapper;
 
@@ -32,5 +33,21 @@ public class AcademyMemberDAO {
 	
 	public void deleteAcademyMember(int a_memberNo) {
 		academyMemberMapper.deleteAcademyMember(a_memberNo);
+	}
+	
+	public void insertAcademyIntroduce(AcademyMemberBean introduceAcademyMemberBean) {
+		academyMemberMapper.insertAcademyIntroduce(introduceAcademyMemberBean);
+	}
+	
+	public AcademyMemberBean infoIntroduce(int a_memberNo) {
+		return academyMemberMapper.infoIntroduce(a_memberNo);
+	}
+	
+	public void modifyAcademyIntroduce(AcademyMemberBean infoIntroduce) {
+		academyMemberMapper.modifyAcademyIntroduce(infoIntroduce);
+	}
+	
+	public void deleteAcademyIntroduce(int a_memberNo) {
+		academyMemberMapper.deleteAcademyIntroduce(a_memberNo);
 	}
 }

@@ -254,8 +254,7 @@
                <ul class="list-inline custom-breadcrumb mb-2">
                   <li class="list-inline-item"><a
                      class="h2 text-primary font-secondary" href="index.html">Home</a></li>
-                  <li class="list-inline-item text-white h3 font-secondary nasted">Our
-                     Courses</li>
+                  <li class="list-inline-item text-white h3 font-secondary nasted">Our Courses</li>
                </ul>
           
             </div>
@@ -289,35 +288,96 @@
          </div>
          <!-- course list -->
          <div class="row justify-content-center">
-
             <c:forEach var="gList" items="${gBoardList }">
-            	<script type="text/javascript">
-	
-			$(document).ready(function() {
-				
-				var convertData = {
-					"grade": [
-						"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
-					],
-					"a_classify": {
-						"1":"종합",
-						"2":"단과",
-						"3":"예체능(기타)"
-					}
-				}
-				
-				window.onload = convertPro();
-				
-				function convertPro() {
-					$('#gradeSpace').html(convertData.grade[${gList.a_gradeMin }] + " ~ " + convertData.grade[${gList.a_gradeMax }]);
-					//$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
-					//alert("이건 되냐?");
-					//alert(convertData.a_classify[${academyInfoBasic.a_classify }]);
+	           	<script type="text/javascript">
 					
-				}
-			});
-		
-		</script>
+					$(document).ready(function() {
+						
+						//학년 출력 변환
+						var convertData = {
+							"grade": [
+								"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
+							],
+							"a_classify": {
+								"1":"종합",
+								"2":"단과",
+								"3":"예체능(기타)"
+							}
+						}
+						
+						window.onload = convertPro(), getWishHeart(${gList.a_memberNo });
+						
+						function convertPro() {
+							//alert("이건 되냐?");
+							var min = ${gList.a_gradeMin };
+							var max = ${gList.a_gradeMax };
+							//alert(convertData.grade[min]);
+							
+							var space = '#gradeSpace'+${gList.a_memberNo };
+							
+							$(space).html(convertData.grade[min] + " ~ " + convertData.grade[max]);
+							//$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
+							
+						}
+						
+					});
+					
+					//찜하기 출력
+					function getWishHeart(a_memberNo) {
+						var wishNum = "#wish"+a_memberNo;
+						//alert(wishNum);
+						
+						$.ajax({
+							url : "boardListWish/"+a_memberNo,
+							type : "GET",
+							dataType : "text",
+							error : function(e) {
+								alert("안됨1");
+								//alert(e);
+							},
+							success : function(wishIs) {
+								if(wishIs.trim()=="true") {
+									$(wishNum).attr('class',"like-btn active");
+								} else if(wishIs.trim()=="false") {
+									$(wishNum).attr('class',"like-btn");
+								}
+							}
+						});
+					}
+
+
+					//찜하기(찜/해제)
+					function switchWishHeart(a_memberNo) {
+						//alert("헤이!");
+						//alert(a_memberNo);
+						
+						$.ajax({
+							url : "boardListWishOnOff/"+a_memberNo,
+							type : "GET",
+							dataType : "text",
+							error : function(e) {
+								alert("안됨2");
+								//alert(e);
+							},
+							success : function(result) {
+								if(result=="false") {
+									alert("일반 회원으로 로그인해주세요.");
+								} else if(result=="on") {
+									alert("찜 등록 완료.");
+								} else if(result=="off") {
+									alert("찜 해제 완료.");
+								} else if(result=="error") {
+									alert("알 수 없는 오류");
+								}
+								
+								getWishHeart(a_memberNo);
+							}
+						});
+					}
+					
+					
+				
+				</script>
                <!-- course item -->
                <div class="col-lg-4 col-sm-6 mb-5">
                   <div class="card p-0 border-primary rounded-0 hover-shadow">
@@ -327,7 +387,13 @@
                         <ul class="list-inline mb-2">
                            <li class="list-inline-item"><i
                               class="ti-calendar mr-1 text-color"></i>${gList.a_location }</li>
-							<li class="list-inline-item"><a class="text-color" href="course-single.html" id="gradeSpace">${gList.a_gradeMin } ~ ${gList.a_gradeMax }</a></li>
+							<li class="list-inline-item">
+								<a class="text-color" href="course-single.html" id="gradeSpace${gList.a_memberNo }">
+									${gList.a_gradeMin } ~ ${gList.a_gradeMax }
+									<input type="hidden" id="gradeMin" value="${gList.a_gradeMin }">
+									<input type="hidden" id="gradeMax" value="${gList.a_gradeMax }">
+								</a>
+							</li>
                         </ul>
                         <a href="course-single.html">
                            <h4 class="card-title">${gList.a_name }</h4>
@@ -336,15 +402,15 @@
                         <a href="gBoardRead?a_memberNo=${gList.a_memberNo }"
                            class="btn btn-primary btn-sm">상세 보기</a>
                            	<!--  like button  -->
-		<p class="card-text mb-4">
-			<a href="#" class="like-btn">
-				<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
-					5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
-				</svg>
-			</a>
-		</p>
-	<!--  /like button  -->
+								<p class="card-text mb-4">
+									<a class="like-btn" id="wish${gList.a_memberNo }" onclick="switchWishHeart(${gList.a_memberNo })">
+										<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
+											5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
+										</svg>
+									</a>
+								</p>
+							<!--  /like button  -->
                      </div>
                   </div>
                </div>
