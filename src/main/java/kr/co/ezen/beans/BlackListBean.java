@@ -13,6 +13,12 @@ public class BlackListBean {
 	
 	private int page;
 	
+	private String m_name;
+	private String a_name;
+	
+	private String searchKeyword;
+	
+	
 	public int getM_memberNo() {
 		return m_memberNo;
 	}
@@ -49,5 +55,22 @@ public class BlackListBean {
 	public void setUpload_file(MultipartFile upload_file) {
 		this.upload_file = upload_file;
 	}
-
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
+	public String getA_name() {
+		return a_name;
+	}
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
+	}
 }

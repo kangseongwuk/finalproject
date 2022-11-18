@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
 <html lang="ko">
@@ -74,18 +75,19 @@
 <table>
     <thead>
     <tr>
-       <th>고객 번호</th>
-       <th>학원 번호</th>
+       <th>블랙리스트</th>
+       <th>학원 이름</th>
+       <th>사유</th>
        <th>작성일자</th>
 
     </tr>
     </thead>
     <tbody>
-<c:forEach var="st" items="${bllist }">
+<c:forEach var="st" items="${blsearchList }">
     <tr>
-        <td><a href="${root }blackList/blackListRead?m_memberNo=${st.m_memberNo}&a_memberNo=${st.a_memberNo}&page=${page}">${st.m_memberNo}</a></td>
-        <td>${st.a_memberNo} &nbsp;&nbsp;</td>
-        
+        <td>${st.m_name}</td>
+        <td>${st.a_name}</td>
+         <td>${st.black_contents}</td>
 <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.black_time}" /></td>
     </tr>
 </c:forEach>
@@ -171,27 +173,14 @@
 					</c:choose>
 				</ul>
 			</div>
-  
-  
-  
-<%-- <c:forEach var="st" items="${bllist }">
-    <tr>
-        <td><a href="${root }blackList/blackListRead?m_memberNo=${st.m_memberNo}&a_memberNo=${st.a_memberNo}&page=${page}">${st.m_memberNo}</a></td>
-        <td>${st.a_memberNo} &nbsp;&nbsp;</td>
-        
-<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.black_time}" /></td>
-    </tr>
-</c:forEach> --%>
-		<c:forEach var="str" items="${blSearchlist }">
-		  <div class="search-box">
-		  <form action="${root}blackList/blackListList?m_memberNo=${str.m_memberNo}&page=${page}" method="post">
-		    <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
-		    <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-		  </form>
+    
+ <div class="search-box">
+		  <form:form action="${root}blackList/blackSearchList_pro?m_name=${requestScope.page }" modelAttribute="blSearchBean" method="get">
+		    <form:input class="search-txt" path="searchKeyword" placeholder="검색어를 입력해 주세요" value="" />
+		    <form:button class="search-btn" type="submit"><i class="fas fa-search"></i></form:button>
+		  </form:form>
 		</div>
-		</div>
-		</c:forEach>
-
+	</div>
 </section>
 <!-- /Board -->
 

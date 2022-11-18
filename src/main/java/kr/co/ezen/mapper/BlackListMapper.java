@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
 
 import kr.co.ezen.beans.BlackListBean;
+import kr.co.ezen.beans.ServiceCenterBean;
 
 public interface BlackListMapper {
 	
@@ -19,32 +20,27 @@ public interface BlackListMapper {
 			)
 		void addBlContent(BlackListBean blWriteBean);		
 	
-	// 저자이름, 작성날짜, 내용, 이미지 등을 추출하여 가져와 내림차순 정렬하여 출력 합니다.	
-	@Select("select m_memberNo, a_memberNo, black_time " +
-			 "from blacklistT " +
-			 "order by black_time desc ")	
-		List<BlackListBean> getBlList(RowBounds rowBounds); 
-	
 		// 제목, 작성날짜, 조회수, 내용, 이미지 등을 추출하여 가져와야 합니다.	
-	@Select("select m_memberNo, a_memberNo, black_contents, black_time "
-			+ "from blacklistT "
-			+ "where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo}")
-		BlackListBean getBlInfo(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo);	
+	@Select("select m_name, a_name, black_contents, black_time "
+			+ "from memberT m, academyMemberT a, blacklistT b "
+			+ "where m.m_memberNo = b.m_memberNo "
+			+ "and a.a_memberNo = b.a_memberNo ")
+	List<BlackListBean> getBlList(RowBounds rowBounds); 	
 
-	
-	//수정
-	@Select("select m_memberNo, a_memberNo, black_contents "
-			+ "from blacklistT "
-			+ "where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo} ")
-		BlackListBean getBlModifyPage(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo);
-	
-	@Update("update blacklistT set black_contents = #{black_contents} "
-			+ "where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo}")
-		void modifyBlInfo(BlackListBean blModifyBean);
-	
 	//삭제
-	@Delete("delete from blacklistT where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo}")
+	@Delete("delete from blacklistT "
+			+ "where m_memberNo = #{m_memberNo} "
+			+ "and a_memberNo = #{a_memberNo}")
 		void delBlInfo(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo);
+	
+	//검색 : 쿼리문 주의 확실하지 않음
+	@Select("select m_name, a_name, black_contents, black_time "
+			+ "from memberT m, academyMemberT a, blacklistT b "
+			+ "where m.m_memberNo = b.m_memberNo "
+			+ "and a.a_memberNo = b.a_memberNo "
+			+ "and m_name = #{m_name}")
+	List<BlackListBean> getBLSearchList(String m_name);
+		
 	
 	/*@Update("update blacklistT set nb_viewCount = nb_viewCount + 1 "
 			+ "where m_memberNo = #{m_memberNo}")
@@ -53,7 +49,5 @@ public interface BlackListMapper {
 	
 	@Select("select count(*) from blacklistT")
 	int getContentCnt();
-	
-	@Select("select m_memberNo, a_memberNo, black_time from blacklistT where m_memberNo = #{m_memberNo} ")
-		List<BlackListBean> getBlSearchList(@Param("m_memberNo")int m_memberNo, RowBounds rowBounds);
-	}
+
+}

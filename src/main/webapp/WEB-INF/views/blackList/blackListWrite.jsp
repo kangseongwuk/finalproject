@@ -34,10 +34,7 @@
 			<form:textarea path="black_contents" rows="10" style="resize:none"></form:textarea>
 			<form:errors path="black_contents" style="color:red"></form:errors>
 		</div>
-		<div>
-			<form:label path="upload_file">첨부 이미지</form:label>
-			<form:input type="file" path="upload_file" accept="image/*"/>
-		</div>
+
 		<div >
 		<div>
 			<form:button>작성하기</form:button>

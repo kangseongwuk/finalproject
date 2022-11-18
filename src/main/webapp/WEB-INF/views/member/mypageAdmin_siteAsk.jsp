@@ -22,7 +22,7 @@
 	<c:forEach var="sa" items="${abSiteAskList }">
 				${sa.m_name } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				${sa.sa_memberNo} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				${sa.sa_title} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="${root}serviceBoard/siteAskRead?sa_time=${sa.sa_time }">${sa.sa_title}</a> 
 			<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${sa.sa_time}" /><br><hr>
 			</c:forEach>
 	<a href="${root}member/mypageAdmin">관리자 마이페이지</a>

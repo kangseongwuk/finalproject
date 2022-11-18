@@ -22,10 +22,6 @@ import kr.co.ezen.dao.ServiceCenterDAO;
 @PropertySource("/WEB-INF/properties/option.properties")
 public class BlackListService {
 
-	@Value("${path.upload}")
-	private String path_upload;
-	
-
 	@Value("${page.listcnt}")
 	private int page_listcnt;  
 	
@@ -38,29 +34,8 @@ public class BlackListService {
 	@Autowired
 	private MemberBean loginMemberBean;
 	
-	@SuppressWarnings("unused")
-	private String saveUploadfile(MultipartFile upload_file) {
 		
-		String file_name = upload_file.getOriginalFilename();
-		
-		try {
-			upload_file.transferTo(new File(path_upload + "/" + file_name));  
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return file_name;
-	}
-	
 	public void addBlContent(BlackListBean blWriteBean) {
-		
-		MultipartFile upload_file = blWriteBean.getUpload_file();
-		
-		if(upload_file.getSize() > 0) {			
-			String file_name = saveUploadfile(upload_file);					
-			blWriteBean.setBlack_contents(file_name); 			
-		}
 		
 		blackListDAO.addBlContent(blWriteBean);
 	}
@@ -74,36 +49,10 @@ public class BlackListService {
 	}
 	
 	//검색
-	public List<BlackListBean> getBlSearchList(@Param("m_memberNo") int m_memberNo,int page){	  
-		
-		int start = (page -1) * page_listcnt;
-		RowBounds rowBounds = new RowBounds(start, page_listcnt);
-		
-	  return blackListDAO.getBlSearchList(m_memberNo, rowBounds); 	  
-	}
-	
-	public BlackListBean getBlInfo(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo) { 
-		  return blackListDAO.getBlInfo(m_memberNo,a_memberNo); 
+	 public List<BlackListBean> getBLSearchList(String searchKeyword){
+		   return blackListDAO.getBLSearchList(searchKeyword);
 	  }
 	
-	//수정 페이지 출력 화면
-		public BlackListBean getBlModifyPage(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo){
-			
-			return blackListDAO.getBlModifyPage(m_memberNo,a_memberNo);
-		}
-	
-	//수정
-	public void modifyBlInfo(BlackListBean blModifyBean){
-		
-		 MultipartFile upload_file = blModifyBean.getUpload_file();
-		  
-		  if(upload_file.getSize() > 0) {
-			  String file_name = saveUploadfile(upload_file);				
-			  blModifyBean.setBlack_contents(file_name); 
-		  }
-		
-		  blackListDAO.modifyBlInfo(blModifyBean);
-	}
 	
 	//삭제
 	public void delBlInfo(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo){
