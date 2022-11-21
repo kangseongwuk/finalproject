@@ -27,6 +27,7 @@ import kr.co.ezen.mapper.AcademyMemberMapper;
 import kr.co.ezen.mapper.BlackListMapper;
 import kr.co.ezen.mapper.BoardMapper;
 import kr.co.ezen.mapper.FaqMapper;
+import kr.co.ezen.mapper.KakaoMapper;
 import kr.co.ezen.mapper.MemberMapper;
 import kr.co.ezen.mapper.ServiceCenterMapper;
 import kr.co.ezen.mapper.SiteAskMapper;
@@ -224,6 +225,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 		      return factoryBean;
 		      
 		   } 
+		   
+		 //KakaoMapper 등록
+		      @Bean
+		      public MapperFactoryBean<KakaoMapper> getKakaoMapper(SqlSessionFactory factory){
+		         MapperFactoryBean<KakaoMapper> factoryBean = new MapperFactoryBean<KakaoMapper>(KakaoMapper.class);
+		               
+		         factoryBean.setSqlSessionFactory(factory);
+		               
+		         return factoryBean;
+		               
+		      }
 }
 
 

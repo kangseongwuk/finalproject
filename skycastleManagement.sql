@@ -466,8 +466,24 @@ CREATE TABLE FAQBoardT(
 --FAQ 게시판 예시
 insert into FAQBoardT(fb_no,fb_title,fb_contentsQ,fb_contentsA)
     values(fb_sq.nextval,'FAQ 테스트1','이 사이트는 뭐 하는 곳이죠?','저도 모릅니다.');
-
-
+select * from KAKAOT;
+--카카오 테이블
+   create table kakaoT(
+      k_number number(8) primary key,
+      k_name varchar2(20) not null,
+      k_email varchar2(50) not null,
+      k_gender varchar2(15),
+      k_age_range varchar2(15),
+      k_birthday varchar2(12)
+   );
+--카카오 넘버 시퀀스
+   create SEQUENCE k_sq
+    INCREMENT by 1
+    START with  1
+    MAXVALUE    99999999
+    MINVALUE    1
+    NOCYCLE;
+    
 commit
 
 
