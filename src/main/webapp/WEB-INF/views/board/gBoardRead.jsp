@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 
 <!--
@@ -65,7 +66,7 @@ $(document).ready(function() {
       }
    }
    
-   window.onload = convertPro();
+   window.onload = convertPro(), getWishHeart(${academyInfoBasic.a_memberNo});
    
    function convertPro() {
       $('#gradeSpace').html(convertData.grade[${academyInfoBasic.a_gradeMin }] + " ~ " + convertData.grade[${academyInfoBasic.a_gradeMax }]);
@@ -75,6 +76,88 @@ $(document).ready(function() {
       
    }
 });
+
+//찜하기 출력
+function getWishHeart(a_memberNo) {
+	//var wishNum = "#wish"+a_memberNo;
+	//alert(wishNum);
+	
+	$.ajax({
+		url : "boardListWish/"+a_memberNo,
+		type : "GET",
+		dataType : "text",
+		error : function(e) {
+			alert("안됨1");
+			//alert(e);
+		},
+		success : function(wishIs) {
+			if(wishIs.trim()=="true") {
+				$('#wish').attr('class',"like-btn active");
+			} else if(wishIs.trim()=="false") {
+				$('#wish').attr('class',"like-btn");
+			}
+		}
+	});
+}
+
+
+//찜하기(찜/해제)
+function switchWishHeart(a_memberNo) {
+	//alert("헤이!");
+	//alert(a_memberNo);
+	
+	$.ajax({
+		url : "boardListWishOnOff/"+a_memberNo,
+		type : "GET",
+		dataType : "text",
+		error : function(e) {
+			alert("안됨2");
+			//alert(e);
+		},
+		success : function(result) {
+			if(result=="false") {
+				alert("일반 회원으로 로그인해주세요.");
+			} else if(result=="on") {
+				alert("찜 등록 완료.");
+			} else if(result=="off") {
+				alert("찜 해제 완료.");
+			} else if(result=="error") {
+				alert("알 수 없는 오류");
+			}
+			
+			getWishHeart(a_memberNo);
+		}
+	});
+}
+
+//리뷰 작성
+function reviewWrite() {
+	alert("일단 되긴 함?");
+	
+	
+	$.ajax({
+		url : "academyReviewWrite",
+		type : "post",
+		dataType : "text",
+		data : {
+			"a_memberNo" : ${academyInfoBasic.a_memberNo},
+			"r_contents" : $("textarea[name=r_contents]").val(),
+			"r_score" : $("input:radio[name=r_score]:checked").val()
+		},
+		error : function() {
+			alert("안됨3");
+		},
+		success : function(result) {
+			if(result=="false") {
+				alert("리뷰는 일반 회원으로 로그인 시에만 작성할 수 있습니다.");
+			} else if(result=="true") {
+				alert("작성 성공 테스트");
+				location.reload();
+			}
+		}
+		
+	});
+}
 
 </script>
 <body>
@@ -150,7 +233,7 @@ $(document).ready(function() {
        
       <div class="col-xl-3 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
    <!--  like button  -->
-      <a href="#" class="like-btn">
+      <a class="like-btn" id="wish" onclick="switchWishHeart(${academyInfoBasic.a_memberNo })">
          <svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 
             5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
@@ -253,21 +336,7 @@ $(document).ready(function() {
           </div>
         </div>
       </div>
-      <div class="col-12 mb-4">
-        <h3 class="mb-3">How to Apply</h3>
-        <ul class="list-styled">
-          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati unde nulla? Lorem, ipsum
-            dolor. Lorem, ipsum.</li>
-          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati unde nulla? Lorem, ipsum
-            dolor. Lorem, ipsum.</li>
-          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati unde nulla? Lorem, ipsum
-            dolor. Lorem, ipsum.</li>
-          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati unde nulla? Lorem, ipsum
-            dolor. Lorem, ipsum.</li>
-          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati unde nulla? Lorem, ipsum
-            dolor. Lorem, ipsum.</li>
-        </ul>
-      </div>
+      
       </div>      
     </div>
   </div>
@@ -340,30 +409,27 @@ $(document).ready(function() {
 <!-- comment -->
 
 <div class="col-lg-12">
-      <form class="comment-form my-5" id="comment-form">
+      <form:form class="comment-form my-5" id="comment-form" method="post" modelAttribute="reviewWrite">
          <h4 class="mb-4">리뷰남기기</h4>
          <div class="row">
          </div>
-
-
-         <textarea class="form-control mb-4" name="comment" id="comment" cols="30" rows="5"
-            placeholder="Comment"></textarea>
+         <form:textarea class="form-control mb-4" path="r_contents" cols="30" rows="5" style="resize: none;"
+            placeholder="학원에 대한 리뷰를 남겨주세요."></form:textarea>
          <div class="star-rating">
-           <input type="radio" id="5-stars" name="rating" value="5" />
+           <form:radiobutton id="5-stars" path="r_score" value="5" />
            <label for="5-stars" class="star">&#9733;</label>
-           <input type="radio" id="4-stars" name="rating" value="4" />
+           <form:radiobutton id="4-stars" path="r_score" value="4" />
            <label for="4-stars" class="star">&#9733;</label>
-           <input type="radio" id="3-stars" name="rating" value="3" />
+           <form:radiobutton id="3-stars" path="r_score" value="3" />
            <label for="3-stars" class="star">&#9733;</label>
-           <input type="radio" id="2-stars" name="rating" value="2" />
+           <form:radiobutton id="2-stars" path="r_score" value="2" />
            <label for="2-stars" class="star">&#9733;</label>
-           <input type="radio" id="1-star" name="rating" value="1" />
+           <form:radiobutton id="1-star" path="r_score" value="1" />
            <label for="1-star" class="star">&#9733;</label>
          </div>
-
-         <input class="btn btn-main-2 btn-round-full" type="submit" name="submit-contact" id="submit_contact"
-            value="댓글 쓰기">
-      </form>
+         
+         <form:button class="btn btn-main-2 btn-round-full" type="button" onclick="reviewWrite()">댓글 쓰기</form:button>
+      </form:form>
    </div>
 
 

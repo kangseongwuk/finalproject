@@ -45,27 +45,32 @@ public class BoardDAO {
 	}
 	
 	//개별 강사 조회
-		public AcademyTeacherBean getTeacherInfo(int a_memberNo, String t_name) {
-			return boardMapper.getTeacherInfo(a_memberNo, t_name);
-		}
-		
-		//개별 강사 리뷰 조회
-		public List<TeacherReviewBean> getTeacherReviewInfo(int a_memberNo, String t_name) {
-			return boardMapper.getTeacherReviewInfo(a_memberNo, t_name);
-		}
-		
-		//찜목록 확인(학원리스트)
-		public WishListBean getWishIs(int m_memberNo, int a_memberNo) {
-			return boardMapper.getWishIs(m_memberNo, a_memberNo);
-		}
-		
-		//찜목록 삭제
-		public void deleteWish(int m_memberNo, int a_memberNo) {
-			boardMapper.deleteWish(m_memberNo, a_memberNo);
-		}
-		
-		//찜목록 등록
-		public void insertWish(int m_memberNo, int a_memberNo) {
-			boardMapper.insertWish(m_memberNo, a_memberNo);
-		}
+	public AcademyTeacherBean getTeacherInfo(int a_memberNo, String t_name) {
+		return boardMapper.getTeacherInfo(a_memberNo, t_name);
+	}
+	
+	//개별 강사 리뷰 조회
+	public List<TeacherReviewBean> getTeacherReviewInfo(int a_memberNo, String t_name) {
+		return boardMapper.getTeacherReviewInfo(a_memberNo, t_name);
+	}
+	
+	//찜목록 확인(학원리스트)
+	public WishListBean getWishIs(int m_memberNo, int a_memberNo) {
+		return boardMapper.getWishIs(m_memberNo, a_memberNo);
+	}
+	
+	//찜목록 삭제
+	public void deleteWish(int m_memberNo, int a_memberNo) {
+		boardMapper.deleteWish(m_memberNo, a_memberNo);
+	}
+	
+	//찜목록 등록
+	public void insertWish(int m_memberNo, int a_memberNo) {
+		boardMapper.insertWish(m_memberNo, a_memberNo);
+	}
+	
+	//학원 리뷰 작성
+	public void insertAcademyReview(AcademyReviewBean academyReviewBean_write) {
+		boardMapper.insertAcademyReview(academyReviewBean_write);
+	}
 }

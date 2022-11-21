@@ -3,10 +3,14 @@ package kr.co.ezen.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.service.BoardService;
 
@@ -20,6 +24,7 @@ public class RestApiController {
 	@Autowired
 	private BoardService boardService;
 	
+	//찜 목록 불러오기
 	@GetMapping("/board/boardListWish/{a_memberNo}")
 	public String boardListWish(@PathVariable int a_memberNo, HttpSession session) {
 		
@@ -40,6 +45,7 @@ public class RestApiController {
 		return wishCheck+"";
 	}
 	
+	//찜 등록, 해제
 	@GetMapping("/board/boardListWishOnOff/{a_memberNo}")
 	public String boardListWishOnOff(@PathVariable int a_memberNo, HttpSession session) {
 		MemberBean mBean = (MemberBean) session.getAttribute("loginMemberBean");
@@ -60,6 +66,38 @@ public class RestApiController {
 				} else {
 					result = "error";
 				}
+			}
+		}
+		
+		return result;
+	}
+	
+	//학원 리뷰 작성
+	@PostMapping("/board/academyReviewWrite")
+	public String academyReviewWrite(AcademyReviewBean academyReviewBean_write,
+									HttpSession session) {
+		MemberBean mBean = (MemberBean) session.getAttribute("loginMemberBean");
+		
+		String result = "false";
+		
+//		System.out.println(academyReviewBean_write.getA_memberNo());
+
+		
+		if(mBean!=null) {
+			if(mBean.getM_memberNo()!=0) {
+				
+				academyReviewBean_write.setR_writerNo(mBean.getM_memberNo());
+				academyReviewBean_write.setR_writerId(mBean.getM_id());
+				
+//				System.out.println(academyReviewBean_write.getA_memberNo());
+//				System.out.println(academyReviewBean_write.getR_writerNo());
+//				System.out.println(academyReviewBean_write.getR_writerId());
+//				System.out.println(academyReviewBean_write.getR_contents());
+//				System.out.println(academyReviewBean_write.getR_score());
+		
+				boardService.insertAcademyReview(academyReviewBean_write);
+				
+				result = "true";
 			}
 		}
 		
