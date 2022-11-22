@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.AcademyReviewBean;
@@ -56,30 +57,37 @@ public interface BoardMapper {
 	List<AcademyTeacherBean> getAcademyInfoTeacher(int a_memberNo);
 	
 	//개별 강사 조회
-		@Select("select a_memberNo, t_name, t_subject, t_contents, t_file "
-				+ "from academyTeacherT "
-				+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name}")
-		AcademyTeacherBean getTeacherInfo(@Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
-		
-		//개별 강사 리뷰 조회
-		@Select("select a_memberNo, t_name, m_memberNo, t_score, t_reviewContents "
-				+ "from teacherReviewT "
-				+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name}")
-		List<TeacherReviewBean> getTeacherReviewInfo(@Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
-		
-		//찜목록 확인(학원리스트)
-		@Select("select * "
-				+ "from wishListT "
-				+ "where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo}")
-		WishListBean getWishIs(@Param("m_memberNo") int m_memberNo,@Param("a_memberNo") int a_memberNo);
-		
-		//찜목록 삭제
-		@Delete("delete from wishListT "
-				+ "where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo}")
-		void deleteWish(@Param("m_memberNo") int m_memberNo,@Param("a_memberNo") int a_memberNo);
-		
-		//찜목록 등록
-		@Insert("insert into wishListT(m_memberNo, a_memberNo) "
-				+ "values(#{m_memberNo},#{a_memberNo})")
-		void insertWish(@Param("m_memberNo") int m_memberNo,@Param("a_memberNo") int a_memberNo);
+	@Select("select a_memberNo, t_name, t_subject, t_contents, t_file "
+			+ "from academyTeacherT "
+			+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name}")
+	AcademyTeacherBean getTeacherInfo(@Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
+	
+	//개별 강사 리뷰 조회
+	@Select("select a_memberNo, t_name, m_memberNo, t_score, t_reviewContents "
+			+ "from teacherReviewT "
+			+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name}")
+	List<TeacherReviewBean> getTeacherReviewInfo(@Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
+	
+	//찜목록 확인(학원리스트)
+	@Select("select * "
+			+ "from wishListT "
+			+ "where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo}")
+	WishListBean getWishIs(@Param("m_memberNo") int m_memberNo,@Param("a_memberNo") int a_memberNo);
+	
+	//찜목록 삭제
+	@Delete("delete from wishListT "
+			+ "where m_memberNo = #{m_memberNo} and a_memberNo = #{a_memberNo}")
+	void deleteWish(@Param("m_memberNo") int m_memberNo,@Param("a_memberNo") int a_memberNo);
+	
+	//찜목록 등록
+	@Insert("insert into wishListT(m_memberNo, a_memberNo) "
+			+ "values(#{m_memberNo},#{a_memberNo})")
+	void insertWish(@Param("m_memberNo") int m_memberNo,@Param("a_memberNo") int a_memberNo);
+	
+	//학원 리뷰 작성
+	@SelectKey(statement = "select nvl(max(r_no),0)+1 from reviewT where a_memberNo = #{a_memberNo}",
+			keyProperty = "r_no", before=true, resultType=int.class)
+	@Insert("insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score) "
+			+ "values(#{a_memberNo},#{r_no},#{r_writerNo},#{r_writerId},#{r_contents},#{r_score})")
+	void insertAcademyReview(AcademyReviewBean academyReviewBean_write);
 }

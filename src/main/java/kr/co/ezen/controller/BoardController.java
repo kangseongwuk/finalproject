@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,7 +40,9 @@ public class BoardController {
 	
 	//종합 학원 게시판 상세보기
 	@GetMapping("/gBoardRead")
-	public String gBoardRead_temp(@RequestParam("a_memberNo") int a_memberNo, Model model) {
+	public String gBoardRead_temp(@RequestParam("a_memberNo") int a_memberNo,
+								@ModelAttribute("reviewWrite") AcademyReviewBean academyReviewBean_write,
+								Model model) {
 		
 		AcademyMemberBean academyInfoBasic = boardService.getAcademyInfoBasic(a_memberNo);
 		List<AcademyReviewBean> academyInfoReview = boardService.getAcademyInfoReview(a_memberNo);
@@ -56,19 +59,19 @@ public class BoardController {
 	}
 	
 	//강사 상세보기
-		@GetMapping("/gBoardRead_teacher")
-		public String gBoardRead_teacher(@RequestParam("a_memberNo") int a_memberNo,
-										@RequestParam("t_name") String t_name,
-										Model model) {
-			
-			AcademyTeacherBean teacherInfo = boardService.getTeacherInfo(a_memberNo, t_name);
-			List<TeacherReviewBean> teacherReviewInfo = boardService.getTeacherReviewInfo(a_memberNo, t_name);
-			
-			model.addAttribute("teacherInfo",teacherInfo);
-			model.addAttribute("teacherReviewInfo",teacherReviewInfo);
-			
-			return "board/gBoardRead_teacher";
-		}
+	@GetMapping("/gBoardRead_teacher")
+	public String gBoardRead_teacher(@RequestParam("a_memberNo") int a_memberNo,
+									@RequestParam("t_name") String t_name,
+									Model model) {
+		
+		AcademyTeacherBean teacherInfo = boardService.getTeacherInfo(a_memberNo, t_name);
+		List<TeacherReviewBean> teacherReviewInfo = boardService.getTeacherReviewInfo(a_memberNo, t_name);
+		
+		model.addAttribute("teacherInfo",teacherInfo);
+		model.addAttribute("teacherReviewInfo",teacherReviewInfo);
+		
+		return "board/gBoardRead_teacher";
+	}
 	
 	//문의게시판 목록 호출
 	@GetMapping("/askBoard")
