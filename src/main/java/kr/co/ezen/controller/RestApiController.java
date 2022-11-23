@@ -85,20 +85,48 @@ public class RestApiController {
 		
 		if(mBean!=null) {
 			if(mBean.getM_memberNo()!=0) {
+				if(academyReviewBean_write.getR_score()==0)
+					result = "noScore";
 				
-				academyReviewBean_write.setR_writerNo(mBean.getM_memberNo());
-				academyReviewBean_write.setR_writerId(mBean.getM_id());
+				else {
 				
-//				System.out.println(academyReviewBean_write.getA_memberNo());
-//				System.out.println(academyReviewBean_write.getR_writerNo());
-//				System.out.println(academyReviewBean_write.getR_writerId());
-//				System.out.println(academyReviewBean_write.getR_contents());
-//				System.out.println(academyReviewBean_write.getR_score());
-		
-				boardService.insertAcademyReview(academyReviewBean_write);
-				
-				result = "true";
+					academyReviewBean_write.setR_writerNo(mBean.getM_memberNo());
+					academyReviewBean_write.setR_writerId(mBean.getM_id());
+					
+//					System.out.println(academyReviewBean_write.getA_memberNo());
+//					System.out.println(academyReviewBean_write.getR_writerNo());
+//					System.out.println(academyReviewBean_write.getR_writerId());
+//					System.out.println(academyReviewBean_write.getR_contents());
+//					System.out.println(academyReviewBean_write.getR_score());
+					
+					
+					
+					boardService.insertAcademyReview(academyReviewBean_write);
+					
+					result = "true";
+				}
 			}
+		}
+		
+		return result;
+	}
+	
+	//학원 리뷰 삭제
+	@PostMapping("/board/academyReviewRemove")
+	public String academyReviewRemove(AcademyReviewBean academyReviewBean_del,
+									HttpSession session) { 
+		MemberBean mBean = (MemberBean) session.getAttribute("loginMemberBean");
+		
+		String result = "false";
+		
+		if(mBean.getM_memberNo() == academyReviewBean_del.getR_writerNo()) {
+			boardService.deleteAcademyReview(academyReviewBean_del.getA_memberNo(), academyReviewBean_del.getR_no());
+			result = "selfDel";
+		} else if(Integer.toString((mBean.getM_memberNo())).length() == 4) {
+			boardService.deleteAcademyReview(academyReviewBean_del.getA_memberNo(), academyReviewBean_del.getR_no());
+			result = "adminDel";
+		} else {
+			result = "unmatched";
 		}
 		
 		return result;

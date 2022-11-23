@@ -22,9 +22,9 @@ public interface BoardMapper {
 	@Select("select a_memberNo, a_name, a_location, a_locationDetail, a_tele, a_joinDate, a_classify, a_infoExpose, "
 			+ "a_introduce, a_mainImg, a_file, a_gradeMin, a_gradeMax, a_shuttle, a_openTime, a_closeTime "
 			+ "from academyMemberT natural join academyInfoT "
-			+ "where a_classify = 1	"
+			+ "where a_classify = #{a_classify}	"
 			+ "order by a_joinDate desc")
-	List<AcademyMemberBean> getGBoardList();
+	List<AcademyMemberBean> getGBoardList(int a_classify);
 	
 	
 
@@ -40,8 +40,8 @@ public interface BoardMapper {
 	@Select("select a_memberNo, r_no, r_writerNo, r_writerId, r_contents, r_score, r_writeTime "
 			+ "from reviewT "
 			+ "where a_memberNo = #{a_memberNo} "
-			+ "order by r_no desc")
-	List<AcademyReviewBean> getAcademyInfoReview(int a_memberNo);
+			+ "order by (CASE WHEN r_writerNo = #{m_memberNo} THEN 1 ELSE 2 END), r_no desc")
+	List<AcademyReviewBean> getAcademyInfoReview(@Param("a_memberNo") int a_memberNo, @Param("m_memberNo") int m_memberNo);
 	
 	//학원 과목 조회
 	@Select("select a_memberNo, a_subject "
@@ -90,4 +90,9 @@ public interface BoardMapper {
 	@Insert("insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score) "
 			+ "values(#{a_memberNo},#{r_no},#{r_writerNo},#{r_writerId},#{r_contents},#{r_score})")
 	void insertAcademyReview(AcademyReviewBean academyReviewBean_write);
+	
+	//학원 리뷰 삭제
+	@Delete("delete from reviewT "
+			+ "where a_memberNo = #{a_memberNo} and r_no = #{r_no}")
+	void deleteAcademyReview(@Param("a_memberNo") int a_memberNo,@Param("r_no") int r_no);
 }

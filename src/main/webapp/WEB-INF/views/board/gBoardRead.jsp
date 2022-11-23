@@ -132,7 +132,7 @@ function switchWishHeart(a_memberNo) {
 
 //리뷰 작성
 function reviewWrite() {
-	alert("일단 되긴 함?");
+	//alert("일단 되긴 함?");
 	
 	
 	$.ajax({
@@ -144,20 +144,63 @@ function reviewWrite() {
 			"r_contents" : $("textarea[name=r_contents]").val(),
 			"r_score" : $("input:radio[name=r_score]:checked").val()
 		},
-		error : function() {
-			alert("안됨3");
+		error : function(e) {
+			if(e.responseText.indexOf("ConstraintViolationException")) {
+				alert("리뷰는 하나만 작성할 수 있습니다.\n새로 작성하기를 원하시면 내 정보에서 리뷰를 삭제해주세요.");
+			} else {
+				alert("안됨3");
+			}
 		},
 		success : function(result) {
 			if(result=="false") {
 				alert("리뷰는 일반 회원으로 로그인 시에만 작성할 수 있습니다.");
 			} else if(result=="true") {
-				alert("작성 성공 테스트");
+				//alert("작성 성공 테스트");
 				location.reload();
+			} else if(result=="noScore") {
+				alert("리뷰점수를 입력해주세요.");
 			}
 		}
 		
 	});
 }
+
+//리뷰 작성
+function reviewRemove(r_no, r_writerNo) {
+	//alert("일단 되긴 함?2");
+	
+	
+	$.ajax({
+		url : "academyReviewRemove",
+		type : "post",
+		dataType : "text",
+		data : {
+			"a_memberNo" : ${academyInfoBasic.a_memberNo},
+			"r_no" : r_no,
+			"r_writerNo" : r_writerNo
+		},
+		error : function(e) {
+			
+			alert("안됨3");
+			
+		},
+		success : function(result) {
+			if(result=="false") {
+				alert("리뷰는 일반 회원으로 로그인 시에만 작성할 수 있습니다.");
+			} else if(result=="selfDel") {
+				alert("리뷰가 삭제되었습니다.");
+				location.reload();
+			} else if(result=="adminDel") {
+				alert("관리자권한으로 리뷰가 삭제되었습니다.");
+				location.reload();
+			} else if(result=="unmatched") {
+				alert("권한이 없습니다.");
+			}
+		}
+		
+	});
+}
+
 
 </script>
 <body>
@@ -233,12 +276,14 @@ function reviewWrite() {
        
       <div class="col-xl-3 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
    <!--  like button  -->
+   <c:if test="${sessionScope.loginAcademyMemberBean == null }">
       <a class="like-btn" id="wish" onclick="switchWishHeart(${academyInfoBasic.a_memberNo })">
          <svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 
             5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
          </svg>
       </a>
+   </c:if>
    <!--  /like button  -->
         <a href="course-single.html" class="btn btn-primary">상담예약</a>
       </div>
@@ -409,6 +454,7 @@ function reviewWrite() {
 <!-- comment -->
 
 <div class="col-lg-12">
+	<c:if test="${sessionScope.loginAcademyMemberBean == null }">
       <form:form class="comment-form my-5" id="comment-form" method="post" modelAttribute="reviewWrite">
          <h4 class="mb-4">리뷰남기기</h4>
          <div class="row">
@@ -430,41 +476,44 @@ function reviewWrite() {
          
          <form:button class="btn btn-main-2 btn-round-full" type="button" onclick="reviewWrite()">댓글 쓰기</form:button>
       </form:form>
-   </div>
+   </c:if>
+</div>
 
 
 <div class="col-lg-12">
-      <div class="comment-area mt-4 mb-5">
-         <h4 class="mb-4">
-         	<% i=0; %>
-         	<c:forEach items="${academyInfoReview}"><% i++; %></c:forEach>
-         	<%=i %>개의 리뷰가 있습니다.
-         </h4>
-         <ul class="comment-tree list-unstyled">
-            <c:forEach var="air" items="${academyInfoReview}">
-               <li class="mb-5">
-                  <div class="comment-area-box d-block d-sm-flex">
-                     <div class="comment-thumb">
-                        <img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
+   <div class="comment-area mt-4 mb-5">
+      <h4 class="mb-4">
+      	<% i=0; %>
+      	<c:forEach items="${academyInfoReview}"><% i++; %></c:forEach>
+      	<%=i %>개의 리뷰가 있습니다.
+      </h4>
+      <ul class="comment-tree list-unstyled">
+         <c:forEach var="air" items="${academyInfoReview}">
+            <li class="mb-5">
+               <div class="comment-area-box d-block d-sm-flex">
+                  <div class="comment-thumb">
+                     <img alt="" src="images/blog/testimonial1.jpg" style="width: 70px">
+                  </div>
+                     <div class="block">
+                     <div class="comment-info">
+                        <h5 class="mb-1">${air.r_writerId }</h5>
+                        <span class="date-comm"> | <fmt:formatDate value="${air.r_writeTime }" pattern="yy/MM/dd hh:mm"/></span>
                      </div>
-                        <div class="block">
-                        <div class="comment-info">
-                           <h5 class="mb-1">${air.r_writerId }</h5>
-                           <span class="date-comm"> | <fmt:formatDate value="${air.r_writeTime }" pattern="yy/MM/dd hh:mm"/></span>
-                        </div>
-                        <div class="comment-meta mt-2">
-                        </div>
-   
-                        <div class="comment-content mt-3">
-                           <p>[${air.r_score }점] | ${air.r_contents }</p>
-                        </div>
+                     <div class="comment-meta mt-2">
+                     </div>
+
+                     <div class="comment-content mt-3">
+                        <p>[${air.r_score }점] | ${air.r_contents }</p>
+                        <input class="btn btn-main-2 btn-round-full" type="button" onclick="reviewRemove('${air.r_no }', '${air.r_writerNo }')"
+                          value="삭제하기">
                      </div>
                   </div>
-                  </li>
-            </c:forEach>
-         </ul>
-      </div>
+               </div>
+               </li>
+         </c:forEach>
+      </ul>
    </div>
+</div>
 
 <!-- /comment -->
 

@@ -20,8 +20,8 @@ public class BoardDAO {
 	private BoardMapper boardMapper;
 	
 	//종합 학원 게시판 목록 호출
-	public List<AcademyMemberBean> getGBoardList() {
-		return boardMapper.getGBoardList();
+	public List<AcademyMemberBean> getGBoardList(int a_classify) {
+		return boardMapper.getGBoardList(a_classify);
 	}
 	
 	//종합 학원 정보 상세 보기
@@ -30,8 +30,8 @@ public class BoardDAO {
 	}
 	
 	//학원 리뷰 조회
-	public List<AcademyReviewBean> getAcademyInfoReview(int a_memberNo) {
-		return boardMapper.getAcademyInfoReview(a_memberNo);
+	public List<AcademyReviewBean> getAcademyInfoReview(int a_memberNo, int m_memberNo) {
+		return boardMapper.getAcademyInfoReview(a_memberNo, m_memberNo);
 	}
 	
 	//학원 과목 조회
@@ -72,5 +72,10 @@ public class BoardDAO {
 	//학원 리뷰 작성
 	public void insertAcademyReview(AcademyReviewBean academyReviewBean_write) {
 		boardMapper.insertAcademyReview(academyReviewBean_write);
+	}
+	
+	//학원 리뷰 삭제
+	public void deleteAcademyReview(int a_memberNo, int r_no) {
+		boardMapper.deleteAcademyReview(a_memberNo, r_no);
 	}
 }

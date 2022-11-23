@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
     
@@ -131,13 +130,13 @@
         <div class="col-lg-8 text-center text-lg-right">
           <ul class="list-inline">
           <c:choose>
-            <c:when test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypageAdmin" >마이페이지</a></li>
-            </c:when>
           	<c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
  				<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
           		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage" >마이페이지</a></li>
+            </c:when>
+            <c:when test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage_admin" >마이페이지</a></li>
             </c:when>
             <c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
            		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
@@ -170,13 +169,13 @@
               <a class="nav-link" href="${root }board/about">회사 소개</a> 
             </li>
             <li class="nav-item @@about">
-              <a class="nav-link" href="${root }board/gBoardList">종합</a>
+              <a class="nav-link" href="${root }board/gBoardList?a_classify=1">종합</a>
             </li>
             <li class="nav-item @@courses">
-              <a class="nav-link" href="${root }courses">단과</a>
+              <a class="nav-link" href="${root }board/gBoardList?a_classify=2">단과</a>
             </li>
             <li class="nav-item @@events">
-              <a class="nav-link" href="${root }courses">예체능</a>
+              <a class="nav-link" href="${root }board/gBoardList?a_classify=3">예체능</a>
             </li> 
             <!-- <li class="nav-item @@contact">
               <a class="nav-link" href="contact.html">이벤트</a>
@@ -189,22 +188,21 @@
               <c:choose>
                 	<c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
                 		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
-               		<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+               			<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
                 		<li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">문의하기</a></li>
-                	<!-- 관리자 권한 -->
                 		<c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
-                		<li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a>
+                			<li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a>
                 		</c:if>
                 	</c:when>
                 	<c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
                 		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
                			<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
-               			<li><a class="dropdown-item" href="${root }serviceBoard/siteAcaAskWrite">문의하기</a></li>
+               			<li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite_aca">문의하기</a></li>
                			<li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a></li>
                 	</c:when>
                 	<c:otherwise>
-                	<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
-               		<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+               			<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
                 	</c:otherwise>
                 </c:choose>
                 
