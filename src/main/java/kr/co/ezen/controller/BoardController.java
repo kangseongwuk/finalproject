@@ -2,6 +2,8 @@ package kr.co.ezen.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.AcademySubjectBean;
 import kr.co.ezen.beans.AcademyTeacherBean;
+import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.TeacherReviewBean;
 import kr.co.ezen.service.BoardService;
 
@@ -26,11 +29,12 @@ public class BoardController {
 	
 	//종합 학원 게시판 목록 호출
 	@GetMapping("/gBoardList")
-	public String main(Model model) {
+	public String main(@RequestParam("a_classify") int a_classify,
+						Model model) {
 		
 		//ModelAndView 개념
 		
-		List<AcademyMemberBean> gBoardList =  boardService.getGBoardList();
+		List<AcademyMemberBean> gBoardList =  boardService.getGBoardList(a_classify);
 		
 		model.addAttribute("gBoardList", gBoardList);
 		
@@ -42,10 +46,17 @@ public class BoardController {
 	@GetMapping("/gBoardRead")
 	public String gBoardRead_temp(@RequestParam("a_memberNo") int a_memberNo,
 								@ModelAttribute("reviewWrite") AcademyReviewBean academyReviewBean_write,
+								HttpSession session,
 								Model model) {
+		int m_memberNo = 0;
+		
+		if(session.getAttribute("loginMemberBean")!=null) {
+			MemberBean mBean = (MemberBean) session.getAttribute("loginMemberBean");
+			m_memberNo = mBean.getM_memberNo();
+		}
 		
 		AcademyMemberBean academyInfoBasic = boardService.getAcademyInfoBasic(a_memberNo);
-		List<AcademyReviewBean> academyInfoReview = boardService.getAcademyInfoReview(a_memberNo);
+		List<AcademyReviewBean> academyInfoReview = boardService.getAcademyInfoReview(a_memberNo, m_memberNo);
 		List<AcademySubjectBean> academyInfoSubject = boardService.getAcademyInfoSubject(a_memberNo);
 		List<AcademyTeacherBean> academyInfoTeacher = boardService.getAcademyInfoTeacher(a_memberNo);
 		
