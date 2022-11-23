@@ -411,6 +411,25 @@ insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents)
 values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
 
 
+--학원 문의
+
+CREATE TABLE siteAcaAskT(
+    a_memberNo number(6),
+    a_name  varchar2(60),
+    a_tele varchar2(11),
+    aa_title    varchar2(100)
+        not null,
+    aa_contents varchar2(1500)
+        not null,
+    aa_time timestamp
+        default systimestamp not null,
+    aa_file varchar2(3000)
+);
+
+drop table siteAcaAskT;
+
+select * from siteAcaAskT;
+
 
 --16.0 공지사항 게시물 번호 시퀀스
 create SEQUENCE nb_sq

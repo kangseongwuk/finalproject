@@ -75,7 +75,7 @@
 <table>
     <thead>
     <tr>
-       <th>블랙리스트</th>
+       <th>고객 이름</th>
        <th>학원 이름</th>
        <th>사유</th>
        <th>작성일자</th>
@@ -130,36 +130,38 @@
   	<div class="d-none d-md-block">
 				<ul class="pagination">
 					<c:choose>
-						<c:when test="${pageCountBean.prevPage <= 0 }">
+						<c:when test="${pageCountBean2.prevPage <= 0 }">
 							<li class="page-item disabled">
 								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
 							</li>
 						</c:when>
 					<c:otherwise>
 						<li class="page-item">
-						<a href="${root}blackList/blackListList?page=${pageCountBean.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+						<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${pageCountBean2.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
 						</li>					
 					</c:otherwise>					
 					</c:choose>
-														
-					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
+					
+													
+					<c:forEach var="idx" begin="${pageCountBean2.min }" end="${pageCountBean2.max }">
 						<c:choose>
-							<c:when test="$idx == pageCountBean.currentPage">
+							<c:when test="$idx == pageCountBean2.currentPage">
 							<li class="page-item active">
-								<a href="${root}blackList/blackListList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>		
 						</c:when>
 						
 						<c:otherwise>
 							<li class="page-item">
-								<a href="${root}blackList/blackListList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>						
 						</c:otherwise>						
 						</c:choose>									
 					</c:forEach>					
 					
 					<c:choose>
-						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
+						<c:when test="${pageCountBean2.max >= pageCountBean2.pageCnt}">
 							<li class="page-item disabled">
 								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
 							</li>
@@ -167,7 +169,7 @@
 					
 					<c:otherwise>
 						<li class="page-item">
-							<a href="${root}blackList/blackListList?page=${pageCountBean.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+							<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${pageCountBean2.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
 						</li>
 					</c:otherwise>
 					</c:choose>

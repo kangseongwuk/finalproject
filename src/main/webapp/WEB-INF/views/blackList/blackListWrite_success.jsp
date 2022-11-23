@@ -10,6 +10,6 @@
 </head>
 <body>
 <h2>ㅇㅇ 글쓰기 성공 ㅇㅇ</h2>
-<a href="${root}index">돌아가기</a>
+<a href="${root}blackList/blackListList">돌아가기</a>
 </body>
 </html>

@@ -77,9 +77,9 @@
       <div class="col-lg-7 mb-4 mb-lg-0">
         <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"
         enctype="multipart/form-data">
-          <form:input class="form-control mb-3" path="m_name" value="${sessionScope.loginMemberBean.m_name }" readonly="true" />
-          <form:input class="form-control mb-3" path="m_id"  value="${sessionScope.loginMemberBean.m_id}"  readonly="true" />
-          <form:input class="form-control mb-3" path="m_email"  value="${sessionScope.loginMemberBean.m_email }"  readonly="true" />
+          <form:input class="form-control mb-3" path="m_name" readonly="true" />
+          <form:input class="form-control mb-3" path="m_id" readonly="true" />
+          <form:input class="form-control mb-3" path="m_email" readonly="true" />
           </form:form>
           
           <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"

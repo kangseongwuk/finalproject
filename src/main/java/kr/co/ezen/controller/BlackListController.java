@@ -38,8 +38,6 @@ public class BlackListController {
 		List<BlackListBean> bllist = blackListService.getBlList(page);
 		model.addAttribute("bllist", bllist); 
 			
-		
-		
 		PageCountBean pageCountBean = blackListService.getContentCnt(page);
 		model.addAttribute("pageCountBean", pageCountBean);
 		
@@ -49,17 +47,42 @@ public class BlackListController {
 	}
 	
 	
+	//검색 화면
+	@GetMapping("/blackSearchList")
+	public String blSearchList(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
+								@RequestParam(value = "page", defaultValue = "1") int page,
+								@RequestParam("searchKeyword") String searchKeyword,
+								Model model) {
+		
+		List<BlackListBean> blsearchList = blackListService.getBLSearchList(searchKeyword, page);
+		model.addAttribute("blsearchList", blsearchList);
+		
+		PageCountBean pageCountBean = blackListService.getContentCnt2(searchKeyword, page);
+		model.addAttribute("pageCountBean2", pageCountBean);
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("page", page);
+		
+		return "blackList/blackSearchList";
+	}
+	
 	//검색
 	@GetMapping("/blackSearchList_pro")
-	public String nbSearchList_pro(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
+	public String blSearchList_pro(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
+			 					@RequestParam(value = "page", defaultValue = "1") int page,
 								@RequestParam("searchKeyword") String searchKeyword,
 								Model model) {
 	
-		List<BlackListBean> blsearchList = blackListService.getBLSearchList(searchKeyword);
+		List<BlackListBean> blsearchList = blackListService.getBLSearchList(searchKeyword, page);
 		blSearchBean.setSearchKeyword(blSearchBean.getSearchKeyword());
+		blSearchBean.getM_name();
 				
 		model.addAttribute("blsearchList", blsearchList);
 		model.addAttribute("blSearchBean", blSearchBean);
+		
+		PageCountBean pageCountBean = blackListService.getContentCnt2(searchKeyword, page);
+		model.addAttribute("pageCountBean2", pageCountBean);
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("page", page);
 		
 		return "blackList/blackSearchList";
 	}	

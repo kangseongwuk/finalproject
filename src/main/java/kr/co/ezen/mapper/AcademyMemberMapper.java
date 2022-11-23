@@ -1,5 +1,7 @@
 package kr.co.ezen.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -44,4 +46,12 @@ public interface AcademyMemberMapper {
 	//학원소개정보삭제
 	@Delete("delete from academyInfoT where a_memberNo = #{a_memberNo}")
 	void deleteAcademyIntroduce(int a_memberNo);
+	
+	//관리자 페이지 : 학원 목록
+		@Select("select a_classify, a_name, a_memberNo, a_joinDate, a_infoExpose "
+				+ "from academyMemberT ")
+		List<AcademyMemberBean> getAdAcademyList();
+		//총 학원 수
+		@Select("select count(*) from academyMemberT")
+		int getAdminAcaCnt(AcademyMemberBean myAdminAcaBean);
 }

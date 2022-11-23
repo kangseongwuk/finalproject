@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 import kr.co.ezen.beans.ServiceCenterBean;
 
@@ -20,7 +21,7 @@ public interface ServiceCenterMapper {
 	// 제목, 작성날짜, 조회수 내림차순 정렬하여 출력 합니다.	
 	@Select("select nb_no, nb_title, nb_writeTime, nb_viewCount "
 			+ "from noticeBoardT")	
-		List<ServiceCenterBean> getNbList(); 
+		List<ServiceCenterBean> getNbList(RowBounds rowBounds); 
 		
 		// 제목, 작성날짜, 조회수, 내용, 이미지 등을 추출하여 가져와야 합니다.	
 	@Select("select nb_no, nb_title, nb_writeTime, nb_viewCount, nb_contents, nb_file "
@@ -58,4 +59,12 @@ public interface ServiceCenterMapper {
 	
 	@Select("select count(*) from noticeBoardT where nb_title like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'")
 	int getSearchListCnt(ServiceCenterBean nbSearchBean);
+	
+	//페이징
+	@Select("select count(*) from noticeBoardT")
+	int getContentCnt();
+	
+	//검색 페이징
+	@Select("select count(*) from noticeBoardT where nb_title like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%' ")
+	int getContentCnt2(String searchKeyword);
 }

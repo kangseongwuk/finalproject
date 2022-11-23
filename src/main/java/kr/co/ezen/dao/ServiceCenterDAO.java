@@ -3,7 +3,7 @@ package kr.co.ezen.dao;
 import java.util.HashMap;
 import java.util.List;
 
-
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,9 +21,9 @@ public class ServiceCenterDAO {
 			serviceCenterMapper.addNbContent(nbWriteBean);		  		 
 		  }	
 		 
-		public List<ServiceCenterBean> getNbList(){		   
+		public List<ServiceCenterBean> getNbList(RowBounds rowBounds){		   
 			
-			return serviceCenterMapper.getNbList(); 			  
+			return serviceCenterMapper.getNbList(rowBounds); 			  
 		  }
 		
 		//검색
@@ -65,5 +65,16 @@ public class ServiceCenterDAO {
 		public void viewCountNbInfo(int nb_no) {
 			serviceCenterMapper.viewCountNbInfo(nb_no);
 		}
-
+		
+		//페이징
+		public int getContentCnt() { 
+			
+			return serviceCenterMapper.getContentCnt();
+		}
+		//검색 페이징
+		public int getContentCnt2(String searchKeyword) { 
+			
+			return serviceCenterMapper.getContentCnt2(searchKeyword);
+		}
+		  
 }

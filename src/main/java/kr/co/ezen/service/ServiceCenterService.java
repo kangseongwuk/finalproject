@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.ServiceCenterBean;
 import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.dao.ServiceCenterDAO;
@@ -20,8 +22,14 @@ import kr.co.ezen.dao.ServiceCenterDAO;
 @PropertySource("/WEB-INF/properties/option.properties")
 public class ServiceCenterService {
 
+	@Value("${page.listcnt}")
+	private int page_listcnt;  	
+	
 	@Value("${path.upload}")
 	private String path_upload;
+	
+	@Value("${page.pagButtonCnt}")
+	private int page_pageButtonCnt;
 	
 	@Autowired
 	private ServiceCenterDAO serviceCenterDAO;
@@ -57,9 +65,12 @@ public class ServiceCenterService {
 	}
 	
 	//글목록
-	 public List<ServiceCenterBean> getNbList(){
+	 public List<ServiceCenterBean> getNbList(int page){
 		 		 
-		  return serviceCenterDAO.getNbList(); 			  
+		 int start = (page -1) * page_listcnt;
+		 RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		 
+		  return serviceCenterDAO.getNbList(rowBounds); 			  
 	  }
 	 
 	 
@@ -111,5 +122,25 @@ public class ServiceCenterService {
 		serviceCenterDAO.viewCountNbInfo(nb_no);
 	}
 	
-
+	//페이징
+	public PageCountBean getContentCnt(int currentPage) {
+			
+	int content_cnt = serviceCenterDAO.getContentCnt();
+		 
+		//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
+		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		 
+		return pageCountBean;
+	 } 
+	
+	//검색 페이징
+	public PageCountBean getContentCnt2(String searchKeyword, int currentPage) {
+		
+		int content_cnt = serviceCenterDAO.getContentCnt2(searchKeyword);
+			 
+			//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
+			PageCountBean pageCountBean2 = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+			 
+			return pageCountBean2;
+		 } 
 }

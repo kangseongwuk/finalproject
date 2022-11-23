@@ -88,6 +88,14 @@ public class MemberDAO {
  		public SiteAskBean getMyaskRead(Timestamp sa_time, int m_memberNo){
  			return memberMapper.getMyaskRead(sa_time, m_memberNo);
  		}
+ 		//게시글 수
+ 		public int getMyAskListCnt(MemberBean myAskBean) {
+ 			 return memberMapper.getMyAskListCnt(myAskBean);
+ 		 }
+ 		//페이징 처리
+ 		public int getMyAskContentCnt() { 	
+ 			return memberMapper.getMyAskContentCnt();
+ 		}
  		
  		//관리자 마이페이지 출력
  		
@@ -98,20 +106,25 @@ public class MemberDAO {
  		//관리자 마이페이지 리스트(회원, 학원, 문의사항)
  		
  		//관리자 마이페이지 : 회원 목록
- 		public List<MemberBean> getAbMemberList(){
- 			return memberMapper.getAbMemberList();
+ 		public List<MemberBean> getAdMemberList(){
+ 			return memberMapper.getAdMemberList();
  		}
- 	 	
- 		
- 		//관리자 마이페이지 : 학원 목록
- 		public List<AcademyMemberBean> getAbAcademyList(){
- 			return memberMapper.getAbAcademyList();	
- 		}	
+ 		//총회원수
+ 		public int getAdminMemberCnt(MemberBean myAdminMemberBean) {
+ 			return memberMapper.getAdminMemberCnt(myAdminMemberBean);
+ 		}
  			
+ 		
+ 			
+ 		/*	
  		//관리자 마이페이지 : 문의사항
  		public List<SiteAskBean> getAbSiteAskList(){
  			return memberMapper.getAbSiteAskList();
  		}
- 		
+ 		*/
+ 		//email 확인
+        public String selectEmailKakao(String m_email) {
+            return memberMapper.selectEmailKakao(m_email);
+         }
  		
 }

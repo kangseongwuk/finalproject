@@ -75,7 +75,7 @@
 <table>
     <thead>
     <tr>
-       <th>블랙리스트</th>
+       <th>고객 이름</th>
        <th>학원 이름</th>
        <th>사유</th>
        <th>작성일자</th>
@@ -91,8 +91,10 @@
     </tr>
 </c:forEach>
 <tr>
+<c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">
 <td colspan="2" align="center"><a href="${root}blackList/blackListWrite">글쓰기</a></td>
-<td colspan="2"  align="center"><a href="${root}index">돌아가기</a></td>
+<td colspan="2" align="center"><a href="${root}blackList/blackListDelete">삭제하기</a></td>
+</c:if>
 </tr>
 </table>
 

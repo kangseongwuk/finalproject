@@ -30,6 +30,7 @@ import kr.co.ezen.mapper.FaqMapper;
 import kr.co.ezen.mapper.KakaoMapper;
 import kr.co.ezen.mapper.MemberMapper;
 import kr.co.ezen.mapper.ServiceCenterMapper;
+import kr.co.ezen.mapper.SiteAcaAskMapper;
 import kr.co.ezen.mapper.SiteAskMapper;
 
 @Configuration
@@ -196,6 +197,16 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 	}
 	
+	//학원 문의하기
+		@Bean
+		public MapperFactoryBean<SiteAcaAskMapper> getSiteAcaAskMapper(SqlSessionFactory factory){
+			MapperFactoryBean<SiteAcaAskMapper> factoryBean = new MapperFactoryBean<SiteAcaAskMapper>(SiteAcaAskMapper.class);
+			
+			factoryBean.setSqlSessionFactory(factory); 
+			
+			return factoryBean;
+		}
+		
 	// 인터셉터 ( 헤더에있는 로그인 정보를 컨트롤러 전에 주입)
 		// 모든 요청 주소는 무조건 인터셉터를 통과하도록 해야 합니다.(/**) 
 		

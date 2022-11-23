@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.SiteAcaAskBean;
 import kr.co.ezen.beans.SiteAskBean;
 
 public interface SiteAskMapper {
@@ -20,15 +21,22 @@ public interface SiteAskMapper {
 	
 	// 문의글 목록
 	@Select("select sa_memberNo, sa_title, sa_time"
-			+ " from siteAskT natural join memberT "
-			+ " and sa_memberNo = m_memberNo")	
+			+ " from siteAskT s, memberT m "
+			+ " where sa_memberNo = m_memberNo ")	
 		List<SiteAskBean> getSaList(); 
+	
+	//문의글 개수
+	@Select("select count(*) from siteAskT")
+	int getSaListCnt(SiteAskBean saBean);
 		
-		// 문의글 상세보기
+	// 문의글 상세보기
 	@Select("select m_id, m_name, sa_tele, m_email, sa_time, sa_title, sa_contents, sa_file "
 			+ "from siteAskT, memberT "
 			+ "where sa_memberNo = m_memberNo "
 			+ "and sa_time = #{sa_time}")
 	SiteAskBean getSaInfo(Timestamp sa_time);	
 	
+	//페이징
+	@Select("select count(*) from siteAskT")
+	int getSaContentCnt();
 }

@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="utf-8">
 <title>noticeRead</title>
 
@@ -64,75 +65,109 @@
 
 <!-- Board -->    
 <section class="section bg-gray">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-       <div class="section-title text-center">
-          <h2>공지사항</h2>
-          </div>
-      </div>
-    </div>
-<table>
-    <thead>
-    <tr>
-        <th>no</th>
-        <th >제목</th>
-        <th>조회수</th>
-       <th>작성일자</th>
-
-    </tr>
-    </thead>
-    <tbody>
-<c:forEach var="st" items="${nblist }">
-    <tr>
-        <td>${st.nb_no} &nbsp;&nbsp;</td>
-        <td><a href="${root }serviceBoard/noticeBoardRead?nb_no=${st.nb_no}">${st.nb_title}</a></td>
-<td>${st.nb_viewCount}</td>        
-<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.nb_writeTime}" /></td>
-    </tr>
-</c:forEach>
-<tr>
-<td colspan="2" align="center"><a href="${root}serviceBoard/noticeBoardWrite">글쓰기</a></td>
-<td colspan="2"  align="center"><a href="${root}index">돌아가기</a></td>
-</tr>
-</table>
-
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
-    </li>
-    <li class="page-item active">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&raquo;</font></font></a>
-    </li>
-  </ul>
-  
+		  <div class="container">
+		    <div class="row">
+		      <div class="col-lg-12">
+		       <div class="section-title text-center">
+		          <h2>공지사항 </h2>
+		          <p>총게시물 ${totCnt} 개</p>
+		          </div>
+		      </div>
+		    </div>
+		   </div>
+		<table>
+		    <thead>
+		    <tr>
+		        <th>no</th>
+		        <th>제목</th>
+		        <th>조회수</th>
+		       <th>작성일자</th>
+		
+		    </tr>
+		    </thead>
+		    <tbody>
+		<c:forEach var="st" items="${nblist }">
+		    <tr>
+		        <td>${st.nb_no}</td>
+		        <td><a href="${root }serviceBoard/noticeBoardRead?nb_no=${st.nb_no}">${st.nb_title}</a></td>
+				<td>${st.nb_viewCount}</td>
+				<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.nb_writeTime}" /></td>
+		    </tr>
+		</c:forEach>
+		<tr>
+		<c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
+		<td colspan="2" align="center"><a href="${root}serviceBoard/noticeBoardWrite">글쓰기</a></td>
+		<td colspan="2" align="center"><a href="${root}serviceBoard/noticeBoardDelete">삭제하기</a></td>
+		</c:if>
+		</tr>
+		</table>
+		<div>
+			  <nav>
+			  <ul class="pagination" id="pagination">
+			 
+			  </ul>  
+  			</nav>
+  			
+  				<div class="d-none d-md-block">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${pageCountBean.prevPage <= 0 }">
+							<li class="page-item disabled">
+								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+							</li>
+						</c:when>
+					<c:otherwise>
+						<li class="page-item">
+						<a href="${root}serviceBoard/noticeBoardList?page=${pageCountBean.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+						</li>					
+					</c:otherwise>					
+					</c:choose>
+														
+					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+						<c:choose>
+							<c:when test="$idx == pageCountBean.currentPage">
+							<li class="page-item active">
+								<a href="${root}serviceBoard/noticeBoardList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+							</li>		
+						</c:when>
+						
+						<c:otherwise>
+							<li class="page-item">
+								<a href="${root}serviceBoard/noticeBoardList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+							</li>						
+						</c:otherwise>						
+						</c:choose>									
+					</c:forEach>					
+					
+					<c:choose>
+						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
+							<li class="page-item disabled">
+								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+							</li>
+						</c:when>
+					
+					<c:otherwise>
+						<li class="page-item">
+							<a href="${root}serviceBoard/noticeBoardList?page=${pageCountBean.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+						</li>
+					</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
   
 		  <div class="search-box">
 		  <form:form action="${root }serviceBoard/noticeBoardSearchList_pro" modelAttribute="nbSearchBean" method="get">
 		    <form:input class="search-txt" path="searchKeyword" placeholder="검색어를 입력해 주세요" value = "" />
 		    <form:button class="search-btn" type="submit"><i class="fas fa-search"></i></form:button>
 		  </form:form>
-</div>
-</div>
+		
+		</div>
+	</div>
+
+
 
 </section>
-<!-- /Board -->
-
+<!-- /Board -->  
 
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>

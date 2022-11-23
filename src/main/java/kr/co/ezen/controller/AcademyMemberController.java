@@ -1,5 +1,7 @@
 package kr.co.ezen.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -62,7 +64,7 @@ public class AcademyMemberController {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAcademyMemberBean", loginAcademyMemberBean);
 			loginAcademyMemberBean.setAcademymemberlogin(true);
-			return "academymember/login_success";
+			return "index";
 		}else {
 			loginAcademyMemberBean.setAcademymemberlogin(false);
 			return "index";
@@ -159,4 +161,19 @@ public class AcademyMemberController {
 	public String login_success() {
 		return "academymember/login_success";
 	}
+	
+	//관리자 학원 목록 페이지
+		@GetMapping("/mypageAdmin_academy")
+		public String abAacademyList(@ModelAttribute("myAdminAcaBean") AcademyMemberBean myAdminAcaBean,
+									Model model) {
+							
+		List<AcademyMemberBean> adAcademylist = academyMemberService.getAdAcademyList();
+		model.addAttribute("adAcademylist", adAcademylist);
+						
+		int adacatotCnt = academyMemberService.getAdminAcaCnt(myAdminAcaBean);
+		model.addAttribute("adacatotCnt", adacatotCnt);
+									
+		return "academymember/mypageAdmin_academy";
+		}
+	
 }

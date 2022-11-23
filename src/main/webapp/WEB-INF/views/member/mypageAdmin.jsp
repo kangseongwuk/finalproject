@@ -14,8 +14,9 @@
 	
 	<div>
 	<a href="${root}member/mypageAdmin_member">회원 정보</a> <br>
-	<a href="${root}member/mypageAdmin_academy">학원 회원</a> <br>
-	<a href="${root}member/mypageAdmin_siteAsk">문의사항</a> <br>
+	<a href="${root}academymember/mypageAdmin_academy">학원 회원</a> <br>
+	<a href="${root}serviceBoard/siteAskList">문의사항(회원)</a> <br>
+	<a href="${root}serviceBoard/siteAcaAskList">문의사항(학원)</a> <br>
 	<a href="${root}index">돌아가기</a> 
 	</div>
 	<br><br><br>

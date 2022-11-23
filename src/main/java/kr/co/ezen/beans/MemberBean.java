@@ -23,6 +23,7 @@ public class MemberBean {
 	
 	private boolean userlogin;
 	
+	private String searchKeyword;
 	
 	//생성자 주입 단, 한번만 실행
 	public MemberBean() {
@@ -123,5 +124,10 @@ public class MemberBean {
 	public void setUserlogin(boolean userlogin) {
 		this.userlogin = userlogin;
 	}
-	
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 }

@@ -13,7 +13,7 @@
 	<h2>  : 관리자 admin01 의 학원 목록 : </h2>
 
 	<p>분류 &nbsp;&nbsp;&nbsp;&nbsp; 학원 이름 &nbsp;&nbsp;&nbsp;&nbsp;학원 번호&nbsp;&nbsp;&nbsp;&nbsp;가입 날짜</p>
-	<c:forEach var="academy" items="${abAcademylist }">
+	<c:forEach var="academy" items="${adAcademylist }">
 				${academy.a_classify} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				${academy.a_name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				${academy.a_memberNo} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
@@ -23,10 +24,17 @@ import com.google.gson.JsonParser;
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.MemberChildBean;
+import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.dao.MemberDAO;
 @Service
 public class MemberService {
+	
+	@Value("${page.listcnt}")
+	private int page_listcnt;  	
+	
+	@Value("${page.pagButtonCnt}")
+	private int page_pageButtonCnt;
 	
 	@Autowired
 	private MemberDAO memberDAO;
@@ -273,23 +281,31 @@ public class MemberService {
 			return memberDAO.getMyaskRead(sa_time, m_memberNo);
 		}
 		
+		public int getMyAskListCnt(MemberBean myAskBean) {
+			return memberDAO.getMyAskListCnt(myAskBean);
+		}
+		
+		public PageCountBean getMyAskContentCnt(int currentPage) {
+		
+			int content_cnt = memberDAO.getMyAskContentCnt();
+			 
+			//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
+			PageCountBean mypageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+			 
+			return mypageCountBean;
+		}
+		
 		//관리자 마이페이지
 		//public List<MemberBean> getAdminPageList() {
 		//	return memberDAO.getAdminPageList();
 		//}
 		
 		//관리자 회원목록 페이지
-		public List<MemberBean> getAbMemberList(){
-			return memberDAO.getAbMemberList();
+		public List<MemberBean> getAdMemberList(){
+			return memberDAO.getAdMemberList();
 		}
-		
-		//관리자 학원 목록 페이지
-		public List<AcademyMemberBean> getAbAcademyList(){
-			return memberDAO.getAbAcademyList();	
-		}	
-		
-		//문의사항 수신
-		public List<SiteAskBean> getAbSiteAskList(){
-			return memberDAO.getAbSiteAskList();
+		//총회원수
+		public int getAdminMemberCnt(MemberBean myAdminMemberBean) {
+			return memberDAO.getAdminMemberCnt(myAdminMemberBean);
 		}
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.dao.MemberDAO;
 import kr.co.ezen.dao.SiteAskDAO;
@@ -19,8 +20,14 @@ import kr.co.ezen.dao.SiteAskDAO;
 @PropertySource("/WEB-INF/properties/option.properties")
 public class SiteAskService {
 
+	@Value("${page.listcnt}")
+	private int page_listcnt;  	
+	
 	@Value("${path.upload}")
 	private String path_upload;
+	
+	@Value("${page.pagButtonCnt}")
+	private int page_pageButtonCnt;
 	
 	@Autowired
 	private MemberBean loginMemberBean;
@@ -57,16 +64,7 @@ public class SiteAskService {
 		
 		siteAskDAO.addSaContent(saWriteBean);
 	}
-	
-	
-	/*
-	public SiteAskBean getSaContentPage(int m_memberNo) {
 		
-		return siteAskDAO.getSaContentPage(m_memberNo);	
-	}
-	*/
-	
-	
 	//글목록
 	 public List<SiteAskBean> getSaList(){		   
 		  return siteAskDAO.getSaList(); 			  
@@ -76,4 +74,21 @@ public class SiteAskService {
 	public SiteAskBean getSaInfo(Timestamp sa_time) { 
 		  return siteAskDAO.getSaInfo(sa_time); 
 	  }
+
+	//개수
+	public int getSaListCnt(SiteAskBean saBean) {
+		
+		return siteAskDAO.getSaListCnt(saBean);
+	}
+	
+	//페이징
+	public PageCountBean getSaContentCnt(int currentPage) {
+		
+		int content_cnt = siteAskDAO.getSaContentCnt();
+			 
+			//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
+			PageCountBean pageCountBeanM = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+			 
+			return pageCountBeanM;
+		 } 
 }

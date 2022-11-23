@@ -23,7 +23,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.ServiceCenterBean;
+import kr.co.ezen.service.BlackListService;
 import kr.co.ezen.service.ServiceCenterService;
 
 @Controller
@@ -39,22 +41,54 @@ public class ServiceCenterController {
 	
 	@GetMapping("/noticeBoardList")
 	public String main(@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean,
+						@RequestParam(value = "page", defaultValue = "1") int page,
 						Model model) {
 		
-		List<ServiceCenterBean> nblist =  serviceCenterService.getNbList();		
+		List<ServiceCenterBean> nblist = serviceCenterService.getNbList(page);		
 		model.addAttribute("nblist", nblist);
 		
 		int totCnt = serviceCenterService.getListCnt(nbSearchBean);
 		model.addAttribute("totCnt", totCnt);
 		
+		PageCountBean pageCountBean = serviceCenterService.getContentCnt(page);
+		model.addAttribute("pageCountBean", pageCountBean);
+		
+		model.addAttribute("page", page);
+		
 		return "serviceBoard/noticeBoardList";
 		
 	}
 	
-	@GetMapping("/noticeBoardSearchList_pro")
-	public String nbSearchList_pro(@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean,
+	//검색 화면
+	@GetMapping("/noticeBoardSearchList")
+	public String nbSearchList(@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean,
+								@RequestParam(value = "page2", defaultValue = "1") int page2,
 								@RequestParam("searchKeyword") String searchKeyword,
 								Model model) {
+	
+		List<ServiceCenterBean> nbsearchList = serviceCenterService.getNbSearchList(searchKeyword);
+		nbSearchBean.setSearchKeyword(nbSearchBean.getSearchKeyword());
+				
+		model.addAttribute("nbsearchList", nbsearchList);
+		model.addAttribute("nbSearchBean", nbSearchBean);
+				
+		PageCountBean pageCountBean = serviceCenterService.getContentCnt2(searchKeyword, page2);
+		model.addAttribute("pageCountBean2", pageCountBean);
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("page2", page2);
+		
+		
+		return "serviceBoard/noticeBoardSearchList";
+	}	
+	
+	
+	
+	//검색	
+	@GetMapping("/noticeBoardSearchList_pro")
+	public String nbSearchList_pro(@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean,
+									@RequestParam(value = "page2", defaultValue = "1") int page2,
+									@RequestParam("searchKeyword") String searchKeyword,
+									Model model) {
 	
 		List<ServiceCenterBean> nbsearchList = serviceCenterService.getNbSearchList(searchKeyword);
 		nbSearchBean.setSearchKeyword(nbSearchBean.getSearchKeyword());
@@ -64,6 +98,12 @@ public class ServiceCenterController {
 		
 		model.addAttribute("nbsearchList", nbsearchList);
 		model.addAttribute("nbSearchBean", nbSearchBean);
+				
+		PageCountBean pageCountBean = serviceCenterService.getContentCnt2(searchKeyword, page2);
+		model.addAttribute("pageCountBean2", pageCountBean);
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("page2", page2);
+		
 		
 		return "serviceBoard/noticeBoardSearchList";
 	}	

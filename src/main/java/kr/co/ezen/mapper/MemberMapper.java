@@ -66,35 +66,44 @@ public interface MemberMapper {
 	
 
 	//내가 쓴 문의사항
-	@Select("select sa_title, sa_time "
-			+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
-			+ "where m_memberNo = #{m_memberNo}")
-	List<SiteAskBean> getMyaskList(int m_memberNo);
-	
-	@Select("select sa_tele, m_email, sa_time, sa_title, sa_contents, sa_file "
-			+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
-			+ "where m_memberNo = #{m_memberNo} "
-			+ "and sa_time = #{sa_time}")
-	SiteAskBean getMyaskRead(@Param("sa_time") Timestamp sa_time, @Param("m_memberNo") int m_memberNo);
-
-	//관리자 마이페이지 차후 월별 가입 회원 수 등 추가 예정
-	//@Select("select m_memberNo from memberT")
-	//List<MemberBean> getAdminPageList();
-	
-	//관리자 페이지 : 회원 목록
-	@Select("select m_classify, m_name, m_memberNo, m_joinDate, m_confirm "
-			+ "from memberT ")
-	List<MemberBean> getAbMemberList();
-
-	//관리자 페이지 : 학원 목록
-	@Select("select a_classify, a_name, a_memberNo, a_joinDate, a_infoExpose "
-			+ "from academyMemberT ")
-	List<AcademyMemberBean> getAbAcademyList();
-	
-	//관리자 페이지 : 문의사항 목록
-	@Select("select m_name, sa_memberNo, sa_title, sa_time "
-			+ "from siteAskT natural join memberT "
-			+ "where sa_memberNo = m_memberNo ")
-	List<SiteAskBean> getAbSiteAskList();
+		@Select("select sa_title, sa_time "
+				+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
+				+ "where m_memberNo = #{m_memberNo}")
+		List<SiteAskBean> getMyaskList(int m_memberNo);
+		
+		@Select("select sa_tele, m_email, sa_time, sa_title, sa_contents, sa_file "
+				+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
+				+ "where m_memberNo = #{m_memberNo} "
+				+ "and sa_time = #{sa_time}")
+		SiteAskBean getMyaskRead(@Param("sa_time") Timestamp sa_time, @Param("m_memberNo") int m_memberNo);
+		//총 게시글 수
+		@Select("select count(*) "
+				+ "from siteAskT s, memberT "
+				+ "where s.sa_memberNo = m.m_memberNo "
+				+ "and m.m_memberNo = #{m_memberNo}")
+		int getMyAskListCnt(MemberBean myAskBean);
+		//페이징
+		@Select("select count(*) "
+				+ "from siteAskT s, memberT "
+				+ "where s.sa_memberNo = m.m_memberNo "
+				+ "and m.m_memberNo = #{m_memberNo}")
+		int getMyAskContentCnt();
+		
+		
+		
+		//관리자 마이페이지 차후 월별 가입 회원 수 등 추가 예정
+		//@Select("select m_memberNo from memberT")
+		//List<MemberBean> getAdminPageList();
+		
+		//관리자 페이지 : 회원 목록
+		@Select("select m_classify, m_name, m_memberNo, m_joinDate, m_confirm "
+				+ "from memberT ")
+		List<MemberBean> getAdMemberList();
+		//총 회원 수
+		@Select("select count(*) from memberT")
+		int getAdminMemberCnt(MemberBean myAdminMemberBean);
 	 
+	//email 확인
+	   @Select("select m_email from memberT where m_email=#{m_email, jdbcType=VARCHAR }")
+	   String selectEmailKakao(String m_email);
 }

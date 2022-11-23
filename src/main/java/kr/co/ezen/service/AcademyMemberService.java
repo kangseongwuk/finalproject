@@ -1,6 +1,7 @@
 package kr.co.ezen.service;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -148,4 +149,13 @@ public class AcademyMemberService {
 	public void deleteAcademyIntroduce(int a_memberNo) {
 		academyMemberDAO.deleteAcademyIntroduce(a_memberNo);
 	}
+	
+	//관리자 학원 목록 페이지
+		public List<AcademyMemberBean> getAdAcademyList(){
+			return academyMemberDAO.getAdAcademyList();	
+		}
+		//총학원수
+		public int getAdminAcaCnt(AcademyMemberBean myAdminAcaBean) {
+			return academyMemberDAO.getAdminAcaCnt(myAdminAcaBean);
+		}
 }

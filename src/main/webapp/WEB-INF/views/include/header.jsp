@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
     
 <!-- <c:url var='root' value='/'/> --> 
 <c:set var='root' value="${pageContext.request.contextPath }/"/> 
@@ -128,15 +130,25 @@
         </div>
         <div class="col-lg-8 text-center text-lg-right">
           <ul class="list-inline">
-            <c:if test="${sessionScope.loginMemberBean.m_memberNo == null }">
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">회원 로그인</a></li>
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal2" data-toggle="modal" data-target="#loginModal2">학원 로그인</a></li>
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/join" >회원가입</a></li>
-            </c:if>
-            <c:if test="${sessionScope.loginMemberBean.m_memberNo != null }">
+          <c:choose>
+            <c:when test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
-          	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage" >마이페이지</a></li>
-          	</c:if>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypageAdmin" >마이페이지</a></li>
+            </c:when>
+          	<c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
+ 				<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
+          		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage" >마이페이지</a></li>
+            </c:when>
+            <c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
+           		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
+          		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }academymember/my_academypage" >마이페이지</a></li>
+            </c:when>
+            <c:otherwise>
+            	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">회원 로그인</a></li>
+            	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal2" data-toggle="modal" data-target="#loginModal2">학원 로그인</a></li>
+            	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/join" >회원가입</a></li>           
+          	</c:otherwise>
+          	</c:choose>
           </ul>
         </div>
       </div>
@@ -174,16 +186,32 @@
                 고객센터
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              
-                <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
-                <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
-                <c:if test="${sessionScope.loginMemberBean.m_memberNo != null }">
-                <li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">문의하기</a></li>
-                </c:if>
+              <c:choose>
+                	<c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
+                		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+               		<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                		<li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">문의하기</a></li>
+                	<!-- 관리자 권한 -->
+                		<c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
+                		<li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a>
+                		</c:if>
+                	</c:when>
+                	<c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
+                		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+               			<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+               			<li><a class="dropdown-item" href="${root }serviceBoard/siteAcaAskWrite">문의하기</a></li>
+               			<li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a></li>
+                	</c:when>
+                	<c:otherwise>
+                	<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+               		<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                	</c:otherwise>
+                </c:choose>
+                
+                
                 <!-- 블랙리스트는 학원 로그인 시에만 출력될 수 있도록 -->
-                <c:if test="${sessionScope.loginMemberBean.m_memberNo != null }">
-                <li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a></li>
-                </c:if>
+                
+               
                 
            <!--    <li><a class="dropdown-item" href="notice-single.html">블랙리스트</a></li> -->
                
@@ -285,19 +313,23 @@
 					<div class="form-title text-center">
 						<h4>학원 로그인</h4>
 					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id2" name="id2"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password2"
-									name="password2" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
+				<div class="form-group">
+					<form:form action="${root}academymember/login_pro" method="post" modelAttribute="loginAcademyMemberBean">
+				<div class="form-group">
+					<form:label path="a_id">아이디</form:label>
+					<form:input path="a_id" class="form-control"/>
+					<form:errors path="a_id"/>
+				</div>
+				<div class="form-group">
+					<form:label path="a_pw">비밀번호</form:label>
+					<form:input path="a_pw" class="form-control"/>
+					<form:errors path="a_pw"/>
+				</div>
+				<div>
+					<form:button class="btn btn-info btn-block btn-round">로그인</form:button>
+				</div>
+			</form:form>
+						
 						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
 						<div class="d-flex justify-content-center social-buttons">
 							<button type="button" class="btn btn-secondary btn-round"

@@ -71,14 +71,14 @@
           </div>
       </div>
     </div>
-    
-<div class="board_view">
+
+		<div class="board_view">
 <table>
     <tr>
       <th width="10%">제목</th>
       <th width="10%">${nbReadBean.nb_title }</th>
       <th width="10%">등록일</th>
-      <th width="10%">${nbReadBean.nb_writeTime }</th>
+      <th width="10%"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${nbReadBean.nb_writeTime }" /></th>
     </tr>
     <tr>
       <th width="10%">글쓴이</th>
@@ -111,13 +111,6 @@
       <!--<input type="button" value="쓰기" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='board_list1.jsp'"/>-->
 <input type="button" value="돌아가기" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }index'"/>
   </div>
-</div>
-  
-  <div class="prev_data_area">
-  <button type="button" class="btn btn-primary btn-sm"><span class="b">이전글ㅣ </span> <!-- <a href=".jsp"?> </a> --></font></font></button>
-</div>
-  <div class="next_data_area">
-  <button type="button" class="btn btn-primary btn-sm"><span class="b">다음글ㅣ </span> <!-- <a href=".jsp"?> </a> --></font></font></button>
 </div>
 
 </div>

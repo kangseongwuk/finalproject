@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.MemberChildBean;
+import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.beans.UserAskBean;
 import kr.co.ezen.beans.UserFavoriteBean;
@@ -182,10 +183,20 @@ public class MemberController {
 		}
 		//내가 쓴 문의사항
 		@GetMapping("/mypage_siteAsk")
-		public String myAsk(Model model) {
+		public String myAsk(@ModelAttribute("myAskBean") MemberBean myAskBean,
+							@RequestParam(value = "myAskPage", defaultValue = "1") int myAskPage,
+							Model model) {
 			
 			List<SiteAskBean> myasklist = memberService.getMyaskList(loginMemberBean.getM_memberNo());
 			model.addAttribute("myasklist", myasklist);
+			
+			int myasktotCnt = memberService.getMyAskListCnt(myAskBean);
+			model.addAttribute("myasktotCnt", myasktotCnt);
+			
+			PageCountBean mypageCountBean = memberService.getMyAskContentCnt(myAskPage);
+			model.addAttribute("mypageCountBean", mypageCountBean);
+			
+			model.addAttribute("myAskPage", myAskPage);
 			
 			return "member/mypage_siteAsk";
 		}
@@ -210,50 +221,28 @@ public class MemberController {
 			
 		//관리자 회원 목록 페이지
 		@GetMapping("/mypageAdmin_member")
-		public String abMemberList(Model model) {
+		public String abMemberList(@ModelAttribute("myAdminMemberBean") MemberBean myAdminMemberBean,
+									Model model) {
 			
-			List<MemberBean> abMemberlist = memberService.getAbMemberList();
-		 	model.addAttribute("abMemberlist", abMemberlist);
+			List<MemberBean> adMemberlist = memberService.getAdMemberList();
+		 	model.addAttribute("adMemberlist", adMemberlist);
+		 	
+			int admemtotCnt = memberService.getAdminMemberCnt(myAdminMemberBean);
+			model.addAttribute("admemtotCnt", admemtotCnt);
 					
+			model.addAttribute("myAdminMemberBean", myAdminMemberBean);
+			
 			return "member/mypageAdmin_member";
 		}
-		
-		//관리자 학원 목록 페이지
-		@GetMapping("/mypageAdmin_academy")
-		public String abAacademyList(Model model) {
 				
-			List<AcademyMemberBean> abAcademylist = memberService.getAbAcademyList();
-			model.addAttribute("abAcademylist", abAcademylist);
-						
-			return "member/mypageAdmin_academy";
-		}
-			
 			
 		//관리자 문의사항 수신 목록	
 		@GetMapping("/mypageAdmin_siteAsk")
-		public String abSiteAskList(Model model) {
-				
-			List<SiteAskBean> abSiteAskList = memberService.getAbSiteAskList();
-			model.addAttribute("abSiteAskList", abSiteAskList);
-						
+		public String abSiteAskList(@ModelAttribute("myAdminSearchBean") MemberBean myAdminSearchBean,
+									Model model) {	
+			
 			return "member/mypageAdmin_siteAsk";
 			}
-		
-			/*
-			 * //마이페이지 목록
-			 * 
-			 * @GetMapping("/mypage") public String
-			 * mypage(@ModelAttribute("mypageMemberBean") MemberBean
-			 * mypageMemberBean,@ModelAttribute("memberChildBean") MemberChildBean
-			 * memberChildBean , Model model) {
-			 * System.out.println(loginMemberBean.getM_memberNo()); List<MemberChildBean>
-			 * memberChildlist =
-			 * memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
-			 * model.addAttribute("memberChildlist", memberChildlist);
-			 * memberService.getMypageMember(mypageMemberBean);
-			 * 
-			 * return "member/mypage"; }
-			 */
 		
 		//학생정보
 		@GetMapping("/studentinfo")
@@ -271,11 +260,5 @@ public class MemberController {
 			return "member/myfavorite";
 		}
 		
-		//내문의사항
-		@GetMapping("/myaskboard")
-		public String myaskboard(@ModelAttribute("userAskBean") UserAskBean userAskBean, Model model) {
-			
-			return "member/myaskboard";
-		}
-
+	
 }

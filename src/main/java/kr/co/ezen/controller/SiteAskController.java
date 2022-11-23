@@ -2,7 +2,6 @@ package kr.co.ezen.controller;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.PageCountBean;
+import kr.co.ezen.beans.SiteAcaAskBean;
 import kr.co.ezen.beans.SiteAskBean;
+import kr.co.ezen.service.MemberService;
 import kr.co.ezen.service.SiteAskService;
 
 @Controller
@@ -25,12 +28,25 @@ public class SiteAskController {
 	@Autowired
 	private SiteAskService siteAskService;		
 
+	@Autowired
+	private MemberBean loginMemberBean;
 
+	//관리자가 보는 문의 목록
 	@GetMapping("/siteAskList")
-	public String main(Model model) {
+	public String main(@ModelAttribute("saBean") SiteAskBean saBean,
+						@RequestParam(value = "pageM", defaultValue = "1") int pageM,			
+						Model model) {
 			
 		List<SiteAskBean> salist =  siteAskService.getSaList();		
 		model.addAttribute("salist", salist);
+		
+		int saListCnt = siteAskService.getSaListCnt(saBean);
+		model.addAttribute("saListCnt", saListCnt);
+		
+		PageCountBean pageCountBeanM = siteAskService.getSaContentCnt(pageM);
+		model.addAttribute("pageCountBeanM", pageCountBeanM);
+		
+		model.addAttribute("pageM", pageM);
 		
 		return "serviceBoard/siteAskList";
 	}
@@ -47,16 +63,20 @@ public class SiteAskController {
 	}	
 	
 	@GetMapping("/siteAskWrite")
-	public String write(@RequestParam("m_memberNo") int m_memberNo,
-						@ModelAttribute("saWriteBean") SiteAskBean saWriteBean,
+	public String write(@ModelAttribute("saWriteBean") SiteAskBean saWriteBean,
 						Model model) {
-				
-		//saWriteBean = siteAskService.getSaContentPage(m_memberNo);
-		model.addAttribute("saWriteBean", saWriteBean);
 		
+		saWriteBean.setSa_memberNo(loginMemberBean.getM_memberNo());
+		
+		saWriteBean.setM_id(loginMemberBean.getM_id());
+		saWriteBean.setM_name(loginMemberBean.getM_name());
+		saWriteBean.setM_email(loginMemberBean.getM_email ());
+		
+		model.addAttribute("saWriteBean", saWriteBean);
+	
 		return "serviceBoard/siteAskWrite";
 	}
-	
+
 	@PostMapping("/siteAskWrite_pro")
 	public String write_pro(@ModelAttribute("saWriteBean") SiteAskBean saWriteBean, BindingResult result) {
 		

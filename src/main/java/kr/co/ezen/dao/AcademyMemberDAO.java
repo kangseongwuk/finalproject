@@ -1,5 +1,7 @@
 package kr.co.ezen.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -50,4 +52,13 @@ public class AcademyMemberDAO {
 	public void deleteAcademyIntroduce(int a_memberNo) {
 		academyMemberMapper.deleteAcademyIntroduce(a_memberNo);
 	}
+	
+	//관리자 마이페이지 : 학원 목록
+		public List<AcademyMemberBean> getAdAcademyList(){
+			return academyMemberMapper.getAdAcademyList();	
+		}
+		//총학원수
+		public int getAdminAcaCnt(AcademyMemberBean myAdminAcaBean) {
+			return academyMemberMapper.getAdminAcaCnt(myAdminAcaBean);
+		}
 }
