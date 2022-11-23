@@ -50,11 +50,7 @@
 </head>
 
 <body>
-  <!-- preloader start -->
-  <div class="preloader">
-    <img src="images/preloader.gif" alt="preloader">
-  </div>
-  <!-- preloader end -->
+
 
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -221,21 +217,7 @@
   </div>
 </section>
 <!-- /banner-feature -->
-<!-- cta -->
-<section class="section bg-primary">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title text-dark">최고의 서비스를 제공합니다. 사용해보세요!</h2>
-         <a href="join" class="btn btn-light">가입하기</a> 
-      </div>
-    </div>
-  </div>
-</section>
 
-
-
-<!-- /cta -->
 
 
 <!-- ===============================  footer  =============================== -->

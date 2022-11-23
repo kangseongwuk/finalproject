@@ -536,10 +536,9 @@ function reviewRemove(r_no, r_writerNo) {
 <!-- google map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
 <script src="plugins/google-map/gmap.js"></script>
-
-<!-- Main Script  카카오지도-->
+ <!-- Main Script  카카오지도-->
 <script src="js/script.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3956e6905ec44bb521e5f39eaaf2977&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b91d7ac694b55d24d6b56c18b966b4cf&libraries=services"></script>
 <script>
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -595,5 +594,6 @@ function displayMarker(place) {
     });
 }
 </script>
+
 </body>
 </html>

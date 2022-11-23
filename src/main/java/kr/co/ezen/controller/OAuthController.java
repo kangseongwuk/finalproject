@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.service.MemberService;
 import kr.co.ezen.service.OAuthService;
 
 @RequestMapping("/member")
@@ -20,6 +21,9 @@ import kr.co.ezen.service.OAuthService;
 public class OAuthController {
    @Autowired
    OAuthService oAuthService;
+   
+   @Autowired
+   MemberService memberService;
    
    
     @RequestMapping(value="/kakao")
@@ -54,15 +58,22 @@ public class OAuthController {
         if(!userInfo.get("email").equals(email)) {
            return "member/kakaoJoin"; 
         }else {
+        	String m_id = (String) userInfo.get("email");
+        	MemberBean mypageMemberBean = memberService.getKakaoLoginMember(m_id);
+        	
+        	System.out.println(mypageMemberBean.getM_memberNo());
+        	session.setAttribute("loginMemberBean", mypageMemberBean);
+        	memberService.getMypageMember(mypageMemberBean, request);
            return "index";
         }
     }
 
-    @RequestMapping(value="/logout")
+    @RequestMapping(value="/kakaoLogout")
     public String logout(HttpSession session) {
        oAuthService.kakaoLogout((String)session.getAttribute("access_Token"));
         session.removeAttribute("access_Token");
         session.removeAttribute("userId");
+        session.removeAttribute("loginMemberBean");
         return "index";
     }
 }

@@ -25,8 +25,6 @@ import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.MemberChildBean;
 import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.SiteAskBean;
-import kr.co.ezen.beans.UserAskBean;
-import kr.co.ezen.beans.UserFavoriteBean;
 import kr.co.ezen.service.MemberService;
 @RequestMapping("/member")
 @Controller
@@ -119,11 +117,11 @@ public class MemberController {
 	}
 	//mypage보기
 	@GetMapping("/mypage")
-	public String mypage(@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean,@ModelAttribute("memberChildBean") MemberChildBean memberChildBean , Model model) {
+	public String mypage(@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean,@ModelAttribute("memberChildBean") MemberChildBean memberChildBean , Model model, HttpServletRequest request) {
 		
 		List<MemberChildBean> memberChildlist = memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
 	 	model.addAttribute("memberChildlist", memberChildlist);
-		memberService.getMypageMember(mypageMemberBean);
+		memberService.getMypageMember(mypageMemberBean, request);
 		
 		return "member/mypage";
 	}
@@ -251,13 +249,6 @@ public class MemberController {
 		 	model.addAttribute("memberChildlist", memberChildlist);
 		 	
 		 	return "member/studentinfo";
-		}
-		
-		//찜목록
-		@GetMapping("/myfavorite")
-		public String myfavorite(@ModelAttribute("userFavoriteBean") UserFavoriteBean userFavoriteBean, Model model) {
-			
-			return "member/myfavorite";
 		}
 		
 	

@@ -81,7 +81,7 @@
             <form:input type="email" path="m_email"/>
 			<form:errors path="m_email" style="color:red"/>
           </div>
-          
+          <form:hidden path="m_classify" value="100"/>
           <form:button class="btn-sign btn-up" type="submit">회원가입 완료</form:button>
         </form:form>
        

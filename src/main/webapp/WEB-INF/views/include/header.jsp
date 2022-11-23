@@ -113,10 +113,23 @@
 </script>
 <!-- End Channel Plugin -->
 
+<!-- 책로딩 -->
   <!-- preloader start -->
-  <div class="preloader">
-    <img src="images/preloader.gif" alt="preloader">
+
+  <!-- preloader start -->
+   <div class="preloader">
+    <div class="spinner">
+     <span class="ball-1"></span>
+     <span class="ball-2"></span>
+     <span class="ball-3"></span>
+     <span class="ball-4"></span>
+     <span class="ball-5"></span>
+     <span class="ball-6"></span>
+     <span class="ball-7"></span>
+     <span class="ball-8"></span>
+   </div>
   </div>
+  <!-- preloader end -->
   <!-- preloader end -->
 
 <header class="fixed-top header">
@@ -129,25 +142,25 @@
         </div>
         <div class="col-lg-8 text-center text-lg-right">
           <ul class="list-inline">
-          <c:choose>
-          	<c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
- 				<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
-          		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage" >마이페이지</a></li>
-            </c:when>
+        <c:choose>
             <c:when test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
-            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage_admin" >마이페이지</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypageAdmin" >마이페이지</a></li>
+            </c:when>
+             <c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
+             <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
+                <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/mypage" >마이페이지</a></li>
             </c:when>
             <c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
-           		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
-          		<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }academymember/my_academypage" >마이페이지</a></li>
+                 <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/logout" >로그아웃</a></li>
+                <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }academymember/my_academypage" >마이페이지</a></li>
             </c:when>
             <c:otherwise>
-            	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">회원 로그인</a></li>
-            	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal2" data-toggle="modal" data-target="#loginModal2">학원 로그인</a></li>
-            	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/join" >회원가입</a></li>           
-          	</c:otherwise>
-          	</c:choose>
+               <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal" data-toggle="modal" data-target="#loginModal">회원 로그인</a></li>
+               <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#loginModal2" data-toggle="modal" data-target="#loginModal2">학원 로그인</a></li>
+               <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }member/join" >회원가입</a></li>           
+             </c:otherwise>
+             </c:choose>
           </ul>
         </div>
       </div>
@@ -186,25 +199,32 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <c:choose>
-                	<c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
-                		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
-               			<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
-                		<li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">문의하기</a></li>
-                		<c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
-                			<li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a>
-                		</c:if>
-                	</c:when>
-                	<c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
-                		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
-               			<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
-               			<li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite_aca">문의하기</a></li>
-               			<li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a></li>
-                	</c:when>
-                	<c:otherwise>
-                		<li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
-               			<li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
-                	</c:otherwise>
+                   <c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">
+                      <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+                        <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                      <li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">문의하기</a></li>
+                   <!-- 관리자 권한 -->
+                      <c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
+                      <li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a>
+                      </c:if>
+                   </c:when>
+                   <c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
+                      <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+                        <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                        <li><a class="dropdown-item" href="${root }serviceBoard/siteAcaAskWrite">문의하기</a></li>
+                        <li><a class="dropdown-item" href="${root }blackList/blackListList">블랙리스트</a></li>
+                   </c:when>
+                   <c:when test="${sessionScope.userId != null }">
+                      <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+                        <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                      <li><a class="dropdown-item" href="${root }serviceBoard/siteAskWrite?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}">문의하기</a></li>
+                   </c:when>
+                   <c:otherwise>
+                   <li><a class="dropdown-item" href="${root }serviceBoard/noticeBoardList">공지사항</a></li>
+                     <li><a class="dropdown-item" href="${root }faq/faqBoard">FAQ</a></li>
+                   </c:otherwise>
                 </c:choose>
+                
                 
                 
                 <!-- 블랙리스트는 학원 로그인 시에만 출력될 수 있도록 -->
@@ -259,36 +279,15 @@
 								<form:input path="m_pw" class="form-control"  placeholder="Password"/>
 									<form:errors path="m_pw" style="color:red"/>
 							</div>
-							<form:button type="submit" class="btn btn-primary">로그인</form:button>
+							<form:button type="submit" class="btn btn-info btn-block btn-round" style="background-color:black;">로 그 인</form:button>
 						</form:form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
+            <a class="p-2"  id="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=d74b9f388e687f66d7d888fd0bb9d36b&redirect_uri=http://localhost:8700/member/kakao&response_type=code">
+           <img src="images/kakao_login_medium_wide.png" style="width:100%"/>
+         	</a>
+						<!-- <div class="text-center text-muted delimiter">다른 계정으로 로그인</div> -->
 						<div class="text-center text-muted delimiter"><a href="${root }member/findpw">비밀번호 찾기</a></div>
   <!-- 카카오 로그인 -->
-         <c:if test="${userId eq null}">
-            <a class="p-2"  id="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=d74b9f388e687f66d7d888fd0bb9d36b&redirect_uri=http://localhost:8700/member/kakao&response_type=code">
-           <img src="images/kakao_login_large_narrow.png" style="width:100%"/>
-         </a>
-      </c:if>
-      <c:if test="${userId ne null}">
-             <h3>로그인 성공입니다</h3>
-           <input type="button" value="로그아웃" onclick="location.href='${root }member/logout'">
-       </c:if>
 
-						<div class="d-flex justify-content-center social-buttons">
-						
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" onclick class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
 					</div>
 					<!-- ==================로그인================== -->
 				</div>
@@ -324,25 +323,10 @@
 					<form:errors path="a_pw"/>
 				</div>
 				<div>
-					<form:button class="btn btn-info btn-block btn-round">로그인</form:button>
+					<form:button class="btn btn-info btn-block btn-round" style="background-color:black;">로그인</form:button>
 				</div>
 			</form:form>
-						
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
+
 					</div>
 				</div>
 			</div>

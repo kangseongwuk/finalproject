@@ -70,6 +70,10 @@ public class MemberDAO {
  		memberMapper.deleteWishList(m_memberNo);
  	}
  	
+  public MemberBean getKakaoLoginMember(String m_id) {
+	  return memberMapper.getKakaoLoginMember(m_id);
+  }
+ 	
  	//임시비밀번호변경
  	 	public int updatePw(MemberBean memberBean) throws Exception {		
  	 		return memberMapper.updatePw(memberBean);

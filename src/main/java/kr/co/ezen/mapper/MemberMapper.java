@@ -18,6 +18,8 @@ public interface MemberMapper {
 	//일반회원로그인
 	@Select("select * from memberT where m_id = #{m_id} and m_pw = #{m_pw}")
 	 MemberBean getLoginMember(MemberBean memberBean);
+	@Select("select * from memberT where m_id = #{m_id}")
+	MemberBean getKakaoLoginMember(String m_id);
 	//일반회원정보수정
 	@Select("select m_id, m_name from memberT where m_memberNo = #{m_memberNo}")
 	MemberBean getModifyMember(int m_memberNo);
@@ -39,8 +41,8 @@ public interface MemberMapper {
 	 void deleteWishList(int m_memberNo);
 	
 	//일반회원가입
-	@Insert("insert into membert(m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email) "
-			+ "values(m_sq.nextval, #{m_id}, #{m_pw}, #{m_name}, #{m_birth}, #{m_gender}, #{m_tele}, #{m_email})")
+	@Insert("insert into membert(m_classify, m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email) "
+			+ "values(#{m_classify} ,m_sq.nextval, #{m_id}, #{m_pw}, #{m_name}, #{m_birth}, #{m_gender}, #{m_tele}, #{m_email})")
 	 void joinMember(MemberBean joinMemberBean);
 	//자녀정보입력
 	@Insert("insert into memberChildT(m_memberNo, c_name, c_grade, c_gender, c_level)"
@@ -78,15 +80,15 @@ public interface MemberMapper {
 		SiteAskBean getMyaskRead(@Param("sa_time") Timestamp sa_time, @Param("m_memberNo") int m_memberNo);
 		//총 게시글 수
 		@Select("select count(*) "
-				+ "from siteAskT s, memberT "
-				+ "where s.sa_memberNo = m.m_memberNo "
-				+ "and m.m_memberNo = #{m_memberNo}")
+				+ "from siteAskT s, memberT m "
+				+ "where sa_memberNo = m_memberNo "
+				+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
 		int getMyAskListCnt(MemberBean myAskBean);
 		//페이징
 		@Select("select count(*) "
-				+ "from siteAskT s, memberT "
-				+ "where s.sa_memberNo = m.m_memberNo "
-				+ "and m.m_memberNo = #{m_memberNo}")
+				+ "from siteAskT s, memberT m "
+				+ "where sa_memberNo = m_memberNo "
+				+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
 		int getMyAskContentCnt();
 		
 		

@@ -1,3 +1,4 @@
+select*from MEMBERT;
 drop SEQUENCE ev_sq; --삭제
 
 drop SEQUENCE eb_sq; --삭제

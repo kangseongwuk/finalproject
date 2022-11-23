@@ -11,8 +11,11 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -87,16 +90,28 @@ public class MemberService {
 		memberDAO.joinMember(joinMemberBean);
 	}
 	
-	public MemberBean getMypageMember(MemberBean mypageMemberBean) {
+	
+	
+	public MemberBean getMypageMember(MemberBean mypageMemberBean, HttpServletRequest request) {
 		
+		
+		if(loginMemberBean.getM_memberNo() != 0) {
 		MemberBean mypageMemberBean2 = memberDAO.getMypageMember(loginMemberBean.getM_memberNo());
-		
+
 		
 		mypageMemberBean.setM_id(mypageMemberBean2.getM_id());
 		mypageMemberBean.setM_name(mypageMemberBean2.getM_name());
 		mypageMemberBean.setM_tele(mypageMemberBean2.getM_tele());
 		mypageMemberBean.setM_email(mypageMemberBean2.getM_email());
-		
+		}else {
+			HttpSession session = request.getSession();
+		   MemberBean memberBean = (MemberBean) session.getAttribute("loginMemberBean");
+			MemberBean mypageMemberBean2 = memberDAO.getMypageMember(memberBean.getM_memberNo());
+			mypageMemberBean.setM_id(mypageMemberBean2.getM_id());
+			mypageMemberBean.setM_name(mypageMemberBean2.getM_name());
+			mypageMemberBean.setM_tele(mypageMemberBean2.getM_tele());
+			mypageMemberBean.setM_email(mypageMemberBean2.getM_email());
+		}
 		return mypageMemberBean;
 	}
 	public List<MemberChildBean> getMypageMemberChild(int m_memberNo) {
@@ -136,6 +151,11 @@ public class MemberService {
 	public void deleteWishList(int m_memberNo) {
 		memberDAO.deleteWishList(m_memberNo);
  	}
+	
+	public MemberBean getKakaoLoginMember( String m_id) {
+		  MemberBean kakaoMemberBean =  memberDAO.getKakaoLoginMember(m_id);
+		return kakaoMemberBean; 
+	  }
 	
 	// 이메일발송
 		public void sendEmail(MemberBean memberBean, String div) throws Exception {
