@@ -1,4 +1,3 @@
-select*from MEMBERT;
 drop SEQUENCE ev_sq; --삭제
 
 drop SEQUENCE eb_sq; --삭제
@@ -22,6 +21,8 @@ drop SEQUENCE nb_sq;
 drop SEQUENCE a_sq;
 drop SEQUENCE m_sq;
 
+
+drop table siteAcaAskT;
 drop table FAQBoardT;
 drop table noticeBoardT;
 drop table siteAskT;
@@ -151,7 +152,7 @@ insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locati
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
     values(a_sq.nextval,'aca04','12345678','D종합학원','1234567894','서울시 관악구 신림동','이젠 601호','01099998888',1);
 
-select * from ACADEMYMEMBERT
+
 
 --4. 학원 소개 정보 테이블
 CREATE TABLE academyInfoT(
@@ -191,8 +192,6 @@ CREATE TABLE academyPayT(
     a_payEnd    timestamp
         not null
 );
-
-select * from academyPayT;
 
 --학원 결제 정보 예시
 insert into academyPayT(a_memberNo,a_payStart,a_payEnd)
@@ -388,7 +387,7 @@ CREATE TABLE counselReservationT(
 
 --15. 사이트 문의 테이블
 CREATE TABLE siteAskT(
-    sa_memberNo varchar2(8)
+    sa_memberNo number(8)
         not null,
     sa_tele varchar2(11),
     sa_time timestamp
@@ -411,25 +410,6 @@ values('10000001', '01011112222', '아직인가요?', '저 로그인 해야해�
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
 values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
 
-
---학원 문의
-
-CREATE TABLE siteAcaAskT(
-    a_memberNo number(6),
-    a_name  varchar2(60),
-    a_tele varchar2(11),
-    aa_title    varchar2(100)
-        not null,
-    aa_contents varchar2(1500)
-        not null,
-    aa_time timestamp
-        default systimestamp not null,
-    aa_file varchar2(3000)
-);
-
-drop table siteAcaAskT;
-
-select * from siteAcaAskT;
 
 
 --16.0 공지사항 게시물 번호 시퀀스
@@ -475,8 +455,6 @@ create SEQUENCE fb_sq
 CREATE TABLE FAQBoardT(
     fb_no   number(4)
         primary key,
-    fb_title    varchar2(100)
-        not null,
     fb_contentsQ    varchar2(1500)
         not null,
     fb_contentsA    varchar2(3000)
@@ -484,28 +462,27 @@ CREATE TABLE FAQBoardT(
 );
 
 --FAQ 게시판 예시
-insert into FAQBoardT(fb_no,fb_title,fb_contentsQ,fb_contentsA)
-    values(fb_sq.nextval,'FAQ 테스트1','이 사이트는 뭐 하는 곳이죠?','저도 모릅니다.');
-select * from KAKAOT;
---카카오 테이블
-   create table kakaoT(
-      k_number number(8) primary key,
-      k_name varchar2(20) not null,
-      k_email varchar2(50) not null,
-      k_gender varchar2(15),
-      k_age_range varchar2(15),
-      k_birthday varchar2(12)
-   );
---카카오 넘버 시퀀스
-   create SEQUENCE k_sq
-    INCREMENT by 1
-    START with  1
-    MAXVALUE    99999999
-    MINVALUE    1
-    NOCYCLE;
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'이 사이트는 뭐 하는 곳이죠?','저도 모릅니다.');
+
+
+--18. 학원 문의 테이블
+CREATE TABLE siteAcaAskT(
+    a_memberNo number(6)
+        not null,
+    a_name  varchar2(60)
+        not null,
+    a_tele varchar2(11),
+    aa_title    varchar2(100)
+        not null,
+    aa_contents varchar2(1500)
+        not null,
+    aa_time timestamp
+        default systimestamp not null,
+    aa_file varchar2(3000)
+);
+
     
-commit
-
-
+commit;
 
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:url var='root' value='/' />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -239,6 +240,33 @@
 
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+	//학년 출력 변환 json
+	var convertData = {
+		"grade": [
+			"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
+		],
+		"a_classify": {
+			"1":"종합",
+			"2":"단과",
+			"3":"예체능(기타)"
+		}
+	}
+	
+	$(document).ready(function () {
+		//sido option 추가
+		jQuery.each(convertData.grade, function (idx, grd) {
+			//append를 이용하여 option 하위에 붙여넣음
+			jQuery('#gradeSelect').append(gr_option(idx, grd));
+		});
+	});
+	
+	function gr_option(idx, grade) {
+		return '<option value="' + idx + '">' + grade + '</option>';
+	}
+	
+</script>
 <body>
    <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp" />
@@ -266,30 +294,22 @@
 <!-- SEARCH BAR -->  
 
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
-	<script type="application/javascript"
+<script type="application/javascript"
 		src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 <section class="section bg-gray">
-  <div class="container">
-<div class="search-box">
-			
-
-
-	<div class="contents">
-		<select id="sido"><option value="">지역 선택</option></select>
-		<select id="sigugun"><option value="">구-시선택</option></select>
-		<select class="input-select">
-		      <option value="0" selected>학년 선택</option>
-              <option value="1">미취학 아동</option>
-              <option value="2">초등학생</option>
-              <option value="3">중학생</option>
-              <option value="4">고등학생</option>
-		    </select>
-		    <input class="search-txt" type="text"placeholder="검색어를 입력해 주세요">
-		    <button class="search-btn" type="submit">검색</button>
-	</div>
+	<div class="container">
+		<div class="search-box">
+				
+			<div class="contents">
+				<select id="sido"><option value="">지역 선택</option></select>
+				<select id="sigugun"><option value="">구-시선택</option></select>
+				<select class="input-select" id="gradeSelect">
+			      <option selected>학년 선택</option>
+			    </select>
+			    <input class="search-txt" type="text"placeholder="검색어를 입력해 주세요">
+			    <button class="search-btn" type="submit">검색</button>
+			</div>
 	
-
-
 <!--  주소 API -->	
 <script>
 jQuery(document).ready(function () {
@@ -363,8 +383,8 @@ function fn_iframe(url) {
 <!--  /주소 API -->	
 
 
-</div>
-</div>		
+		</div>
+	</div>		
 </section>
 <!-- /SEARCH BAR --> 
    
@@ -399,17 +419,6 @@ function fn_iframe(url) {
 					
 					$(document).ready(function() {
 						
-						//학년 출력 변환
-						var convertData = {
-							"grade": [
-								"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
-							],
-							"a_classify": {
-								"1":"종합",
-								"2":"단과",
-								"3":"예체능(기타)"
-							}
-						}
 						
 						window.onload = convertPro(), getWishHeart(${gList.a_memberNo });
 						
@@ -504,7 +513,16 @@ function fn_iframe(url) {
                         <a href="course-single.html">
                            <h4 class="card-title">${gList.a_name }</h4>
                         </a>
-                        <p class="card-text mb-4">${gList.a_introduce }</p>
+                        <p class="card-text mb-4">
+                        	<c:choose>
+                        		<c:when test="${fn:length(gList.a_introduce) <= 50}">
+                        			${gList.a_introduce }
+                        		</c:when>
+                        		<c:when test="${fn:length(gList.a_introduce) > 50}">
+                        			${fn:substring(gList.a_introduce, 0, 49)}...
+                        		</c:when>
+                        	</c:choose>
+                        </p>
                         <a href="gBoardRead?a_memberNo=${gList.a_memberNo }"
                            class="btn btn-primary btn-sm">상세 보기</a>
                            	<!--  like button  -->
