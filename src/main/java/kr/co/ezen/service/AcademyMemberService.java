@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.ezen.beans.AcademyMemberBean;
+import kr.co.ezen.beans.BlackListBean;
+import kr.co.ezen.beans.SiteAcaAskBean;
 import kr.co.ezen.dao.AcademyMemberDAO;
 
 @Service
@@ -151,11 +153,21 @@ public class AcademyMemberService {
 	}
 	
 	//관리자 학원 목록 페이지
-		public List<AcademyMemberBean> getAdAcademyList(){
+	public List<AcademyMemberBean> getAdAcademyList(){
 			return academyMemberDAO.getAdAcademyList();	
-		}
-		//총학원수
-		public int getAdminAcaCnt(AcademyMemberBean myAdminAcaBean) {
+	}
+	//총학원수
+	public int getAdminAcaCnt(AcademyMemberBean myAdminAcaBean) {
 			return academyMemberDAO.getAdminAcaCnt(myAdminAcaBean);
-		}
+	}
+		
+	public List<SiteAcaAskBean> getAcaAskList(int a_memberNo){
+			return academyMemberDAO.getAcaAskList(a_memberNo);
+	}
+	
+	public List<BlackListBean> getBlackListList(int a_memberNo){
+		
+		return academyMemberDAO.getBlackListList(a_memberNo);
+		
+	}
 }

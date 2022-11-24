@@ -13,6 +13,10 @@ drop table mBoardT; --삭제
 drop table gBoardReviewT; --삭제
 drop table gBoardT; --삭제
 
+drop table memberConnectionT; --삭제
+
+drop table topMenuT; --삭제
+
 --위는 이전 버전 삭제
 
 drop SEQUENCE fb_sq;
@@ -28,10 +32,8 @@ drop table noticeBoardT;
 drop table siteAskT;
 drop table counselReservationT;
 
-drop table topMenuT;
 
 drop table wishListT;
-drop table memberConnectionT;
 drop table blacklistT;
 drop table teacherReviewT;
 drop table academyTeacherT;
@@ -310,24 +312,7 @@ CREATE TABLE blacklistT(
 
 
 
-
---11. 학생-학원 연결 정보 테이블
-CREATE TABLE memberConnectionT(
-    m_memberNo  number(8)
-        not null,
-    a_memberNo  number(6)
-        not null,
-    m_connDate  timestamp
-        DEFAULT systimestamp not null,
-    constraint conn_pk primary key(a_memberNo, m_memberNo)
-);
-
-
--- 학생-학원 연결 예시(현재 없음)
-
-
-
---12. 학원 찜 목록 테이블
+--11. 학원 찜 목록 테이블
 CREATE TABLE wishListT(
     m_memberNo  number(8)
         not null,
@@ -340,32 +325,12 @@ CREATE TABLE wishListT(
     constraint wish_pk primary key(m_memberNo, a_memberNo)
 );
 
---12. 학원 찜 예시
+--11. 학원 찜 예시
 insert into wishListT(m_memberNo,a_memberNo)
     values(10000001,100001);
 
 
---13. 게시판명(상단메뉴) 테이블
-CREATE TABLE topMenuT(
-    menu_no number(2)   PRIMARY key,
-    menu_name   varchar2(30)    not null
-);
-
---상단 메뉴 예시
-insert into topMenuT(menu_no,menu_name)
-    values(0,'회사 소개');
-insert into topMenuT(menu_no,menu_name)
-    values(1,'종합');
-insert into topMenuT(menu_no,menu_name)
-    values(2,'단과');
-insert into topMenuT(menu_no,menu_name)
-    values(3,'예체능');
-insert into topMenuT(menu_no,menu_name)
-    values(4,'고객센터');
-
-
-
---14. 학원상담 예약문의
+--12. 학원상담 예약문의
 CREATE TABLE counselReservationT(
     a_memberNo  number(6)
         not null,
@@ -385,7 +350,7 @@ CREATE TABLE counselReservationT(
 
 
 
---15. 사이트 문의 테이블
+--13. 사이트 문의 테이블
 CREATE TABLE siteAskT(
     sa_memberNo number(8)
         not null,
@@ -412,7 +377,7 @@ values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
 
 
 
---16.0 공지사항 게시물 번호 시퀀스
+--14.0 공지사항 게시물 번호 시퀀스
 create SEQUENCE nb_sq
     INCREMENT by 1
     START with  1
@@ -420,7 +385,7 @@ create SEQUENCE nb_sq
     MINVALUE    1
     NOCYCLE;
 
---16. 공지사항 게시판 테이블
+--14. 공지사항 게시판 테이블
 CREATE TABLE noticeBoardT(
     nb_no   number(4)
         primary key,
@@ -443,7 +408,7 @@ insert into noticeBoardT(nb_no,nb_title,nb_contents,nb_file)
 
 
 
---17.0  FAQ 게시물 번호 시퀀스
+--15.0  FAQ 게시물 번호 시퀀스
 create SEQUENCE fb_sq
     INCREMENT by 1
     START with  1
@@ -451,7 +416,7 @@ create SEQUENCE fb_sq
     MINVALUE    1
     NOCYCLE;
 
---17. FAQ 게시판 테이블
+--15. FAQ 게시판 테이블
 CREATE TABLE FAQBoardT(
     fb_no   number(4)
         primary key,
@@ -466,7 +431,7 @@ insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
     values(fb_sq.nextval,'이 사이트는 뭐 하는 곳이죠?','저도 모릅니다.');
 
 
---18. 학원 문의 테이블
+--16. 학원 문의 테이블
 CREATE TABLE siteAcaAskT(
     a_memberNo number(6)
         not null,
@@ -484,3 +449,9 @@ CREATE TABLE siteAcaAskT(
 
     
 commit;
+
+select a_memberNo, a_name, a_location, a_locationDetail, a_tele, a_joinDate, a_classify, a_infoExpose, 
+    a_introduce, a_mainImg, a_file, a_gradeMin, a_gradeMax, a_shuttle, a_openTime, a_closeTime 
+    from academyMemberT natural join academyInfoT 
+    where a_classify like '%'||'' and a_location like '%'||'관%동'||'%' and ('-1' between a_gradeMin and a_gradeMax) or '-1' = '-1' and a_name like '%'||'%'
+    order by a_joinDate desc;

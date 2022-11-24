@@ -119,16 +119,17 @@ public class RestApiController {
 		
 		String result = "false";
 		
-		if(mBean.getM_memberNo() == academyReviewBean_del.getR_writerNo()) {
-			boardService.deleteAcademyReview(academyReviewBean_del.getA_memberNo(), academyReviewBean_del.getR_no());
-			result = "selfDel";
-		} else if(Integer.toString((mBean.getM_memberNo())).length() == 4) {
-			boardService.deleteAcademyReview(academyReviewBean_del.getA_memberNo(), academyReviewBean_del.getR_no());
-			result = "adminDel";
-		} else {
-			result = "unmatched";
+		if(mBean!=null) {
+			if(mBean.getM_memberNo() == academyReviewBean_del.getR_writerNo()) {
+				boardService.deleteAcademyReview(academyReviewBean_del.getA_memberNo(), academyReviewBean_del.getR_no());
+				result = "selfDel";
+			} else if(Integer.toString((mBean.getM_memberNo())).length() == 4) {
+				boardService.deleteAcademyReview(academyReviewBean_del.getA_memberNo(), academyReviewBean_del.getR_no());
+				result = "adminDel";
+			} else {
+				result = "unmatched";
+			}
 		}
-		
 		return result;
 	}
 	

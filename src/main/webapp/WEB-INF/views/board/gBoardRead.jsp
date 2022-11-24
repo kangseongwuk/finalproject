@@ -166,7 +166,7 @@ function reviewWrite() {
 	});
 }
 
-//리뷰 작성
+//리뷰 삭제
 function reviewRemove(r_no, r_writerNo) {
 	//alert("일단 되긴 함?2");
 	
@@ -182,7 +182,7 @@ function reviewRemove(r_no, r_writerNo) {
 		},
 		error : function(e) {
 			
-			alert("안됨3");
+			alert("안됨4");
 			
 		},
 		success : function(result) {
@@ -235,7 +235,14 @@ function reviewRemove(r_no, r_writerNo) {
     <div class="row">
       <div class="col-12 mb-4">
         <!-- course thumb -->
-        <img src="images/courses/course-single.jpg" class="img-fluid w-100">
+        <c:choose>
+			<c:when test="${academyInfoBasic.a_mainImg != null }">
+				<img class="card-img-top rounded-0" src="${root }upload/${academyInfoBasic.a_mainImg}" />
+			</c:when>
+			<c:otherwise>
+				<img class="card-img-top rounded-0" src="images/courses/course-1.jpg" alt="이미지 없음">
+			</c:otherwise>
+		</c:choose>
       </div>
     </div>
     <!-- course info -->
@@ -316,6 +323,11 @@ function reviewRemove(r_no, r_writerNo) {
         <h3>학원소개</h3>
         
         <p>${academyInfoBasic.a_introduce }</p>
+        <c:choose>
+			<c:when test="${academyInfoBasic.a_mainImg != null }">
+				<img src="${root }upload/${academyInfoBasic.a_file}" />
+			</c:when>
+		</c:choose>
       </div>
       <div class="col-12 mb-4">
         <h3 class="mb-3">과목</h3>
@@ -422,12 +434,14 @@ function reviewRemove(r_no, r_writerNo) {
     <div class="carousel-item active">
       <div class="col-12 col-md-4">
         <div class="card mb-2">
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (36).jpg"
+          <img class="card-img-top" src="images/logo.png" alt="logo"
             alt="Card image cap">
           <div class="card-body">
+          	<p><br><br><br><br></p>
             <h4 class="card-title font-weight-bold">마음에 드는 강사에게 리뷰를 남겨주세요.</h4>
             <p class="card-text"></p>
-            <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher">Button</a>
+            <!-- <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher">Button</a> -->
+            <p><br><br><br></p>
           </div>
         </div>
       </div>
@@ -436,8 +450,14 @@ function reviewRemove(r_no, r_writerNo) {
        <div class="carousel-item">
          <div class="col-12 col-md-4">
            <div class="card mb-2">
-             <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
-               alt="Card image cap">
+			<c:choose>
+				<c:when test="${ait.t_file != null }">
+					<img class="card-img-top rounded-0" src="${root }upload/${ait.t_file}" />
+				</c:when>
+				<c:otherwise>
+					<img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg" alt="Card image cap">
+				</c:otherwise>
+			</c:choose>
              <div class="card-body">
                <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
                <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
@@ -514,12 +534,11 @@ function reviewRemove(r_no, r_writerNo) {
 
                      <div class="comment-content mt-3">
                         <p>[${air.r_score }점] | ${air.r_contents }</p>
-                        <input class="btn btn-main-2 btn-round-full" type="button" onclick="reviewRemove('${air.r_no }', '${air.r_writerNo }')"
-                          value="삭제하기">
+                        <a class="btn btn-primary btn-md btn-rounded" type="button" onclick="reviewRemove('${air.r_no }', '${air.r_writerNo }')">삭제하기</a>
                      </div>
                   </div>
                </div>
-               </li>
+			</li>
          </c:forEach>
       </ul>
    </div>

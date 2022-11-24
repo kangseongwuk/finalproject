@@ -2,6 +2,7 @@ package kr.co.ezen.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,46 @@ public class BoardController {
 	
 	//종합 학원 게시판 목록 호출
 	@GetMapping("/gBoardList")
-	public String main(@RequestParam("a_classify") int a_classify,
+	public String gBoardList(@RequestParam("a_classify") String a_classify,
+						HttpServletRequest request,
 						Model model) {
 		
-		//ModelAndView 개념
+//		System.out.println(request.getParameter("sido"));
+//		System.out.println(request.getParameter("sigugun"));
+//		System.out.println(request.getParameter("gradeSelect"));
+//		System.out.println(request.getParameter("acaName"));
+//		System.out.println(a_classify);
 		
-		List<AcademyMemberBean> gBoardList =  boardService.getGBoardList(a_classify);
 		
-		model.addAttribute("gBoardList", gBoardList);
+		if(request.getParameter("gradeSelect")==null && request.getParameter("sido")==null &&
+				request.getParameter("sigugun")==null && request.getParameter("acaName")==null) {
+			
+			List<AcademyMemberBean> gBoardList =  boardService.getGBoardList(a_classify);
+			
+			model.addAttribute("gBoardList", gBoardList);
+			
+		} else {
+			String searchLoc = "";
+			String searchGrade = "-1";
+			String searchAcaName = "";
+			
+			if(request.getParameter("sido")!=null || request.getParameter("sigugun")!=null)	{
+				searchLoc = request.getParameter("sido") + "%" + request.getParameter("sigugun");
+			}
+			if(request.getParameter("gradeSelect")!="") {
+				searchGrade = request.getParameter("gradeSelect");
+			}
+			if(request.getParameter("acaName")!=null) {
+				searchAcaName = request.getParameter("acaName");
+			}
+			
+			List<AcademyMemberBean> gBoardList =  boardService.getGBoardSearchList(a_classify,searchLoc,searchGrade,searchAcaName);
+			
+			model.addAttribute("gBoardList", gBoardList);
+			
+		}
+		
+		
 		
 		
 		return "board/gBoardList";

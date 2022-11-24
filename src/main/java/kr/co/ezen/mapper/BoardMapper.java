@@ -22,9 +22,23 @@ public interface BoardMapper {
 	@Select("select a_memberNo, a_name, a_location, a_locationDetail, a_tele, a_joinDate, a_classify, a_infoExpose, "
 			+ "a_introduce, a_mainImg, a_file, a_gradeMin, a_gradeMax, a_shuttle, a_openTime, a_closeTime "
 			+ "from academyMemberT natural join academyInfoT "
-			+ "where a_classify = #{a_classify}	"
+			+ "where a_classify like '%'||#{a_classify} "
 			+ "order by a_joinDate desc")
-	List<AcademyMemberBean> getGBoardList(int a_classify);
+	List<AcademyMemberBean> getGBoardList(String a_classify);
+	
+	//종합 학원 게시판 목록 호출(검색)
+	@Select("select a_memberNo, a_name, a_location, a_locationDetail, a_tele, a_joinDate, a_classify, a_infoExpose, "
+			+ "a_introduce, a_mainImg, a_file, a_gradeMin, a_gradeMax, a_shuttle, a_openTime, a_closeTime "
+			+ "from academyMemberT natural join academyInfoT "
+			+ "where a_classify like '%'||#{a_classify} "
+			+ "	and a_location like '%'||#{searchLoc}||'%' "
+			+ "	and (#{searchGrade} between a_gradeMin and a_gradeMax or #{searchGrade} = '-1') "
+			+ "	and a_name like '%'||#{searchAcaName}||'%' "
+			+ "order by a_joinDate desc")
+	List<AcademyMemberBean> getGBoardSearchList(@Param("a_classify") String a_classify,
+												@Param("searchLoc") String searchLoc,
+												@Param("searchGrade") String searchGrade,
+												@Param("searchAcaName") String searchAcaName);
 	
 	
 
