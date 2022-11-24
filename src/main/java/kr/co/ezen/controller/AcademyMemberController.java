@@ -48,7 +48,7 @@ public class AcademyMemberController {
 	@GetMapping("/login")
 	public String login(@ModelAttribute("loginAcademyMemberBean") AcademyMemberBean loginAcademyMemberBean, Model model){
 		
-		model.addAttribute("loginAcademyMemberBean",this. loginAcademyMemberBean);
+		model.addAttribute("loginAcademyMemberBean", loginAcademyMemberBean);
 		
 		return "academymember/login";
 	}
@@ -62,7 +62,7 @@ public class AcademyMemberController {
 		
 		if(loginAcademyMemberBean.isAcademymemberlogin() == true) {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginAcademyMemberBean", loginAcademyMemberBean);
+			session.setAttribute("loginAcademyMemberBean",this.loginAcademyMemberBean);
 			loginAcademyMemberBean.setAcademymemberlogin(true);
 			return "index";
 		}else {

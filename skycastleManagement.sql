@@ -484,5 +484,3 @@ CREATE TABLE siteAcaAskT(
 
     
 commit;
-
-
