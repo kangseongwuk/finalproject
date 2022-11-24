@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.ezen.beans.AcademyMemberBean;
+import kr.co.ezen.beans.BlackListBean;
+import kr.co.ezen.beans.SiteAcaAskBean;
 import kr.co.ezen.service.AcademyMemberService;
+import kr.co.ezen.service.SiteAcaAskService;
 @RequestMapping("/academymember")
 @Controller
 public class AcademyMemberController {
@@ -27,6 +30,7 @@ public class AcademyMemberController {
 	
 	@Autowired
 	private AcademyMemberService academyMemberService;
+	
 	
 	
 	//학원회원가입페이지
@@ -62,7 +66,7 @@ public class AcademyMemberController {
 		
 		if(loginAcademyMemberBean.isAcademymemberlogin() == true) {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginAcademyMemberBean",this.loginAcademyMemberBean);
+			session.setAttribute("loginAcademyMemberBean", this.loginAcademyMemberBean);
 			loginAcademyMemberBean.setAcademymemberlogin(true);
 			return "index";
 		}else {
@@ -77,6 +81,15 @@ public class AcademyMemberController {
 		session.invalidate();
 		return "index";
 	}
+	
+	//학원정보조회(마이페이지)
+		@GetMapping("my_academypage")
+		public String my_academypage(@ModelAttribute("modifyAcademyMemberBean") AcademyMemberBean modifyAcademyMemberBean) {
+			modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+			academyMemberService.getModifyAcademyMember(modifyAcademyMemberBean);
+			return "academymember/my_academypage";
+			
+		}
 	//학원정보수정페이지
 	@GetMapping("modify")
 	public String modify(@ModelAttribute("modifyAcademyMemberBean") AcademyMemberBean modifyAcademyMemberBean) {
@@ -94,31 +107,44 @@ public class AcademyMemberController {
 		academyMemberService.modifyAcademyMember(modifyAcademyMemberBean);
 		return "academymember/login_success";
 	}
-	//학원정보삭제
 	@GetMapping("delete")
-	public String delete(HttpSession session) {
+	public String delete() {
+		return "academymember/delete";
+	}
+	//학원정보삭제
+	@GetMapping("delete_pro")
+	public String delete_pro(HttpSession session) {
 		academyMemberService.deleteAcademyIntroduce(loginAcademyMemberBean.getA_memberNo());
 		academyMemberService.deleteAcademyMember(loginAcademyMemberBean.getA_memberNo());
 		session.invalidate();
 		return "index";
 	}
-	//학원소개작성페이지
-	@GetMapping("/introduce")
-	public String introduce(@ModelAttribute("introduceAcademyMemberBean")AcademyMemberBean introduceAcademyMemberBean) {
-		introduceAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
-		return "academymember/introduce";
+	//학원소개페이지
+	@GetMapping("/academyinfo")
+	public String academyinfo(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce) {
+		infoIntroduce.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+		academyMemberService.infoIntroduce(infoIntroduce);
+		return "academymember/academyinfo";
 	}
-	//학원소개작성
-	@PostMapping("/introduce_pro")
-	public String introduce_pro(@ModelAttribute("introduceAcademyMemberBean")AcademyMemberBean introduceAcademyMemberBean, BindingResult result) {
+	
+	@GetMapping("/academyinfo_write")
+	public String academyinfo_write(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce){
 		
-		if(result.hasErrors()) {
-			return "academymember/introduce";
+		return "academymember/academyinfo_write";
+	}
+	
+		//학원소개작성
+		@PostMapping("/academyinfo_write_pro")
+		public String academyinfo_write_pro(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce,@ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean, BindingResult result) {
+			
+			if(result.hasErrors()) {
+				return "academymember/academyinfo";
+			}
+			modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+			academyMemberService.getModifyAcademyMember(modifyAcademyMemberBean);
+			academyMemberService.insertAcademyIntroduce(infoIntroduce);
+			return "academymember/my_academypage";
 		}
-		
-		academyMemberService.insertAcademyIntroduce(introduceAcademyMemberBean);
-		return "academymember/login_success";
-	}
 	//학원소개확인
 	@GetMapping("/introduce_info")
 	public String introduce_info(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce) {
@@ -134,33 +160,54 @@ public class AcademyMemberController {
 		
 	}
 	//학원소개수정페이지
-	@GetMapping("/introduce_modify")
-	public String introduce_modify(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce) {
-		infoIntroduce.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
-		academyMemberService.infoIntroduce(infoIntroduce);
-		return "academymember/introduce_modify";
-	}
+		@GetMapping("/academyinfo_modify")
+		public String introduce_modify(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce) {
+			infoIntroduce.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+			academyMemberService.infoIntroduce(infoIntroduce);
+			return "academymember/academyinfo_modify";
+		}
 	//학원소개수정
 	@PostMapping("/introduce_modifyPro")
-	public String introduce_modifyPro(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce, BindingResult result) {
-		if(result.hasErrors()) {
-			return "academymember/introduce_modify";
-		}
-		
-		academyMemberService.modifyAcademyIntroduce(infoIntroduce);
-		return "academymember/login_success";
+	public String introduce_modifyPro(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce, @ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean , BindingResult result) {
+			if(result.hasErrors()) {
+				return "academymember/introduce_modify";
+			}
+			
+			academyMemberService.modifyAcademyIntroduce(infoIntroduce);
+			modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+			academyMemberService.getModifyAcademyMember(modifyAcademyMemberBean);
+			return "academymember/my_academypage";
 	}
-	//학원소개삭제
+		
 	@GetMapping("/introduce_delete")
 	public String introduce_delete() {
+		return "academymember/introduce_delete";
+	}
+		
+	//학원소개삭제
+	@GetMapping("/introduce_delete_pro")
+	public String introduce_delete_pro(@ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean) {
+		modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+		academyMemberService.getModifyAcademyMember(modifyAcademyMemberBean);
 		academyMemberService.deleteAcademyIntroduce(loginAcademyMemberBean.getA_memberNo());
-		return "academymember/login_success";
+		return "academymember/my_academypage";
 	}
 	//로그인성공페이지이동
 	@GetMapping("login_success")
 	public String login_success() {
 		return "academymember/login_success";
 	}
+	
+	//블랙리스트 조회
+	@GetMapping("academyBlacklist")
+	public String blacklistview(Model model) {
+		List<BlackListBean> acablacklist = academyMemberService.getBlackListList(loginAcademyMemberBean.getA_memberNo());
+		model.addAttribute("acablacklist", acablacklist);
+		
+		return "academymember/academyBlacklist";
+		
+	}
+	
 	
 	//관리자 학원 목록 페이지
 		@GetMapping("/mypageAdmin_academy")
@@ -174,6 +221,15 @@ public class AcademyMemberController {
 		model.addAttribute("adacatotCnt", adacatotCnt);
 									
 		return "academymember/mypageAdmin_academy";
+		}
+		
+	//학원문의 조회
+		@GetMapping("/academyaskboard")
+		public String academyaskboard(Model model) {
+			
+		List<SiteAcaAskBean> acaAsklist = academyMemberService.getAcaAskList(loginAcademyMemberBean.getA_memberNo());
+		model.addAttribute("acaAsklist", acaAsklist);
+			return "academymember/academyaskboard";
 		}
 	
 }

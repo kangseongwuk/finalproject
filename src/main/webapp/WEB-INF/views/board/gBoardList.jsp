@@ -301,13 +301,17 @@
 		<div class="search-box">
 				
 			<div class="contents">
-				<select id="sido"><option value="">지역 선택</option></select>
-				<select id="sigugun"><option value="">구-시선택</option></select>
-				<select class="input-select" id="gradeSelect">
-			      <option selected>학년 선택</option>
-			    </select>
-			    <input class="search-txt" type="text"placeholder="검색어를 입력해 주세요">
-			    <button class="search-btn" type="submit">검색</button>
+				<form action="gBoardList" method="get">
+					<select id="sido" name="sido"><option value="">지역 선택</option></select>
+					<select id="sigugun" name="sigugun"><option value="">구-시선택</option></select>
+					<select class="input-select" id="gradeSelect" name="gradeSelect">
+				      <option value="" selected>학년 선택</option>
+				    </select>
+				    <input class="search-txt" type="text" name="acaName" placeholder="검색어를 입력해 주세요">
+				    <!-- <button class="search-btn" onclick="location.href='gBoardList?a_classify=1&a_name='">검색</button> -->
+				    <button class="search-btn" type="submit">검색</button>
+				    <input type="hidden" name="a_classify" value="1">
+			    </form>
 			</div>
 	
 <!--  주소 API -->	
@@ -496,8 +500,14 @@ function fn_iframe(url) {
                <!-- course item -->
                <div class="col-lg-4 col-sm-6 mb-5">
                   <div class="card p-0 border-primary rounded-0 hover-shadow">
-                     <img class="card-img-top rounded-0"
-                        src="images/courses/course-1.jpg" alt="이미지 없음">
+                  	<c:choose>
+	                    <c:when test="${gList.a_mainImg != null }">
+							<img class="card-img-top rounded-0" src="${root }upload/${gList.a_mainImg}" />
+						</c:when>
+						<c:otherwise>
+							<img class="card-img-top rounded-0" src="images/courses/course-1.jpg" alt="이미지 없음">
+	                    </c:otherwise>
+                    </c:choose>
                      <div class="card-body">
                         <ul class="list-inline mb-2">
                            <li class="list-inline-item"><i

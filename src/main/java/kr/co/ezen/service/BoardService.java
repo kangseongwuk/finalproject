@@ -20,8 +20,13 @@ public class BoardService {
 	private BoardDAO boardDAO;	
 	
 	//종합 학원 게시판 목록 호출
-	public List<AcademyMemberBean> getGBoardList(int a_classify) {
+	public List<AcademyMemberBean> getGBoardList(String a_classify) {
 		return boardDAO.getGBoardList(a_classify);
+	}
+	
+	//종합 학원 게시판 목록 호출(검색)
+	public List<AcademyMemberBean> getGBoardSearchList(String a_classify,String searchLoc,String searchGrade,String searchAcaName) {
+		return boardDAO.getGBoardSearchList(a_classify,searchLoc,searchGrade,searchAcaName);
 	}
 	
 	//종합 학원 정보 상세 보기

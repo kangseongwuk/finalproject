@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 
 import kr.co.ezen.beans.AcademyMemberBean;
+import kr.co.ezen.beans.BlackListBean;
+import kr.co.ezen.beans.SiteAcaAskBean;
 import kr.co.ezen.mapper.AcademyMemberMapper;
 
 @Repository
@@ -54,11 +56,20 @@ public class AcademyMemberDAO {
 	}
 	
 	//관리자 마이페이지 : 학원 목록
-		public List<AcademyMemberBean> getAdAcademyList(){
+	public List<AcademyMemberBean> getAdAcademyList(){
 			return academyMemberMapper.getAdAcademyList();	
-		}
-		//총학원수
-		public int getAdminAcaCnt(AcademyMemberBean myAdminAcaBean) {
+	}
+	//총학원수
+	public int getAdminAcaCnt(AcademyMemberBean myAdminAcaBean) {
 			return academyMemberMapper.getAdminAcaCnt(myAdminAcaBean);
-		}
+	}
+	//학원문의사항	
+	public List<SiteAcaAskBean> getAcaAskList(int a_memberNo){
+			return academyMemberMapper.getAcaAskList(a_memberNo);
+	}
+	//학원 블랙리스트
+	public List<BlackListBean> getBlackListList(int a_memberNo){
+		return academyMemberMapper.getBlackListList(a_memberNo);
+	}
+		
 }
