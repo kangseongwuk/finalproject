@@ -115,8 +115,6 @@
 
 <!-- 책로딩 -->
   <!-- preloader start -->
-
-  <!-- preloader start -->
    <div class="preloader">
     <div class="spinner">
      <span class="ball-1"></span>
@@ -129,7 +127,6 @@
      <span class="ball-8"></span>
    </div>
   </div>
-  <!-- preloader end -->
   <!-- preloader end -->
 
 <header class="fixed-top header">

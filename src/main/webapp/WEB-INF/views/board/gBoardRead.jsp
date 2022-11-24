@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 
 <!--
@@ -440,7 +441,16 @@ function reviewRemove(r_no, r_writerNo) {
              <div class="card-body">
                <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
                <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
-               <p class="card-text">${ait.t_contents }</p>
+               <p class="card-text">
+               		<c:choose>
+	               		<c:when test="${fn:length(ait.t_contents) <= 100}">
+	               			${ait.t_contents }
+	               		</c:when>
+						<c:when test="${fn:length(ait.t_contents) > 100}">
+							${fn:substring(ait.t_contents, 0, 99)}...
+						</c:when>
+					</c:choose>
+               </p>
                <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher?a_memberNo=${ait.a_memberNo}&t_name=${ait.t_name}">상세보기</a>
              </div>
            </div>
@@ -536,7 +546,8 @@ function reviewRemove(r_no, r_writerNo) {
 <!-- google map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
 <script src="plugins/google-map/gmap.js"></script>
- <!-- Main Script  카카오지도-->
+
+<!-- Main Script  카카오지도-->
 <script src="js/script.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b91d7ac694b55d24d6b56c18b966b4cf&libraries=services"></script>
 <script>
@@ -594,6 +605,5 @@ function displayMarker(place) {
     });
 }
 </script>
-
 </body>
 </html>
