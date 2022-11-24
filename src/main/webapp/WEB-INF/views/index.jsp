@@ -61,7 +61,7 @@
 
 
 <!-- hero slider -->
-<section class="hero-section overlay bg-cover" data-background="images/banner/banner-1.jpg">
+<section class="hero-section overlay bg-cover" data-background="images/banner/school-2761394_1920.jpg">
   <div class="container">
     <div class="hero-slider">
       <!-- slider item -->
@@ -79,7 +79,7 @@
       <div class="hero-slider-item">
         <div class="row">
           <div class="col-md-8">
-            <img class="hero-section overlay bg-cover" src="images/1.png">
+            <img class="hero-section overlay bg-cover" src="images/teachers/teacher-1.png" style="border: 10 solid pink;">
             <a href="contact.html" class="btn btn-primary" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".7">더보기</a>
           </div>
         </div>
@@ -110,31 +110,31 @@
         <!-- <img class="img-fluid w-100" src="images/banner/banner-feature.png" alt="banner-feature"> -->
       </div>
       <div class="col-xl-8 col-lg-7">
-        <div class="row feature-blocks bg-gray justify-content-between">
+        <div class="row feature-blocks bg-gray justify-content-between" style="flex-wrap:nowrap;">
           <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
             <i class="ti-book mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
-            <h3 class="mb-xl-4 mb-lg-3 mb-4">Scholorship News</h3>
+            <h3 class="mb-xl-4 mb-lg-3 mb-4">종합학원 섹션</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
               et dolore magna aliqua. Ut enim ad</p>
           </div>
           <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
             <i class="ti-blackboard mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
-            <h3 class="mb-xl-4 mb-lg-3 mb-4">Our Notice Board</h3>
+            <h3 class="mb-xl-4 mb-lg-3 mb-4">단과학원 섹션</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
               et dolore magna aliqua. Ut enim ad</p>
           </div>
           <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
             <i class="ti-agenda mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
-            <h3 class="mb-xl-4 mb-lg-3 mb-4">Our Achievements</h3>
+            <h3 class="mb-xl-4 mb-lg-3 mb-4">예체능학원 섹션</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
               et dolore magna aliqua. Ut enim ad</p>
           </div>
-          <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+<!--           <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
             <i class="ti-write mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
             <h3 class="mb-xl-4 mb-lg-3 mb-4">Admission Now</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
               et dolore magna aliqua. Ut enim ad</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
