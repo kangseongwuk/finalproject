@@ -106,6 +106,6 @@ public interface MemberMapper {
 		int getAdminMemberCnt(MemberBean myAdminMemberBean);
 	 
 	//email 확인
-	   @Select("select m_email from memberT where m_email=#{m_email, jdbcType=VARCHAR }")
+	   @Select("select m_id from memberT where m_id=#{m_id, jdbcType=VARCHAR }")
 	   String selectEmailKakao(String m_email);
 }

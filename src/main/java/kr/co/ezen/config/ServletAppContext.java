@@ -29,6 +29,7 @@ import kr.co.ezen.mapper.BoardMapper;
 import kr.co.ezen.mapper.FaqMapper;
 import kr.co.ezen.mapper.KakaoMapper;
 import kr.co.ezen.mapper.MemberMapper;
+import kr.co.ezen.mapper.PayMapper;
 import kr.co.ezen.mapper.ServiceCenterMapper;
 import kr.co.ezen.mapper.SiteAcaAskMapper;
 import kr.co.ezen.mapper.SiteAskMapper;
@@ -247,6 +248,16 @@ public class ServletAppContext implements WebMvcConfigurer{
 		         return factoryBean;
 		               
 		      }
+		 //payMapper등록
+		  	@Bean
+			public MapperFactoryBean<PayMapper> getPayMapper(SqlSessionFactory factory) {
+				MapperFactoryBean<PayMapper> factoryBean = new MapperFactoryBean<PayMapper>(PayMapper.class);
+
+				factoryBean.setSqlSessionFactory(factory);
+
+				return factoryBean;
+
+			}
 }
 
 

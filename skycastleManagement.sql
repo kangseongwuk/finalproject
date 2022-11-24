@@ -22,8 +22,6 @@ drop SEQUENCE nb_sq;
 drop SEQUENCE a_sq;
 drop SEQUENCE m_sq;
 
-
-
 drop table FAQBoardT;
 drop table noticeBoardT;
 drop table siteAskT;
@@ -153,7 +151,7 @@ insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locati
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
     values(a_sq.nextval,'aca04','12345678','D종합학원','1234567894','서울시 관악구 신림동','이젠 601호','01099998888',1);
 
-
+select * from ACADEMYMEMBERT
 
 --4. 학원 소개 정보 테이블
 CREATE TABLE academyInfoT(
@@ -193,6 +191,8 @@ CREATE TABLE academyPayT(
     a_payEnd    timestamp
         not null
 );
+
+select * from academyPayT;
 
 --학원 결제 정보 예시
 insert into academyPayT(a_memberNo,a_payStart,a_payEnd)
