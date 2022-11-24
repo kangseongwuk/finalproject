@@ -48,7 +48,7 @@ public class AcademyMemberController {
 	@GetMapping("/login")
 	public String login(@ModelAttribute("loginAcademyMemberBean") AcademyMemberBean loginAcademyMemberBean, Model model){
 		
-		model.addAttribute("loginAcademyMemberBean", loginAcademyMemberBean);
+		model.addAttribute("loginAcademyMemberBean",this. loginAcademyMemberBean);
 		
 		return "academymember/login";
 	}
