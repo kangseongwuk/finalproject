@@ -75,7 +75,7 @@ public class PayController {
 			case "500":
 				payService.insert_6month(academyPayBean);
 				break;
-			case "1000":
+			case "900":
 				payService.insert_1year(academyPayBean);
 				break;
 			default:
@@ -101,7 +101,7 @@ public class PayController {
 				case "500":
 					payService.insert_6month(academyPayBean);
 					break;
-				case "1000":
+				case "900":
 					payService.insert_1year(academyPayBean);
 					break;
 				default:
@@ -115,7 +115,7 @@ public class PayController {
 			case "500":
 				payService.add_halfyear(a_memberNo, a_payStart);
 				break;
-			case "1000":
+			case "900":
 				payService.add_ayear(a_memberNo, a_payStart);
 				break;
 			default:

@@ -78,9 +78,16 @@
       <!-- slider item -->
       <div class="hero-slider-item">
         <div class="row">
-          <div class="col-md-8">
-            <img class="hero-section overlay bg-cover" src="images/teachers/teacher-1.png" style="border: 10 solid pink;">
-            <a href="contact.html" class="btn btn-primary" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".7">더보기</a>
+          <div class="col-md-8" style="background:rgba(0,0,0,0.5);all:inherit;">
+            <img class="hero-section overlay bg-cover" src="images/teachers/teacher-1.png">
+          <div>
+          <br><br>
+            <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">12월<br>TOP강사</h1>
+            <h3 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">차 해 나</h3>
+            <h4 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">과목 : 언어</h4>
+            <h5 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">메가스터디 종로점</h5>
+            <p class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">아이들의 취미와 특기를 다 잡겠습니다. 맡겨주세요</p>
+        </div>
           </div>
         </div>
       </div>
