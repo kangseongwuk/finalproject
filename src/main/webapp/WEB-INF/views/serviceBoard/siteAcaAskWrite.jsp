@@ -91,10 +91,13 @@
           <form:button type="submit" class="btn btn-primary" >작성완료</form:button>
         </form:form>
       </div>
+    
       <div class="col-lg-5">
-        <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit recusandae voluptates doloremque veniam temporibus porro culpa ipsa, nisi soluta minima saepe laboriosam debitis nesciunt. Dolore, labore. Accusamus nulla sed cum aliquid exercitationem debitis error harum porro maxime quo iusto aliquam dicta modi earum fugiat, vel possimus commodi, deleniti et veniam, fuga ipsum praesentium. Odit unde optio nulla ipsum quae obcaecati! Quod esse natus quibusdam asperiores quam vel, tempore itaque architecto ducimus expedita</p>
-        <a href="tel:+8802057843248" class="text-color h5 d-block">02-1234-5678</a>
-        <a href="mailto:yourmail@email.com" class="mb-5 text-color h5 d-block">skycastle@naver.com</a>
+      	<div class="section-img">
+        <h3><img class="content-img" src="images/icon/icons1.png"> 문의가능시간</h3> <p class="mb-5"> <a href="#">오전09:00 ~ 오후06:00</a><br />
+        <h3><img class="content-img" src="images/icon/icons2.png"> 전화번호</h3>   <p class="mb-5"><a href="tel:+8802057843248"> 02-1234-5678</a></p>
+        <h3><img class="content-img" src="images/icon/icons3.png"> Email</h3> <p class="mb-5"><a href="mailto:yourmail@email.com">skycastle@naver.com</a>
+        </div>
       </div>
     </div>
   </div>

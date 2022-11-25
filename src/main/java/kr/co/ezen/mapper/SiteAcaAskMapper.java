@@ -14,8 +14,8 @@ import kr.co.ezen.beans.SiteAcaAskBean;
 public interface SiteAcaAskMapper {
 	
 		
-	@Insert("insert into siteAcaAskT(a_memberNo, aa_title, aa_contents, aa_file) "
-			+ "VALUES(#{a_memberNo}, #{aa_title}, #{aa_contents}, #{aa_file, jdbcType=VARCHAR})"
+	@Insert("insert into siteAcaAskT(a_memberNo, a_name, aa_title, aa_contents, aa_file) "
+			+ "VALUES(#{a_memberNo}, #{a_name}, #{aa_title}, #{aa_contents}, #{aa_file, jdbcType=VARCHAR})"
 			)
 	void addAaContent(SiteAcaAskBean aaWriteBean);
 	

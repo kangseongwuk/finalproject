@@ -97,8 +97,8 @@ public class MemberDAO {
  			 return memberMapper.getMyAskListCnt(myAskBean);
  		 }
  		//페이징 처리
- 		public int getMyAskContentCnt() { 	
- 			return memberMapper.getMyAskContentCnt();
+ 		public int getMyAskContentCnt(int m_memberNo) { 	
+ 			return memberMapper.getMyAskContentCnt(m_memberNo);
  		}
  		
  		//관리자 마이페이지 출력

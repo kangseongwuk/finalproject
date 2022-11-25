@@ -51,7 +51,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="${root}member/mypage">My Page</a></li>
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="${root}academymember/my_academypage">My Page</a></li>
           
           <li class="list-inline-item text-white h3 font-secondary nasted">내 문의사항</li>
         </ul>
@@ -65,10 +65,10 @@
       <div class="row">
         <div class="col-sm-12 text-center">
           <ul class="list-inline text-center">
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/mypage"><h4>내 정보</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/studentinfo"><h4>학생 정보</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/myfavorite"><h4>찜 목록</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/myaskboard"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/mypage_siteAcaAsk"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
           </ul>
         </div>
       </div>
@@ -85,56 +85,31 @@
           </div>
       </div>
     </div>
-<table>
-    <thead>
-    <tr>
-        <th >제목</th>
-       <th>작성일자</th>
-
-    </tr>
-    </thead>
-    <tbody>
-<c:forEach var="st" items="${nblist}">
-    <tr>
-        <td><a href="${root}serviceBoard/noticeBoardRead?nb_no=${st.nb_no}">${st.nb_title}</a></td>  
-<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.nb_writeTime}" /></td>
-    </tr>
-</c:forEach>
-</table>
-
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
-    </li>
-    <li class="page-item active">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&raquo;</font></font></a>
-    </li>
-  </ul>
-  
-  
-  <div class="search-box">
-  <form action="." method="post">
-    <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
-    <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-  </form>
-</div>
-</div>
-
+<div>
+						<label for="aa_title">제목</label>
+						<input type="text" id="aa_title" name="aa_title" value="${myaskreadBean.aa_title }" disabled="disabled"/>
+					</div>
+					<div>
+						<label for="aa_time">작성날짜</label>
+						<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${myaskreadBean.aa_time}" /><br>
+					</div>
+					<div>
+						<label for="aa_contents">내용</label>
+						<textarea id="aa_contents" name="aa_contents" rows="10" style="resize:none" disabled="disabled">${myaskreadBean.aa_contents }</textarea>
+					</div>
+					<c:if test="${myaskreadBean.aa_file != null }">
+						<div>
+							<label for="aa_file">첨부 이미지</label>
+							<img src="${root }upload/${myaskreadBean.aa_file}" width="100%"/>						
+						</div>
+					</c:if>
+									
+						<div>
+							<a href="${root }academymember/mypage_siteAcaAsk">목록보기</a>
+							
+						</div>
+			</div>
+		
 </section>
 <!-- /Board -->
 

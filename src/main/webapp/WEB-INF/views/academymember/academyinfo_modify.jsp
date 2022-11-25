@@ -61,7 +61,8 @@
 						<li class="list-inline-item"><a
 							class="h2 text-primary font-secondary"
 							href="${root}academymember/my_academypage">My Page</a></li>
-						<li class="list-inline-item text-white h3 font-secondary nasted">학원 소개</li>
+						<li class="list-inline-item text-white h3 font-secondary nasted">학원
+							정보 수정</li>
 
 					</ul>
 				</div>
@@ -79,12 +80,10 @@
 						href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
 					<li class="list-inline-item"><a class="d-inline-block p-2"
 						href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
-					<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyteacher"><h4>학원 강사 조회</h4></a></li>
-					<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academypay"><h4>결제내역조회</h4></a></li>
-					 <li class="list-inline-item"><a class="d-inline-block p-2" 
-					 	href="${root}academymember/mypage_siteAcaAsk?a_memberNo=${sessionScope.loginAcademyMemberBean.a_memberNo}"><h4>내 문의사항</h4></a></li>
 					<li class="list-inline-item"><a class="d-inline-block p-2"
-						href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
+						href="${root}academymember/academyBlacklist"><h4>블랙리스트 조회</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/academyaskboard"><h4>내 문의사항</h4></a></li>
 				</ul>
 			</div>
 		</div>
@@ -96,29 +95,26 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="text-center">학원 소개</h3>
+					<h3 class="text-center">학원 정보 수정</h3>
 					<hr>
 				</div>
 			</div>
-		
-			<c:choose><c:when test="${infoIntroduce.a_introduce != null}"> 
 			<div class="row justify-content-center">
 				<div class="col-lg-8 mb-5 mb-lg-0">
-					<form:form action="${root}academymember/introduce_modifyPro"
+					<form:form action="${root}academymember/introduce_modify"
 						method="post" modelAttribute="infoIntroduce"
 						enctype="multipart/form-data">
-						<form:hidden path="a_memberNo" value="${sessionScope.loginAcademyMemberBean.a_memberNo }"/>
 						<form:input class="form-control mb-3" path="a_name"
-							value="학원 이름 : ${sessionScope.loginAcademyMemberBean.a_name}"
+							value="${sessionScope.loginAcademyMemberBean.a_name}"
 							readonly="true" />
 						<form:input class="form-control mb-3" path="a_id"
-							value="아이디 : ${sessionScope.loginAcademyMemberBean.a_id}"
+							value="${sessionScope.loginAcademyMemberBean.a_id}"
 							readonly="true" />
 						<form:input class="form-control mb-3" path="a_tele"
-							value="전화번호 : ${sessionScope.loginAcademyMemberBean.a_tele}"
+							value="${sessionScope.loginAcademyMemberBean.a_tele}"
 							readonly="true" />
 						<form:textarea path="a_introduce" class="form-control mb-3"
-							placeholder="학원 소개글" readonly="true"></form:textarea>
+							placeholder="학원 소개글"></form:textarea>
 						<div class="text-center">
 							<form:label path="a_gradeMin">
 								<strong>최소 수업 학년 :</strong>
@@ -216,27 +212,13 @@
 						<br>
 						<br>
 						<div class="text-center">
-							<form:button class="btn btn-primary">학원소개 수정</form:button>
-							
+							<form:button type="submit" class="btn btn-primary">작성완료</form:button>
 						</div>
 					</form:form>
-					<br>
-					<div align="center">
-					<a class="btn btn-danger" href="${root}academymember/introduce_delete">학원소개 삭제</a>
-					</div>
-					
-				</div>				
+
+				</div>
 			</div>
-			</c:when>
-			<c:otherwise>
-				<div align="center">
-					<a class="btn btn-primary" href="${root}academymember/academyinfo_write">학원소개입력</a>
-					</div>
-			</c:otherwise>
-			</c:choose>
-			
 		</div>
-		
 	</section>
 
 	<!-- ===============================  footer  =============================== -->

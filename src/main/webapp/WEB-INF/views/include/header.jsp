@@ -159,7 +159,7 @@
                 </c:choose>
             </c:when>
             <c:when test="${sessionScope.loginAcademyMemberBean.a_memberNo != null }">
-             	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }pay/pay_howlong?a_memberNo=${sessionScope.loginAcademyMemberBean.a_memberNo}">멤버십</a></li>
+             	<li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }pay/pay_howlong?a_memberNo=${sessionScope.loginAcademyMemberBean.a_memberNo}">MEMBERSHIP</a></li>
                 <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }academymember/logout" >로그아웃</a></li>
                 <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="${root }academymember/my_academypage" >마이페이지</a></li>
             </c:when>

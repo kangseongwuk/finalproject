@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:url var='root' value='/' />
 <!DOCTYPE html>
-<html>
+
+<html lang="ko">
 <head>
+
 <!-- Basic Page Needs
 	================================================== -->
-<meta charset="UTF-8">
-<title>:: 자녀 정보 수정 ::</title>
+<meta charset="utf-8">
+<title>:: My Page ::</title>
 
 <!-- Mobile Specific Metas
 	================================================== -->
@@ -37,10 +40,12 @@
 
 <!-- Main Stylesheet -->
 <link href="css/style.css" rel="stylesheet">
-
+<!-- Mypage CSS -->
+<link href="css/mypagemenu.css" rel="stylesheet">
 <!--Favicon-->
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 <link rel="icon" href="images/favicon.png" type="image/x-icon">
+<link href="css/academyPay.css" rel="stylesheet">
 
 </head>
 
@@ -54,7 +59,6 @@
 	<!-- ===============================  header  =============================== -->
 	<c:import url="/WEB-INF/views/include/header.jsp" />
 	<!-- ===============================  header  =============================== -->
-
 	<!-- page title -->
 	<section class="page-title-section overlay"
 		data-background="images/backgrounds/page-title.jpg">
@@ -63,9 +67,9 @@
 				<div class="col-md-8">
 					<ul class="list-inline custom-breadcrumb mb-2">
 						<li class="list-inline-item"><a
-							class="h2 text-primary font-secondary">Home</a></li>
-						<li class="list-inline-item text-white h3 font-secondary nasted">정보
-							수정</li>
+							class="h2 text-primary font-secondary" href="${root}index">Home</a></li>
+						<li class="list-inline-item text-white h3 font-secondary nasted">My
+							Page</li>
 					</ul>
 				</div>
 			</div>
@@ -73,47 +77,65 @@
 	</section>
 	<!-- /page title -->
 
+	<!-- side menu nav -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center" >
+				<ul class="list-inline text-center">
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/academyBlacklist"><h4>블랙리스트 조회</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/academyaskboard"><h4>내 문의사항</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/academyteacher"><h4>학원 강사</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/academypay?a_memberno=${sessionScope.loginAcademyMemberBean.a_memberNo}"><h4>결제내역조회</h4></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
-	<!-- insert section -->
-	<section class="section">
-		<div class="container">
-			<h3 class="text-center">자녀 정보 수정</h3>
-			<hr>
-			<div class="row justify-content-center">
-				<div>
-					<form:form action="${root}member/modifyChild_pro" method="post"
-						modelAttribute="modifyChildBean">
-						<form:hidden path="m_memberNo" />
-						<div>
-							<form:label path="c_name">학생이름</form:label>
-							<form:input path="c_name" readonly="true" />
-						</div>
-						<div>
-							<form:label path="c_grade">학년</form:label>
-							<form:input path="c_grade" />
-						</div>
-						<div>
-							<form:label path="c_gender">성별</form:label>
-							<form:input path="c_gender" />
-						</div>
-						<div>
-							<form:label path="c_level">학업수준</form:label>
-							<form:input path="c_level" />
-						</div>
+	<!-- academy pay -->
+	
+	<div class="container-fluid" style="background: linear-gradient(to right, rgba(235,224,232,1) 52%,#F7E600 53%,rgba(254,191,1,1) 100%);
+font-family: 'Roboto', sans-serif;">
+		<div class="row d-flex justify-content-center">
+			<div class="col-sm-12">
+				<div class="card mx-auto">
+					<p class="heading">PAYMENT DETAILS</p>
+					<c:forEach var="st" items="${ academypaylist}">
+					<div class="form-group mb-0">
+						<p class="text-warning mb-0" >시작일</p>
 						
-						<div class="text-center">
-							<form:button type="submit" class="btn btn-primary">수정하기</form:button>
+						<p><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.a_payStart }" /></p>
+						<p class="text-warning mb-0">종료일</p>
+						<p><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.a_payEnd}" /></p>
+						<hr>
+					</div>
+					</c:forEach>
+					<div class="form-group pt-2">
+						<div class="row d-flex">
+							<div class="col-sm-5 pt-0">
+								<button type="button" class="btn btn-primary" onclick="location.href='${root }pay/pay_howlong?a_memberNo=${sessionScope.loginAcademyMemberBean.a_memberNo}'">GO TO MEMBERSHIP
+									<i class="fas fa-arrow-right px-3 py-2"></i>
+								</button>
+							</div>
 						</div>
-					</form:form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</section>
-	<!-- modify section -->
+	</div>
+
 
 	<!-- ===============================  footer  =============================== -->
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<!-- ===============================  footer  =============================== -->
+
 
 	<!-- jQuery -->
 	<script src="plugins/jQuery/jquery.min.js"></script>
@@ -134,5 +156,6 @@
 
 	<!-- Main Script -->
 	<script src="js/script.js"></script>
+
 </body>
 </html>

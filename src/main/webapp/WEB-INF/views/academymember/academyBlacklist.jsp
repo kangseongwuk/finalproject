@@ -68,8 +68,10 @@
           <ul class="list-inline text-center">
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 조회</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyaskboard"><h4>내 문의사항</h4></a></li>
+             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyteacher"><h4>학원 강사 조회</h4></a></li>
+             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academypay"><h4>결제 내역 조회</h4></a></li> 
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/mypage_siteAcaAsk"><h4>내 문의사항</h4></a></li>
+          	<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
           </ul>
         </div>
       </div>
@@ -89,8 +91,7 @@
     <thead>
     <tr>
        <th>학생</th>
-       <th>학원</th>
-       <th>사유</th>
+
        <th>작성일자</th>
     </tr>
     </thead> 
@@ -98,46 +99,11 @@
 <c:forEach var="a" items="${acablacklist}">
     <tr>
         <td>${a.m_name}</td>
-        <td>${a.a_name}</td>
-        <td>${a.black_contents}</td>
 <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${a.black_time}" /></td>
     </tr>
 </c:forEach>
 
-<tr>
-<td colspan="2"  align="center"><a href="${root}index">돌아가기</a></td>
-</tr>
 </table>
-
- <%--  <ul class="pagination">
-	  <c:choose>
-	  	<c:when test="${pageCountBean.prevPage <= 0 }">
-	  	    <li class="page-item disabled">
-	      		<a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
-		    </li>
-			<c:otherwise>
-		    <li class="page-item active">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>
-		    </li>
-		    </c:otherwise>					
-			</c:choose>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&raquo;</font></font></a>
-		    </li>
- 	 </c:choose>
-  </ul> --%>
   
   	<div class="d-none d-md-block">
 				<ul class="pagination">

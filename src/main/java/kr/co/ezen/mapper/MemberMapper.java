@@ -24,8 +24,8 @@ public interface MemberMapper {
 	@Select("select m_id, m_name from memberT where m_memberNo = #{m_memberNo}")
 	MemberBean getModifyMember(int m_memberNo);
 	//일반회원mypage 일반회원정보
-	@Select("select m_name, m_id, m_tele, m_email from memberT where m_memberNo = #{m_memberNo}")
-	MemberBean getMypageMember(int m_memberNo);
+		@Select("select m_name, m_id, m_tele, m_email from memberT where m_memberNo = #{m_memberNo}")
+		MemberBean getMypageMember(int m_memberNo);
 	//일반회원mypage 일반회원자녀정보
 	@Select("select c_name, c_grade, c_gender, c_level from memberChildT where m_memberNo = #{m_memberNo}")
 	List<MemberChildBean> getMypageMemberChild(int m_memberNo);
@@ -70,7 +70,8 @@ public interface MemberMapper {
 	//내가 쓴 문의사항
 		@Select("select sa_title, sa_time "
 				+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
-				+ "where m_memberNo = #{m_memberNo}")
+				+ "where m_memberNo = #{m_memberNo} "
+				+ "order by sa_time desc")
 		List<SiteAskBean> getMyaskList(int m_memberNo);
 		
 		@Select("select sa_tele, m_email, sa_time, sa_title, sa_contents, sa_file "
@@ -89,7 +90,7 @@ public interface MemberMapper {
 				+ "from siteAskT s, memberT m "
 				+ "where sa_memberNo = m_memberNo "
 				+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
-		int getMyAskContentCnt();
+		int getMyAskContentCnt(int m_memberNo);
 		
 		
 		

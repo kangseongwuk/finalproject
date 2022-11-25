@@ -6,10 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>::SKYCASTLE::</title>
 </head>
 <body>
-<h2> ㅇㅅㅇㅋ 수정 성공 ㅇㅁㅇ</h2>
-<a href="${root}index">돌아가기</a>
+<script type="text/javascript">
+var send = confirm("수정하시겠습니까?");
+
+if(send == true) {
+   location.href="${root}serviceBoard/noticeBoardList"
+}
+else {
+   history.back(-1);
+}
+</script>
 </body>
 </html>

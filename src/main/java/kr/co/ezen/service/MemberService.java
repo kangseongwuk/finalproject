@@ -307,7 +307,7 @@ public class MemberService {
 		
 		public PageCountBean getMyAskContentCnt(int currentPage) {
 		
-			int content_cnt = memberDAO.getMyAskContentCnt();
+			int content_cnt = memberDAO.getMyAskContentCnt(loginMemberBean.getM_memberNo());
 			 
 			//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
 			PageCountBean mypageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);

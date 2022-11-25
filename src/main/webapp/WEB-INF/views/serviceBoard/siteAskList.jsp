@@ -5,11 +5,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 
 <meta charset="utf-8">
-<title> : 회원 문의사항 :</title>
+<title>:: SKYCASTLE ::</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -38,8 +38,14 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
+
 <body>
+
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
@@ -52,8 +58,8 @@
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
           <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">사이트 관리</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">문의사항 (회원)</li>
         </ul>
       </div>
     </div>
@@ -61,79 +67,98 @@
 </section>
 <!-- /page title -->
 
+<!-- side menu nav -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<ul class="list-inline text-center">
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}member/mypageAdmin_member"><h4>회원 정보</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/mypageAdmin_academy"><h4>학원 정보</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}serviceBoard/siteAskList"><h4>문의사항(회원)</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}serviceBoard/siteAcaAskList"><h4>문의사항(학원)</h4></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
 <!-- Board -->    
 <section class="section bg-gray">
-		  <div class="container">
-		    <div class="row">
-		      <div class="col-lg-12">
-		       <div class="section-title text-center">
-			<h4> : 문 의 사 항 : (회원) </h4>			
-			
-		          <p>총게시물 ${saListCnt} 개</p>
-		   </div>
-		  </div>
-		 </div>
-		</div>
+  <div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h2 class="text-color">문의사항 (회원)</h2>
+						<p>총게시물 ${saListCnt} 개</p>
+					</div>
+				</div>
+			</div>
+
+
+		  
+
+<!-- table -->  
 		<table>
 		    <thead>
-		    <tr>        
-		       <th>no</th>
-		       <th>제목</th>
-		       <th>작성일자</th>
-		       </tr>
+		    <tr>
+		       <th class="sa-memberNo">no</th>
+		       <th class="sa-title">제목</th>
+		       <th class="sa-time">작성일자</th>
+		    </tr>
 		    </thead>
-		    <tbody>   
-			<c:forEach var="str" items="${salist}">
-				<tr>
-        		<td>${str.sa_memberNo}</td>
-        		<td><a href="${root }serviceBoard/siteAskRead?sa_time=${str.sa_time}">${str.sa_title}</a></td>
-        		<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${str.sa_time}" /></td>
+		    <tbody>
+		<c:forEach var="str" items="${salist}">
+		    <tr>
+		        <td class="sa-memberNo">${str.sa_memberNo}</td>
+        		<td class="sa-title"><a href="${root }serviceBoard/siteAskRead?sa_time=${str.sa_time}">${str.sa_title}</a></td>
+        		<td class="sa-time"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${str.sa_time}" /></td>
 			</tr>
-			</c:forEach>
-			<tr>
-				<td colspan="2"  align="center"><a href="${root}index">돌아가기</a></td>
-			</tr>
-			</table>
+		</c:forEach>
+		</table>
+		
+		
+        <br>
+		<div align="right">
+		<button class="search-btn btn-color" onclick="location.href='${root }serviceBoard/siteAskWrite'">글쓰기</button>
+		</div>
 		<div>
-			  <nav>
-			  <ul class="pagination" id="pagination">
 			 
-			  </ul>  
-  			</nav>
-  			
-  				<div class="d-none d-md-block">
-				<ul class="pagination">
+  				<div class="d-none d-md-block text-center">
+				<ul class="pagination" >
 					<c:choose>
-						<c:when test="${pageCountBeanM.prevPage <= 0 }">
+						<c:when test="${pageCountBean.prevPage <= 0 }">
 							<li class="page-item disabled">
 								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
 							</li>
 						</c:when>
 					<c:otherwise>
 						<li class="page-item">
-						<a href="${root}serviceBoard/siteAskList?pageM=${pageCountBeanM.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+						<a href="${root}serviceBoard/siteAskList?page=${pageCountBean.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
 						</li>					
 					</c:otherwise>					
 					</c:choose>
 														
-					<c:forEach var="idx" begin="${pageCountBeanM.min }" end="${pageCountBeanM.max }">
+					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 						<c:choose>
-							<c:when test="$idx == pageCountBeanM.currentPage">
+							<c:when test="$idx == pageCountBean.currentPage">
 							<li class="page-item active">
-								<a href="${root}serviceBoard/siteAskList?pageM=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}serviceBoard/siteAskList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>		
 						</c:when>
 						
 						<c:otherwise>
 							<li class="page-item">
-								<a href="${root}serviceBoard/siteAskList?pageM=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}serviceBoard/siteAskList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>						
 						</c:otherwise>						
 						</c:choose>									
 					</c:forEach>					
 					
 					<c:choose>
-						<c:when test="${pageCountBeanM.max >= pageCountBeanM.pageCnt}">
+						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
 							<li class="page-item disabled">
 								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
 							</li>
@@ -141,17 +166,14 @@
 					
 					<c:otherwise>
 						<li class="page-item">
-							<a href="${root}serviceBoard/siteAskList?pageM=${pageCountBeanM.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+						<a href="${root}serviceBoard/siteAskList?pageM=${pageCountBeanM.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
 						</li>
 					</c:otherwise>
 					</c:choose>
 				</ul>
-			</div>
- 
-	</div>
-
-
-
+</div>
+</div>
+</div>
 </section>
 <!-- /Board -->  
 

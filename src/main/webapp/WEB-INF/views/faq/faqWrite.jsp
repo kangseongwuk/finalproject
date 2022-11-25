@@ -5,11 +5,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
+
+
 <html lang="ko">
 <head>
 
-<meta charset="utf-8">
-<title>::SKYCASTLE::</title>
+  <!-- Basic Page Needs
+	================================================== -->
+  <meta charset="utf-8">
+  <title>faqBoard</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -20,8 +24,6 @@
   <meta name="generator" content="Themefisher Educenter HTML Template v1.0">
 
   <!-- ** Plugins Needed for the Project ** -->
-  <!-- serachbar -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Bootstrap -->
   <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
   <!-- slick slider -->
@@ -37,11 +39,12 @@
 
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
-  
+  <link href="css/faqstyle.css" rel="stylesheet">
+
   <!--Favicon-->
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <link rel="icon" href="images/favicon.png" type="image/x-icon">
-  
+
 </head>
 
 <body>
@@ -50,7 +53,6 @@
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
 
-	
 <!-- page title -->
 <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
   <div class="container">
@@ -59,7 +61,7 @@
         <ul class="list-inline custom-breadcrumb mb-2">
           <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">FAQ</li>
         </ul>
       </div>
     </div>
@@ -67,48 +69,51 @@
 </section>
 <!-- /page title -->
 
-<!-- Board -->   
-
+<!-- FAQWrite Board -->
 <section class="section bg-gray">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
        <div class="section-title text-center">
-          <h2 class="text-color">공지사항 수정페이지</h2>
+          <h2 class="text-color">FAQ 글쓰기</h2>
           </div>
       </div>
     </div>
-    
-<div class="board_view">
-		<form:form action="${root }serviceBoard/noticeBoardModify_pro" method="post" modelAttribute="nbModifyBean"
+
+	<div class="board_view">
+		<form:form action="${root }faq/faqWrite_pro" method="post" modelAttribute="fbWriteBean"
 		enctype="multipart/form-data">
-			<form:hidden path="nb_no"/>
-		<table>
-			<tr>
-			<th class="th-writetitle">제목</th>
-			<th class="th-border"><form:input class="write-width" path="nb_title" /></th>
-			</tr>
-			<tr>
-			<th class="th-writetitle">내용</th>
-			<th class="th-border"><form:textarea path="nb_contents" class="write-width" rows="10" style="resize:none"></form:textarea></th>
-			</tr>
-			<tr>
-			<th class="th-writetitle"><form:label path="upload_file">첨부 이미지</form:label></th>
-			<th class="th-border"><form:input type="file" class="write-width" path="upload_file" accept="image/*"/></th>
+	<table>
+		<tr>
+		 <th class="th-writetitle">질문</th>
+		 <th class="th-border">
+			<form:input class="write-width" path="fb_contentsQ"/>
+			<form:errors path="fb_contentsQ" style="color:red"></form:errors>
+		</th>
 		</tr>
-		</table>			
-<div align="right">			
-<form:button type="submit" class="search-btn btn-color" style="cursor:pointer;" >수정 완료</form:button>
-<input type="button" value="목록" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardList'"/>
+		<tr>
+		 <th class="th-writetitle">답변</th>
+		 <th class="th-border">
+			<form:textarea class="write-width"  path="fb_contentsA" rows="10" style="resize:none"></form:textarea>
+				<form:errors path="fb_contentsA" style="color:red"></form:errors>
+			</th>
+			</tr>
+			
+</table>
+		
+<br>
+<div align="right">
+    <form:button type="submit">작성 완료</form:button>
+    <input type="button" value="목록" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }faq/faqBoard'"/>
+  
 </div>
 </form:form>
-
-
+</div>
 </div>
 
-</div>
-</section>
+</section>	
 		
+<!-- /FAQWrite Board -->
 
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>
@@ -116,10 +121,13 @@
 
 <!-- jQuery -->
 <script src="plugins/jQuery/jquery.min.js"></script>
+<script src="plugins/jQuery/faqjquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="plugins/bootstrap/bootstrap.min.js"></script>
+<script src="plugins/bootstrap/faqbootstrap.min.js"></script>
 <!-- slick slider -->
 <script src="plugins/slick/slick.min.js"></script>
+<script src="plugins/slick/faqslick.min.js"></script>
 <!-- aos -->
 <script src="plugins/aos/aos.js"></script>
 <!-- venobox popup -->
@@ -129,9 +137,12 @@
 <!-- google map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
 <script src="plugins/google-map/gmap.js"></script>
+<!-- # JS Plugins -->
+<script src="plugins/scrollmenu/scrollmenu.min.js"></script>
 
 <!-- Main Script -->
 <script src="js/script.js"></script>
+<script src="js/faqscript.js"></script>
 
 </body>
 </html>

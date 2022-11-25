@@ -76,22 +76,31 @@ public class MemberController {
 	}
 	//회원정보수정
 	@PostMapping("/modify_pro")
-	public String modify_pro(@ModelAttribute("modifyMemberBean") MemberBean modifyMemberBean, BindingResult result) {
+	public String modify_pro(@ModelAttribute("modifyMemberBean") MemberBean modifyMemberBean, 
+													@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean, 
+													BindingResult result, HttpServletRequest request) {
 		if(result.hasErrors()) {
 			return "member/modify";
 		}
 		memberService.updateMember(modifyMemberBean);
+		memberService.getMypageMember(mypageMemberBean, request);
 		return "member/mypage";
 	}
-	//회원탈퇴
-	@GetMapping("/delete")
-	public String delete(HttpSession session) {
-		memberService.deleteWishList(loginMemberBean.getM_memberNo());
-		memberService.deleteAllChild(loginMemberBean.getM_memberNo());
-		memberService.deleteMemeber(loginMemberBean.getM_memberNo());
-		session.invalidate();
-		return "index";
-	}
+	//회원탈퇴확인
+		@GetMapping("/delete")
+		public String delete() {
+			return "member/delete";
+		}
+		
+		//회원탈퇴
+		@GetMapping("/delete_pro")
+		public String delete(HttpSession session) {
+			memberService.deleteWishList(loginMemberBean.getM_memberNo());
+			memberService.deleteAllChild(loginMemberBean.getM_memberNo());
+			memberService.deleteMemeber(loginMemberBean.getM_memberNo());
+			session.invalidate();
+			return "index";
+		}
 	//회원가입페이지 이동
 	@GetMapping("/join")
 	public String join(@ModelAttribute("joinMemberBean") MemberBean joinMemberBean, @ModelAttribute("joinAcademyMemberBean") AcademyMemberBean joinAcademyMemberBean) {
@@ -116,15 +125,14 @@ public class MemberController {
 		return "index";
 	}
 	//mypage보기
-	@GetMapping("/mypage")
-	public String mypage(@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean,@ModelAttribute("memberChildBean") MemberChildBean memberChildBean , Model model, HttpServletRequest request) {
-		
-		List<MemberChildBean> memberChildlist = memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
-	 	model.addAttribute("memberChildlist", memberChildlist);
-		memberService.getMypageMember(mypageMemberBean, request);
-		
-		return "member/mypage";
-	}
+		@GetMapping("/mypage")
+		public String mypage(@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean, HttpServletRequest request, Model model) {
+			
+			
+			memberService.getMypageMember(mypageMemberBean, request);
+			
+			return "member/mypage";
+		}
 	//자녀정보입력이동
 	@GetMapping("/insertChild")
 	public String insertChild(@ModelAttribute("insertChildBean") MemberChildBean insertChildBean) {
@@ -139,7 +147,7 @@ public class MemberController {
 		}
 		insertChildBean.setM_memberNo(loginMemberBean.getM_memberNo());
 		memberService.insertChild(insertChildBean);
-		return "member/login_success";
+		return "member/studentinfo";
 	}
 	//자녀정보수정페이지 이동
 	@GetMapping("modifyChild")
@@ -150,21 +158,25 @@ public class MemberController {
 	}
 	//자녀정보수정
 	@PostMapping("modifyChild_pro")
-	public String modifyChild_pro(@ModelAttribute("modifyChildBean") MemberChildBean modifyChild, BindingResult result) {
+	public String modifyChild_pro(@ModelAttribute("modifyChildBean") MemberChildBean modifyChild, Model model, BindingResult result) {
 		if(result.hasErrors()) {
 			return "member/modifyChild";
 		}
 	
 		memberService.modifyChild(modifyChild);
-		return "member/login_success";
+		List<MemberChildBean> memberChildlist = memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
+	 	model.addAttribute("memberChildlist", memberChildlist);
+		return "member/studentinfo";
 	}
 	//자녀정보삭제
 	@GetMapping("deleteChild")
-	public String deleteChild(@ModelAttribute("deleteChildBean") MemberChildBean deleteChildBean, @RequestParam String c_name) {
+	public String deleteChild(@ModelAttribute("deleteChildBean") MemberChildBean deleteChildBean, @RequestParam String c_name, Model model) {
 		deleteChildBean.setM_memberNo(loginMemberBean.getM_memberNo());
 		deleteChildBean.setC_name(c_name);
 		memberService.deleteChild(deleteChildBean);
-		return "member/login_success";
+		List<MemberChildBean> memberChildlist = memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
+	 	model.addAttribute("memberChildlist", memberChildlist);
+		return "member/studentinfo";
 	}
 	
 	//비밀번호 찾기 
@@ -251,5 +263,4 @@ public class MemberController {
 		 	return "member/studentinfo";
 		}
 		
-	
 }

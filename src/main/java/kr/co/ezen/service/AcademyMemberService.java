@@ -1,6 +1,7 @@
 package kr.co.ezen.service;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.ezen.beans.AcademyMemberBean;
+import kr.co.ezen.beans.AcademyPayBean;
+import kr.co.ezen.beans.AcademyTeacherBean;
 import kr.co.ezen.beans.BlackListBean;
+import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.SiteAcaAskBean;
+import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.dao.AcademyMemberDAO;
 
 @Service
 @PropertySource("/WEB-INF/properties/option.properties")
 public class AcademyMemberService {
 
+	@Value("${page.listcnt}")
+	private int page_listcnt;  	
+	
+	@Value("${page.pagButtonCnt}")
+	private int page_pageButtonCnt;
+	
 	@Value("${path.upload}")
 	private String path_upload;
 	
@@ -150,6 +162,72 @@ public class AcademyMemberService {
 	
 	public void deleteAcademyIntroduce(int a_memberNo) {
 		academyMemberDAO.deleteAcademyIntroduce(a_memberNo);
+	}
+	//학원강사입력
+		public void insertTeacher(AcademyTeacherBean insertAcademyTeacherBean) {
+			MultipartFile upload_file = insertAcademyTeacherBean.getUpload_file();
+			
+			if(upload_file.getSize() > 0) {
+				String file_name = saveUploadfile(upload_file);
+				insertAcademyTeacherBean.setT_file(file_name);
+			}
+			academyMemberDAO.insertTeacher(insertAcademyTeacherBean);
+		}
+		
+		//학원강사수정
+		public void modifyTeacher(AcademyTeacherBean modifyAcademyTeacherBean) {
+			MultipartFile upload_file = modifyAcademyTeacherBean.getUpload_file();
+			
+			if(upload_file.getSize() > 0) {
+				String file_name = saveUploadfile(upload_file);
+				modifyAcademyTeacherBean.setT_file(file_name);
+			}
+			academyMemberDAO.modifyTeacher(modifyAcademyTeacherBean);
+		}
+		
+		//학원강사정보전체조회
+		public List<AcademyTeacherBean> academyTeacherList(int a_memberNo){
+			return academyMemberDAO.academyTeacherList(a_memberNo);
+		}
+			
+		//학원강사삭제
+		public void deleteTeacher(AcademyTeacherBean deleteAcademyTeacherBean) {
+			academyMemberDAO.deleteTeacher(deleteAcademyTeacherBean);
+		}
+		
+		//학원강사정보조회
+		public AcademyTeacherBean teacherInfo(AcademyTeacherBean infoAcademyTeacherBean) {
+			return academyMemberDAO.teacherInfo(infoAcademyTeacherBean);
+		}
+		
+		//학원결제내역조회
+		public List<AcademyPayBean> getAcademyPayList(int a_memberNo){
+			return academyMemberDAO.getAcademyPayList(a_memberNo);
+		}
+	
+	
+	
+	
+	//내가 쓴 문의사항
+	public List<SiteAcaAskBean> getMyaskList(int a_memberNo){
+		return academyMemberDAO.getMyaskList(a_memberNo);
+	}	
+	public SiteAcaAskBean getMyaskRead(Timestamp aa_time, int a_memberNo){
+		return academyMemberDAO.getMyaskRead(aa_time, a_memberNo);
+	}
+			
+	public int getMyAskListCnt(AcademyMemberBean myAskBean) {
+		return academyMemberDAO.getMyAskListCnt(myAskBean);
+	}
+			
+	public PageCountBean getMyAskContentCnt(int currentPage) {
+			
+		int content_cnt = academyMemberDAO.getMyAskContentCnt(loginAcademyMemberBean.getA_memberNo());
+				 
+		//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
+		PageCountBean mypageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+				 
+		return mypageCountBean;
 	}
 	
 	//관리자 학원 목록 페이지

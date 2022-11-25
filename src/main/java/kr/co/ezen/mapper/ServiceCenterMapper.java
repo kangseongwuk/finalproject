@@ -20,7 +20,8 @@ public interface ServiceCenterMapper {
 	
 	// 제목, 작성날짜, 조회수 내림차순 정렬하여 출력 합니다.	
 	@Select("select nb_no, nb_title, nb_writeTime, nb_viewCount "
-			+ "from noticeBoardT")	
+			+ "from noticeBoardT "
+			+ "order by nb_writeTime desc ")	
 		List<ServiceCenterBean> getNbList(RowBounds rowBounds); 
 		
 		// 제목, 작성날짜, 조회수, 내용, 이미지 등을 추출하여 가져와야 합니다.	

@@ -173,9 +173,9 @@
         <div class="col-sm-12 text-center">
           <ul class="list-inline text-center">
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/mypage"><h4>내 정보</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/studentinfo"><h4>학생 정보</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/studentinfo"><h4>자녀 정보</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/myfavorite"><h4>찜 목록</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/myaskboard"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/mypage_siteAsk"><h4>내 문의사항</h4></a></li>
           </ul>
         </div>
       </div>
@@ -199,7 +199,7 @@
 				<td class="text-center">${str.c_grade}</td>
 			</tr>	
 			<tr>
-				<td class="text-left"><strong>학년 :</strong></td>
+				<td class="text-left"><strong>성별 :</strong></td>
 				<td class="text-center">${str.c_gender}</td>
 			</tr>	
 			<tr>
@@ -209,12 +209,18 @@
 			</table>	
 		
 	</div>
-	</c:forEach>
-	<hr>
+	<br><br>
+	<br>
 	<div class="text-center">
-	<a href="${root }member/insertChild?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}" class="btn btn-primary">자녀정보입력</a>	
-	<a href="${root }member/delete?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}" class="btn btn-danger">자녀정보삭제</a>
+	<a href="${root }member/modifyChild?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}&c_name=${str.c_name}" class="btn btn-primary">자녀정보수정</a>
+	<a href="${root }member/deleteChild?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}&c_name=${str.c_name}" class="btn btn-danger">자녀정보삭제</a>
 	</div>
+	
+	<br><hr><br><br>
+	</c:forEach>
+	
+	<a href="${root }member/insertChild?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}" class="btn btn-primary">자녀정보입력</a>	
+	
 </div>
 </div>
 </div>

@@ -3,14 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-  <c:url var='root' value='/'/>
- <!DOCTYPE html>
-<html>   
+  <c:url var='root' value='/'/>   
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 
 <meta charset="utf-8">
-<title> : 학원 문의사항 :</title>
+<title>:: SKYCASTLE ::</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -39,8 +38,14 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
+
 <body>
+
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
@@ -53,8 +58,8 @@
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
           <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">사이트 관리</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">문의사항 (회원)</li>
         </ul>
       </div>
     </div>
@@ -62,44 +67,64 @@
 </section>
 <!-- /page title -->
 
+<!-- side menu nav -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<ul class="list-inline text-center">
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}member/mypageAdmin_member"><h4>회원 정보</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/mypageAdmin_academy"><h4>학원 정보</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}serviceBoard/siteAskList"><h4>문의사항(회원)</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}serviceBoard/siteAcaAskList"><h4>문의사항(학원)</h4></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
 <!-- Board -->    
 <section class="section bg-gray">
-		  <div class="container">
-		    <div class="row">
-		      <div class="col-lg-12">
-		       <div class="section-title text-center">
-			<h4> : 문 의 사 항 : (학원) </h4>	
-			  <p>총게시물 ${acaAskCnt} 개</p>
-		   </div>
-		  </div>
-		 </div>
-		</div>
+  <div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h2 class="text-color">문의사항 (학원)</h2>
+						<p>총게시물 ${acaAskCnt} 개</p>
+					</div>
+				</div>
+			</div>
+
+
+		  
+
+<!-- table -->  
 		<table>
 		    <thead>
-		    <tr>        
-		       <th>no</th>
-		       <th>제목</th>
-		       <th>작성일자</th>
-		       </tr>
-		        </thead>
-		    <tbody>   
-			<c:forEach var="str" items="${aalist}">
-				<tr>
-        		<td>${str.a_name}</td>
-        		<td><a href="${root }serviceBoard/siteAcaAskRead?aa_time=${str.aa_time}">${str.aa_title}</a></td>
-        		<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${str.aa_time}" /></td>
-				</tr>
-			</c:forEach>
-			
-			</table>
+		    <tr>
+		       <th class="aa-name">id</th>
+		       <th class="aa-title">제목</th>
+		       <th class="aa-time">작성일자</th>
+		    </tr>
+		    </thead>
+		    <tbody>
+		<c:forEach var="str" items="${aalist}">
+		    <tr>
+		        <td class="aa-name">${str.a_name}</td>
+        		<td class="aa-title"><a href="${root }serviceBoard/siteAcaAskRead?aa_time=${str.aa_time}">${str.aa_title}</a></td>
+        		<td class="aa-time"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${str.aa_time}" /></td>
+			</tr>
+		</c:forEach>
+		</table>
+		
+		
+        <br>
 		<div>
-			  <nav>
-			  <ul class="pagination" id="pagination">
 			 
-			  </ul>  
-  			</nav>
-			<div class="d-none d-md-block">
-				<ul class="pagination">
+  				<div class="d-none d-md-block text-center">
+				<ul class="pagination" >
 					<c:choose>
 						<c:when test="${pageCountBeanA.prevPage <= 0 }">
 							<li class="page-item disabled">
@@ -115,7 +140,7 @@
 														
 					<c:forEach var="idx" begin="${pageCountBeanA.min }" end="${pageCountBeanA.max }">
 						<c:choose>
-							<c:when test="$idx == pageCountBeanA.currentPage">
+							<c:when test="${idx == pageCountBeanA.currentPage}">
 							<li class="page-item active">
 								<a href="${root}serviceBoard/siteAcaAskList?pageA=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>		
@@ -138,17 +163,14 @@
 					
 					<c:otherwise>
 						<li class="page-item">
-							<a href="${root}serviceBoard/siteAcaAskList?pageA=${pageCountBeanA.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+						<a href="${root}serviceBoard/siteAcaAskList?pageA=${pageCountBeanA.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
 						</li>
 					</c:otherwise>
 					</c:choose>
 				</ul>
-			</div>
- 
-	</div>
-
-
-
+</div>
+</div>
+</div>
 </section>
 <!-- /Board -->  
 

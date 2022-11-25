@@ -13,3 +13,19 @@
 
 var send = confirm("삭제하시겠습니까?");
 
+
+
+
+
+
+
+
+if(send == true) {
+   location.href="${root}member/deleteChild_pro"
+}
+else {
+   history.back(-1);
+}
+</script>
+</body>
+</html>

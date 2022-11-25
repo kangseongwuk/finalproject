@@ -1,10 +1,20 @@
 package kr.co.ezen.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +31,7 @@ import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.TeacherReviewBean;
 import kr.co.ezen.service.BoardService;
 
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -32,14 +43,15 @@ public class BoardController {
 	@GetMapping("/gBoardList")
 	public String gBoardList(@RequestParam("a_classify") String a_classify,
 						HttpServletRequest request,
-						Model model) {
+						Model model) throws IOException, ParseException {
 		
 //		System.out.println(request.getParameter("sido"));
 //		System.out.println(request.getParameter("sigugun"));
+//		System.out.println(request.getParameter("sido_text"));
+//		System.out.println(request.getParameter("sigugun_text"));
 //		System.out.println(request.getParameter("gradeSelect"));
 //		System.out.println(request.getParameter("acaName"));
 //		System.out.println(a_classify);
-		
 		
 		if(request.getParameter("gradeSelect")==null && request.getParameter("sido")==null &&
 				request.getParameter("sigugun")==null && request.getParameter("acaName")==null) {
@@ -49,12 +61,13 @@ public class BoardController {
 			model.addAttribute("gBoardList", gBoardList);
 			
 		} else {
+
 			String searchLoc = "";
 			String searchGrade = "-1";
 			String searchAcaName = "";
 			
 			if(request.getParameter("sido")!=null || request.getParameter("sigugun")!=null)	{
-				searchLoc = request.getParameter("sido") + "%" + request.getParameter("sigugun");
+				searchLoc = request.getParameter("sido_text") + "%" + request.getParameter("sigugun_text");
 			}
 			if(request.getParameter("gradeSelect")!="") {
 				searchGrade = request.getParameter("gradeSelect");
@@ -62,6 +75,11 @@ public class BoardController {
 			if(request.getParameter("acaName")!=null) {
 				searchAcaName = request.getParameter("acaName");
 			}
+			
+//			System.out.println("------");
+//			System.out.println(searchLoc);
+//			System.out.println(searchGrade);
+//			System.out.println(searchAcaName);
 			
 			List<AcademyMemberBean> gBoardList =  boardService.getGBoardSearchList(a_classify,searchLoc,searchGrade,searchAcaName);
 			

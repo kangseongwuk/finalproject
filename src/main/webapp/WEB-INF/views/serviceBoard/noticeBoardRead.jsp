@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>noticeRead</title>
+<title>::SKYCASTLE::</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -35,6 +36,10 @@
 
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
   
 </head>
 
@@ -67,52 +72,50 @@
     <div class="row">
       <div class="col-lg-12">
        <div class="section-title text-center">
-          <h2>공지사항</h2>
+          <h2 class="text-color">공지사항</h2>
           </div>
       </div>
     </div>
-
-		<div class="board_view">
+    
 <table>
     <tr>
-      <th width="10%">제목</th>
-      <th width="10%">${nbReadBean.nb_title }</th>
-      <th width="10%">등록일</th>
-      <th width="10%"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${nbReadBean.nb_writeTime }" /></th>
+      <th class="th-title">제목</th>
+      <th class="th-border">${nbReadBean.nb_title }</th>
+      <th class="th-title">등록일</th>
+      <th class="th-border"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${nbReadBean.nb_writeTime }" /></th>
     </tr>
     <tr>
-      <th width="10%">글쓴이</th>
-      <th width="10%">관리자(수정가능)</th>
-      <th width="10%">조회</th>
-      <th width="10%">${nbReadBean.nb_viewCount }</th>
+      <th class="th-title">글쓴이</th>
+      <th class="th-border">관리자(수정가능)</th>
+      <th class="th-title">조회</th>
+      <th class="th-border">${nbReadBean.nb_viewCount }</th>
     </tr>
     <tr>
-      <td colsapn="4" height="200" valign="top" style="padding: 20px; line-height:160%">
-         <div id="bbs_file_wrap">
-            <div>
-               <img src="" width="900" onerror=""/><br />
-               </div>
-              </div> 
-              내용
-              </td>
-<!--<label for="nb_file">첨부 이미지</label>
-<img src="${root }upload/${nbReadBean.nb_file}" width="100%"/>	-->	
-             <th>${nbReadBean.nb_contents }</th>
-              </tr> 
+     <th colspan="4" class="th-border" height="500px" >
+     <br><br>
+     <c:if test="${nbReadBean.nb_file != null }">
+						
+	<img src="${root }upload/${nbReadBean.nb_file}" width="100%"/>
+	</c:if>
+     <br><br><br>
+     ${nbReadBean.nb_contents }
+     <br><br>
+     </th>
+
+    </tr> 
 </table>
-  </div>
-  <div class="btn_area">
-    <div class="align_left">
-      <input type="button" value="목록" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardList'"/>
-    </div>
-    <div class="align_left">
-      <input type="button" value="수정" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardModify?nb_no=${nbReadBean.nb_no}'"/>
-      <input type="button" value="삭제" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardDelete?nb_no=${nbReadBean.nb_no}'"/>
-      <!--<input type="button" value="쓰기" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='board_list1.jsp'"/>-->
-<input type="button" value="돌아가기" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }index'"/>
+        
+<div class="btn_area">
+  <br>
+    <div align="right">
+  
+      <input type="button" value="목록" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardList'"/>
+      <c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
+      <input type="button" value="수정" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardModify?nb_no=${nbReadBean.nb_no}'"/>
+      <input type="button" value="삭제" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardDelete?nb_no=${nbReadBean.nb_no}'"/>
+	</c:if>
   </div>
 </div>
-
 </div>
 
 </section>

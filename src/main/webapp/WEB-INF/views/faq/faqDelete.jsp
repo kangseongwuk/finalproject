@@ -13,7 +13,7 @@
 var send = confirm("삭제하시겠습니까?");
 
 if(send == true) {
-   location.href="${root}serviceBoard/noticeBoardList"
+   location.href="${root}faq/faqBoard"
 }
 else {
    history.back(-1);
@@ -21,3 +21,7 @@ else {
 </script>
 </body>
 </html>
+
+
+
+<!-- 삭제 페이지 완료  -->

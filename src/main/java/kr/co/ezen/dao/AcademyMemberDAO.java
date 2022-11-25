@@ -1,5 +1,6 @@
 package kr.co.ezen.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,12 @@ import org.springframework.stereotype.Repository;
 
 
 import kr.co.ezen.beans.AcademyMemberBean;
+import kr.co.ezen.beans.AcademyPayBean;
+import kr.co.ezen.beans.AcademyTeacherBean;
 import kr.co.ezen.beans.BlackListBean;
+import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.SiteAcaAskBean;
+import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.mapper.AcademyMemberMapper;
 
 @Repository
@@ -53,6 +58,50 @@ public class AcademyMemberDAO {
 	
 	public void deleteAcademyIntroduce(int a_memberNo) {
 		academyMemberMapper.deleteAcademyIntroduce(a_memberNo);
+	}
+	//학원강사정보입력
+		public void insertTeacher(AcademyTeacherBean insertAcademyTeacherBean) {
+			academyMemberMapper.insertTeacher(insertAcademyTeacherBean);
+		}
+		
+		//학원강사정보수정
+		public void modifyTeacher(AcademyTeacherBean modifyAcademyTeacherBean) {
+			academyMemberMapper.modifyTeacher(modifyAcademyTeacherBean);
+		}
+		
+		//학원강사정보전체조회
+		public List<AcademyTeacherBean> academyTeacherList(int a_memberNo){
+			return academyMemberMapper.academyTeacherList(a_memberNo);
+		}
+		
+		//학원강사삭제
+		public void deleteTeacher(AcademyTeacherBean deleteAcademyTeacherBean) {
+			academyMemberMapper.deleteTeacher(deleteAcademyTeacherBean);
+		}
+		
+		//학원강사정보조회
+		public AcademyTeacherBean teacherInfo(AcademyTeacherBean infoAcademyTeacherBean) {
+			return academyMemberMapper.teacherInfo(infoAcademyTeacherBean);
+		}
+		
+		public List<AcademyPayBean> getAcademyPayList(int a_memberNo){
+			return academyMemberMapper.getAcademyPayList(a_memberNo);
+		}
+	
+	//내가 쓴 문의사항
+	public List<SiteAcaAskBean> getMyaskList(int a_memberNo){
+		return academyMemberMapper.getMyaskList(a_memberNo);
+	}
+	public SiteAcaAskBean getMyaskRead(Timestamp aa_time, int a_memberNo){
+		return academyMemberMapper.getMyaskRead(aa_time, a_memberNo);
+	}
+		//게시글 수
+	public int getMyAskListCnt(AcademyMemberBean myAskBean) {
+			return academyMemberMapper.getMyAskListCnt(myAskBean);
+	}
+		//페이징 처리
+	public int getMyAskContentCnt(int a_memberNo) { 	
+		return academyMemberMapper.getMyAskContentCnt(a_memberNo);
 	}
 	
 	//관리자 마이페이지 : 학원 목록

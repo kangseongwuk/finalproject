@@ -9,7 +9,7 @@
 <head>
 
 <meta charset="utf-8">
-<title>noticeRead</title>
+<title>::SKYCASTLE::</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -38,6 +38,10 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
 
 <body>
@@ -63,53 +67,63 @@
 </section>
 <!-- /page title -->
 
+
+
 <!-- Board -->    
 <section class="section bg-gray">
-		  <div class="container">
-		    <div class="row">
-		      <div class="col-lg-12">
-		       <div class="section-title text-center">
-		          <h2>공지사항 검색 결과 </h2>
-		          <p>총게시물 ${searchCnt} 개</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+       <div class="section-title text-center">
+		       <h2 class="text-color">공지사항 검색결과 </h2> 
+		          <p class="text-color">검색 게시물 ${searchCnt}개</p>
 		          </div>
 		      </div>
 		    </div>
-		   </div>
+		    
+		        <!-- search box -->
+     <div> 
+    <form:form align="right" action="${root }serviceBoard/noticeBoardSearchList_pro" modelAttribute="nbSearchBean" method="get">
+	<form:input class="search-txt btn-round btn-color"  path="searchKeyword" placeholder="   검색어를 입력해 주세요" value = "" />
+    <form:button class="search-btn btn-round btn-color" type="submit"><i class="fas fa-search"></i></form:button>
+    </form:form>
+    </div>
+	<br>
+
+<!-- /search box -->
+
+<!-- table -->  
 		<table>
 		    <thead>
 		    <tr>
 		        <th>no</th>
 		        <th>제목</th>
-		        <th>조회수</th>
-		       <th>작성일자</th>
+		        <th class="th-views">조회수</th>
+		       <th class="th-days">작성일자</th>
 		
 		    </tr>
 		    </thead>
 		    <tbody>
-		<c:forEach var="nbsearch" items="${nbsearchList }" >
-		 
+		<c:forEach var="nbsearch" items="${nbsearchList}">
 		    <tr>
-		        <td>${nbsearch.nb_no}</td>
-		        <td><a href="${root }serviceBoard/noticeBoardRead?nb_no=${nbsearch.nb_no}">${nbsearch.nb_title}</a></td>
-				<td>${nbsearch.nb_viewCount}</td>
-				<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${nbsearch.nb_writeTime}" /></td>
+		        <td class="boardnumber">${nbsearch.nb_no}</td>
+		        <td class="boardtitle"><a href="${root }serviceBoard/noticeBoardRead?nb_no=${nbsearch.nb_no}">${nbsearch.nb_title}</a></td>
+				<td class="th-views">${nbsearch.nb_viewCount}</td>
+				<td class="th-days"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${nbsearch.nb_writeTime}" /></td>
 		    </tr>
 		</c:forEach>
-		<tr>
-		<td colspan="2" align="center"><a href="${root}serviceBoard/noticeBoardWrite">글쓰기</a></td>
-		<td colspan="2"  align="center"><a href="${root}index">돌아가기</a></td>
-		</tr>
 		</table>
+		
+		
+        <br>
+		<div align="right">
+		<button class="search-btn btn-color" onclick="location.href='${root }serviceBoard/noticeBoardWrite'">글쓰기</button>
+		</div>
 		<div>
-			  <nav>
-			  <ul class="pagination" id="pagination">
 			 
-			  </ul>  
-  			</nav>
-  
-  		<div class="d-none d-md-block">
-				<ul class="pagination">
-					<c:choose>
+  				<div class="d-none d-md-block">
+				<ul class="pagination" >
+				<c:choose>
 						<c:when test="${pageCountBean2.prevPage <= 0 }">
 							<li class="page-item disabled">
 								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
@@ -153,17 +167,9 @@
 					</c:otherwise>
 					</c:choose>
 				</ul>
-			</div>
-			
-  
-		  <div class="search-box">
-		  <form:form action="${root }serviceBoard/noticeBoardSearchList_pro" modelAttribute="nbSearchBean" method="get">
-		    <form:input class="search-txt" path="searchKeyword" placeholder="검색어를 입력해 주세요" value = "" />
-		    <form:button class="search-btn" type="submit"><i class="fas fa-search"></i></form:button>
-		  </form:form>
-		</div>
-	</div>
-
+</div>
+</div>
+</div>
 </section>
 <!-- /Board -->  
 

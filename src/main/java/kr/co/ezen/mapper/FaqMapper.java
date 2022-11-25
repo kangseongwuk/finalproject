@@ -11,23 +11,26 @@ import kr.co.ezen.beans.FaqBoardBean;
 
 public interface FaqMapper {
 
-	@Select("select * from FAQboardT")
+	@Select("select * from FAQboardT "
+			+ "order by fb_no")
 	List<FaqBoardBean> getFaqList();
 	
-	@Select("select * from FAQboardT where fb_no = #{fb_no}")
-	FaqBoardBean getDetail(int fb_no);
+	//입력
+	@Insert("insert into FAQboardT (fb_no, fb_contentsQ, fb_contentsA)"
+			+ "values(fb_sq.nextval, #{fb_contentsQ}, #{fb_contentsA})")
+	void fbWrite(FaqBoardBean fbWriteBean);
 	
+	//수정 페이지
 	@Select("select * from FAQboardT where fb_no = #{fb_no}")
-	FaqBoardBean getModify(int fb_no);
+	FaqBoardBean getFbModifyPage(int fb_no);
 	
-	@Update("update FAQboardT set fb_title = #{fb_title}, fb_contentsQ = #{fb_contentsQ}, fb_contentsA = #{fb_contentsA}"
+	//수정
+	@Update("update FAQboardT set fb_contentsQ = #{fb_contentsQ}, fb_contentsA = #{fb_contentsA} "
 			+ "where fb_no = #{fb_no}")
-	void faqModify(FaqBoardBean modifyFaqBoardBean);
+	void fbModify(FaqBoardBean fbModifyBean);
 	
-	@Insert("insert into FAQboardT (fb_no, fb_title, fb_contentsQ, fb_contentsA)"
-			+ "values(fb_sq.nextval, #{fb_title}, #{fb_contentsQ}, #{fb_contentsA})")
-	void faqWrite(FaqBoardBean writeFaqBoardBean);
 	
+	//삭제
 	@Delete("delete from FAQboardT where fb_no = #{fb_no}")
-	void faqDelete(int fb_no);
+	void fbDelete(int fb_no);
 }

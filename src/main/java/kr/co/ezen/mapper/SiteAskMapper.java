@@ -20,9 +20,9 @@ public interface SiteAskMapper {
 	void addSaContent(SiteAskBean saWriteBean);
 	
 	// 문의글 목록
-	@Select("select sa_memberNo, sa_title, sa_time"
-			+ " from siteAskT s, memberT m "
-			+ " where sa_memberNo = m_memberNo ")	
+	@Select("select sa_memberNo, sa_title, sa_time "
+			+ "from siteAskT "
+			+ "order by sa_time desc")	
 		List<SiteAskBean> getSaList(); 
 	
 	//문의글 개수

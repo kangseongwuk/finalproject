@@ -1,5 +1,7 @@
 package kr.co.ezen.beans;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class AcademyTeacherBean {
 
 	private int a_memberNo;
@@ -8,6 +10,14 @@ public class AcademyTeacherBean {
 	private String t_contents;
 	private String t_file;
 	
+	private MultipartFile upload_file;
+	
+	public MultipartFile getUpload_file() {
+		return upload_file;
+	}
+	public void setUpload_file(MultipartFile upload_file) {
+		this.upload_file = upload_file;
+	}
 	public int getA_memberNo() {
 		return a_memberNo;
 	}

@@ -6,11 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>::SKYCASTLE::</title>
 </head>
 <body>
-<h2>ㅇㅇ 문의글이 접수되었습니다 ㅇㅇ</h2>
-<a href="${root}index">돌아가기</a>
+<script type="text/javascript">
+var send = confirm("등록하시겠습니까?");
 
+if(send == true) {
+	var send = confirm("작성이 완료되었습니다.");
+	location.href="${root}serviceBoard/siteAcaAskWrite"
+}
+else {
+   history.back(-1);
+}
+</script>
 </body>
 </html>

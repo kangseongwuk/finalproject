@@ -33,7 +33,9 @@ public interface BoardMapper {
 			+ "where a_classify like '%'||#{a_classify} "
 			+ "	and a_location like '%'||#{searchLoc}||'%' "
 			+ "	and (#{searchGrade} between a_gradeMin and a_gradeMax or #{searchGrade} = '-1') "
-			+ "	and a_name like '%'||#{searchAcaName}||'%' "
+			+ "	and (a_name like '%'||#{searchAcaName}||'%' or a_memberNo = (select a_memberNo"
+			+ "                                                    		from ACADEMYSUBJECTT"
+			+ "                                                    		where A_SUBJECT like '%'||#{searchAcaName}||'%'))"
 			+ "order by a_joinDate desc")
 	List<AcademyMemberBean> getGBoardSearchList(@Param("a_classify") String a_classify,
 												@Param("searchLoc") String searchLoc,

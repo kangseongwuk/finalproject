@@ -10,7 +10,7 @@
   <!-- Basic Page Needs
    ================================================== -->
   <meta charset="utf-8">
-  <title>askBoard</title>
+  <title>::SKYCASTLE::</title>
 
   <!-- Mobile Specific Metas
    ================================================== -->
@@ -50,7 +50,7 @@
 <!-- ===============================  header  =============================== -->
 
 <!-- page title -->
-<section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
+<section class="page-title-section overlay" data-background="images/backgrounds/bg_pagetitle1.png">
   <div class="container">
     <div class="row">
       <div class="col-md-8">
@@ -70,33 +70,39 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="section-title">문의사항</h2>
+        <h2 class="section-title text-center">문의사항</h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-7 mb-4 mb-lg-0">
+      <div class="col-lg-7 mb-4 mb-lg-0 ">
         <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"
         enctype="multipart/form-data">
-          <form:input class="form-control mb-3" path="m_name" readonly="true" />
-          <form:input class="form-control mb-3" path="m_id" readonly="true" />
-          <form:input class="form-control mb-3" path="m_email" readonly="true" />
+          <form:input class="form-control mb-3" path="m_name" value="이름               ${sessionScope.loginMemberBean.m_name }" readonly="true" />
+          <form:input class="form-control mb-3" path="m_id"  value="아이디           ${sessionScope.loginMemberBean.m_id}"  readonly="true" />
+          <form:input class="form-control mb-3" path="m_email"  value="이메일           ${sessionScope.loginMemberBean.m_email }"  readonly="true" />
           </form:form>
           
           <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"
           enctype="multipart/form-data">
           <form:hidden path="sa_memberNo" />
+          <table>
+         
           <form:input class="form-control mb-3" path="sa_tele" placeholder="휴대폰" />
           <form:input class="form-control mb-3" path="sa_title" placeholder="제목" />
+         </table>
           <form:textarea path="sa_contents" class="form-control mb-3" placeholder="문의내용" ></form:textarea>
          <!-- 2022.11.11 01시 수정 -->
           <form:input type="file" class="form-control mb-3" path="upload_file" placeholder="첨부내용" accept="image/*"/>
-          <form:button type="submit" class="btn btn-primary" >작성완료</form:button>
+          <form:button align="center" type="submit" class="btn btn-primary" >작성완료</form:button>
         </form:form>
       </div>
-      <div class="col-lg-5">
-        <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit recusandae voluptates doloremque veniam temporibus porro culpa ipsa, nisi soluta minima saepe laboriosam debitis nesciunt. Dolore, labore. Accusamus nulla sed cum aliquid exercitationem debitis error harum porro maxime quo iusto aliquam dicta modi earum fugiat, vel possimus commodi, deleniti et veniam, fuga ipsum praesentium. Odit unde optio nulla ipsum quae obcaecati! Quod esse natus quibusdam asperiores quam vel, tempore itaque architecto ducimus expedita</p>
-        <a href="tel:+8802057843248" class="text-color h5 d-block">02-1234-5678</a>
-        <a href="mailto:yourmail@email.com" class="mb-5 text-color h5 d-block">skycastle@naver.com</a>
+      
+     <div class="col-lg-5">
+      	<div class="section-img">
+        <h3><img class="content-img" src="images/icon/icons1.png"> 문의가능시간</h3> <p class="mb-5"> <a href="#">오전09:00 ~ 오후06:00</a><br />
+        <h3><img class="content-img" src="images/icon/icons2.png"> 전화번호</h3>   <p class="mb-5"><a href="tel:+8802057843248"> 02-1234-5678</a></p>
+        <h3><img class="content-img" src="images/icon/icons3.png"> Email</h3> <p class="mb-5"><a href="mailto:yourmail@email.com">skycastle@naver.com</a>
+        </div>
       </div>
     </div>
   </div>

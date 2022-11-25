@@ -765,7 +765,7 @@ link:focus,
 }
 
 .hero-section {
-  padding: 0px 0 180px;
+  padding: 40px 0 200px;
 }
 @media (max-width: 991px) {
   .hero-section {

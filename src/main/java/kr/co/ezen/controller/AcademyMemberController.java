@@ -1,5 +1,6 @@
 package kr.co.ezen.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +15,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.ezen.beans.AcademyMemberBean;
+import kr.co.ezen.beans.AcademyPayBean;
+import kr.co.ezen.beans.AcademyTeacherBean;
 import kr.co.ezen.beans.BlackListBean;
+import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.PageCountBean;
 import kr.co.ezen.beans.SiteAcaAskBean;
+import kr.co.ezen.beans.SiteAskBean;
 import kr.co.ezen.service.AcademyMemberService;
 import kr.co.ezen.service.SiteAcaAskService;
 @RequestMapping("/academymember")
@@ -105,7 +112,7 @@ public class AcademyMemberController {
 		}
 		modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
 		academyMemberService.modifyAcademyMember(modifyAcademyMemberBean);
-		return "academymember/login_success";
+		return "academymember/my_academypage";
 	}
 	@GetMapping("delete")
 	public String delete() {
@@ -192,12 +199,7 @@ public class AcademyMemberController {
 		academyMemberService.deleteAcademyIntroduce(loginAcademyMemberBean.getA_memberNo());
 		return "academymember/my_academypage";
 	}
-	//로그인성공페이지이동
-	@GetMapping("login_success")
-	public String login_success() {
-		return "academymember/login_success";
-	}
-	
+		
 	//블랙리스트 조회
 	@GetMapping("academyBlacklist")
 	public String blacklistview(Model model) {
@@ -208,6 +210,101 @@ public class AcademyMemberController {
 		
 	}
 	
+	//학원강사리스트페이지
+		@GetMapping("/academyteacher")
+		public String academyteacher(Model model) {
+			
+			List<AcademyTeacherBean> academyteacherlist = academyMemberService.academyTeacherList(loginAcademyMemberBean.getA_memberNo());
+			model.addAttribute("academyteacherlist", academyteacherlist);
+			return "academymember/academyteacher";
+		}
+		
+		//학원강사 수정페이지
+		@GetMapping("academyteacher_modify")
+		public String academyteacher_modify(@ModelAttribute("teacherModifyBean") AcademyTeacherBean teacherModifyBean, @RequestParam("t_name") String t_name) {
+			
+			teacherModifyBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+			teacherModifyBean.setT_name(t_name);
+			AcademyTeacherBean teacherModifyBean2 = academyMemberService.teacherInfo(teacherModifyBean);
+			teacherModifyBean.setT_subject(teacherModifyBean2.getT_subject());
+			teacherModifyBean.setT_contents(teacherModifyBean2.getT_contents());
+			teacherModifyBean.setT_file(teacherModifyBean2.getT_file());
+			return "academymember/academyteacher_modify";
+			
+		}
+		
+		//학원강사수정
+		@PostMapping("academyteacher_modifyPro")
+		public String academyteacher_modifyPro(@ModelAttribute("teacherModifyBean") AcademyTeacherBean teacherModifyBean, Model model) {
+			
+			academyMemberService.modifyTeacher(teacherModifyBean);
+			List<AcademyTeacherBean> academyteacherlist = academyMemberService.academyTeacherList(loginAcademyMemberBean.getA_memberNo());
+			model.addAttribute("academyteacherlist", academyteacherlist);
+			return "academymember/academyteacher";
+		}
+		
+		//학원강사삭제선택
+		@GetMapping("academyteacher_delete")
+		public String academyteacher_delete(@RequestParam("t_name") String t_name, Model model) {
+			model.addAttribute("t_name", t_name);
+			return "academymember/academyteacher_delete";
+		}
+		
+		//학원강사삭제
+		@GetMapping("academyteacher_deletePro")
+		public String academyteacher_deletePro(@RequestParam("t_name")String t_name, @ModelAttribute("deleteAcademyTeacherBean") AcademyTeacherBean deleteAcademyTeacherBean) {
+			
+			deleteAcademyTeacherBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+			deleteAcademyTeacherBean.setT_name(t_name);
+			academyMemberService.deleteTeacher(deleteAcademyTeacherBean);
+			
+			
+			return "academymember/academyteacher";
+		}
+		
+		//결제조회
+		@GetMapping("academypay")
+		public String academypay(Model model) {
+			
+			List<AcademyPayBean> academypaylist = academyMemberService.getAcademyPayList(loginAcademyMemberBean.getA_memberNo());
+			
+			model.addAttribute("academypaylist", academypaylist);
+			
+			return "academymember/academypay";
+		}
+		
+	
+	
+	//내가 쓴 문의사항
+			@GetMapping("/mypage_siteAcaAsk")
+			public String myAsk(@ModelAttribute("myAskBean") AcademyMemberBean myAskBean,
+								@RequestParam(value = "myAskPage", defaultValue = "1") int myAskPage,
+								Model model) {
+				
+				List<SiteAcaAskBean> myasklist = academyMemberService.getMyaskList(loginAcademyMemberBean.getA_memberNo());
+				model.addAttribute("myasklist", myasklist);
+				
+				int myasktotCnt = academyMemberService.getMyAskListCnt(myAskBean);
+				model.addAttribute("myasktotCnt", myasktotCnt);
+				
+				PageCountBean mypageCountBean = academyMemberService.getMyAskContentCnt(myAskPage);
+				model.addAttribute("mypageCountBean", mypageCountBean);
+				
+				model.addAttribute("myAskPage", myAskPage);
+				
+				return "academymember/mypage_siteAcaAsk";
+			}
+			
+			@GetMapping("/mypage_siteAcaAskRead")
+			public String myAskRead(@RequestParam("aa_time") Timestamp aa_time, 
+									Model model) {
+				
+				SiteAcaAskBean myaskreadBean = academyMemberService.getMyaskRead(aa_time, loginAcademyMemberBean.getA_memberNo());
+				
+				model.addAttribute("myaskreadBean", myaskreadBean);
+				
+				return "academymember/mypage_siteAcaAskRead";
+			}
 	
 	//관리자 학원 목록 페이지
 		@GetMapping("/mypageAdmin_academy")
@@ -222,14 +319,4 @@ public class AcademyMemberController {
 									
 		return "academymember/mypageAdmin_academy";
 		}
-		
-	//학원문의 조회
-		@GetMapping("/academyaskboard")
-		public String academyaskboard(Model model) {
-			
-		List<SiteAcaAskBean> acaAsklist = academyMemberService.getAcaAskList(loginAcademyMemberBean.getA_memberNo());
-		model.addAttribute("acaAsklist", acaAsklist);
-			return "academymember/academyaskboard";
-		}
-	
 }

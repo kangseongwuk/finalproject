@@ -78,9 +78,11 @@
       <!-- slider item -->
       <div class="hero-slider-item">
         <div class="row">
-          <div class="col-md-8" style="background:rgba(0,0,0,0.5);all:inherit;">
-            <img class="hero-section overlay bg-cover" src="images/teachers/teacher-1.png">
-          <div>
+          <div class="col-md-8" style="all:inherit;">
+          <div style="display:inline-block;">
+            <img class="hero-section overlay bg-cover" src="images/teachers/teacher-1.png" style="margin-left:22%">
+           </div>
+          <div style="display:inline-block;">
           <br><br>
             <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">12월<br>TOP강사</h1>
             <h3 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">차 해 나</h3>

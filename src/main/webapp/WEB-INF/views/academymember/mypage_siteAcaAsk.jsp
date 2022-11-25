@@ -67,8 +67,10 @@
           <ul class="list-inline text-center">
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 조회</h4></a></li>
-             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyaskboard"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyteacher"><h4>학원 강사 조회</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academypay"><h4>결제내역조회</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/mypage_siteAcaAsk"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
           </ul>
         </div>
       </div>
@@ -81,7 +83,7 @@
     <div class="row">
       <div class="col-lg-12">
        <div class="section-title text-center">
-          <h2>내 문의사항</h2><hr>
+          <h2>내 문의사항</h2>
           </div>
       </div>
     </div>
@@ -89,20 +91,19 @@
     <thead>
     <tr>
         <th >제목</th>
-        <th>내용</th>
-       <th>작성일자</th>	
+       <th>작성일자</th>
     </tr>
     </thead>
     <tbody>
-<c:forEach var="st" items="${acaAsklist}">
-    <tr>
-        <td>${st.aa_title}</td>
-        <td>${st.aa_contents }</td>  
-<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.aa_time}" /></td>
-    </tr>
-</c:forEach>
+    	<c:forEach var="ask" items="${myasklist}">
+    	<tr>
+	<td><a href="${root }academymember/mypage_siteAcaAskRead?aa_time=${ask.aa_time}">${ask.aa_title}</a></td>
+	<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${ask.aa_time}" /></td>
+		</tr>
+	</c:forEach>
+	
 </table>
-
+<br><br><br><br><br>
   <ul class="pagination">
     <li class="page-item disabled">
       <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
@@ -127,13 +128,6 @@
     </li>
   </ul>
   
-  
-  <div class="search-box">
-  <form action="." method="post">
-    <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
-    <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-  </form>
-</div>
 </div>
 
 </section>
@@ -164,3 +158,4 @@
 <script src="js/script.js"></script>
 
 </body>
+</html>

@@ -310,7 +310,7 @@ CREATE TABLE blacklistT(
 
 -- 신고/블랙리스트 관리 예시(현재 없음)
 
-
+select * from blacklistT;
 
 --11. 학원 찜 목록 테이블
 CREATE TABLE wishListT(

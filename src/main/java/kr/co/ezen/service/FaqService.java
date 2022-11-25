@@ -19,23 +19,23 @@ public class FaqService {
 		return faqDAO.getFaqList();
 	}
 	
-	public FaqBoardBean getDetail(int fb_no) {
-		return faqDAO.getDetail(fb_no);
+	//입력
+	public void fbWrite(FaqBoardBean fbWriteBean) {
+		faqDAO.fbWrite(fbWriteBean);
 	}
 	
-	public FaqBoardBean getModify(int fb_no) {
-		return faqDAO.getModify(fb_no);
+	//수정 페이지
+	public FaqBoardBean getFbModifyPage(int fb_no) {
+		return faqDAO.getFbModifyPage(fb_no);
 	}
 	
-	public void faqModify(FaqBoardBean modifyFaqBoardBean) {
-		faqDAO.faqModify(modifyFaqBoardBean);
+	//수정
+	public void fbModify(FaqBoardBean fbModifyBean) {
+		faqDAO.fbModify(fbModifyBean);
 	}
 	
-	public void faqWrite(FaqBoardBean writeFaqBoardBean) {
-		faqDAO.faqWrite(writeFaqBoardBean);
-	}
-	
-	public void faqDelete(int fb_no) {
-		faqDAO.faqDelete(fb_no);
+	//삭제
+	public void fbDelete(int fb_no) {
+		faqDAO.fbDelete(fb_no);
 	}
 }

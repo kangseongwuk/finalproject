@@ -296,23 +296,35 @@
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript"
 		src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-<section class="section bg-gray">
-	<div class="container">
-		<div class="search-box">
+<section class="section bg-gray" style="padding-top: 4%;padding-bottom: 0px;">
+	<div class="s002">
 				
-			<div class="contents">
 				<form action="gBoardList" method="get">
-					<select id="sido" name="sido"><option value="">지역 선택</option></select>
-					<select id="sigugun" name="sigugun"><option value="">구-시선택</option></select>
-					<select class="input-select" id="gradeSelect" name="gradeSelect">
+				<div class="inner-form">
+          		<div class="input-field first-wrap" style="background: white;">
+            	<div class="icon-wrap">
+              		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                 	</svg>
+            	</div>
+					<select class="nice-select" tabindex="0" id="sido" name="sido">
+					<option value="">지역 선택</option>
+					</select>
+					
+					<input type="hidden" name="sido_text" id="sido_text" value="">
+					<select class="nice-select" tabindex="0" id="sigugun" name="sigugun"><option value="">구-시선택</option></select>
+					<input type="hidden" name="sigugun_text" id="sigugun_text" value="">
+					<select class="nice-select" tabindex="0" id="gradeSelect" name="gradeSelect">
 				      <option value="" selected>학년 선택</option>
 				    </select>
-				    <input class="search-txt" type="text" name="acaName" placeholder="검색어를 입력해 주세요">
-				    <!-- <button class="search-btn" onclick="location.href='gBoardList?a_classify=1&a_name='">검색</button> -->
-				    <button class="search-btn" type="submit">검색</button>
-				    <input type="hidden" name="a_classify" value="1">
+				    <input class="nice-select" tabindex="0" type="text" id="acaName" name="acaName" 
+				    placeholder="검색하고자 하는 과목명 또는 학원 이름을 입력해주세요." style="border-radius: 6px;margin-top: 4.1px;">
+					<input type="hidden" name="a_classify" value="<%=request.getParameter("a_classify") %>">
+					<button class="btn" type="submit" style="color: wheat;font-size: 16px;background: #7c7c7c;left: 2.5%;padding-top: 1.3%;padding-bottom: 1.3%;margin-left: 86%;position: absolute;">
+					SEARCH</button>
+			    </div></div>
 			    </form>
-			</div>
+			    </div>
+			
 	
 <!--  주소 API -->	
 <script>
@@ -325,6 +337,14 @@ jQuery(document).ready(function () {
 
 	//sido 변경시 시군구 option 추가
 	jQuery('#sido').change(function () {
+		//시도 히든 값
+		if($('#sido option:selected').val()=="") {
+			$('#sido_text').val("");
+		}else {
+			$('#sido_text').val($('#sido option:selected').text());
+		}
+		$('#sigugun_text').val("");
+		
 		jQuery('#sigugun').show();
 		jQuery('#sigugun').empty();
 		jQuery('#sigugun').append(fn_option('', '선택')); //
@@ -347,6 +367,15 @@ jQuery(document).ready(function () {
 
 	//시군구 변경시 행정동 옵션추가
 	jQuery('#sigugun').change(function () {
+		//시군구 히든 값
+		if($('#sigugun option:selected').val()=="") {
+			$('#sigugun_text').val("");
+		}else {
+			$('#sigugun_text').val($('#sigugun option:selected').text());
+		}
+		
+		
+		/*
 		//option 제거
 		jQuery('#dong').empty();
 		jQuery.each(hangjungdong.dong, function (idx, code) {
@@ -357,8 +386,10 @@ jQuery(document).ready(function () {
 		jQuery('#dong').prepend(fn_option('', '선택'));
 		//option중 선택을 기본으로 선택
 		jQuery('#dong option:eq("")').attr('selected', 'selected');
+		*/
 	});
-
+	
+	/*
 	jQuery('#dong').change(function () {
 		var sido = jQuery('#sido option:selected');
 		var sigugun = jQuery('#sigugun option:selected');
@@ -374,6 +405,19 @@ jQuery(document).ready(function () {
 		//iframe으로 결과 보기
 		fn_iframe(url);
 	});
+	*/
+	
+	//검색 값 유지
+	setTimeout(function() {
+		if('<%=request.getParameter("acaName")%>'!='null') {
+			$('#acaName').val('<%=request.getParameter("acaName")%>');
+		}
+		$('#sido').val(<%=request.getParameter("sido")%>).trigger('change');
+		$('#sigugun').val(<%=request.getParameter("sigugun")%>).trigger('change');
+		$('#gradeSelect').val(<%=request.getParameter("gradeSelect")%>).trigger('change');
+		
+	},100);
+	
 });
 
 function fn_option(code, name) {
@@ -388,130 +432,131 @@ function fn_iframe(url) {
 
 
 		</div>
-	</div>		
 </section>
 <!-- /SEARCH BAR --> 
    
    
-   <!-- courses -->
-   <section class="section">
-      <div class="container">
-         <div style="width: 80%;margin-left:10%;">
-         <div class="map_wrap">
-            <div id="map"
-               style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-
-            <div id="menu_wrap" class="bg_white">
-               <div class="option">
-                  <div>
-                     <form onsubmit="searchPlaces(); return false;">
-                        키워드 : <input type="text" value="신림동 학원" id="keyword" size="15">
-                        <button type="submit">검색하기</button>
-                     </form>
-                  </div>
-               </div>
-               <hr>
-               <ul id="placesList"></ul>
-               <div id="pagination"></div>
-            </div>
-            </div>
-         </div>
-         <!-- course list -->
-         <div class="row justify-content-center">
-            <c:forEach var="gList" items="${gBoardList }">
-	           	<script type="text/javascript">
-					
-					$(document).ready(function() {
-						
-						
-						window.onload = convertPro(), getWishHeart(${gList.a_memberNo });
-						
-						function convertPro() {
-							//alert("이건 되냐?");
-							var min = ${gList.a_gradeMin };
-							var max = ${gList.a_gradeMax };
-							//alert(convertData.grade[min]);
-							
-							var space = '#gradeSpace'+${gList.a_memberNo };
-							
-							$(space).html(convertData.grade[min] + " ~ " + convertData.grade[max]);
-							//$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
-							
-						}
-						
-					});
-					
-					//찜하기 출력
-					function getWishHeart(a_memberNo) {
-						var wishNum = "#wish"+a_memberNo;
-						//alert(wishNum);
-						
-						$.ajax({
-							url : "boardListWish/"+a_memberNo,
-							type : "GET",
-							dataType : "text",
-							error : function(e) {
-								alert("안됨1");
-								//alert(e);
-							},
-							success : function(wishIs) {
-								if(wishIs.trim()=="true") {
-									$(wishNum).attr('class',"like-btn active");
-								} else if(wishIs.trim()=="false") {
-									$(wishNum).attr('class',"like-btn");
-								}
-							}
-						});
-					}
-
-
-					//찜하기(찜/해제)
-					function switchWishHeart(a_memberNo) {
-						//alert("헤이!");
-						//alert(a_memberNo);
-						
-						$.ajax({
-							url : "boardListWishOnOff/"+a_memberNo,
-							type : "GET",
-							dataType : "text",
-							error : function(e) {
-								alert("안됨2");
-								//alert(e);
-							},
-							success : function(result) {
-								if(result=="false") {
-									alert("일반 회원으로 로그인해주세요.");
-								} else if(result=="on") {
-									alert("찜 등록 완료.");
-								} else if(result=="off") {
-									alert("찜 해제 완료.");
-								} else if(result=="error") {
-									alert("알 수 없는 오류");
-								}
-								
-								getWishHeart(a_memberNo);
-							}
-						});
-					}
-					
-					
+<!-- courses -->
+<section class="section" style="padding-top: 0px;padding-right: 20px;">
+   <div class="container">
+		<div style="width: 106.5%;margin-left: -2.4%;margin-bottom: 5%;margin-top: 1;">
+			<div class="map_wrap">
+				<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+				<div id="menu_wrap" class="bg_white">
+					<div class="option">
+						<div>
+							<form onsubmit="searchPlaces(); return false;">
+								<%if(request.getParameter("sido_text")==null && request.getParameter("sigugun_text") == null) {%>
+									키워드 : <input type="text" value="학원" id="keyword" size="15">
+								<%} else { %>
+									키워드 : <input type="text" value="<%=request.getParameter("sido_text")%> <%=request.getParameter("sigugun_text")%> 학원" id="keyword" size="15">
+								<%} %>
+						      <button type="submit">검색하기</button>
+						   </form>
+						</div>
+					</div>
+					<hr>
+					<ul id="placesList"></ul>
+					<div id="pagination"></div>
+				</div>
+			</div>
+		</div>
+	<!-- course list -->
+	<div class="row justify-content-center">
+		<c:forEach var="gList" items="${gBoardList }">
+		<script type="text/javascript">
+		
+		$(document).ready(function() {
+			
+			
+			window.onload = convertPro(), getWishHeart(${gList.a_memberNo });
+			
+			function convertPro() {
+				//alert("이건 되냐?");
+				var min = ${gList.a_gradeMin };
+				var max = ${gList.a_gradeMax };
+				//alert(convertData.grade[min]);
 				
-				</script>
-               <!-- course item -->
-               <div class="col-lg-4 col-sm-6 mb-5">
-                  <div class="card p-0 border-primary rounded-0 hover-shadow">
-                  	<c:choose>
-	                    <c:when test="${gList.a_mainImg != null }">
+				var space = '#gradeSpace'+${gList.a_memberNo };
+				
+				$(space).html(convertData.grade[min] + " ~ " + convertData.grade[max]);
+				//$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
+				
+			}
+			
+		});
+		
+		//찜하기 출력
+		function getWishHeart(a_memberNo) {
+			var wishNum = "#wish"+a_memberNo;
+			//alert(wishNum);
+			
+			$.ajax({
+				url : "boardListWish/"+a_memberNo,
+				type : "GET",
+				dataType : "text",
+				error : function(e) {
+					alert("안됨1");
+					//alert(e);
+				},
+				success : function(wishIs) {
+					if(wishIs.trim()=="true") {
+						$(wishNum).attr('class',"like-btn active");
+					} else if(wishIs.trim()=="false") {
+						$(wishNum).attr('class',"like-btn");
+					}
+				}
+			});
+		}
+		
+		
+		//찜하기(찜/해제)
+		function switchWishHeart(a_memberNo) {
+			//alert("헤이!");
+			//alert(a_memberNo);
+			
+			$.ajax({
+				url : "boardListWishOnOff/"+a_memberNo,
+				type : "GET",
+				dataType : "text",
+				error : function(e) {
+					alert("안됨2");
+					//alert(e);
+				},
+				success : function(result) {
+					if(result=="false") {
+						alert("일반 회원으로 로그인해주세요.");
+					} else if(result=="on") {
+						alert("찜 등록 완료.");
+					} else if(result=="off") {
+						alert("찜 해제 완료.");
+					} else if(result=="error") {
+						alert("알 수 없는 오류");
+					}
+					
+					getWishHeart(a_memberNo);
+				}
+			});
+		}
+		
+		
+		
+		</script>
+		<!-- course item -->
+			<div class="col-lg-4 col-sm-6 mb-5">
+				<div class="card p-0 border-primary rounded-0 hover-shadow">
+					<c:choose>
+						<c:when test="${gList.a_mainImg != null }">
 							<img class="card-img-top rounded-0" src="${root }upload/${gList.a_mainImg}" />
 						</c:when>
 						<c:otherwise>
 							<img class="card-img-top rounded-0" src="images/courses/course-1.jpg" alt="이미지 없음">
-	                    </c:otherwise>
-                    </c:choose>
-                     <div class="card-body">
-                        <ul class="list-inline mb-2">
-                           <li class="list-inline-item"><i
-                              class="ti-calendar mr-1 text-color"></i>${gList.a_location }</li>
+						</c:otherwise>
+					</c:choose>
+					<div class="card-body">
+						<ul class="list-inline mb-2">
+							<li class="list-inline-item"><i
+					         class="ti-calendar mr-1 text-color"></i>${gList.a_location }</li>
 							<li class="list-inline-item">
 								<a class="text-color" href="course-single.html" id="gradeSpace${gList.a_memberNo }">
 									${gList.a_gradeMin } ~ ${gList.a_gradeMax }
@@ -519,43 +564,42 @@ function fn_iframe(url) {
 									<input type="hidden" id="gradeMax" value="${gList.a_gradeMax }">
 								</a>
 							</li>
-                        </ul>
-                        <a href="course-single.html">
-                           <h4 class="card-title">${gList.a_name }</h4>
-                        </a>
-                        <p class="card-text mb-4">
-                        	<c:choose>
-                        		<c:when test="${fn:length(gList.a_introduce) <= 50}">
-                        			${gList.a_introduce }
-                        		</c:when>
-                        		<c:when test="${fn:length(gList.a_introduce) > 50}">
-                        			${fn:substring(gList.a_introduce, 0, 49)}...
-                        		</c:when>
-                        	</c:choose>
-                        </p>
-                        <a href="gBoardRead?a_memberNo=${gList.a_memberNo }"
-                           class="btn btn-primary btn-sm">상세 보기</a>
-                           	<!--  like button  -->
-                           	<c:if test="${sessionScope.loginAcademyMemberBean == null }">
-								<p class="card-text mb-4">
-									<a class="like-btn" id="wish${gList.a_memberNo }" onclick="switchWishHeart(${gList.a_memberNo })">
-										<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
-											5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
-										</svg>
-									</a>
-								</p>
-							</c:if>
-							<!--  /like button  -->
-                     </div>
-                  </div>
-               </div>
-            </c:forEach>
-         </div>
-         <!-- /course list -->
-      </div>
-   </section>
-   <!-- /courses -->
+						</ul>
+						<a href="course-single.html">
+							<h4 class="card-title">${gList.a_name }</h4>
+						</a>
+						<p class="card-text mb-4">
+							<c:choose>
+								<c:when test="${fn:length(gList.a_introduce) <= 50}">
+									${gList.a_introduce }
+								</c:when>
+								<c:when test="${fn:length(gList.a_introduce) > 50}">
+									${fn:substring(gList.a_introduce, 0, 49)}...
+								</c:when>
+							</c:choose>
+						</p>
+						<a href="gBoardRead?a_memberNo=${gList.a_memberNo }" class="btn btn-primary btn-sm">상세 보기</a>
+	   				<!--  like button  -->
+					   	<c:if test="${sessionScope.loginAcademyMemberBean == null }">
+							<p class="card-text mb-4">
+								<a class="like-btn" id="wish${gList.a_memberNo }" onclick="switchWishHeart(${gList.a_memberNo })">
+									<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
+										5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
+									</svg>
+								</a>
+							</p>
+						</c:if>
+					<!--  /like button  -->
+	     				</div>
+	 			 	</div>
+			</div>
+		</c:forEach>
+	</div>
+	<!-- /course list -->
+	</div>
+</section>
+<!-- /courses -->
 
 
    <!-- ===============================  footer  =============================== -->
@@ -569,6 +613,10 @@ function fn_iframe(url) {
    <script src="plugins/bootstrap/bootstrap.min.js"></script>
    <!-- slick slider -->
    <script src="plugins/slick/slick.min.js"></script>
+	<!-- 서치폼 -->
+	<link href="css/searchForm.css" rel="stylesheet" />
+	<!-- 셀렉트 -->
+	<link rel="stylesheet" href="css/nice-select.css">
    <!-- aos -->
    <script src="plugins/aos/aos.js"></script>
    <!-- venobox popup -->
