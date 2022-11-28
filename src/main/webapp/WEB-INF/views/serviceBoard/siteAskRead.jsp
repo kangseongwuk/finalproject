@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title> : 문 의 사 항 : </title>
+<title>::SKYCASTLE::</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -36,52 +37,116 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
 
 <body>
 
-					<div>
-						<label for="m_id">아이디</label>
-						<input type="text" id="m_id" name="m_id" value="${saReadBean.m_id }" disabled="disabled">
-					</div>
-					<div>
-						<label for="m_name">이름</label>
-						<input type="text" id="m_name" name="m_name" value="${saReadBean.m_name }" disabled="disabled">
-					</div>
-					<div>
-						<label for="sa_tele">전화번호</label>
-						<input type="text" id="sa_tele" name="sa_tele" value="${saReadBean.sa_tele }" disabled="disabled">
-					</div>
-					<div>
-						<label for="m_email">이메일</label>
-						<input type="text" id="m_email" name="m_email" value="${saReadBean.m_email }" disabled="disabled">
-					</div>
-					<div>
-						<label for="sa_time">작성날짜</label>
-						<input type="text" id="sa_time" name="sa_time" value="${saReadBean.sa_time }" disabled="disabled"/>
-					</div>
-			
-					<div>
-						<label for="sa_title">제목</label>
-						<input type="text" id="sa_title" name="sa_title" value="${saReadBean.sa_title }" disabled="disabled"/>
-					</div>
-					<div>
-						<label for="sa_contents">내용</label>
-						<textarea id="sa_contents" name="sa_contents" rows="10" style="resize:none" disabled="disabled">${saReadBean.sa_contents }</textarea>
-					</div>
-					<c:if test="${saReadBean.sa_file != null }">
-						<div>
-							<label for="sa_file">첨부 이미지</label>
-							<img src="${root }upload/${saReadBean.sa_file}" width="100%"/>						
-						</div>
-					</c:if>
-					<div>
-						<div>
-							<a href="${root }serviceBoard/siteAskList">목록보기</a>
-							<a href="${root}index">돌아가기</a>
-							
-						</div>
-					</div>
+<!-- ===============================  header  =============================== -->
+   <c:import url="/WEB-INF/views/include/header.jsp"/>
+<!-- ===============================  header  =============================== -->
+
+	
+<!-- page title -->
+<section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">문의사항</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /page title -->
+
+<section class="section bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+       <div class="section-title text-center">
+          <h2 class="text-color">공지사항</h2>
+          </div>
+      </div>
+    </div>
+    
+<table>
+    <tr>
+      <th class="th-title">아이디</th>
+      <th class="th-border">${saReadBean.m_id }</th>
+      <th class="th-title">이름</th>
+      <th class="th-border">${saReadBean.m_name }</th>
+    </tr>
+    <tr>
+      <th class="th-title">전화번호</th>
+      <th class="th-border">${saReadBean.sa_tele }</th>
+      <th class="th-title">이메일</th>
+      <th class="th-border">${saReadBean.m_email }</th>
+    </tr>
+    <tr>
+      <th class="th-title">작성날짜</th>
+      <th class="th-border" colspan="3">${saReadBean.sa_time }</th>
+    </tr>
+    <tr>
+      <th class="th-title">제목</th>
+      <th class="th-border"  colspan="3">${saReadBean.sa_title }</th>
+    </tr>
+    
+    <tr>
+     <th colspan="4" class="th-border" height="500px" >
+     <br><br>
+    <c:if test="${saReadBean.sa_file != null }">
+						
+	<img src="${root }upload/${saReadBean.sa_file}" width="100%"/>
+	</c:if>
+     <br><br><br>
+    ${saReadBean.sa_contents }
+     <br><br>
+     </th>
+
+    </tr> 
+</table>
+        
+<div class="btn_area">
+  <br>
+    <div align="right">
+  
+      <input type="button" value="목록" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/siteAskList'"/>
+
+  </div>
+</div>
+</div>
+
+</section>
+
+<!-- ===============================  footer  =============================== -->
+ <c:import url="/WEB-INF/views/include/footer.jsp"/>
+<!-- ===============================  footer  =============================== -->
+
+<!-- jQuery -->
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- aos -->
+<script src="plugins/aos/aos.js"></script>
+<!-- venobox popup -->
+<script src="plugins/venobox/venobox.min.js"></script>
+<!-- filter -->
+<script src="plugins/filterizr/jquery.filterizr.min.js"></script>
+<!-- google map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
+<script src="plugins/google-map/gmap.js"></script>
+
+<!-- Main Script -->
+<script src="js/script.js"></script>
 
 </body>
 </html>

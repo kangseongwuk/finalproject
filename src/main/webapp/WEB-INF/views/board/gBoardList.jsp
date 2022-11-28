@@ -603,7 +603,7 @@ function fn_iframe(url) {
 
 
    <!-- ===============================  footer  =============================== -->
-   <c:import url="/WEB-INF/views/include/footer.jsp" />
+<%--  <c:import url="/WEB-INF/views/include/footer.jsp"/> --%>
    <!-- ===============================  footer  =============================== -->
 
 
