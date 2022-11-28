@@ -246,7 +246,7 @@ function reviewRemove(r_no, r_writerNo) {
       </div>
     </div>
     <!-- course info -->
-    <div class="row align-items-center mb-5">
+  <div class="row align-items-center mb-5">
       <div class="col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0">
         <h2>${academyInfoBasic.a_name }</h2>
       </div>
@@ -254,7 +254,7 @@ function reviewRemove(r_no, r_writerNo) {
         <ul class="list-inline text-xl-center">
           <li class="list-inline-item mr-4 mb-3 mb-sm-0">
             <div class="d-flex align-items-center">
-              <i class="ti-book text-primary icon-md mr-2"></i>
+            <img class="icon-width" src="images/icon/icons4.png" style="width: 40px;">
               <div class="text-left">
                 <h6 class="mb-0">지역</h6>
                 <p class="mb-0">${academyInfoBasic.a_location }</p>
@@ -263,16 +263,18 @@ function reviewRemove(r_no, r_writerNo) {
           </li>
           <li class="list-inline-item mr-4 mb-3 mb-sm-0">
             <div class="d-flex align-items-center">
-              <i class="ti-alarm-clock text-primary icon-md mr-2"></i>
+             <img class="icon-width" src="images/icon/icons2.png" style="width: 40px;">
               <div class="text-left">
                 <h6 class="mb-0">전화번호</h6>
                 <p class="mb-0">${academyInfoBasic.a_tele }</p>
               </div>
             </div>
           </li>
+          
+         
           <li class="list-inline-item mr-4 mb-3 mb-sm-0">
             <div class="d-flex align-items-center">
-              <i class="ti-wallet text-primary icon-md mr-2"></i>
+              <img class="icon-width" src="images/icon/icons5.png" style="width: 40px;">
               <div class="text-left">
                 <h6 class="mb-0">학원분류</h6>
                <p class="mb-0" id="a_classifySpace">${academyInfoBasic.a_classify}</p>
@@ -293,7 +295,6 @@ function reviewRemove(r_no, r_writerNo) {
       </a>
    </c:if>
    <!--  /like button  -->
-        <a href="course-single.html" class="btn btn-primary">상담예약</a>
       </div>
       <!-- border -->
       <div class="col-12 mt-4 order-4">

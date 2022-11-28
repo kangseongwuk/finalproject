@@ -1114,7 +1114,7 @@ link:focus,
 
 .footer {
     border-color: #494a43 !important;
-    padding-top: 60px;
+    padding-top: 0px;
     bottom:0;
     width:100%;
 }

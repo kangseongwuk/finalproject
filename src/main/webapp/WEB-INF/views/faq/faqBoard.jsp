@@ -34,17 +34,17 @@
   <link rel="stylesheet" href="plugins/aos/aos.css">
   <!-- venobox popup -->
   <link rel="stylesheet" href="plugins/venobox/venobox.css">
-
+	
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/faqstyle.css" rel="stylesheet">
+  <link href="css/faqBoard.css" rel="stylesheet">
+  
 
   <!--Favicon-->
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
 </head>
-
 <body>
 
 <!-- ===============================  header  =============================== -->
@@ -68,64 +68,55 @@
 <!-- /page title -->
 
 <!-- blogs -->
-<section class="section bg-white">
-  <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-6">
-        <div class="section-title text-center">
-          <h2 class="text-color">자주 묻는 질문</h2>
-        </div>
-      </div>
-    </div>
-   <c:forEach var="str" items="${faqlist}" varStatus="status">
-   
-    <div class="row justify-content-center">
-    
-      <div class="col-lg-9">
-        <div class="accordion accordion-border-bottom" id="accordionFAQ">
-          <div align="right">
-           <c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
-          <button class="search-btn btn-color" onclick="location.href='${root }faq/faqModify?fb_no=${str.fb_no }'">수정</button>
-          <button class="search-btn btn-color" onclick="location.href='${root }faq/faqDelete?fb_no=${str.fb_no }'" >삭제</button>
-           </c:if>
-          
-          <div class="accordion-item">
-          <br>
-            <h2 class="accordion-header accordion-button h5 border-0 collapsed"
-              style="background-color:mistyrose"
-              id="heading-${status.index}" type="button" data-bs-toggle="collapse"
-              data-bs-target="#collapse-${status.index}" aria-expanded="true"
-              aria-controls="collapse-${status.index}">
-              <span id="Qstyle">Q</span> &nbsp; ${str.fb_contentsQ }  
-                &emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;  
-            
+<section class="faq-section">
+<div class="container">
+  <div class="row">
+                    <!-- ***** FAQ Start ***** -->
+                    <div class="col-md-6 offset-md-3">
 
-            </h2>
-            <div id="collapse-${status.index}"
-              class="accordion-collapse border-0 collapse"
-              style="background-color: lavender"
-              aria-labelledby="${status.index}" data-bs-parent="#accordionFAQ">
-              <div class= "accordion-header h5 border-0 active text-left"> &nbsp;&nbsp;&nbsp;&nbsp; 
-             <br> <span id="Astyle">A</span>  &nbsp; ${str.fb_contentsA } <br>
-              </div>
-            </div>
-           
-          </div>
-        </div> 
-      </div>
-       </div>
-    </div>
-    <br><br>
-  </c:forEach>
+                        <div class="faq-title text-center pb-3">
+                            <h2>FAQ</h2>
+                        </div>
+                    </div>
+                     
+                    <div class="col-md-6 offset-md-3" style="width: 10%; margin-left: 150px;">
+                        <div class="faq" id="accordion" style="width: 150%;">
+                     <c:forEach var="str" items="${faqlist}" varStatus="status">
+                            <div class="card">
+                               
+                                <div class="card-header" id="faqHeading-1">
+                           
+                                    <div class="mb-0">
+                                        <h5 class="faq-title" data-toggle="collapse" data-target="#faqCollapse-${status.index}" data-aria-expanded="true" data-aria-controls="faqCollapse-${status.index}">
+                                            <span class="badge">${status.index+1}</span>${str.fb_contentsQ } 
+                                                  <c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
+											      	  <button class="search-btn btn-color" onclick="location.href='${root }faq/faqDelete?fb_no=${str.fb_no }'"style="float: right; margin-top: -1%;" >삭제</button>
+											          <button class="search-btn btn-color" onclick="location.href='${root }faq/faqModify?fb_no=${str.fb_no }' "style="float: right; margin-top: -1%;">수정</button> 
+           										  </c:if> 
+                                        </h5>
+                                    
+                                    </div>
+                                </div>
+                                <div id="faqCollapse-${status.index}" class="collapse" aria-labelledby="faqHeading-${status.index}" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>${str.fb_contentsA }  </p>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                     </c:forEach>
+                        </div>
+                    </div>
+                  </div>
+                   <c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
+					  <div align = "right">
+					 	 <button class="search-btn btn-color" onclick="location.href='${root }faq/faqWrite'" style="margin-right: 13.5%; margin-top: 1%;">글쓰기</button>
+					  </div>
+  				</c:if>
+                </div>
+                
+                </section>
 
-  <c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
- <div align = "right">
-  <button class="search-btn btn-color" onclick="location.href='${root }faq/faqWrite'">글쓰기</button>
-  </div>
-  </c:if>
-  </div>
-</section>
-<!-- /blogs -->
 
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>

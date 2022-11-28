@@ -11,38 +11,38 @@
 </head>
 <body>
 	<form:form action="${root}academymember/join_pro" method="post" modelAttribute="joinAcademyMemberBean">
-		<div>
 			<form:label path="a_id">아이디</form:label>
+		<div>
 			<form:input path="a_id"/>
 			<form:errors path="a_id"></form:errors>
 		</div>
-		<div>
 			<form:label path="a_pw">비밀번호</form:label>
+		<div>
 			<form:input path="a_pw"/>
 			<form:errors path="a_pw"></form:errors>
 		</div>
-		<div>
 			<form:label path="a_name">이름</form:label>
+		<div>
 			<form:input path="a_name"/>
 			<form:errors path="a_name"/>
 		</div>
-		<div>
 			<form:label path="a_CRN">사업자등록번호</form:label>
+		<div>
 			<form:input path="a_CRN"/>
 			<form:errors path="a_CRN"/>
 		</div>
-		<div>
 			<form:label path="a_location">지역(동까지)</form:label>
+		<div>
 			<form:input path="a_location"/>
 			<form:errors path="a_location"/>
 		</div>
-		<div>
 			<form:label path="a_locationDetail">상세주소</form:label>
+		<div>
 			<form:input path="a_locationDetail"/>
 			<form:errors path="a_locationDetail"/>
 		</div>
-		<div>
 			<form:label path="a_tele">학원대표전화번호</form:label>
+		<div>
 			<form:input path="a_tele"/>
 			<form:errors path="a_tele"/>
 		</div>

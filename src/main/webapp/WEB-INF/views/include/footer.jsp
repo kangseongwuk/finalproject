@@ -10,7 +10,7 @@
 </head>
 <body>
 <!-- footer -->
-<footer>
+<footer class="">
 <!-- copyright -->
   <div class="copyright py-4 bg-footer">
     <div class="container">

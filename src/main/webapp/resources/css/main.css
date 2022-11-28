@@ -131,19 +131,18 @@ a.link-copy {
   margin-right: 5px;
 }
 .form-area {
-  position: absolute;
-  top: 20%;
-  left: 40%;
-  width: 20%;
-  height: 60%;
-  padding: 20px 0;
-  background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  z-index: 2;
-
-  opacity: 0;
-  transition: opacity 0.5s ease-in 0.2s;
+	position: absolute;
+    top: 10%;
+    left: 40%;
+    width: 20%;
+    height: 70%;
+    padding: 20px 0px;
+    background: white;
+    box-shadow: rgb(0 0 0 / 20%) 0px 0px 10px;
+    border-radius: 10px;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s ease-in 0.2s;
 }
 .organize-form {
   width: 100%;

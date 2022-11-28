@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:url var='root' value='/'/>
 <!DOCTYPE html>
 
@@ -51,17 +52,59 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <link rel="icon" href="images/favicon.png" type="image/x-icon">
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var elm = ".box";
+            $(elm).each(function (index) {
+                // 개별적으로 Wheel 이벤트 적용
+                $(this).on("mousewheel DOMMouseScroll", function (e) {
+                    e.preventDefault();
+                    var delta = 0;
+                    if (!event) event = window.event;
+                    if (event.wheelDelta) {
+                        delta = event.wheelDelta / 120;
+                        if (window.opera) delta = -delta;
+                    } 
+                    else if (event.detail)
+                        delta = -event.detail / 3;
+                    var moveTop = $(window).scrollTop();
+                    var elmSelecter = $(elm).eq(index);
+                    // 마우스휠을 위에서 아래로
+                    if (delta < 0) {
+                        if ($(elmSelecter).next() != undefined) {
+                            try{
+                                moveTop = $(elmSelecter).next().offset().top;
+                            }catch(e){}
+                        }
+                    // 마우스휠을 아래에서 위로
+                    } else {
+                        if ($(elmSelecter).prev() != undefined) {
+                            try{
+                                moveTop = $(elmSelecter).prev().offset().top;
+                            }catch(e){}
+                        }
+                    }
+                     
+                    // 화면 이동 0.8초(300)
+                    $("html,body").stop().animate({
+                        scrollTop: moveTop + 'px'
+                    }, {
+                        duration: 300, complete: function () {
+                        }
+                    });
+                });
+            });
+        }
+    </script>
 </head>
 
 <body>
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
-
-
 <!-- hero slider -->
-<section class="hero-section overlay bg-cover" data-background="images/banner/school-2761394_1920.jpg">
+<section class="box hero-section overlay bg-cover" data-background="images/banner/school-2761394_1920.jpg">
   <div class="container">
     <div class="hero-slider">
       <!-- slider item -->
@@ -71,7 +114,7 @@
             <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">SKYCASTLE<br>성공을 확신합니다!</h1>
             <p class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">우리가 하는일은 누군가에게는 첫 출발, 또 누군가에게는 새로운 출발이 될 전환점이되는 곳입니다.
               </p>
-            <a href="contact.html" class="btn btn-primary" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".7">더보기</a>
+            <a href="${root}board/about " class="btn btn-primary" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".7">더보기</a>
           </div>
         </div>
       </div>
@@ -79,12 +122,10 @@
       <div class="hero-slider-item">
         <div class="row">
           <div class="col-md-8" style="all:inherit;">
-          <div style="display:inline-block;">
-            <img class="hero-section overlay bg-cover" src="images/teachers/teacher-1.png" style="margin-left:22%">
-           </div>
-          <div style="display:inline-block;">
-          <br><br>
-            <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">12월<br>TOP강사</h1>
+            <img class="hero-section overlay bg-cover" src="images/teachers/teacher-1.png" style="left: 8%;width: 20%;">
+          <div style="display:inline-block;padding-left: 13%;">
+          <br><br><br>
+            <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">12월 TOP강사</h1>
             <h3 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">차 해 나</h3>
             <h4 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">과목 : 언어</h4>
             <h5 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">메가스터디 종로점</h5>
@@ -97,22 +138,22 @@
       <div class="hero-slider-item">
         <div class="row">
           <div class="col-md-8">
-            <h1 class="text-white" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">Your bright future is our mission</h1>
-            <p class="text-white" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor
-              incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer</p>
-            <a href="contact.html" class="btn btn-primary" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="zoomIn" data-delay-in=".7">더보기</a>
+            <h1 class="text-white" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">E V E N T</h1>
+            <p class="text-white" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".4">현재 진행 중인 이벤트가 없습니다.
+            직전 이벤트 사이트 추천 추첨 기프티콘
+            </p>
+            <a href="#" class="btn btn-primary" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="zoomIn" data-delay-in=".7">더보기</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <!-- /hero slider -->
 
 <!-- banner-feature -->
-<section class="bg-gray overflow-md-hidden" style="padding-top:10px;">
+<section class="bg-gray overflow-md-hidden box" style="padding-top:10px;padding-bottom:0px;">
   <div class="container-fluid p-0">
     <div class="row no-gutters">
       <div class="col-xl-4 col-lg-5 align-self-end">
@@ -151,73 +192,90 @@
 </section>
 <!-- /banner-feature -->
 
-<!-- teachers -->
+<!-- 즐겨찾기 학원 리스트-->
 
-<section class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <!-- teacher category list -->
-        <ul class="list-inline text-center filter-controls mb-5">
-          <li class="list-inline-item m-3 text-uppercase" data-filter="arts">이달의 학원</li>
-          <li class="list-inline-item m-3 text-uppercase" data-filter="law">이달의 강사</li>
-        </ul>
-      </div>
-    </div>
-    <!-- teacher list -->
-    <div class="row filtr-container">
-  
-      <!-- teacher -->
-      <div data-category="arts" class="col-lg-4 col-sm-6 mb-5 filtr-item">
-        <div class="card border-0 rounded-0 hover-shadow">
-          <img class="card-img-top rounded-0" src="images/teachers/teacher-1.png" alt="teacher">
-          <div class="card-body">
-            <a href="teacher-single.html">
-              <h4 class="card-title">차해나</h4>
-            </a>
-            <p>국어</p>
-          <!--   <ul class="list-inline">
-            </ul> -->
-          </div>
-        </div>
-      </div>
-      <!-- teacher -->
-      <div data-category="Law" class="col-lg-4 col-sm-6 mb-5 filtr-item">
-        <div class="card border-0 rounded-0 hover-shadow">
-          <img class="card-img-top rounded-0" src="images/teachers/teacher-2.png" alt="teacher">
-          <div class="card-body">
-            <a href="teacher-single.html">
-              <h4 class="card-title">이하영</h4>
-            </a>
-            <p>수학</p>
-           <!--  <ul class="list-inline">
-            </ul> -->
-          </div>
-        </div>
-      </div>
-      <!-- teacher -->
-        <div data-category="arts" class="col-lg-4 col-sm-6 mb-5 filtr-item">
-        <div class="card border-0 rounded-0 hover-shadow">
-          <img class="card-img-top rounded-0" src="images/teachers/teacher-3.png" alt="teacher">
-          <div class="card-body">
-            <a href="teacher-single.html">
-              <h4 class="card-title">최태성</h4>
-            </a>
-            <p>한국사</p>
-           <!--  <ul class="list-inline">
-            </ul> -->
-          </div>
-        </div>
-      </div>
-    </div>
+<section class="section text-center" style="padding-top:0px">
+<h2>학원 즐겨찾기 리스트</h2>
+<div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+  <!--Controls-->
+  <div class="controls-top">
+      <a class="carousel-control-prev" href="#carousel-example-multi" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+      </a>
+         <a class="carousel-control-next" href="#carousel-example-multi" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
-</section>
+  <!--/.Controls-->
 
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>
+    <% int i = 0; %>
+    <c:forEach items="${academyInfoTeacher}">
+       <% i++; %>
+       <li data-target="#carousel-example-multi" data-slide-to=<%=i %>></li>
+    </c:forEach>
+  </ol>
+  <!--/.Indicators-->
+
+  <div class="carousel-inner v-2" role="listbox">
+
+    <div class="carousel-item active">
+      <div class="col-12 col-md-4">
+        <div class="card mb-2">
+          <img class="card-img-top" src="images/logo.png" alt="logo"
+            alt="Card image cap">
+          <div class="card-body">
+          	<p><br><br></p>
+            <h4 class="card-title font-weight-bold">마음에 드는 강사에게 리뷰를 남겨주세요.</h4>
+            <p class="card-text"></p>
+            <!-- <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher">Button</a> -->
+            <p><br><br><br></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <c:forEach var="ait" items="${academyInfoTeacher}">
+       <div class="carousel-item">
+         <div class="col-12 col-md-4" style="width:80%;height:80%;">
+           <div class="card mb-2">
+			<c:choose>
+				<c:when test="${ait.t_file != null }">
+					<img class="card-img-top rounded-0" src="${root }upload/${ait.t_file}" />
+				</c:when>
+				<c:otherwise>
+					<img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg" alt="Card image cap">
+				</c:otherwise>
+			</c:choose>
+             <div class="card-body">
+               <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
+               <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
+               <p class="card-text">
+               		<c:choose>
+	               		<c:when test="${fn:length(ait.t_contents) <= 100}">
+	               			${ait.t_contents }
+	               		</c:when>
+						<c:when test="${fn:length(ait.t_contents) > 100}">
+							${fn:substring(ait.t_contents, 0, 99)}...
+						</c:when>
+					</c:choose>
+               </p>
+               <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher?a_memberNo=${ait.a_memberNo}&t_name=${ait.t_name}">상세보기</a>
+             </div>
+           </div>
+         </div>
+       </div>
+    </c:forEach>
+  </div>
+</div>
+</section>
 <!-- /teachers -->
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>
 <!-- ===============================  footer  =============================== -->
-
 
 <!-- jQuery -->
 <script src="plugins/jQuery/jquery.min.js"></script>
