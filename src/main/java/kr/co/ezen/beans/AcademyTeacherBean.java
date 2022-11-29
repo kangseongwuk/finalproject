@@ -9,6 +9,9 @@ public class AcademyTeacherBean {
 	private String t_subject;
 	private String t_contents;
 	private String t_file;
+	private String a_name;
+	
+	
 	
 	private MultipartFile upload_file;
 	
@@ -17,6 +20,12 @@ public class AcademyTeacherBean {
 	}
 	public void setUpload_file(MultipartFile upload_file) {
 		this.upload_file = upload_file;
+	}
+	public String getA_name() {
+		return a_name;
+	}
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
 	}
 	public int getA_memberNo() {
 		return a_memberNo;

@@ -73,8 +73,8 @@ public interface BoardMapper {
 	List<AcademyTeacherBean> getAcademyInfoTeacher(int a_memberNo);
 	
 	//개별 강사 조회
-	@Select("select a_memberNo, t_name, t_subject, t_contents, t_file "
-			+ "from academyTeacherT "
+	@Select("select a_memberNo, t_name, t_subject, t_contents, t_file, a_name "
+			+ "from academyTeacherT natural join academyMemberT "
 			+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name}")
 	AcademyTeacherBean getTeacherInfo(@Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
 	
@@ -111,4 +111,5 @@ public interface BoardMapper {
 	@Delete("delete from reviewT "
 			+ "where a_memberNo = #{a_memberNo} and r_no = #{r_no}")
 	void deleteAcademyReview(@Param("a_memberNo") int a_memberNo,@Param("r_no") int r_no);
+	
 }
