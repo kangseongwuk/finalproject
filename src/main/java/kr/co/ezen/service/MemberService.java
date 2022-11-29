@@ -158,174 +158,181 @@ public class MemberService {
 	  }
 	
 	// 이메일발송
-		public void sendEmail(MemberBean memberBean, String div) throws Exception {
-			// Mail Server 설정
-			String charSet = "utf-8";
-			String hostSMTP = "smtp.naver.com"; // 네이버 이용시 smtp.naver.com
-			String hostSMTPid = ""; //moma417@naver.com
-			String hostSMTPpwd = ""; //3M5PE4G346VL
-			
-			// 보내는 사람 EMail, 제목, 내용
-			String fromEmail = "moma417@naver.com";
-			String fromName = "SkyCastle";
-			String subject = "";
-			String msg = "";
+	public void sendEmail(MemberBean memberBean, String div) throws Exception {
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.naver.com"; // 네이버 이용시 smtp.naver.com
+		String hostSMTPid = ""; //moma417@naver.com
+		String hostSMTPpwd = ""; //3M5PE4G346VL
+		
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "moma417@naver.com";
+		String fromName = "SkyCastle";
+		String subject = "";
+		String msg = "";
 
-			if (div.equals("findpw")) {
-				subject = "스카이캐슬 임시 비밀번호 입니다.";
-				msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-				msg += "<h3 style='color: blue;'>";
-				msg += memberBean.getM_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-				msg += "<p>임시 비밀번호 : ";
-				msg += memberBean.getM_pw() + "</p></div>";
+		if (div.equals("findpw")) {
+			subject = "스카이캐슬 임시 비밀번호 입니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h3 style='color: blue;'>";
+			msg += memberBean.getM_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+			msg += "<p>임시 비밀번호 : ";
+			msg += memberBean.getM_pw() + "</p></div>";
+		}
+
+		// 받는 사람 E-Mail 주소
+		String mail = memberBean.getM_email();
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(465); // 네이버 이용시 587
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+		}
+	}
+
+	//비밀번호찾기
+	public void findPw(HttpServletResponse response, MemberBean memberBean) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		MemberBean ck = memberDAO.readMember(memberBean.getM_id());
+		PrintWriter out = response.getWriter();
+		// 가입된 아이디가 없으면
+		if (memberDAO.readMember(memberBean.getM_id()) == null) {
+			out.print("등록되지 않은 아이디입니다.");
+			out.close();
+		}
+		// 가입된 이메일이 아니면
+		else if (!memberBean.getM_email().equals(ck.getM_email())) {
+			out.print("등록되지 않은 이메일입니다.");
+			out.close();
+		} else {
+			// 임시 비밀번호 생성
+			String pw = "";
+			for (int i = 0; i < 12; i++) {
+				pw += (char) ((Math.random() * 26) + 97);
 			}
+			memberBean.setM_pw(pw);
+			// 비밀번호 변경
+			memberDAO.updatePw(memberBean);
+			// 비밀번호 변경 메일 발송
+			sendEmail(memberBean, "findpw");
 
-			// 받는 사람 E-Mail 주소
-			String mail = memberBean.getM_email();
-			try {
-				HtmlEmail email = new HtmlEmail();
-				email.setDebug(true);
-				email.setCharset(charSet);
-				email.setSSL(true);
-				email.setHostName(hostSMTP);
-				email.setSmtpPort(465); // 네이버 이용시 587
+			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
+			out.close();
+		}
+	}
+		
+	//카카오톡로그인 
+	
+	public String getAccessToken (String authorize_code) {
+		String access_Token = "";
+		String refresh_Token = "";
+		String reqURL = "https://kauth.kakao.com/oauth/token";
 
-				email.setAuthentication(hostSMTPid, hostSMTPpwd);
-				email.setTLS(true);
-				email.addTo(mail, charSet);
-				email.setFrom(fromEmail, fromName, charSet);
-				email.setSubject(subject);
-				email.setHtmlMsg(msg);
-				email.send();
-			} catch (Exception e) {
-				System.out.println("메일발송 실패 : " + e);
+		try {
+			URL url = new URL(reqURL);
+            
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
+            
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+			// POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+            
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			StringBuilder sb = new StringBuilder();
+			sb.append("grant_type=authorization_code");
+            
+			sb.append("&client_id=fbbc5c452681184de4d17b6575dd2e5d"); //본인이 발급받은 key
+			sb.append("&redirect_uri=http://localhost:8700/SkyCastleProject/"); // 본인이 설정한 주소
+            
+			sb.append("&code=" + authorize_code);
+			bw.write(sb.toString());
+			bw.flush();
+            
+			// 결과 코드가 200이라면 성공
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+            
+			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			String result = "";
+            
+			while ((line = br.readLine()) != null) {
+				result += line;
 			}
+			System.out.println("response body : " + result);
+            
+			// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(result);
+            
+			access_Token = element.getAsJsonObject().get("access_token").getAsString();
+			refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+            
+			System.out.println("access_token : " + access_Token);
+			System.out.println("refresh_token : " + refresh_Token);
+            
+			br.close();
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
-		//비밀번호찾기
-		public void findPw(HttpServletResponse response, MemberBean memberBean) throws Exception {
-			response.setContentType("text/html;charset=utf-8");
-			MemberBean ck = memberDAO.readMember(memberBean.getM_id());
-			PrintWriter out = response.getWriter();
-			// 가입된 아이디가 없으면
-			if (memberDAO.readMember(memberBean.getM_id()) == null) {
-				out.print("등록되지 않은 아이디입니다.");
-				out.close();
-			}
-			// 가입된 이메일이 아니면
-			else if (!memberBean.getM_email().equals(ck.getM_email())) {
-				out.print("등록되지 않은 이메일입니다.");
-				out.close();
-			} else {
-				// 임시 비밀번호 생성
-				String pw = "";
-				for (int i = 0; i < 12; i++) {
-					pw += (char) ((Math.random() * 26) + 97);
-				}
-				memberBean.setM_pw(pw);
-				// 비밀번호 변경
-				memberDAO.updatePw(memberBean);
-				// 비밀번호 변경 메일 발송
-				sendEmail(memberBean, "findpw");
-
-				out.print("이메일로 임시 비밀번호를 발송하였습니다.");
-				out.close();
-			}
-		}
+		return access_Token;
+	}
 		
-		//카카오톡로그인 
+	//내가 쓴 문의사항
+	public List<SiteAskBean> getMyaskList(int m_memberNo){
+		return memberDAO.getMyaskList(m_memberNo);
+	}	
+	public SiteAskBean getMyaskRead(Timestamp sa_time, int m_memberNo){
+		return memberDAO.getMyaskRead(sa_time, m_memberNo);
+	}
+	
+	public int getMyAskListCnt(MemberBean myAskBean) {
+		return memberDAO.getMyAskListCnt(myAskBean);
+	}
+	
+	public PageCountBean getMyAskContentCnt(int currentPage) {
+	
+		int content_cnt = memberDAO.getMyAskContentCnt(loginMemberBean.getM_memberNo());
+		 
+		//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
+		PageCountBean mypageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		 
+		return mypageCountBean;
+	}
+	
+	//관리자 마이페이지
+	//public List<MemberBean> getAdminPageList() {
+	//	return memberDAO.getAdminPageList();
+	//}
+	
+	//관리자 회원목록 페이지
+	public List<MemberBean> getAdMemberList(){
+		return memberDAO.getAdMemberList();
+	}
+	
+	//총회원수
+	public int getAdminMemberCnt(MemberBean myAdminMemberBean) {
+		return memberDAO.getAdminMemberCnt(myAdminMemberBean);
+	}
+	
+	//찜목록 페이지 이동
+	public List<AcademyMemberBean> myWishList(int m_memberNo){
+    	return memberDAO.myWishList(m_memberNo);
+    }
 		
-		public String getAccessToken (String authorize_code) {
-			String access_Token = "";
-			String refresh_Token = "";
-			String reqURL = "https://kauth.kakao.com/oauth/token";
-
-			try {
-				URL url = new URL(reqURL);
-	            
-				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-				// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
-	            
-				conn.setRequestMethod("POST");
-				conn.setDoOutput(true);
-				// POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
-	            
-				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-				StringBuilder sb = new StringBuilder();
-				sb.append("grant_type=authorization_code");
-	            
-				sb.append("&client_id=fbbc5c452681184de4d17b6575dd2e5d"); //본인이 발급받은 key
-				sb.append("&redirect_uri=http://localhost:8700/SkyCastleProject/"); // 본인이 설정한 주소
-	            
-				sb.append("&code=" + authorize_code);
-				bw.write(sb.toString());
-				bw.flush();
-	            
-				// 결과 코드가 200이라면 성공
-				int responseCode = conn.getResponseCode();
-				System.out.println("responseCode : " + responseCode);
-	            
-				// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				String line = "";
-				String result = "";
-	            
-				while ((line = br.readLine()) != null) {
-					result += line;
-				}
-				System.out.println("response body : " + result);
-	            
-				// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
-				JsonParser parser = new JsonParser();
-				JsonElement element = parser.parse(result);
-	            
-				access_Token = element.getAsJsonObject().get("access_token").getAsString();
-				refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
-	            
-				System.out.println("access_token : " + access_Token);
-				System.out.println("refresh_token : " + refresh_Token);
-	            
-				br.close();
-				bw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return access_Token;
-		}
-		
-		//내가 쓴 문의사항
-		public List<SiteAskBean> getMyaskList(int m_memberNo){
-			return memberDAO.getMyaskList(m_memberNo);
-		}	
-		public SiteAskBean getMyaskRead(Timestamp sa_time, int m_memberNo){
-			return memberDAO.getMyaskRead(sa_time, m_memberNo);
-		}
-		
-		public int getMyAskListCnt(MemberBean myAskBean) {
-			return memberDAO.getMyAskListCnt(myAskBean);
-		}
-		
-		public PageCountBean getMyAskContentCnt(int currentPage) {
-		
-			int content_cnt = memberDAO.getMyAskContentCnt(loginMemberBean.getM_memberNo());
-			 
-			//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
-			PageCountBean mypageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
-			 
-			return mypageCountBean;
-		}
-		
-		//관리자 마이페이지
-		//public List<MemberBean> getAdminPageList() {
-		//	return memberDAO.getAdminPageList();
-		//}
-		
-		//관리자 회원목록 페이지
-		public List<MemberBean> getAdMemberList(){
-			return memberDAO.getAdMemberList();
-		}
-		//총회원수
-		public int getAdminMemberCnt(MemberBean myAdminMemberBean) {
-			return memberDAO.getAdminMemberCnt(myAdminMemberBean);
-		}
 }

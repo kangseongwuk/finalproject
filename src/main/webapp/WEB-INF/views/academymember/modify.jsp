@@ -39,113 +39,12 @@
 
 </head>
 <body>
-<!-- preloader start -->
-  <div class="preloader">
-    <img src="images/preloader.gif" alt="preloader">
-  </div>
-  <!-- preloader end -->
+
 
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
-<!-- Modal -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>회원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id" name="id"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 학원 로그인 -->
-	<div class="modal fade" id="loginModal2" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>학원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id2" name="id2"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password2"
-									name="password2" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+
 <!-- page title -->
 <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
   <div class="container">
@@ -166,51 +65,58 @@
       <div class="row">
         <div class="col-sm-12 text-center">
           <ul class="list-inline text-center">
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
+           <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 조회</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyaskboard"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyteacher"><h4>학원 강사 조회</h4></a></li>
+			<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academypay"><h4>결제 내역 조회</h4></a></li>     
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/mypage_siteAcaAsk"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
           </ul>
         </div>
       </div>
     </div>
 
 	<!-- academy member modify -->
-	<section class="section">
+	<section class="section bg-gray">
 		<div class="container">
-			<h3 class="text-center">학원 정보 수정</h3>
-			<hr>
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="text-center">학원 강사 정보 입력</h3>
+					<hr>
+				</div>
+			</div>
 			<div class="row justify-content-center">
-				<div>
+			<div class="col-lg-8 mb-5 mb-lg-0">
 					<form:form action="${root}academymember/modify_pro" method="post"
 						modelAttribute="modifyAcademyMemberBean">
 						<form:hidden path="a_memberNo" />
 						<div>
 							<form:label path="a_id"><strong>아이디 :&nbsp;&nbsp;&nbsp;</strong></form:label>
-							<form:input path="a_id" readonly="true" style="text-align:center" size="10"/><hr>
-							<form:errors path="a_id" />
+							<form:input class="form-control mb-3" path="a_id" readonly="true"/><hr>
 						</div>
 						<div>
 							<form:label path="a_name"><strong>이름 :</strong></form:label>
-							<form:input path="a_name" readonly="true" style="text-align:center" size="10"/><hr>
-							<form:errors path="a_name" />
+							<form:input path="a_name" class="form-control mb-3" readonly="true"/><hr>
+						</div>
+							<form:label path="a_location">지역(동까지)</form:label>
+     	 				<div>
+      						<select tabindex="0" id="sido" name="sido"><option value="">지역 선택</option></select>
+							<select tabindex="0" id="sigugun" name="sigugun"><option value="">구-시선택</option></select>
+							<select tabindex="0" id="dong" name="dong"><option value="">구-시선택</option></select>
+		 					<form:input class="form-control mb-3" type="hidden" path="a_location" value=""></form:input><hr>
 						</div>
 						<div>
-							<form:label path="a_location"><strong>지역(동까지) :</strong></form:label>
-							<form:input path="a_location" style="text-align:center" size="15"/><hr>
-							<form:errors path="a_location" />
-						</div>
-						<div>
-							<form:label path="a_locationDetail"><strong>상세주소 :</strong></form:label>
-							<form:input path="a_locationDetail" style="text-align:center" size="15"/><hr>
+							<form:label path="a_locationDetail"><strong>상세주소</strong></form:label>
+							<form:input path="a_locationDetail" class="form-control mb-3"/><hr>
 							<form:errors path="a_locationDetail" />
 						</div>
 						<div>
-							<form:label path="a_tele"><strong>학원대표전화번호 :</strong></form:label>
-							<form:input path="a_tele" style="text-align:center" size="10"/><hr>
+							<form:label path="a_tele"><strong>학원대표전화번호</strong></form:label>
+							<form:input path="a_tele" class="form-control mb-3"/><hr>
 							<form:errors path="a_tele" />
 						</div>
 						<div>
+						<form:label path="a_classify">학원분류</form:label> &nbsp;&nbsp;
 							<form:select path="a_classify" >
 								<form:option value="1" label="종합" />
 								<form:option value="2" label="단과" />
@@ -220,10 +126,101 @@
 						<div class="text-center">
 							<form:button type="submit" class="btn btn-primary">정보수정</form:button>
 						</div>
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+						      <script type="application/javascript"
+								src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
+						      <script type="text/javascript">
+						      	jQuery(document).ready(function () {
+						    		//sido option 추가
+						    		jQuery.each(hangjungdong.sido, function (idx, code) {
+						    			//append를 이용하여 option 하위에 붙여넣음
+						    			jQuery('#sido').append(fn_option(code.sido, code.codeNm));
+						    		});
+						
+						    		//sido 변경시 시군구 option 추가
+						    		jQuery('#sido').change(function () {
+						    			/* //시도 히든 값
+						    			if($('#sido option:selected').val()=="") {
+						    				$('#sido_text').val("");
+						    			}else {
+						    				$('#sido_text').val($('#sido option:selected').text());
+						    			}
+						    			$('#sigugun_text').val(""); */
+						    			
+						    			jQuery('#sigugun').show();
+						    			jQuery('#sigugun').empty();
+						    			jQuery('#sigugun').append(fn_option('', '선택')); //
+						    			jQuery.each(hangjungdong.sigugun, function (idx, code) {
+						    				if (jQuery('#sido > option:selected').val() == code.sido)
+						    					jQuery('#sigugun').append(fn_option(code.sigugun, code.codeNm));
+						    			});
+						
+						    			//세종특별자치시 예외처리
+						    			//옵션값을 읽어 비교
+						    			if (jQuery('#sido option:selected').val() == '36') {
+						    				jQuery('#sigugun').hide();
+						    				//index를 이용해서 selected 속성(attr)추가
+						    				//기본 선택 옵션이 최상위로 index 0을 가짐
+						    				jQuery('#sigugun option:eq(1)').attr('selected', 'selected');
+						    				//trigger를 이용해 change 실행
+						    				jQuery('#sigugun').trigger('change');
+						    			}
+						    		});
+						
+						    		//시군구 변경시 행정동 옵션추가
+						    		jQuery('#sigugun').change(function () {
+						    			/* //시군구 히든 값
+						    			if($('#sigugun option:selected').val()=="") {
+						    				$('#sigugun_text').val("");
+						    			}else {
+						    				$('#sigugun_text').val($('#sigugun option:selected').text());
+						    			} */
+						    			
+						    			
+						    			
+						    			//option 제거
+						    			jQuery('#dong').empty();
+						    			jQuery.each(hangjungdong.dong, function (idx, code) {
+						    				if (jQuery('#sido > option:selected').val() == code.sido && jQuery('#sigugun > option:selected').val() == code.sigugun)
+						    					jQuery('#dong').append(fn_option(code.dong, code.codeNm));
+						    			});
+						    			//option의 맨앞에 추가
+						    			jQuery('#dong').prepend(fn_option('', '선택'));
+						    			//option중 선택을 기본으로 선택
+						    			jQuery('#dong option:eq("")').attr('selected', 'selected');
+						    			
+						    		});
+						    		
+						    		
+						    		jQuery('#dong').change(function () {
+						    			var sido = jQuery('#sido option:selected');
+						    			var sigugun = jQuery('#sigugun option:selected');
+						    			var dong = jQuery('#dong option:selected');
+						
+						    			var dongName = sido.text() + ' ' + sigugun.text() + ' ' + dong.text(); // 시도/시군구/읍면동 이름
+						    			jQuery('#a_location').val(dongName);
+						
+						    			/* var dongCode = sido.val() + sigugun.val() + dong.val() + '00'; // 읍면동코드
+						    			jQuery('#dongCode').text(dongCode); */
+						    			//동네예보 URL
+						    			//var url = 'https://www.weather.go.kr/weather/process/timeseries-dfs-body-ajax.jsp?myPointCode=' + dongCode + '&unit=K';
+						    			//iframe으로 결과 보기
+						    			//fn_iframe(url);
+						    		});
+						    		
+						    	});
+						
+						    	function fn_option(code, name) {
+						    		return '<option value="' + code + '">' + name + '</option>';
+						    	}
+						    	/* function fn_iframe(url) {
+						    		jQuery('#iframe').attr('src', url);
+						    	} */
+						      </script>
 					</form:form>
 				</div>
 			</div>
-		</div>
+			</div>
 	</section>
 
 	<!-- ===============================  footer  =============================== -->

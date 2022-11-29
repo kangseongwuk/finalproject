@@ -59,7 +59,7 @@
         <ul class="list-inline custom-breadcrumb mb-2">
           <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
           <li class="list-inline-item text-white h3 font-secondary nasted">사이트 관리</li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">문의사항 (회원)</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">회원문의</li>
         </ul>
       </div>
     </div>
@@ -77,9 +77,9 @@
 					<li class="list-inline-item"><a class="d-inline-block p-2"
 						href="${root}academymember/mypageAdmin_academy"><h4>학원 정보</h4></a></li>
 					<li class="list-inline-item"><a class="d-inline-block p-2"
-						href="${root}serviceBoard/siteAskList"><h4>문의사항(회원)</h4></a></li>
+						href="${root}serviceBoard/siteAskList"><h4>회원문의</h4></a></li>
 					<li class="list-inline-item"><a class="d-inline-block p-2"
-						href="${root}serviceBoard/siteAcaAskList"><h4>문의사항(학원)</h4></a></li>
+						href="${root}serviceBoard/siteAcaAskList"><h4>학원문의</h4></a></li>
 				</ul>
 			</div>
 		</div>
@@ -91,7 +91,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title text-center">
-						<h2 class="text-color">문의사항 (회원)</h2>
+						<h2 class="text-color">회원문의</h2>
 						<p>총게시물 ${saListCnt} 개</p>
 					</div>
 				</div>

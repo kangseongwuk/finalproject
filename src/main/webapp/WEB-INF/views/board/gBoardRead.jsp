@@ -179,37 +179,40 @@ function reviewWrite() {
 //리뷰 삭제
 function reviewRemove(r_no, r_writerNo) {
 	//alert("일단 되긴 함?2");
-	confirm("삭제 하시겠습니까?");
+	if(confirm("삭제 하시겠습니까?")){
 	
-	$.ajax({
-		url : "academyReviewRemove",
-		type : "post",
-		dataType : "text",
-		data : {
-			"a_memberNo" : ${academyInfoBasic.a_memberNo},
-			"r_no" : r_no,
-			"r_writerNo" : r_writerNo
-		},
-		error : function(e) {
-			
-			alert("안됨4");
-			
-		},
-		success : function(result) {
-			if(result=="false") {
-				alert("리뷰는 일반 회원으로 로그인 시에만 작성할 수 있습니다.");
-			} else if(result=="selfDel") {
-				alert("리뷰가 삭제되었습니다.");
-				location.reload();
-			} else if(result=="adminDel") {
-				alert("관리자권한으로 리뷰가 삭제되었습니다.");
-				location.reload();
-			} else if(result=="unmatched") {
-				alert("권한이 없습니다.");
+		$.ajax({
+			url : "academyReviewRemove",
+			type : "post",
+			dataType : "text",
+			data : {
+				"a_memberNo" : ${academyInfoBasic.a_memberNo},
+				"r_no" : r_no,
+				"r_writerNo" : r_writerNo
+			},
+			error : function(e) {
+				
+				alert("안됨4");
+				
+			},
+			success : function(result) {
+				if(result=="false") {
+					alert("리뷰는 일반 회원으로 로그인 시에만 작성할 수 있습니다.");
+				} else if(result=="selfDel") {
+					alert("리뷰가 삭제되었습니다.");
+					location.reload();
+				} else if(result=="adminDel") {
+					alert("관리자권한으로 리뷰가 삭제되었습니다.");
+					location.reload();
+				} else if(result=="unmatched") {
+					alert("권한이 없습니다.");
+				}
 			}
-		}
-		
-	});
+			
+		});
+	} else {
+		return false;
+	}
 }
 
 
@@ -417,7 +420,8 @@ function reviewRemove(r_no, r_writerNo) {
 <!-- /section -->
 
 <!-- teachers carousel -->
-<section class="section text-center">
+<section class="section-sm">
+	<div class="container">
 	<h2>강사진</h2>
 	<div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
 		<!--Controls-->
@@ -494,6 +498,7 @@ function reviewRemove(r_no, r_writerNo) {
 			</div>
 			</c:forEach>
 		</div>
+	</div>
 	</div>
 </section>
 <!-- /teachers carousel -->

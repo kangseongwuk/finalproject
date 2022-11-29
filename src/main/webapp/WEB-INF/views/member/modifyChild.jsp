@@ -43,13 +43,36 @@
 <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	   
+	   var convertData = {
+	      "grade": [
+	         "미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
+	      ],
+	      "a_classify": {
+	         "1":"종합",
+	         "2":"단과",
+	         "3":"예체능(기타)"
+	      }
+	   }
+	   
+	   window.onload = convertPro()
+	   
+	   function convertPro() {
+	      $('#gradeSpace').html(convertData.grade[]);
+	      $('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
+	      //alert("이건 되냐?");
+	      //alert(convertData.a_classify[${academyInfoBasic.a_classify }]);
+	      
+	   }
+	});
 
+
+</script>
 <body>
-	<!-- preloader start -->
-	<div class="preloader">
-		<img src="images/preloader.gif" alt="preloader">
-	</div>
-	<!-- preloader end -->
+	
 
 	<!-- ===============================  header  =============================== -->
 	<c:import url="/WEB-INF/views/include/header.jsp" />
@@ -63,8 +86,8 @@
 				<div class="col-md-8">
 					<ul class="list-inline custom-breadcrumb mb-2">
 						<li class="list-inline-item"><a
-							class="h2 text-primary font-secondary">Home</a></li>
-						<li class="list-inline-item text-white h3 font-secondary nasted">정보
+							class="h2 text-primary font-secondary" href="${root}member/mypage">My Page</a></li>
+						<li class="list-inline-item text-white h3 font-secondary nasted">자녀 정보
 							수정</li>
 					</ul>
 				</div>
@@ -72,36 +95,82 @@
 		</div>
 	</section>
 	<!-- /page title -->
+<!-- side menu nav -->
+<div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/mypage"><h4>내 정보</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/studentinfo"><h4>자녀 정보</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/myfavorite"><h4>찜 목록</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/mypage_siteAsk?m_memberNo=${sessionScope.loginMemberBean.m_memberNo}"><h4>내 문의사항</h4></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-
-	<!-- insert section -->
+	<!-- modify section -->
 	<section class="section">
 		<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
 			<h3 class="text-center">자녀 정보 수정</h3>
 			<hr>
+	</div>
+	</div>
 			<div class="row justify-content-center">
-				<div>
+				<div class="col-lg-8 mb-5 mb-lg-0">
 					<form:form action="${root}member/modifyChild_pro" method="post"
 						modelAttribute="modifyChildBean">
 						<form:hidden path="m_memberNo" />
 						<div>
 							<form:label path="c_name">학생이름</form:label>
-							<form:input path="c_name" readonly="true" />
+							<form:input class="form-control mb-3" path="c_name" readonly="true" />
 						</div>
 						<div>
-							<form:label path="c_grade">학년</form:label>
-							<form:input path="c_grade" />
+							<form:label path="c_grade">학년</form:label>&nbsp;&nbsp;
+							<form:select path="c_grade">
+								<form:option value="0" label="미취학" />
+								<form:option value="1" label="초1" />
+								<form:option value="2" label="초2" />
+								<form:option value="3" label="초3" />
+								<form:option value="4" label="초4" />
+								<form:option value="5" label="초5" />
+								<form:option value="6" label="초6" />
+								<form:option value="7" label="중1" />
+								<form:option value="8" label="중2" />
+								<form:option value="9" label="중3" />
+								<form:option value="10" label="고1" />
+								<form:option value="11" label="고2" />
+								<form:option value="12" label="고3" />
+								<form:option value="13" label="재수이상" />
+							</form:select>
+							<hr>
 						</div>
 						<div>
-							<form:label path="c_gender">성별</form:label>
-							<form:input path="c_gender" />
+							성별 &nbsp;&nbsp;
+							<form:label path="c_gender">남자</form:label>
+							<form:radiobutton path="c_gender" value="남"/>
+							<form:label path="c_gender">여자</form:label>
+							<form:radiobutton path="c_gender" value="여"/>
+							<hr>
 						</div>
 						<div>
-							<form:label path="c_level">학업수준</form:label>
-							<form:input path="c_level" />
+							학업수준 &nbsp;&nbsp;
+							<form:label path="c_level">상</form:label>
+							<form:radiobutton path="c_gender" value="상"/> &nbsp;
+							<form:label path="c_level">중상</form:label>
+							<form:radiobutton path="c_gender" value="중상"/> &nbsp;
+							<form:label path="c_level">중</form:label>
+							<form:radiobutton path="c_gender" value="중"/> &nbsp;
+							<form:label path="c_level">중하</form:label>
+							<form:radiobutton path="c_gender" value="중하"/> &nbsp;
+							<form:label path="c_level">하</form:label>
+							<form:radiobutton path="c_gender" value="하"/> &nbsp;
+							<hr>
 						</div>
 						
-						<div class="text-center">
+						<div class="text-right">
 							<form:button type="submit" class="btn btn-primary">수정하기</form:button>
 						</div>
 					</form:form>

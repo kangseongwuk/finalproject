@@ -48,11 +48,7 @@
 </head>
 
 <body>
-	<!-- preloader start -->
-	<div class="preloader">
-		<img src="images/preloader.gif" alt="preloader">
-	</div>
-	<!-- preloader end -->
+	
 
 	<!-- ===============================  header  =============================== -->
 	<c:import url="/WEB-INF/views/include/header.jsp" />

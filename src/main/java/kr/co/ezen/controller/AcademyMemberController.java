@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -219,6 +220,23 @@ public class AcademyMemberController {
 			return "academymember/academyteacher";
 		}
 		
+		//학원강사 입력페이지
+		@GetMapping("/academyteacher_insert")
+		public String academyteacher_insert(@ModelAttribute("teacherInsertBean")AcademyTeacherBean teacherInsertBean) {
+			return "academymember/academyteacher_insert";
+		}
+		
+		//학원강사입력
+		@PostMapping("/academyteacher_insertPro")
+		public String academyteacher_insertPro(@ModelAttribute("teacherInsertBean")AcademyTeacherBean teacherInsertBean, BindingResult result, Model model) {
+			if(result.hasErrors()) {
+				return "academymember/academyteacher_insert";
+			}
+			academyMemberService.insertTeacher(teacherInsertBean);
+			List<AcademyTeacherBean> academyteacherlist = academyMemberService.academyTeacherList(loginAcademyMemberBean.getA_memberNo());
+			model.addAttribute("academyteacherlist", academyteacherlist);
+			return "academymember/academyteacher";
+		}
 		//학원강사 수정페이지
 		@GetMapping("academyteacher_modify")
 		public String academyteacher_modify(@ModelAttribute("teacherModifyBean") AcademyTeacherBean teacherModifyBean, @RequestParam("t_name") String t_name) {

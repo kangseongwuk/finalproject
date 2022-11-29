@@ -56,7 +56,7 @@ public interface AcademyMemberMapper {
 	void deleteAcademyIntroduce(int a_memberNo);
 	//강사정보입력
 		@Insert("insert into academyteacherT(a_memberNo, t_name, t_subject, t_contents, t_file) "
-				+ "values(#{a_memberNo}, #{t_name}, #{t_subject}, #{t_contents}, #{t_file, jdbcType=VARCHAR}")
+				+ "values(#{a_memberNo}, #{t_name}, #{t_subject}, #{t_contents}, #{t_file, jdbcType=VARCHAR})")
 		void insertTeacher(AcademyTeacherBean insertAcademyTeacherBean);
 		
 		//강사정보수정

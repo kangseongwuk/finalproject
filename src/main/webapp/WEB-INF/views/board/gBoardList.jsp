@@ -448,15 +448,15 @@ function fn_iframe(url) {
 							<form onsubmit="searchPlaces(); return false;">
 								<%if(request.getParameter("sido_text")==null && request.getParameter("sigugun_text") == null) {
 									if(request.getParameter("acaName")=="" || request.getParameter("acaName")==null) {%>
-										<!-- 키워드 :  --><input type="text" value="학원" id="keyword" size="15">
+										<!-- 키워드 :  --><input type="hidden" value="학원" id="keyword" size="15">
 									<%} else { %>
-										<input type="text" value="<%=request.getParameter("acaName") %>" id="keyword" size="15">
+										<input type="hidden" value="<%=request.getParameter("acaName") %>" id="keyword" size="15">
 									<%} %>
 								<%} else { 
 									if(request.getParameter("acaName")=="" || request.getParameter("acaName")==null) {%>
-										<input type="text" value="<%=request.getParameter("sido_text")%> <%=request.getParameter("sigugun_text")%> 학원" id="keyword" size="15">
+										<input type="hidden" value="<%=request.getParameter("sido_text")%> <%=request.getParameter("sigugun_text")%> 학원" id="keyword" size="15">
 									<%} else { %>
-										<input type="text" value="<%=request.getParameter("sido_text")%> <%=request.getParameter("sigugun_text")%> <%=request.getParameter("acaName") %>" id="keyword" size="15">
+										<input type="hidden" value="<%=request.getParameter("sido_text")%> <%=request.getParameter("sigugun_text")%> <%=request.getParameter("acaName") %>" id="keyword" size="15">
 									<%} %>
 								<%} %>
 						      <!-- <button type="submit">검색하기</button> -->

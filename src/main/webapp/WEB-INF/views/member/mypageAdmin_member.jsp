@@ -76,9 +76,9 @@
 					<li class="list-inline-item"><a class="d-inline-block p-2"
 						href="${root}academymember/mypageAdmin_academy"><h4>학원 정보</h4></a></li>
 					<li class="list-inline-item"><a class="d-inline-block p-2"
-						href="${root}serviceBoard/siteAskList"><h4>문의사항(회원)</h4></a></li>
+						href="${root}serviceBoard/siteAskList"><h4>회원문의</h4></a></li>
 					<li class="list-inline-item"><a class="d-inline-block p-2"
-						href="${root}serviceBoard/siteAcaAskList"><h4>문의사항(학원)</h4></a></li>
+						href="${root}serviceBoard/siteAcaAskList"><h4>학원문의</h4></a></li>
 				</ul>
 			</div>
 		</div>

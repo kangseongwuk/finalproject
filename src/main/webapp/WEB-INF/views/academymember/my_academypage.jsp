@@ -7,7 +7,29 @@
 
 <html lang="ko">
 <head>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>s
+<script type="text/javascript">
+$(document).ready(function() {
+	   
+	   var convertData = {
+	      "a_classify": {
+	         "1":"종합",
+	         "2":"단과",
+	         "3":"예체능(기타)"
+	      }
+	   }
+	   
+	   window.onload = convertPro();
+	   
+	   function convertPro() {
+	    
+	      $('#a_classify').html(convertData.a_classify[${modifyAcademyMemberBean.a_classify}]);
+	      //alert("이건 되냐?");
+	      //alert(convertData.a_classify[${modifyAcademyMemberBean.a_classify }]);
+	      
+	   }
+	});
+</script>
   <!-- Basic Page Needs
 	================================================== -->
   <meta charset="utf-8">
@@ -46,10 +68,7 @@
 </head>
 
 <body>
-  <!-- preloader start -->
-  <div class="preloader">
-    <img src="images/preloader.gif" alt="preloader">
-  </div>
+
   <!-- preloader end -->
 
 <!-- ===============================  header  =============================== -->
@@ -116,8 +135,8 @@
 			<td class="text-center">${modifyAcademyMemberBean.a_tele}</td>
 		</tr>
 		<tr>
-			<td class="text-left"><strong>1종합2단과3예체능</strong></td>
-			<td class="text-center">${modifyAcademyMemberBean.a_classify}</td>
+			<td class="text-left"><strong>학원분류</strong></td>
+			<td class="text-center" id="a_classify">${modifyAcademyMemberBean.a_classify}</td>
 		</tr> <!-- 스크립트 이용해서 번호를 종합,단과,예체능으로 변환 필요. -->
 		</table>
 	</form:form>

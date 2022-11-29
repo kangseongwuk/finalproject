@@ -263,4 +263,12 @@ public class MemberController {
 		 	return "member/studentinfo";
 		}
 		
+		//찜목록 페이지 이동
+		@GetMapping("/myfavorite")
+		public String myfavorite(Model model) {
+			List<AcademyMemberBean> favoritelist = memberService.myWishList(loginMemberBean.getM_memberNo());
+			model.addAttribute("favoritelist", favoritelist);
+			return "member/myfavorite";
+		}
+		
 }

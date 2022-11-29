@@ -51,15 +51,32 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="${root }index">Home</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">사이트관리</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">학원문의</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 <!-- /page title -->
+<!-- side menu nav -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<ul class="list-inline text-center">
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}member/mypageAdmin_member"><h4>회원 정보</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}academymember/mypageAdmin_academy"><h4>학원 정보</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}serviceBoard/siteAskList"><h4>회원문의</h4></a></li>
+					<li class="list-inline-item"><a class="d-inline-block p-2"
+						href="${root}serviceBoard/siteAcaAskList"><h4>학원문의</h4></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
 <!-- Board -->    
 <section class="section bg-gray">
@@ -71,52 +88,47 @@
           </div>
       </div>
     </div>
-		<div class="board_view">
-<table>
-    <tr>
-		<th>아이디</th>
-		<th>${aaReadBean.a_id }</th>
-		<th>이름</th>
-		<th>${aaReadBean.a_name }</th>
-		<th>전화번호</th>
-		<th>${aaReadBean.a_tele }</th>
-		<th>작성날짜</th>
-		<th width="10%"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${aaReadBean.aa_time }" /></th>
-   		<th>제목</th>
-		<th>${aaReadBean.aa_title }</th>
-	</tr>
-	<tr>
-	<td colsapn="4" height="200" valign="top" style="padding: 20px; line-height:160%">
-         <div id="bbs_file_wrap">
-            <div>
-               <img src="" width="900" onerror=""/><br />
-               </div>
-              </div> 			
-				내용</td>
-				<th>${aaReadBean.aa_contents }</th>
-	</tr>
-	<tr>				
-		<c:if test="${saReadBean.sa_file != null }">
-			<th>
-			<label for="sa_file">첨부 이미지</label>
-			<img src="${root }upload/${saReadBean.sa_file}" width="100%"/>						
-			</th>
-			</c:if>
-	</tr>
-</table>
-  </div>
-  <div class="btn_area">
-    <div class="align_left">
-      <input type="button" value="목록" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/siteAcaAskList'"/>
-    </div>
-    <div class="align_left">
-<input type="button" value="돌아가기" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }index'"/>
-  </div>
-</div>
-
-
-</div>
-
+		<div class="row justify-content-center">
+			<div class="col-lg-8 mb-5 mb-lg-0">
+   				<div>
+   					<label for="a_id">아이디</label>
+   					<input class="form-control mb-3" id="a_id" name="a_id" value="${aaReadBean.a_id}" disabled="disabled"/>
+   				</div>
+				<div>
+					<label for="a_name">이름</label>
+					<input class="form-control mb-3" id="a_name" name="a_name" value="${aaReadBean.a_name }" disabled="disabled"/>
+				</div>
+				<div>
+					<label for="a_tele">전화번호</label>
+					<input class="form-control mb-3" id="a_tele" name="a_name" value="${aaReadBean.a_tele }" disabled="disabled"/>
+				</div>
+				<div>
+					<label for="aa_time">작성날짜</label>
+					<input class="form-control mb-3" id="aa_time" name="aa_time" value="<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${aaReadBean.aa_time }" />" disabled="disabled"/>
+				</div>
+				<div>
+					<label for="aa_title">제목</label>
+					<input class="form-control mb-3" id="aa_title" name="aa_title" value="${aaReadBean.aa_title }" disabled="disabled"/>
+				</div>
+				<div>
+					<label for="aa_contents">내용</label>
+					<textarea class="form-control mb-3" id="aa_contents" name="aa_contents" disabled="disabled">${aaReadBean.aa_contents }</textarea>
+				</div>
+					<c:if test="${aaReadBean.aa_file != null }">
+					<div>		
+						<label for="aa_file">첨부 이미지</label>
+						<img src="${root }upload/${aaReadBean.aa_file}" width="100%"/>						
+					</div>	
+					</c:if>
+				<div align="right">
+					<a class="btn btn-primary" href="${root }serviceBoard/siteAcaAskList">목록보기</a>
+				</div>
+  			</div>
+	  		
+		
+	</div>
+	</div>
+	
 </section>
 <!-- /Board -->
 

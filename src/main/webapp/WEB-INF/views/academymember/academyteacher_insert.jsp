@@ -86,6 +86,7 @@
       </div>
     </div>
 	<!--  -->
+
 	<!--  -->
 	<section class="section bg-gray">
 		<div class="container">
@@ -97,36 +98,33 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-lg-8 mb-5 mb-lg-0">
-					<form:form action="${root}academymember/academyteacher_modifyPro"
-						method="post" modelAttribute="teacherModifyBean"
+					<form:form action="${root}academymember/academyteacher_insertPro"
+						method="post" modelAttribute="teacherInsertBean"
 						enctype="multipart/form-data">
-						<form:hidden path="a_memberNo"/>
+						<form:hidden path="a_memberNo" value="${sessionScope.loginAcademyMemberBean.a_memberNo}"/>
 						<div>
 							<form:label path="t_name">강사명</form:label>
-							<form:input class="form-control mb-3" path="t_name" readonly="true"/>
+							<form:input class="form-control mb-3" path="t_name"/>
 						</div>
 						<div>
 							<form:label path="t_subject">과목</form:label>
 							<form:input class="form-control mb-3" path="t_subject"/>
 						</div>
-						<form:label path="t_contents">소개</form:label>
-						<form:textarea path="t_contents" class="form-control mb-3"
-							placeholder="강사 소개"></form:textarea>
-						
+						<div>
+							<form:label path="t_contents">소개</form:label>
+							<form:textarea path="t_contents" class="form-control mb-3"
+								placeholder="강사 소개"></form:textarea>
+						</div>
 						<br>
 						<br>
 						<div>
-							<form:label path="t_file"><strong>강사 이미지</strong></form:label>
-							<c:if test="${teacherModifyBean.t_file != null}">
-								<img src="${root}upload/${teacherModifyBean.t_file}" />
-							</c:if>
+							<form:label path="upload_file"><strong>강사 이미지</strong></form:label>
 							<form:input type="file" path="upload_file" accept="image/*" />
 						</div>
-						
 						<br>
 						<br>
 						<div class="text-center">
-							<form:button type="submit" class="btn btn-primary">수정 완료</form:button>
+							<form:button type="submit" class="btn btn-primary">강사등록</form:button>
 						</div>
 					</form:form>
 
@@ -162,6 +160,3 @@
 
 </body>
 </html>
-
-
-

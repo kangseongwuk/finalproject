@@ -77,9 +77,9 @@
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyteacher"><h4>학원 강사 조회</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 조회</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyaskboard"><h4>내 문의사항</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyinfo"><h4>결제내역조회</h4></a></li>
+			<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academypay"><h4>결제 내역 조회</h4></a></li>     
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/mypage_siteAcaAsk"><h4>내 문의사항</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
           </ul>
         </div>
       </div>
@@ -104,8 +104,8 @@
           <li class="list-inline-item text-align-center">${str.t_subject }</li>
         </ul>
         
-          <h4 class="text-center" href="${root}board/gBoardRead_teacher">${str.t_name }</h4>
-    <h4 class="text-center" href="${root}board/gBoardRead_teacher">${str.t_contents }</h4>
+          <a href="${root}board/gBoardRead_teacher?a_memberNo=${sessionScope.loginAcademyMemberBean.a_memberNo}&t_name=${str.t_name}"><h4 class="text-center">${str.t_name }</h4></a>
+    <h4 class="text-center">${str.t_contents }</h4>
         <div class="text-center">
         <a href="${root}academymember/academyteacher_modify?t_name=${str.t_name}" class="btn btn-primary btn-sm">수정</a>
         <a href="${root}academymember/academyteacher_delete?t_name=${str.t_name}" class="btn btn-danger btn-sm">삭제</a>
@@ -114,6 +114,8 @@
     </div>
   </div>
   </c:forEach>
+  
+  
   <!-- /teacher item -->
   
   
@@ -121,6 +123,7 @@
   
   </div>
   </div>
+  <div class="text-center"><a href="${root}academymember/academyteacher_insert" class="btn btn-primary btn-sm">강사입력</a></div>
 </section>
 <!-- /courses -->
 

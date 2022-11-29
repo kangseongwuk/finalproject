@@ -68,45 +68,54 @@ public interface MemberMapper {
 	
 
 	//내가 쓴 문의사항
-		@Select("select sa_title, sa_time "
-				+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
-				+ "where m_memberNo = #{m_memberNo} "
-				+ "order by sa_time desc")
-		List<SiteAskBean> getMyaskList(int m_memberNo);
+	@Select("select sa_title, sa_time "
+			+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
+			+ "where m_memberNo = #{m_memberNo} "
+			+ "order by sa_time desc")
+	List<SiteAskBean> getMyaskList(int m_memberNo);
 		
-		@Select("select sa_tele, m_email, sa_time, sa_title, sa_contents, sa_file "
-				+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
-				+ "where m_memberNo = #{m_memberNo} "
-				+ "and sa_time = #{sa_time}")
-		SiteAskBean getMyaskRead(@Param("sa_time") Timestamp sa_time, @Param("m_memberNo") int m_memberNo);
-		//총 게시글 수
-		@Select("select count(*) "
-				+ "from siteAskT s, memberT m "
-				+ "where sa_memberNo = m_memberNo "
-				+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
-		int getMyAskListCnt(MemberBean myAskBean);
-		//페이징
-		@Select("select count(*) "
-				+ "from siteAskT s, memberT m "
-				+ "where sa_memberNo = m_memberNo "
-				+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
-		int getMyAskContentCnt(int m_memberNo);
+	@Select("select sa_tele, m_email, sa_time, sa_title, sa_contents, sa_file "
+			+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
+			+ "where m_memberNo = #{m_memberNo} "
+			+ "and sa_time = #{sa_time}")
+	SiteAskBean getMyaskRead(@Param("sa_time") Timestamp sa_time, @Param("m_memberNo") int m_memberNo);
 		
+	//총 게시글 수
+	@Select("select count(*) "
+			+ "from siteAskT s, memberT m "
+			+ "where sa_memberNo = m_memberNo "
+			+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
+	int getMyAskListCnt(MemberBean myAskBean);
 		
+	//페이징
+	@Select("select count(*) "
+			+ "from siteAskT s, memberT m "
+			+ "where sa_memberNo = m_memberNo "
+			+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
+	int getMyAskContentCnt(int m_memberNo);
 		
 		//관리자 마이페이지 차후 월별 가입 회원 수 등 추가 예정
 		//@Select("select m_memberNo from memberT")
 		//List<MemberBean> getAdminPageList();
 		
-		//관리자 페이지 : 회원 목록
-		@Select("select m_classify, m_name, m_memberNo, m_joinDate, m_confirm "
-				+ "from memberT ")
-		List<MemberBean> getAdMemberList();
-		//총 회원 수
-		@Select("select count(*) from memberT")
-		int getAdminMemberCnt(MemberBean myAdminMemberBean);
+	//관리자 페이지 : 회원 목록
+	@Select("select m_classify, m_name, m_memberNo, m_joinDate, m_confirm "
+			+ "from memberT ")
+	List<MemberBean> getAdMemberList();
+	
+	//총 회원 수
+	@Select("select count(*) from memberT")
+	int getAdminMemberCnt(MemberBean myAdminMemberBean);
 	 
 	//email 확인
-	   @Select("select m_id from memberT where m_id=#{m_id, jdbcType=VARCHAR }")
-	   String selectEmailKakao(String m_email);
+	@Select("select m_id from memberT where m_id=#{m_id, jdbcType=VARCHAR }")
+	String selectEmailKakao(String m_email);
+   
+	//찜목록 페이지
+	@Select("select w.a_memberNo,a_mainImg, a_name, a_location, a_gradeMin, a_gradeMax from "
+			+ "academyMemberT a1, academyInfoT a2, wishlistT w "
+			+ "where a1.a_memberNo = a2.a_memberNo and a2.a_memberNo = w.a_memberNo "
+			+ "and m_memberNo = #{m_memberNo}")
+	List<AcademyMemberBean> myWishList(int m_memberNo);
+	
 }
