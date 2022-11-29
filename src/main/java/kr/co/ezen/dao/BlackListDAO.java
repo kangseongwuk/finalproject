@@ -26,16 +26,32 @@ public class BlackListDAO {
 			  return blackListMapper.getBlList(rowBounds); 		  
 		  }
 		  
+		  //상세보기
+		  public BlackListBean getBlackInfo(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo) {
+			  return blackListMapper.getBlackInfo(m_memberNo, a_memberNo);
+		  }
+		  
 		  //검색
 		  public List<BlackListBean> getBLSearchList(String m_name, RowBounds rowBounds){
 			   return blackListMapper.getBLSearchList(m_name, rowBounds);
 		  }
 		  
+		  
+		//수정 페이지
+		public BlackListBean getBlModifyPage(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo) {
+			return blackListMapper.getBlModifyPage(m_memberNo, a_memberNo);
+		}
+			
+		  
+		//수정
+		public void modifyBlInfo(BlackListBean blModifyBean) {
+			blackListMapper.modifyBlInfo(blModifyBean);
+		}
 		
-		public void delBlInfo(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo) {
+		//삭제
+		public void delBlInfo(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo) {
 			
-			blackListMapper.delBlInfo(m_memberNo,a_memberNo);
-			
+			blackListMapper.delBlInfo(m_memberNo, a_memberNo);
 		}
 		
 		  public int getContentCnt() { 

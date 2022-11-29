@@ -13,7 +13,6 @@
 var send = confirm("등록하시겠습니까?");
 
 if(send == true) {
-	var send = confirm("작성이 완료되었습니다.");
 	location.href="${root}serviceBoard/siteAskWrite"
 }
 else {

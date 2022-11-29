@@ -102,7 +102,7 @@
 					<tr>
 						<th>분류</th>
 						<th>학원 이름</th>
-						<th class="th-views">학원 번호</th>
+						<th class="th-views">학원번호</th>
 						<th class="th-days">가입날짜</th>
 
 					</tr>

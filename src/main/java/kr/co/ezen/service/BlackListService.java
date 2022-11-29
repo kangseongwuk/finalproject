@@ -56,12 +56,26 @@ public class BlackListService {
 		 
 		return blackListDAO.getBLSearchList(searchKeyword, rowBounds);
 	  }
-	
+	 
+	//상세보기
+	 public BlackListBean getBlackInfo(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo) {
+		  return blackListDAO.getBlackInfo(m_memberNo, a_memberNo);
+	 }
 	
 	//삭제
-	public void delBlInfo(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo){
+	public void delBlInfo(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo){
 		
 		blackListDAO.delBlInfo(m_memberNo, a_memberNo);
+	}
+	
+	//수정 페이지
+	public BlackListBean getBlModifyPage(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo) {
+		return blackListDAO.getBlModifyPage(m_memberNo, a_memberNo);
+	}
+	
+	//수정
+	public void modifyBlInfo(BlackListBean blModifyBean) {
+		blackListDAO.modifyBlInfo(blModifyBean);
 	}
 	
 	//페이징

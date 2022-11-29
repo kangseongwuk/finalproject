@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.ezen.beans.AcademyReviewBean;
 import kr.co.ezen.beans.MemberBean;
+import kr.co.ezen.beans.TeacherReviewBean;
 import kr.co.ezen.service.BoardService;
 
 //HTML형태의 데이터가 아니라면 사용합니다. 아니라면 json으로 처리를 합니다.
@@ -78,9 +79,6 @@ public class RestApiController {
 		
 		String result = "false";
 		
-//		System.out.println(academyReviewBean_write.getA_memberNo());
-
-		
 		if(mBean!=null) {
 			if(mBean.getM_memberNo()!=0) {
 				if(academyReviewBean_write.getR_score()==0)
@@ -90,15 +88,7 @@ public class RestApiController {
 				
 					academyReviewBean_write.setR_writerNo(mBean.getM_memberNo());
 					academyReviewBean_write.setR_writerId(mBean.getM_id());
-					
-//					System.out.println(academyReviewBean_write.getA_memberNo());
-//					System.out.println(academyReviewBean_write.getR_writerNo());
-//					System.out.println(academyReviewBean_write.getR_writerId());
-//					System.out.println(academyReviewBean_write.getR_contents());
-//					System.out.println(academyReviewBean_write.getR_score());
-					
-					
-					
+
 					boardService.insertAcademyReview(academyReviewBean_write);
 					
 					result = "true";
@@ -123,6 +113,56 @@ public class RestApiController {
 				result = "selfDel";
 			} else if(Integer.toString((mBean.getM_memberNo())).length() == 4) {
 				boardService.deleteAcademyReview(academyReviewBean_del.getA_memberNo(), academyReviewBean_del.getR_no());
+				result = "adminDel";
+			} else {
+				result = "unmatched";
+			}
+		}
+		return result;
+	}
+	
+	//강사 리뷰 작성
+	@PostMapping("/board/teacherReviewWrite")
+	public String teacherReviewWrite(TeacherReviewBean teacherReviewBean_write,
+									HttpSession session) {
+		MemberBean mBean = (MemberBean) session.getAttribute("loginMemberBean");
+		
+		String result = "false";
+		
+		if(mBean!=null) {
+			if(mBean.getM_memberNo()!=0) {
+				if(teacherReviewBean_write.getT_score()==0)
+					result = "noScore";
+				
+				else {
+				
+					teacherReviewBean_write.setT_reWriterNo(mBean.getM_memberNo());
+					teacherReviewBean_write.setT_reWriterId(mBean.getM_id());
+
+					boardService.insertTeacherReview(teacherReviewBean_write);
+					
+					result = "true";
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	//강사 리뷰 삭제
+	@PostMapping("/board/teacherReviewRemove")
+	public String teacherReviewRemove(TeacherReviewBean teacherReviewBean_del,
+									HttpSession session) { 
+		MemberBean mBean = (MemberBean) session.getAttribute("loginMemberBean");
+		
+		String result = "false";
+		
+		if(mBean!=null) {
+			if(mBean.getM_memberNo() == teacherReviewBean_del.getT_reWriterNo()) {
+				boardService.deleteTeacherReview(teacherReviewBean_del.getA_memberNo(), teacherReviewBean_del.getT_name(), teacherReviewBean_del.getT_reNo());
+				result = "selfDel";
+			} else if(Integer.toString((mBean.getM_memberNo())).length() == 4) {
+				boardService.deleteTeacherReview(teacherReviewBean_del.getA_memberNo(), teacherReviewBean_del.getT_name(), teacherReviewBean_del.getT_reNo());
 				result = "adminDel";
 			} else {
 				result = "unmatched";

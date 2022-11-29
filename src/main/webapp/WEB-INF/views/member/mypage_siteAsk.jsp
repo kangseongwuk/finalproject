@@ -66,7 +66,7 @@
         <div class="col-sm-12 text-center">
           <ul class="list-inline text-center">
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/mypage"><h4>내 정보</h4></a></li>
-            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/studentinfo"><h4>학생 정보</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/studentinfo"><h4>자녀 정보</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/myfavorite"><h4>찜 목록</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}member/mypage_siteAsk"><h4>내 문의사항</h4></a></li>
           </ul>

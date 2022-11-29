@@ -55,8 +55,8 @@ public class BoardService {
 	}
 	
 	//개별 강사 리뷰 조회
-	public List<TeacherReviewBean> getTeacherReviewInfo(int a_memberNo, String t_name) {
-		return boardDAO.getTeacherReviewInfo(a_memberNo, t_name);
+	public List<TeacherReviewBean> getTeacherReviewInfo(int m_memberNo, int a_memberNo, String t_name) {
+		return boardDAO.getTeacherReviewInfo(m_memberNo, a_memberNo, t_name);
 	}
 	
 	//찜목록 확인(학원리스트)
@@ -82,5 +82,15 @@ public class BoardService {
 	//학원 리뷰 삭제
 	public void deleteAcademyReview(int a_memberNo, int r_no) {
 		boardDAO.deleteAcademyReview(a_memberNo, r_no);
+	}
+	
+	//강사 리뷰 작성
+	public void insertTeacherReview(TeacherReviewBean teacherReviewBean_write) {
+		boardDAO.insertTeacherReview(teacherReviewBean_write);
+	}
+	
+	//강사 리뷰 삭제
+	public void deleteTeacherReview(int a_memberNo, String t_name, int t_reNo) {
+		boardDAO.deleteTeacherReview(a_memberNo, t_name, t_reNo);
 	}
 }

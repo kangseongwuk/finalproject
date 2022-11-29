@@ -158,15 +158,15 @@ $(document).ready(function() {
 						<div>
 							학업수준 &nbsp;&nbsp;
 							<form:label path="c_level">상</form:label>
-							<form:radiobutton path="c_gender" value="상"/> &nbsp;
+							<form:radiobutton path="c_level" value="상"/> &nbsp;
 							<form:label path="c_level">중상</form:label>
-							<form:radiobutton path="c_gender" value="중상"/> &nbsp;
+							<form:radiobutton path="c_level" value="중상"/> &nbsp;
 							<form:label path="c_level">중</form:label>
-							<form:radiobutton path="c_gender" value="중"/> &nbsp;
+							<form:radiobutton path="c_level" value="중"/> &nbsp;
 							<form:label path="c_level">중하</form:label>
-							<form:radiobutton path="c_gender" value="중하"/> &nbsp;
+							<form:radiobutton path="c_level" value="중하"/> &nbsp;
 							<form:label path="c_level">하</form:label>
-							<form:radiobutton path="c_gender" value="하"/> &nbsp;
+							<form:radiobutton path="c_level" value="하"/> &nbsp;
 							<hr>
 						</div>
 						

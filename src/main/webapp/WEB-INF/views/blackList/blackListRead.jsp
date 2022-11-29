@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>noticeRead</title>
+<title>::SKYCASTLE::</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -36,6 +37,10 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
 
 <body>
@@ -53,7 +58,7 @@
         <ul class="list-inline custom-breadcrumb mb-2">
           <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
-          <li class="list-inline-item text-white h3 font-secondary nasted">블랙리스트</li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
         </ul>
       </div>
     </div>
@@ -67,56 +72,49 @@
     <div class="row">
       <div class="col-lg-12">
        <div class="section-title text-center">
-          <h2>블랙리스트</h2>
+          <h2 class="text-color">블랙리스트</h2>
           </div>
       </div>
     </div>
     
-<div class="board_view">
 <table>
     <tr>
-      <th width="10%">고객 번호</th>
-      <th width="10%">${blReadBean.m_memberNo }</th>
-      <th width="10%">학원 번호</th>
-      <th width="10%">${blReadBean.a_memberNo }</th>
-      <th width="10%">등록일</th>
-      <th width="10%">${blReadBean.black_time }</th>
+      <th class="th-title">고객 번호</th>
+      <th class="th-border">${blReadBean.m_memberNo }</th>
     </tr>
-    
     <tr>
-      <td colsapn="4" height="200" valign="top" style="padding: 20px; line-height:160%">
-         <div id="bbs_file_wrap">
-            <div>
-               <img src="" width="900" onerror=""/><br />
-               </div>
-              </div> 
-              내용
-              </td>
-<!--<label for="nb_file">첨부 이미지</label>
-<img src="${root }upload/${nbReadBean.nb_file}" width="100%"/>	-->	
-             <th>${blReadBean.black_contents }</th>
-              </tr> 
+      <th class="th-title">고객 이름</th>
+      <th class="th-border">${blReadBean.m_name }</th>
+    </tr>
+    <tr>
+      <th class="th-title">학원 번호</th>
+      <th class="th-border">${blReadBean.a_memberNo }</th>
+    </tr>
+    <tr>
+      <th class="th-title">학원 이름</th>
+      <th class="th-border">${blReadBean.a_name }</th>
+    </tr>
+    <tr>
+      <th class="th-title">작성 날짜</th>
+      <th class="th-border"><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${blReadBean.black_time }" /></th>
+    </tr>
+    <tr >
+       <th class="th-title">사유</th>
+      <th  class="th-border">${blReadBean.black_contents }</th>
+    </tr>
+   
 </table>
-  </div>
-  <div class="btn_area">
-    <div class="align_left">
-      <input type="button" value="목록" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }blackList/blackListList'"/>
-    </div>
-    <div class="align_left">
-      <input type="button" value="수정" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }blackList/blackListModify?m_memberNo=${blReadBean.m_memberNo}&a_memberNo=${blReadBean.a_memberNo}'"/>
-      <input type="button" value="삭제" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }blackList/blackListDelete?m_memberNo=${blReadBean.m_memberNo}&a_memberNo=${blReadBean.a_memberNo}'"/>
-      <!--<input type="button" value="쓰기" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='board_list1.jsp'"/>-->
-	  <input type="button" value="돌아가기" class="btn_list btn_txt02" style="cursor:pointer;" onclick="location.href='${root }index'"/>
-  </div>
-</div>
+        
+<div class="btn_area">
+  <br>
+    <div align="right">
   
-  <div class="prev_data_area">
-  <button type="button" class="btn btn-primary btn-sm"><span class="b">이전글ㅣ </span> <!-- <a href=".jsp"?> </a> --></font></font></button>
-</div>
-  <div class="next_data_area">
-  <button type="button" class="btn btn-primary btn-sm"><span class="b">다음글ㅣ </span> <!-- <a href=".jsp"?> </a> --></font></font></button>
-</div>
+      <input type="button" value="목록" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }blackList/blackListList'"/>
+      <input type="button" value="수정" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }blackList/blackListModify?m_memberNo=${blReadBean.m_memberNo }&a_memberNo=${blReadBean.a_memberNo }'"/>
+      <input type="button" value="삭제" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }blackList/blackListDelete?m_memberNo=${blReadBean.m_memberNo }&a_memberNo=${blReadBean.a_memberNo }'"/>
 
+  </div>
+</div>
 </div>
 
 </section>
@@ -130,7 +128,7 @@
 <!-- jQuery -->
 <script src="plugins/jQuery/jquery.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="plugins/bootstrap/bootstrap.min.js"></script>.
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
 <!-- slick slider -->
 <script src="plugins/slick/slick.min.js"></script>
 <!-- aos -->

@@ -177,7 +177,7 @@
 			</div>
     
  <div class="search-box">
-		  <form:form action="${root}blackList/blackSearchList_pro?m_name=${requestScope.page }" modelAttribute="blSearchBean" method="get">
+		  <form:form action="${root}blackList/blackSearchList_pro" modelAttribute="blSearchBean" method="get">
 		    <form:input class="search-txt" path="searchKeyword" placeholder="검색어를 입력해 주세요" value="" />
 		    <form:button class="search-btn" type="submit"><i class="fas fa-search"></i></form:button>
 		  </form:form>

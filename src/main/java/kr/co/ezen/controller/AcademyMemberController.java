@@ -79,7 +79,7 @@ public class AcademyMemberController {
 			return "index";
 		}else {
 			loginAcademyMemberBean.setAcademymemberlogin(false);
-			return "index";
+			return "academymember/login_fail";
 		}
 		
 	}

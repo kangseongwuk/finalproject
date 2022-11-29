@@ -2,6 +2,7 @@ package kr.co.ezen.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -55,8 +56,8 @@ public class BoardDAO {
 	}
 	
 	//개별 강사 리뷰 조회
-	public List<TeacherReviewBean> getTeacherReviewInfo(int a_memberNo, String t_name) {
-		return boardMapper.getTeacherReviewInfo(a_memberNo, t_name);
+	public List<TeacherReviewBean> getTeacherReviewInfo(int m_memberNo, int a_memberNo, String t_name) {
+		return boardMapper.getTeacherReviewInfo(m_memberNo, a_memberNo, t_name);
 	}
 	
 	//찜목록 확인(학원리스트)
@@ -82,5 +83,15 @@ public class BoardDAO {
 	//학원 리뷰 삭제
 	public void deleteAcademyReview(int a_memberNo, int r_no) {
 		boardMapper.deleteAcademyReview(a_memberNo, r_no);
+	}
+	
+	//강사 리뷰 작성
+	public void insertTeacherReview(TeacherReviewBean teacherReviewBean_write) {
+		boardMapper.insertTeacherReview(teacherReviewBean_write);
+	}
+	
+	//강사 리뷰 삭제
+	public void deleteTeacherReview(int a_memberNo, String t_name, int t_reNo) {
+		boardMapper.deleteTeacherReview(a_memberNo, t_name, t_reNo);
 	}
 }

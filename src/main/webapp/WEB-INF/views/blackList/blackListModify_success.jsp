@@ -9,7 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>ㅋㅋ 글쓰기 실패 ㅋㅋ</h2>
+	<script>
+		alert("글 수정을 성공 했습니다.")
+		location.href="blackListRead?m_memberNo=${blModifyBean.m_memberNo}&a_memberNo=${blModifyBean.a_memberNo}"
 
+		</script>
 </body>
-</html>
+</html>	

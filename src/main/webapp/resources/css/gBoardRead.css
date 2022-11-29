@@ -115,6 +115,20 @@
 	height: 150px;
 }
 
+.del-btn {
+	height: 40px;
+    align-items: center;
+    display: flex;
+    background-color: #dd4040;
+    color: white;
+    border-width: 1px;
+    border: double;
+}
+
+.del-btn:hover {
+	font-weight : bold;
+}
+
 /* review star rating(출력용) */
 #full-stars-example-two
 	/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */

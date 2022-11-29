@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
   <c:url var='root' value='/'/>   
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="utf-8">
 <title>noticeRead</title>
 
@@ -37,8 +39,11 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+    <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
-
 <body>
 
 <!-- ===============================  header  =============================== -->
@@ -62,6 +67,8 @@
 </section>
 <!-- /page title -->
 
+
+
 <!-- Board -->    
 <section class="section bg-gray">
   <div class="container">
@@ -72,62 +79,59 @@
           </div>
       </div>
     </div>
-<table>
+    
+     
+		           <!-- search box -->
+	          
+    <div> 
+    <form:form align="right" action="${root}blackList/blackSearchList_pro" modelAttribute="blSearchBean" method="get">
+	<form:input class="search-txt btn-round btn-color"  path="searchKeyword" placeholder="   검색어를 입력해 주세요" value = "" />
+    <form:button class="search-btn btn-round btn-color" type="submit"><i class="fas fa-search"></i></form:button>
+    </form:form>
+    </div>
+	<br>
+    
+    
+<!-- /search box -->
+    
+<table id = "btable">
     <thead>
     <tr>
+		
        <th>고객 이름</th>
        <th>학원 이름</th>
        <th>사유</th>
        <th>작성일자</th>
+       <c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">
+       <th>상세보기</th>
+       </c:if>
     </tr>
     </thead>
     <tbody>
+
 <c:forEach var="st" items="${bllist }">
     <tr>
-        <td>${st.m_name}</td>
+		<td>${st.m_name}</td>
         <td>${st.a_name}</td>
         <td>${st.black_contents}</td>
 <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.black_time}" /></td>
-    </tr>
+<c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">	
+         <td><a href="${root }blackList/blackListRead?m_memberNo=${st.m_memberNo}&a_memberNo=${st.a_memberNo}">상세보기</a></td>
+         </c:if>
+  </tr>
 </c:forEach>
-<tr>
-<c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">
-<td colspan="2" align="center"><a href="${root}blackList/blackListWrite">글쓰기</a></td>
-<td colspan="2" align="center"><a href="${root}blackList/blackListDelete">삭제하기</a></td>
-</c:if>
-</tr>
-</table>
 
- <%--  <ul class="pagination">
-	  <c:choose>
-	  	<c:when test="${pageCountBean.prevPage <= 0 }">
-	  	    <li class="page-item disabled">
-	      		<a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
-		    </li>
-			<c:otherwise>
-		    <li class="page-item active">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>
-		    </li>
-		    </c:otherwise>					
-			</c:choose>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&raquo;</font></font></a>
-		    </li>
- 	 </c:choose>
-  </ul> --%>
-  
+</table>
+<c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">
+
+<br>
+<div align="right">
+
+<button class="search-btn btn-color" onclick="location.href='${root }blackList/blackListWrite'">글쓰기</button>
+
+</div>
+</c:if>
+
   	<div class="d-none d-md-block">
 				<ul class="pagination">
 					<c:choose>
@@ -145,7 +149,7 @@
 														
 					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 						<c:choose>
-							<c:when test="$idx == pageCountBean.currentPage">
+							<c:when test="${ idx == pageCountBean.currentPage}">
 							<li class="page-item active">
 								<a href="${root}blackList/blackListList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>		
@@ -186,12 +190,7 @@
     </tr>
 </c:forEach> --%>
 		
-		  <div class="search-box">
-		  <form:form action="${root}blackList/blackSearchList_pro?m_name=${requestScope.page }" modelAttribute="blSearchBean" method="get">
-		    <form:input class="search-txt" path="searchKeyword" placeholder="검색어를 입력해 주세요" value="" />
-		    <form:button class="search-btn" type="submit"><i class="fas fa-search"></i></form:button>
-		  </form:form>
-		</div>
+		  
 		</div>
 	
 

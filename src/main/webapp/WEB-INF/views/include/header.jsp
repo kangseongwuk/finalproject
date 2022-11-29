@@ -289,7 +289,7 @@
 								<form:input path="m_pw" class="form-control"  placeholder="Password"/>
 									<form:errors path="m_pw" style="color:red"/>
 							</div>
-							<form:button type="submit" class="btn btn-info btn-block btn-round" style="background-color:black;">로 그 인</form:button>
+							<form:button type="submit" class="btn btn-info btn-block btn-round" style="background-color:black;border-radius: 5px;width: 95%;left: 2.5%;padding: 12px 40px;">로 그 인</form:button>
 						</form:form>
             <a class="p-2"  id="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=d74b9f388e687f66d7d888fd0bb9d36b&redirect_uri=http://localhost:8700/member/kakao&response_type=code">
            <img src="images/kakao_login_medium_wide.png" style="width:100%"/>
@@ -333,7 +333,7 @@
 					<form:errors path="a_pw"/>
 				</div>
 				<div>
-					<form:button class="btn btn-info btn-block btn-round" style="background-color:black;">로그인</form:button>
+					<form:button class="btn btn-info btn-block btn-round" style="background-color:black;border-radius: 5px;">로그인</form:button>
 				</div>
 			</form:form>
 

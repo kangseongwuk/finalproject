@@ -20,32 +20,51 @@ public interface BlackListMapper {
 		void addBlContent(BlackListBean blWriteBean);		
 	
 		// 제목, 작성날짜, 조회수, 내용, 이미지 등을 추출하여 가져와야 합니다.	
-	@Select("select m_name, a_name, black_contents, black_time "
+	@Select("select m.m_memberNo, m.m_name, a.a_memberNo, a.a_name, b.black_contents, b.black_time "
 			+ "from memberT m, academyMemberT a, blacklistT b "
 			+ "where m.m_memberNo = b.m_memberNo "
 			+ "and a.a_memberNo = b.a_memberNo "
-			+ "order by black_time desc")
-	List<BlackListBean> getBlList(RowBounds rowBounds); 	
+			+ "order by b.black_time desc")
+	List<BlackListBean> getBlList(RowBounds rowBounds); 
+	
+	//상세보기
+	@Select("select m.m_memberNo, m.m_name, a.a_memberNo, a.a_name, b.black_contents, b.black_time "
+			+ "from memberT m, academyMemberT a, blacklistT b "
+			+ "where m.m_memberNo = b.m_memberNo "
+			+ "and a.a_memberNo = b.a_memberNo "
+			+ "and m.m_memberNo = #{m_memberNo} "
+			+ "and a.a_memberNo = #{a_memberNo} ")
+	BlackListBean getBlackInfo(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo);	
 
 	//삭제
 	@Delete("delete from blacklistT "
 			+ "where m_memberNo = #{m_memberNo} "
 			+ "and a_memberNo = #{a_memberNo}")
-		void delBlInfo(@Param("m_memberNo")int m_memberNo,@Param("a_memberNo") int a_memberNo);
+	void delBlInfo(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo);
+
+	//수정 페이지
+	@Select("select m.m_name, a.a_name, b.black_contents "
+			+ "from memberT m, academyMemberT a, blacklistT b "
+			+ "where m.m_memberNo = b.m_memberNo "
+			+ "and a.a_memberNo = b.a_memberNo "
+			+ "and b.m_memberNo = #{m_memberNo}" 
+			+ "and b.a_memberNo = #{a_memberNo}" )
+	BlackListBean getBlModifyPage(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo);
+	
+	//수정
+	@Update("update blacklistT set black_contents = #{black_contents, jdbcType=VARCHAR} "
+			+ "where m_memberNo = #{m_memberNo} "
+			+ "and a_memberNo = #{a_memberNo}")
+	void modifyBlInfo(BlackListBean blModifyBean);
 	
 	//검색 : 쿼리문 주의 확실하지 않음
 	@Select("select m_name, a_name, black_contents, black_time "
 			+ "from memberT m, academyMemberT a, blacklistT b "
 			+ "where m.m_memberNo = b.m_memberNo "
 			+ "and a.a_memberNo = b.a_memberNo "
-			+ "and m_name = #{m_name}")
+			+ "and m_name like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'")
 	List<BlackListBean> getBLSearchList(String m_name, RowBounds rowBounds);
-		
-	
-	/*@Update("update blacklistT set nb_viewCount = nb_viewCount + 1 "
-			+ "where m_memberNo = #{m_memberNo}")
-		void viewCountBlInfo(int m_memberNo);
-	*/
+			
 	
 	@Select("select count(*) from blacklistT")
 	int getContentCnt();

@@ -139,7 +139,7 @@
 													
 					<c:forEach var="idx" begin="${pageCountBean2.min }" end="${pageCountBean2.max }">
 						<c:choose>
-							<c:when test="$idx == pageCountBean2.currentPage">
+							<c:when test="${ idx == pageCountBean2.currentPage}">
 							<li class="page-item active">
 								<a href="${root}serviceBoard/noticeBoardSearchList?page2=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>		

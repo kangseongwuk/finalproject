@@ -6,13 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>::SKYCASTLE::</title>
 </head>
 <body>
-<h2>zz 삭제 성공 zz</h2>
 <script type="text/javascript">
-		alert("데이터가 삭제 되었습니다.")
-		location.href='blackListList'
-	</script>
+var send = confirm("삭제하시겠습니까?");
+
+if(send == true) {
+   location.href="${root}blackList/blackListList"
+}
+else {
+   history.back(-1);
+}
+</script>
 </body>
 </html>

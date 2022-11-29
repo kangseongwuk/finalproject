@@ -36,14 +36,6 @@ public class BoardController {
 						HttpServletRequest request,
 						Model model) throws IOException, ParseException {
 		
-//		System.out.println(request.getParameter("sido"));
-//		System.out.println(request.getParameter("sigugun"));
-//		System.out.println(request.getParameter("sido_text"));
-//		System.out.println(request.getParameter("sigugun_text"));
-//		System.out.println(request.getParameter("gradeSelect"));
-//		System.out.println(request.getParameter("acaName"));
-//		System.out.println(a_classify);
-		
 		if(request.getParameter("gradeSelect")==null && request.getParameter("sido")==null &&
 				request.getParameter("sigugun")==null && request.getParameter("acaName")==null) {
 			
@@ -67,11 +59,6 @@ public class BoardController {
 				searchAcaName = request.getParameter("acaName");
 			}
 			
-//			System.out.println("------");
-//			System.out.println(searchLoc);
-//			System.out.println(searchGrade);
-//			System.out.println(searchAcaName);
-			
 			List<AcademyMemberBean> gBoardList =  boardService.getGBoardSearchList(a_classify,searchLoc,searchGrade,searchAcaName);
 			
 			model.addAttribute("gBoardList", gBoardList);
@@ -84,7 +71,6 @@ public class BoardController {
 	//종합 학원 게시판 상세보기
 	@GetMapping("/gBoardRead")
 	public String gBoardRead_temp(@RequestParam("a_memberNo") int a_memberNo,
-								@ModelAttribute("reviewWrite") AcademyReviewBean academyReviewBean_write,
 								HttpSession session,
 								Model model) {
 		int m_memberNo = 0;
@@ -112,10 +98,18 @@ public class BoardController {
 	@GetMapping("/gBoardRead_teacher")
 	public String gBoardRead_teacher(@RequestParam("a_memberNo") int a_memberNo,
 									@RequestParam("t_name") String t_name,
+									HttpSession session,
 									Model model) {
 		
+		int m_memberNo = 0;
+		
+		if(session.getAttribute("loginMemberBean")!=null) {
+			MemberBean mBean = (MemberBean) session.getAttribute("loginMemberBean");
+			m_memberNo = mBean.getM_memberNo();
+		}
+		
 		AcademyTeacherBean teacherInfo = boardService.getTeacherInfo(a_memberNo, t_name);
-		List<TeacherReviewBean> teacherReviewInfo = boardService.getTeacherReviewInfo(a_memberNo, t_name);
+		List<TeacherReviewBean> teacherReviewInfo = boardService.getTeacherReviewInfo(m_memberNo, a_memberNo, t_name);
 		
 		model.addAttribute("teacherInfo",teacherInfo);
 		model.addAttribute("teacherReviewInfo",teacherReviewInfo);

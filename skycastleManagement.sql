@@ -112,15 +112,15 @@ CREATE TABLE memberChildT(
 
 --자녀 등록 예시
 insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
-    values(10000001,'자녀11','중1','남','미입력');
+    values(10000001,'자녀11','7','남','미입력');
 insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
-    values(10000001,'자녀12','고1','여','미입력');
+    values(10000001,'자녀12','10','여','미입력');
 insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
-    values(10000001,'자녀13','고2','여','미입력');
+    values(10000001,'자녀13','11','여','미입력');
 insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
-    values(10000002,'자녀21','초6','남','미입력');
+    values(10000002,'자녀21','6','남','미입력');
 insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
-    values(10000003,'자녀31','중3','여','미입력');
+    values(10000003,'자녀31','9','여','미입력');
 
 
 
@@ -257,17 +257,17 @@ CREATE TABLE reviewT(
 
 --학원 리뷰 예시
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,1,10000001,'유저일','강의실이 친절하고, 강사님이 아늑해요',5);
+    values(100001,1,10000001,'user01','강의실이 친절하고, 강사님이 아늑해요',5);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,1,10000002,'유저이','강의실이 친절하고, 강사님이 아늑해요',4);
+    values(100001,2,10000002,'user02','강의실이 친절하고, 강사님이 아늑해요',4);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,1,10000003,'유저삼','힘들어요',2);
+    values(100001,3,10000003,'user03','힘들어요',2);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,1,10000004,'유저사','시끄러워요',5);
+    values(100001,4,10000004,'user04','시끄러워요',5);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100004,1,10000002,'유저이','그저 그래요.',3);
+    values(100004,1,10000002,'user02','그저 그래요.',3);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100004,1,10000003,'유저삼','그저 그래요.',4);
+    values(100004,2,10000003,'user03','그저 그래요.',4);
 
 
 
@@ -368,29 +368,35 @@ CREATE TABLE teacherReviewT(
         not null,
     t_name  varchar2(30)
         not null,
-    m_memberNo  number(8)
+    t_reNo    number(4)
         not null,
+    t_reWriterNo  number(8)
+        not null,
+    t_reWriterId  varchar2(40)
+        not null,
+    t_reContents    varchar2(1500),
     t_score number(1)
         not null,
-    t_reviewContents    varchar2(1500),
-    constraint t_review_pk primary key(a_memberNo, t_name, m_memberNo)
+    t_reWriteTime timestamp
+        default systimestamp not null,
+    constraint t_review_pk primary key(a_memberNo, t_name, t_reWriterNo)
 );
 
 --강사 리뷰 예시
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'박강산',10000001,'오홓홓 좋아요','5');
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'박강산',10000002,'그냥 싫어요','2');
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'박강산',10000003,'그냥','3');
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'박강산',10000004,'사랑합니다','5');
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'김강사',10000001,'좋아요','5');
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'김강사',10000002,'내가 악플러다','1');
-insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'김강사',10000003,'','4');
+insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
+    values(100001,'박강산',1,10000001,'user01','오홓홓 좋아요','5');
+insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
+    values(100001,'박강산',2,10000002,'user02','그냥 싫어요','2');
+insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
+    values(100001,'박강산',3,10000003,'user03','그냥','3');
+insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
+    values(100001,'박강산',4,10000004,'user04','사랑합니다','5');
+insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
+    values(100001,'김강사',1,10000001,'user01','좋아요','5');
+insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
+    values(100001,'김강사',2,10000002,'user02','내가 악플러다','1');
+insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
+    values(100001,'김강사',3,10000003,'user03','','4');
 
 
 
@@ -557,5 +563,5 @@ CREATE TABLE siteAcaAskT(
 commit;
 
     
-    
+    select * from MEMBERT;
     

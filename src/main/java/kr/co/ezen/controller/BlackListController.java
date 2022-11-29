@@ -1,7 +1,11 @@
 package kr.co.ezen.controller;
 
+
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.BlackListBean;
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.PageCountBean;
@@ -30,8 +36,10 @@ public class BlackListController {
 	private MemberBean loginMemberBean;
 
 	
-	@GetMapping("/blackListList") 
+	
+	@GetMapping("/blackListList")
 		public String main(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
+							@ModelAttribute("blListBean") BlackListBean blListBean,
 						   @RequestParam(value = "page", defaultValue = "1") int page,
 						   Model model) {
 
@@ -43,7 +51,22 @@ public class BlackListController {
 		
 		model.addAttribute("page", page);
 		
+		model.addAttribute("blListBean", blListBean);
+		
 		return "blackList/blackListList";
+	}
+	
+	//상세보기
+	@GetMapping("/blackListRead")
+	 public String read(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo,
+			 							Model model) {
+		 
+				
+		BlackListBean blReadBean = blackListService.getBlackInfo(m_memberNo, a_memberNo);
+		model.addAttribute("blReadBean", blReadBean);
+				
+		return "blackList/blackListRead";
+	  
 	}
 	
 	
@@ -88,15 +111,15 @@ public class BlackListController {
 	}	
 	
 	@GetMapping("/blackListWrite")
-	public String write(@ModelAttribute("blWriteBean") BlackListBean blWriteBean
+	public String write(@ModelAttribute("blWriteBean") BlackListBean blWriteBean) {
 
-	) {
-
+		
 		return "blackList/blackListWrite";
 	}
 
 	@PostMapping("blackListWrite_pro")
-	public String write_pro(@ModelAttribute("blWriteBean") BlackListBean blWriteBean, BindingResult result) {
+	public String write_pro(@ModelAttribute("blWriteBean") BlackListBean blWriteBean, 
+							BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "blackList/blackListWrite";
@@ -111,18 +134,44 @@ public class BlackListController {
 	public String noticeBoardWrite_fail() {
 		return "blackList/blackListWrite_fail";
 	}
-
+	
+	//수정
+	@GetMapping("/blackListModify")
+	public String modify(@RequestParam("m_memberNo") int m_memberNo, @RequestParam("a_memberNo") int a_memberNo,
+						 @ModelAttribute("blModifyBean") BlackListBean blModifyBean,
+						 Model model) {
+		
+		blModifyBean = blackListService.getBlModifyPage(m_memberNo, a_memberNo);
+		model.addAttribute("blModifyBean", blModifyBean);
+	
+		return "blackList/blackListModify";
+	}
+	
+	@PostMapping("blackListModify_pro")
+	public String modify_pro(@ModelAttribute("blModifyBean") BlackListBean blModifyBean,
+							 BindingResult result,
+							 Model model) {
+		
+		if(result.hasErrors()) {
+			return "blackList/blackListModify";
+		}
+		
+		blackListService.modifyBlInfo(blModifyBean);
+		
+		return "blackList/blackListModify_success";
+	}
+	
 	
 	// 삭제
 	@GetMapping("/blackListDelete")
 	public String delete(@RequestParam("m_memberNo") int m_memberNo, @RequestParam("a_memberNo") int a_memberNo,
-			Model model) {
-		blackListService.delBlInfo(m_memberNo, a_memberNo);
+							Model model) {
+	blackListService.delBlInfo(m_memberNo, a_memberNo);
 
-		model.addAttribute("m_memberNo", m_memberNo);
-		model.addAttribute("a_memberNo", a_memberNo);
+	model.addAttribute("m_memberNo", m_memberNo);
+	model.addAttribute("a_memberNo", a_memberNo);
 
-		return "blackList/blackListDelete";
+	return "blackList/blackListDelete";
 	}
-
+	
 }

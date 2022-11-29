@@ -263,41 +263,43 @@ function reviewRemove(r_no, r_writerNo) {
 			</div>
 		</div>
 	<!-- course info -->
-		<div class="row align-items-center mb-5">
-			<div class="col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0">
-				<h2>${academyInfoBasic.a_name }</h2>
-			</div>
-			<div class="col-xl-6 order-sm-3 order-xl-2 col-12 order-2">
-				<ul class="list-inline text-xl-center">
-					<li class="list-inline-item mr-4 mb-3 mb-sm-0">
-						<div class="d-flex align-items-center">
-							<i class="ti-book text-primary icon-md mr-2"></i>
-							<div class="text-left">
-								<h6 class="mb-0">지역</h6>
-								<p class="mb-0">${academyInfoBasic.a_location }</p>
-							</div>
-						</div>
-					</li>
-					<li class="list-inline-item mr-4 mb-3 mb-sm-0">
-						<div class="d-flex align-items-center">
-							<i class="ti-alarm-clock text-primary icon-md mr-2"></i>
-							<div class="text-left">
-								<h6 class="mb-0">전화번호</h6>
-								<p class="mb-0">${academyInfoBasic.a_tele }</p>
-							</div>
-						</div>
-					</li>
-					<li class="list-inline-item mr-4 mb-3 mb-sm-0">
-						<div class="d-flex align-items-center">
-							<i class="ti-wallet text-primary icon-md mr-2"></i>
-							<div class="text-left">
-								<h6 class="mb-0">학원분류</h6>
-								<p class="mb-0" id="a_classifySpace">${academyInfoBasic.a_classify}</p>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
+	 <div class="row align-items-center mb-5">
+      <div class="col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0">
+        <h2>${academyInfoBasic.a_name }</h2>
+      </div>
+      <div class="col-xl-6 order-sm-3 order-xl-2 col-12 order-2">
+        <ul class="list-inline text-xl-center">
+          <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+            <div class="d-flex align-items-center">
+            <img class="icon-width" src="images/icon/icons4.png" style="width: 40px;">
+              <div class="text-left">
+                <h6 class="mb-0">지역</h6>
+                <p class="mb-0">${academyInfoBasic.a_location }</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+            <div class="d-flex align-items-center">
+             <img class="icon-width" src="images/icon/icons2.png" style="width: 40px;">
+              <div class="text-left">
+                <h6 class="mb-0">전화번호</h6>
+                <p class="mb-0">${academyInfoBasic.a_tele }</p>
+              </div>
+            </div>
+          </li>
+          
+         
+          <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+            <div class="d-flex align-items-center">
+              <img class="icon-width" src="images/icon/icons5.png" style="width: 40px;">
+              <div class="text-left">
+                <h6 class="mb-0">학원분류</h6>
+               <p class="mb-0" id="a_classifySpace">${academyInfoBasic.a_classify}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
 			<div class="col-xl-3 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
 		<!--  like button  -->
@@ -506,7 +508,7 @@ function reviewRemove(r_no, r_writerNo) {
 <div class="container">
 	<div class="be-comment-block">
 		<c:if test="${sessionScope.loginAcademyMemberBean == null }">
-			<form:form id="comment-form" method="post" modelAttribute="reviewWrite" class="form-block">
+			<form id="comment-form" method="post" class="form-block">
 				<h4 class="mb-4">리뷰남기기</h4>
 					<div class="row">
 					<div class="star-rating" style="padding-left: 2%;padding-top:1%">
@@ -532,13 +534,28 @@ function reviewRemove(r_no, r_writerNo) {
 					<div class="form-group" style="width: 597px;margin-left: 1%;">
 						<textarea id="r_contents" name="r_contents" style="resize: none;width: 140%;" placeholder="학원에 대한 리뷰를 남겨주세요." class="form-group" rows="5" cols="30"></textarea>
 					</div>
-					<button onclick="reviewWrite()" style="height: 105px;left: 24%;" type="button" class="btn btn-primary pull-right" value="Submit">댓글 쓰기</button>
+					<button onclick="reviewWrite()" style="height: 105px;left: 24%;" type="button" class="btn btn-primary pull-right">댓글 쓰기</button>
 				</div>
-			</form:form>
+			</form>
 		</c:if>
+	<script type="text/javascript">
+		var count = 0;
+		var total = 0.0;
+		
+		$(window).on("load", function() {
+			setTimeout(function() {
+				if(count!=0) {
+					var avg = Math.round(total/count * 100) / 100
+					$('#rCount').html(count);
+					$('#rAvg').html(avg);
+				}
+				//alert(count+"끝");
+			},100);
+		});
+	</script>
 		<hr>
 		<h1 class="comments-title">
-			Comments (<%i=0;%><c:forEach items="${academyInfoReview}"><%i++;%></c:forEach><%=i%>)
+			Comments (<span id="rCount">0</span>) | 평점 : <span id="rAvg">0.0</span>
 		</h1>
 		<c:forEach var="air" items="${academyInfoReview}">
 		<div class="be-comment">
@@ -566,9 +583,9 @@ function reviewRemove(r_no, r_writerNo) {
 				</span>
 				<p class="be-comment-text">${air.r_contents }</p>
 				<p align="right">
-				<%-- <c:if test="${air.r_writerNo == sessionScope.loginMemberBean.m_memberNo }"> --%>
-					<button onclick="reviewRemove('${air.r_no }', '${air.r_writerNo }')">삭제하기</button>
-				<%-- </c:if> --%>
+				<c:if test="${air.r_writerNo == sessionScope.loginMemberBean.m_memberNo }">
+					<button onclick="reviewRemove('${air.r_no }', '${air.r_writerNo }')" class="del-btn">삭제하기</button>
+				</c:if>
 				</p>
 			</div>
 		</div>
@@ -578,6 +595,9 @@ function reviewRemove(r_no, r_writerNo) {
 			var space = '#scoreStar' + ${air.r_writerNo };
 			var ckeckVal = '#rating3-' + ${air.r_score };
 			$(space).find(ckeckVal).attr('checked','checked');
+			
+			count++;
+			total +=${air.r_score };
 		});
 	</script>
 		</c:forEach>

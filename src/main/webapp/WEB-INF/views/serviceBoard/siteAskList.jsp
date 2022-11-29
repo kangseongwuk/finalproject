@@ -121,44 +121,40 @@
 		
 		
         <br>
-		<div align="right">
-		<button class="search-btn btn-color" onclick="location.href='${root }serviceBoard/siteAskWrite'">글쓰기</button>
-		</div>
-		<div>
 			 
   				<div class="d-none d-md-block text-center">
 				<ul class="pagination" >
 					<c:choose>
-						<c:when test="${pageCountBean.prevPage <= 0 }">
+						<c:when test="${pageCountBeanM.prevPage <= 0 }">
 							<li class="page-item disabled">
 								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
 							</li>
 						</c:when>
 					<c:otherwise>
 						<li class="page-item">
-						<a href="${root}serviceBoard/siteAskList?page=${pageCountBean.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+						<a href="${root}serviceBoard/siteAskList?pageM=${pageCountBeanM.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
 						</li>					
 					</c:otherwise>					
 					</c:choose>
 														
-					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					<c:forEach var="idx" begin="${pageCountBeanM.min }" end="${pageCountBeanM.max }">
 						<c:choose>
-							<c:when test="$idx == pageCountBean.currentPage">
+							<c:when test="${idx == pageCountBeanM.currentPage}">
 							<li class="page-item active">
-								<a href="${root}serviceBoard/siteAskList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}serviceBoard/siteAskList?pageM=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>		
 						</c:when>
 						
 						<c:otherwise>
 							<li class="page-item">
-								<a href="${root}serviceBoard/siteAskList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}serviceBoard/siteAskList?pageM=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>						
 						</c:otherwise>						
 						</c:choose>									
 					</c:forEach>					
 					
 					<c:choose>
-						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
+						<c:when test="${pageCountBeanM.max >= pageCountBeanM.pageCnt}">
 							<li class="page-item disabled">
 								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
 							</li>

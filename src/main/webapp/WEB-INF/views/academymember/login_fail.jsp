@@ -5,9 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#a{
+	background-color: black;
+	color: black;
+}
+</style>
 </head>
-<body>
-로그인 실패
-
-</body>
+<body id="a">
+<script type="text/javascript">
+	alert("로그인에실패하셨습니다.");
+	history.back(-1);
+</script>
+	</body>
 </html>

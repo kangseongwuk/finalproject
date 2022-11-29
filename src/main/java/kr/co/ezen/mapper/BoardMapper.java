@@ -79,10 +79,11 @@ public interface BoardMapper {
 	AcademyTeacherBean getTeacherInfo(@Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
 	
 	//개별 강사 리뷰 조회
-	@Select("select a_memberNo, t_name, m_memberNo, t_score, t_reviewContents "
+	@Select("select a_memberNo, t_name, t_reNo, t_reWriterNo, t_reWriterId, t_reContents, t_score, t_reWriteTime "
 			+ "from teacherReviewT "
-			+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name}")
-	List<TeacherReviewBean> getTeacherReviewInfo(@Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
+			+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name} "
+			+ "order by (CASE WHEN t_reWriterNo = #{m_memberNo} THEN 1 ELSE 2 END), t_reNo desc")
+	List<TeacherReviewBean> getTeacherReviewInfo(@Param("m_memberNo") int m_memberNo, @Param("a_memberNo") int a_memberNo, @Param("t_name") String t_name);
 	
 	//찜목록 확인(학원리스트)
 	@Select("select * "
@@ -111,5 +112,18 @@ public interface BoardMapper {
 	@Delete("delete from reviewT "
 			+ "where a_memberNo = #{a_memberNo} and r_no = #{r_no}")
 	void deleteAcademyReview(@Param("a_memberNo") int a_memberNo,@Param("r_no") int r_no);
+	
+	//강사 리뷰 작성
+	@SelectKey(statement = "select nvl(max(t_reNo),0)+1 from teacherReviewT "
+			+ "where a_memberNo = #{a_memberNo} and t_name = #{t_name}",
+			keyProperty = "t_reNo", before=true, resultType=int.class)
+	@Insert("insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score) "
+			+ "values(#{a_memberNo},#{t_name},#{t_reNo},#{t_reWriterNo},#{t_reWriterId},#{t_reContents},#{t_score})")
+	void insertTeacherReview(TeacherReviewBean teacherReviewBean_write);
+	
+	//강사 리뷰 삭제
+	@Delete("delete from teacherReviewT "
+			+ "where a_memberNo = #{a_memberNo} and t_name=#{t_name} and t_reNo = #{t_reNo}")
+	void deleteTeacherReview(@Param("a_memberNo") int a_memberNo,@Param("t_name") String t_name, @Param("t_reNo") int t_reNo);
 	
 }

@@ -61,7 +61,7 @@ public class MemberController {
 			return "index";
 		}else {
 			loginMemberBean.setMemberlogin(false);
-			return "index";
+			return "member/login_fail";
 		}
 		
 		

@@ -71,6 +71,7 @@
     <div class="row">
       <div class="col-lg-12">
         <h2 class="section-title text-center">문의사항</h2>
+        <h4 class="section-title text-center" style="margin-bottom: 30px;padding-bottom: 30px;color: gray;">문의사항 답변은 전화 또는 이메일로 드립니다.</h4>
       </div>
     </div>
     <div class="row">
