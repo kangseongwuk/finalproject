@@ -83,8 +83,14 @@ create table memberT(
 --관리자, 회원 등록 예시
 insert into membert(m_classify,m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email)
     values('999','1001','admin01','12345678','Admin','901010','1','01012341234','admin@asd.com');
+insert into membert(m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email,m_confirm)
+    values(m_sq.nextval,'user01','12345678','유저일','921212','2','01012124545','user01@asd.com','y');
+insert into membert(m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email,m_confirm)
+    values(m_sq.nextval,'user02','12345678','유저이','901112','1','01012120002','user02@asd.com','y');
+insert into membert(m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email,m_confirm)
+    values(m_sq.nextval,'user03','12345678','유저삼','901012','1','01012120003','user03@asd.com','y');
 insert into membert(m_memberNo,m_id,m_pw,m_name,m_birth,m_gender,m_tele,m_email)
-    values(m_sq.nextval,'user01','12345678','user','921212','2','01012124545','user@asd.com');
+    values(m_sq.nextval,'user04','12345678','유저사','900812','2','01012120004','user04@asd.com');
 
 
 
@@ -106,7 +112,15 @@ CREATE TABLE memberChildT(
 
 --자녀 등록 예시
 insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
-    values(10000001,'child01','중1','남','미입력');
+    values(10000001,'자녀11','중1','남','미입력');
+insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
+    values(10000001,'자녀12','고1','여','미입력');
+insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
+    values(10000001,'자녀13','고2','여','미입력');
+insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
+    values(10000002,'자녀21','초6','남','미입력');
+insert into memberChildT(m_memberNo,c_name,c_grade,c_gender,c_level)
+    values(10000003,'자녀31','중3','여','미입력');
 
 
 
@@ -146,13 +160,19 @@ CREATE TABLE academyMemberT(
 
 --학원 회원 등록 예시
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
-    values(a_sq.nextval,'aca01','12345678','a종합학원','1234567891','서울시 관악구 신림동','이젠 601호','01099998888',1);
+    values(a_sq.nextval,'aca01','12345678','이젠종합학원','1234567891','서울특별시 관악구 신림동','이젠 601호','01099998888',1);
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
-    values(a_sq.nextval,'aca02','12345678','b단과학원','1234567892','서울시 관악구 신림동','이젠 602호','01099997777',2);
+    values(a_sq.nextval,'aca02','12345678','b단과학원','1234567892','서울특별시 양천구 목동','222-22','01099997777',2);
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
-    values(a_sq.nextval,'aca03','12345678','c미술학원','1234567893','서울시 관악구 신림동','이젠 603호','01099996666',3);
+    values(a_sq.nextval,'aca03','12345678','c미술학원','1234567893','서울특별시 영등포구 여의도동','444-44','01099996666',3);
 insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
-    values(a_sq.nextval,'aca04','12345678','D종합학원','1234567894','서울시 관악구 신림동','이젠 601호','01099998888',1);
+    values(a_sq.nextval,'aca04','12345678','D종합학원','1234567894','경기도 수원시 팔달구','111-11','01099995555',1);
+insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
+    values(a_sq.nextval,'aca05','12345678','E종합학원','1234567895','서울특별시 관악구 서림동','333-2','01099994444',1);
+insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
+    values(a_sq.nextval,'aca06','12345678','F종합학원','1234567896','충청북도 충주시 금릉동','789-12','01099993333',1);
+insert into academyMemberT(a_memberNo,a_id,a_pw,a_name,a_CRN,a_location,a_locationDetail,a_tele,a_classify)
+    values(a_sq.nextval,'aca07','12345678','ㅎ음악학원','1234567897','서울특별시 관악구 신림동','424-44','01099992222',3);
 
 
 
@@ -180,7 +200,15 @@ insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gr
 insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
     values(100002,'단과 학원입니다.','','','7','13','n','16:00','');
 insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
-    values(100004,'종합 학원입니다.','','','7','12','y','15:00','21:30');
+    values(100003,'미술 학원입니다.','','','1','10','n','16:00','21:00');
+insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
+    values(100004,'종합 학원입니다.','','','4','10','y','15:00','21:30');
+insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
+    values(100005,'종합 학원입니다.','','','6','12','y','15:00','21:30');
+insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
+    values(100006,'종합 학원입니다.','','','4','12','y','15:00','21:30');
+insert into academyInfoT(a_memberNo,a_introduce,a_mainImg,a_file,a_gradeMin,a_gradeMax,a_shuttle,a_openTime,a_closeTime)
+    values(100007,'음악 학원입니다.','','','0','12','n','16:00','21:00');
 
 
 
@@ -202,6 +230,10 @@ insert into academyPayT(a_memberNo,a_payStart,a_payEnd)
     values(100002,'22/07/01','22/07/31');
 insert into academyPayT(a_memberNo,a_payStart,a_payEnd)
     values(100002,'22/08/05','22/09/04');
+insert into academyPayT(a_memberNo,a_payStart,a_payEnd)
+    values(100004,'22/07/01','22/08/31');
+insert into academyPayT(a_memberNo,a_payStart,a_payEnd)
+    values(100004,'22/09/01','23/08/31');
 
 
 --6. 학원 리뷰 테이블
@@ -225,9 +257,17 @@ CREATE TABLE reviewT(
 
 --학원 리뷰 예시
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,1,10000001,'user01','강의실이 친절하고, 강사님이 아늑해요',5);
+    values(100001,1,10000001,'유저일','강의실이 친절하고, 강사님이 아늑해요',5);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100002,1,10000001,'user01','그저 그래요.',3);
+    values(100001,1,10000002,'유저이','강의실이 친절하고, 강사님이 아늑해요',4);
+insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
+    values(100001,1,10000003,'유저삼','힘들어요',2);
+insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
+    values(100001,1,10000004,'유저사','시끄러워요',5);
+insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
+    values(100004,1,10000002,'유저이','그저 그래요.',3);
+insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
+    values(100004,1,10000003,'유저삼','그저 그래요.',4);
 
 
 
@@ -249,6 +289,30 @@ insert into academySubjectT(a_memberNo,a_subject)
     values(100001,'영어');
 insert into academySubjectT(a_memberNo,a_subject)
     values(100002,'영어');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100003,'미술');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100004,'국어');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100004,'수학');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100004,'과학');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100005,'사회');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100005,'수학');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100005,'영어');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100006,'국어');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100006,'수학');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100006,'논술');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100007,'음악');
+insert into academySubjectT(a_memberNo,a_subject)
+    values(100007,'피아노');
 
 
 --8. 학원 강사 정보 테이블
@@ -272,6 +336,30 @@ insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
     values(100001,'박강산','국어','안녕하세요.','');
 insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
     values(100002,'이하나','영어','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100003,'이그림','미술','hello~','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100004,'박국어','국어','안녕하세요.','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100004,'이영어','수학','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100004,'어버버','수학','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100004,'이사회','과학','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100005,'가가가','사회','안녕하세요.','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100005,'이이이','수학','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100005,'우우우','영어','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100006,'smith','국어','안녕하세요.','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100006,'madmath','수학','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100006,'enough','수리논술','Hi','');
+insert into academyTeacherT(a_memberNo,t_name,t_subject,t_contents,t_file)
+    values(100007,'김뮤직','음악','Hi','');
 
 
 --9. 강사 리뷰 정보 테이블
@@ -292,7 +380,18 @@ CREATE TABLE teacherReviewT(
 insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
     values(100001,'박강산',10000001,'오홓홓 좋아요','5');
 insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
-    values(100001,'박강산',1001,'그냥 싫어요','2');
+    values(100001,'박강산',10000002,'그냥 싫어요','2');
+insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
+    values(100001,'박강산',10000003,'그냥','3');
+insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
+    values(100001,'박강산',10000004,'사랑합니다','5');
+insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
+    values(100001,'김강사',10000001,'좋아요','5');
+insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
+    values(100001,'김강사',10000002,'내가 악플러다','1');
+insert into teacherReviewT(a_memberNo,t_name,m_memberNo,t_reviewContents,t_score)
+    values(100001,'김강사',10000003,'','4');
+
 
 
 --10. 신고/블랙리스트 관리 정보 테이블
@@ -308,9 +407,16 @@ CREATE TABLE blacklistT(
     constraint black_pk primary key(a_memberNo, m_memberNo)
 );
 
--- 신고/블랙리스트 관리 예시(현재 없음)
+-- 신고/블랙리스트 관리 예시
+insert into blacklistT(m_memberNo, a_memberNo, black_contents)
+    values(10000002, 100001, '돈 안 낸 진상');
+insert into blacklistT(m_memberNo, a_memberNo, black_contents) 
+    values(10000003, 100001, '돈 안 낸 진상');
+insert into blacklistT(m_memberNo, a_memberNo, black_contents) 
+    values(10000004, 100001, '돈 안 낸 진상');
+insert into blacklistT(m_memberNo, a_memberNo, black_contents) 
+    values(10000005, 100001, '돈 안 낸 진상');
 
-select * from blacklistT;
 
 --11. 학원 찜 목록 테이블
 CREATE TABLE wishListT(
@@ -367,13 +473,11 @@ CREATE TABLE siteAskT(
 -- 사이트 문의 예시
 
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
-values('10000001', '01011112222', '빨리 해결해주세요', '아이디랑 비밀번호를 모르겠어요. 제 계정 정보 좀 알려주세요');
-
+    values('10000001', '01011112222', '빨리 해결해주세요', '아이디랑 비밀번호를 모르겠어요. 제 계정 정보 좀 알려주세요');
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
-values('10000001', '01011112222', '아직인가요?', '저 로그인 해야해요');
-
+    values('10000001', '01011112222', '아직인가요?', '저 로그인 해야해요');
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
-values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
+    values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
 
 
 
@@ -405,6 +509,8 @@ CREATE TABLE noticeBoardT(
 --공지사항 게시판 예시
 insert into noticeBoardT(nb_no,nb_title,nb_contents,nb_file)
     values(nb_sq.nextval,'공지사항 테스트1','공지사항 테스트입니다','');
+insert into noticeBoardT(nb_no,nb_title,nb_contents,nb_file)
+    values(nb_sq.nextval,'공지사항 테스트2','공지사항 테스트입니다아아ㅏㅏㅏㅏㅏㅏㅏ','');
 
 
 
@@ -450,8 +556,6 @@ CREATE TABLE siteAcaAskT(
     
 commit;
 
-select a_memberNo, a_name, a_location, a_locationDetail, a_tele, a_joinDate, a_classify, a_infoExpose, 
-    a_introduce, a_mainImg, a_file, a_gradeMin, a_gradeMax, a_shuttle, a_openTime, a_closeTime 
-    from academyMemberT natural join academyInfoT 
-    where a_classify like '%'||'' and a_location like '%'||'관%동'||'%' and ('-1' between a_gradeMin and a_gradeMax) or '-1' = '-1' and a_name like '%'||'%'
-    order by a_joinDate desc;
+    
+    
+    
