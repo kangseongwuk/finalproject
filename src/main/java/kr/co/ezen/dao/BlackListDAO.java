@@ -32,8 +32,8 @@ public class BlackListDAO {
 		  }
 		  
 		  //검색
-		  public List<BlackListBean> getBLSearchList(String m_name, RowBounds rowBounds){
-			   return blackListMapper.getBLSearchList(m_name, rowBounds);
+		  public List<BlackListBean> getBLSearchList(String  searchKeyword){
+			   return blackListMapper.getBLSearchList(searchKeyword);
 		  }
 		  
 		  
@@ -60,8 +60,8 @@ public class BlackListDAO {
 		  }
 		  
 		  
-		  public int getContentCnt2(String m_name) {
-			  return blackListMapper.getContentCnt2(m_name);
+		  public int getContentCnt2(String searchKeyword) {
+			  return blackListMapper.getContentCnt2(searchKeyword);
 		  }
 		 
 }

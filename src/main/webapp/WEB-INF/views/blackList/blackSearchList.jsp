@@ -8,7 +8,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>noticeRead</title>
+<title>::SKYCASTLE::</title>
 
   <!-- Mobile Specific Metas
 	================================================== -->
@@ -62,6 +62,8 @@
 </section>
 <!-- /page title -->
 
+
+
 <!-- Board -->    
 <section class="section bg-gray">
   <div class="container">
@@ -72,62 +74,61 @@
           </div>
       </div>
     </div>
-<table>
+    
+     
+		           <!-- search box -->
+	          
+    <div> 
+    <form:form align="right" action="${root}blackList/blackSearchList_pro?page2=${requestScope.page }&searchKeyword=${requestScope.searchKeyword}" modelAttribute="blSearchBean" method="get">
+	<form:input class="search-txt btn-round btn-color"  path="searchKeyword" placeholder="   검색어를 입력해 주세요" value = "" />
+    <form:button class="search-btn btn-round btn-color" type="submit"><i class="fas fa-search"></i></form:button>
+    </form:form>
+    </div>
+	<br>
+    
+    
+<!-- /search box -->
+
+<table id = "btable">
     <thead>
     <tr>
+		
        <th>고객 이름</th>
        <th>학원 이름</th>
        <th>사유</th>
        <th>작성일자</th>
-
+       <c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">
+       <th>상세보기</th>
+       </c:if>
     </tr>
     </thead>
-    <tbody>
-<c:forEach var="st" items="${blsearchList }">
+    <tbody>   
+<c:forEach var="blsearch" items="${blsearchList }">
     <tr>
-        <td>${st.m_name}</td>
-        <td>${st.a_name}</td>
-         <td>${st.black_contents}</td>
-<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.black_time}" /></td>
+        <td>${blsearch.m_name}</td>
+        <td>${blsearch.a_name}</td>
+         <td>${blsearch.black_contents}</td>
+<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${blsearch.black_time}" /></td>
+  <c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">	
+         <td><a href="${root }blackList/blackListRead?m_memberNo=${blsearch.m_memberNo}&a_memberNo=${blsearch.a_memberNo}">상세보기</a></td>
+         </c:if>  
     </tr>
 </c:forEach>
-<tr>
-<td colspan="2" align="center"><a href="${root}blackList/blackListWrite">글쓰기</a></td>
-<td colspan="2"  align="center"><a href="${root}index">돌아가기</a></td>
-</tr>
 </table>
+<c:if test="${sessionScope.loginMemberBean.m_classify == 999 }">
 
- <%--  <ul class="pagination">
-	  <c:choose>
-	  	<c:when test="${pageCountBean.prevPage <= 0 }">
-	  	    <li class="page-item disabled">
-	      		<a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
-		    </li>
-			<c:otherwise>
-		    <li class="page-item active">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>
-		    </li>
-		    </c:otherwise>					
-			</c:choose>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&raquo;</font></font></a>
-		    </li>
- 	 </c:choose>
-  </ul> --%>
+
+<br>
+<div align="right">
+
+<button class="search-btn btn-color" onclick="location.href='${root }blackList/blackListWrite'">글쓰기</button>
+
+</div>
+</c:if>
+
+
   
-  	<div class="d-none d-md-block">
+  <div class="d-none d-md-block">
 				<ul class="pagination">
 					<c:choose>
 						<c:when test="${pageCountBean2.prevPage <= 0 }">
@@ -137,24 +138,22 @@
 						</c:when>
 					<c:otherwise>
 						<li class="page-item">
-						<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${pageCountBean2.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+						<a href="${root}blackList/blackSearchList?page2=${pageCountBean.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
 						</li>					
 					</c:otherwise>					
 					</c:choose>
-					
-					
-													
+														
 					<c:forEach var="idx" begin="${pageCountBean2.min }" end="${pageCountBean2.max }">
 						<c:choose>
-							<c:when test="$idx == pageCountBean2.currentPage">
+							<c:when test="${ idx == pageCountBean2.currentPage}">
 							<li class="page-item active">
-								<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}blackList/blackSearchList?page2=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>		
 						</c:when>
 						
 						<c:otherwise>
 							<li class="page-item">
-								<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+								<a href="${root}blackList/blackSearchList?page2=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
 							</li>						
 						</c:otherwise>						
 						</c:choose>									
@@ -169,20 +168,12 @@
 					
 					<c:otherwise>
 						<li class="page-item">
-							<a href="${root}blackList/blackSearchList?searchKeyword=${searchKeyword }&page=${pageCountBean2.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+							<a href="${root}blackList/blackSearchList?page2=${pageCountBean2.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
 						</li>
 					</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
-    
- <div class="search-box">
-		  <form:form action="${root}blackList/blackSearchList_pro" modelAttribute="blSearchBean" method="get">
-		    <form:input class="search-txt" path="searchKeyword" placeholder="검색어를 입력해 주세요" value="" />
-		    <form:button class="search-btn" type="submit"><i class="fas fa-search"></i></form:button>
-		  </form:form>
-		</div>
-	</div>
 </section>
 <!-- /Board -->
 

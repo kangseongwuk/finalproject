@@ -58,12 +58,12 @@ public interface BlackListMapper {
 	void modifyBlInfo(BlackListBean blModifyBean);
 	
 	//검색 : 쿼리문 주의 확실하지 않음
-	@Select("select m_name, a_name, black_contents, black_time "
+	@Select("select m.m_memberNo, a.a_memberNo, m.m_name, a.a_name, b.black_contents, b.black_time "
 			+ "from memberT m, academyMemberT a, blacklistT b "
 			+ "where m.m_memberNo = b.m_memberNo "
 			+ "and a.a_memberNo = b.a_memberNo "
-			+ "and m_name like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'")
-	List<BlackListBean> getBLSearchList(String m_name, RowBounds rowBounds);
+			+ "and m.m_name like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'")
+	List<BlackListBean> getBLSearchList(String searchKeyword);
 			
 	
 	@Select("select count(*) from blacklistT")
@@ -72,8 +72,8 @@ public interface BlackListMapper {
 	@Select("select count(*) from memberT m, academyMemberT a, blacklistT b "
 			+ "where m.m_memberNo = b.m_memberNo "
 			+ "and a.a_memberNo = b.a_memberNo "
-			+ "and m_name = #{m_name, jdbcType=VARCHAR}")
-	int getContentCnt2(String m_name);
+			+ "and m_name like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'")
+	int getContentCnt2(String searchKeyword);
 
 	
 	

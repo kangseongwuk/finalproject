@@ -583,7 +583,7 @@ function reviewRemove(r_no, r_writerNo) {
 				</span>
 				<p class="be-comment-text">${air.r_contents }</p>
 				<p align="right">
-				<c:if test="${air.r_writerNo == sessionScope.loginMemberBean.m_memberNo }">
+				<c:if test="${air.r_writerNo == sessionScope.loginMemberBean.m_memberNo || Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4}">
 					<button onclick="reviewRemove('${air.r_no }', '${air.r_writerNo }')" class="del-btn">삭제하기</button>
 				</c:if>
 				</p>

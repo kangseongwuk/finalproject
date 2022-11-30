@@ -49,12 +49,9 @@ public class BlackListService {
 	}
 	
 	//검색
-	 public List<BlackListBean> getBLSearchList(String searchKeyword, int page){
+	 public List<BlackListBean> getBLSearchList(String searchKeyword, int page2){
 		 
-		int start = (page -1) * page_listcnt;
-		RowBounds rowBounds = new RowBounds(start, page_listcnt);
-		 
-		return blackListDAO.getBLSearchList(searchKeyword, rowBounds);
+		return blackListDAO.getBLSearchList(searchKeyword);
 	  }
 	 
 	//상세보기
@@ -90,9 +87,9 @@ public class BlackListService {
 	 } 
 	
 	//검색 페이징
-		 public PageCountBean getContentCnt2(String m_name, int currentPage) {
+		 public PageCountBean getContentCnt2(String searchKeyword, int currentPage) {
 		
-			 int content_cnt = blackListDAO.getContentCnt2(m_name);
+			 int content_cnt = blackListDAO.getContentCnt2(searchKeyword);
 			 
 			//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
 			 PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);

@@ -127,5 +127,10 @@ public class MemberDAO {
     public List<AcademyMemberBean> myWishList(int m_memberNo){
     	return memberMapper.myWishList(m_memberNo);
     }
+    
+    //메인 찜목록
+    public List<AcademyMemberBean> mainWishList(int m_memberNo) {
+    	return memberMapper.mainWishList(m_memberNo);
+    }
  		
 }

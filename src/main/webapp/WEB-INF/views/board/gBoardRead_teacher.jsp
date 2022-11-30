@@ -265,7 +265,7 @@ function reviewRemoveT(t_reNo, t_reWriterNo) {
 				</span>
 				<p class="be-comment-text">${tri.t_reContents }</p>
 				<p align="right">
-				<c:if test="${tri.t_reWriterNo == sessionScope.loginMemberBean.m_memberNo }">
+				<c:if test="${tri.t_reWriterNo == sessionScope.loginMemberBean.m_memberNo  || Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4} ">
 					<button onclick="reviewRemoveT('${tri.t_reNo }', '${tri.t_reWriterNo }')" class="del-btn">삭제하기</button>
 				</c:if>
 				</p>

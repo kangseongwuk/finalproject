@@ -95,7 +95,8 @@ public interface AcademyMemberMapper {
 		@Select("select a2.aa_title, a2.aa_time "
 				+ "from siteAcaAskT a2, academyMemberT a1 "
 				+ "where a2.a_memberNo = a1.a_memberNo "
-				+ "and a2.a_memberNo = #{a_memberNo}")
+				+ "and a2.a_memberNo = #{a_memberNo} "
+				+ "order by a2.aa_time desc")
 		List<SiteAcaAskBean> getMyaskList(int a_memberNo);
 				
 		@Select("select a1.a_tele, a2.aa_time, a2.aa_title, a2.aa_contents, a2.aa_file "
@@ -119,7 +120,7 @@ public interface AcademyMemberMapper {
 		
 		
 	//학원 마이페이지 문의사항
-	@Select("select * from siteAcaAskT where a_memberNo = #{a_memberNo}")
+	@Select("select * from siteAcaAskT where a_memberNo = #{a_memberNo} ")
 	List<SiteAcaAskBean> getAcaAskList(int a_memberNo);
 	
 	//학원 블랙리스트

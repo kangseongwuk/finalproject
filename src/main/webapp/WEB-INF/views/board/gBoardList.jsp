@@ -566,14 +566,13 @@ function fn_iframe(url) {
 							<li class="list-inline-item"><i
 					         class="ti-calendar mr-1 text-color"></i>${gList.a_location }</li>
 							<li class="list-inline-item">
-								<a class="text-color" href="course-single.html" id="gradeSpace${gList.a_memberNo }">
+								<li class="text-color" href="course-single.html" id="gradeSpace${gList.a_memberNo }" style="color:#5c5c77">
 									${gList.a_gradeMin } ~ ${gList.a_gradeMax }
 									<input type="hidden" id="gradeMin" value="${gList.a_gradeMin }">
 									<input type="hidden" id="gradeMax" value="${gList.a_gradeMax }">
-								</a>
-							</li>
+								</li>
 						</ul>
-						<a href="course-single.html">
+						<a href="gBoardRead?a_memberNo=${gList.a_memberNo }">
 							<h4 class="card-title">${gList.a_name }</h4>
 						</a>
 						<p class="card-text mb-4">

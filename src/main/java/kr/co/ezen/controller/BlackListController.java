@@ -73,17 +73,18 @@ public class BlackListController {
 	//검색 화면
 	@GetMapping("/blackSearchList")
 	public String blSearchList(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
-								@RequestParam(value = "page", defaultValue = "1") int page,
+								@RequestParam(value = "page2", defaultValue = "1") int page2,
 								@RequestParam("searchKeyword") String searchKeyword,
 								Model model) {
 		
-		List<BlackListBean> blsearchList = blackListService.getBLSearchList(searchKeyword, page);
+		List<BlackListBean> blsearchList = blackListService.getBLSearchList(searchKeyword, page2);
 		model.addAttribute("blsearchList", blsearchList);
+		model.addAttribute("blSearchBean", blSearchBean);
 		
-		PageCountBean pageCountBean = blackListService.getContentCnt2(searchKeyword, page);
+		PageCountBean pageCountBean = blackListService.getContentCnt2(searchKeyword, page2);
 		model.addAttribute("pageCountBean2", pageCountBean);
 		model.addAttribute("searchKeyword", searchKeyword);
-		model.addAttribute("page", page);
+		model.addAttribute("page2", page2);
 		
 		return "blackList/blackSearchList";
 	}
@@ -91,21 +92,23 @@ public class BlackListController {
 	//검색
 	@GetMapping("/blackSearchList_pro")
 	public String blSearchList_pro(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
-			 					@RequestParam(value = "page", defaultValue = "1") int page,
+			 					@RequestParam(value = "page2", defaultValue = "1") int page2,
 								@RequestParam("searchKeyword") String searchKeyword,
 								Model model) {
 	
-		List<BlackListBean> blsearchList = blackListService.getBLSearchList(searchKeyword, page);
+		List<BlackListBean> blsearchList = blackListService.getBLSearchList(searchKeyword, page2);
 		blSearchBean.setSearchKeyword(blSearchBean.getSearchKeyword());
 		blSearchBean.getM_name();
 				
 		model.addAttribute("blsearchList", blsearchList);
 		model.addAttribute("blSearchBean", blSearchBean);
 		
-		PageCountBean pageCountBean = blackListService.getContentCnt2(searchKeyword, page);
+		PageCountBean pageCountBean = blackListService.getContentCnt2(searchKeyword, page2);
 		model.addAttribute("pageCountBean2", pageCountBean);
 		model.addAttribute("searchKeyword", searchKeyword);
-		model.addAttribute("page", page);
+		model.addAttribute("page2", page2);
+		
+		
 		
 		return "blackList/blackSearchList";
 	}	
@@ -142,6 +145,10 @@ public class BlackListController {
 						 Model model) {
 		
 		blModifyBean = blackListService.getBlModifyPage(m_memberNo, a_memberNo);
+		
+		model.addAttribute("m_memberNo", m_memberNo);
+		model.addAttribute("a_memberNo", a_memberNo);
+		
 		model.addAttribute("blModifyBean", blModifyBean);
 	
 		return "blackList/blackListModify";

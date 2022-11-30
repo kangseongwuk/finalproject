@@ -190,7 +190,7 @@ var convertData = {
 			//alert(wishNum);
 			
 			$.ajax({
-				url : "/board/boardListWish/"+a_memberNo,
+				url : "${root}board/boardListWish/"+a_memberNo,
 				type : "GET",
 				dataType : "text",
 				error : function(e) {
@@ -214,7 +214,7 @@ var convertData = {
 			//alert(a_memberNo);
 			
 			$.ajax({
-				url : "boardListWishOnOff/"+a_memberNo,
+				url : "${root}board/boardListWishOnOff/"+a_memberNo,
 				type : "GET",
 				dataType : "text",
 				error : function(e) {

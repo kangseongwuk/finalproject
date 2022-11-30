@@ -112,10 +112,21 @@ public interface MemberMapper {
 	String selectEmailKakao(String m_email);
    
 	//찜목록 페이지
-	@Select("select w.a_memberNo,a_mainImg, a_name, a_location, a_gradeMin, a_gradeMax from "
+	@Select("select w.a_memberNo,a_mainImg, a_name, a_introduce, a_location, a_gradeMin, a_gradeMax from "
 			+ "academyMemberT a1, academyInfoT a2, wishlistT w "
 			+ "where a1.a_memberNo = a2.a_memberNo and a2.a_memberNo = w.a_memberNo "
 			+ "and m_memberNo = #{m_memberNo}")
 	List<AcademyMemberBean> myWishList(int m_memberNo);
+	
+	//메인 찜목록
+	@Select("select a_memberNo, a_mainImg, a_name, a_introduce, a_location, a_gradeMin, a_gradeMax "
+			+ "from (select ROW_NUMBER() OVER(ORDER BY a_name) rnum, w.a_memberNo, a_mainImg, a_name, a_introduce, a_location, a_gradeMin, a_gradeMax "
+			+ "      	from academyMemberT a1, academyInfoT a2, wishlistT w "
+			+ "         where a1.a_memberNo = a2.a_memberNo and a2.a_memberNo = w.a_memberNo "
+			+ "         and m_memberNo = #{m_memberNo}) "
+			+ "where rnum <=3")
+	List<AcademyMemberBean> mainWishList(int m_memberNo);
+	
+	
 	
 }

@@ -58,7 +58,7 @@ public class MemberController {
 			 HttpSession session = request.getSession();
 			 session.setAttribute("loginMemberBean", this.loginMemberBean);
 			loginMemberBean.setMemberlogin(true);
-			return "index";
+			return "redirect:/index";
 		}else {
 			loginMemberBean.setMemberlogin(false);
 			return "member/login_fail";

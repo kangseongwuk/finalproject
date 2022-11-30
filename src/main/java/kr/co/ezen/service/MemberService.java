@@ -334,5 +334,9 @@ public class MemberService {
 	public List<AcademyMemberBean> myWishList(int m_memberNo){
     	return memberDAO.myWishList(m_memberNo);
     }
-		
+	
+	//메인 찜목록
+    public List<AcademyMemberBean> mainWishList(int m_memberNo) {
+    	return memberDAO.mainWishList(m_memberNo);
+    }
 }

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:url var='root' value='/'/>
 <!DOCTYPE html>
 
@@ -195,7 +195,24 @@
 <!-- 즐겨찾기 학원 리스트-->
 
 <section class="section text-center" style="padding-top:0px">
-<h2>학원 즐겨찾기 리스트</h2>
+<h2>학원 즐겨찾기 리스트</h2><br>
+
+
+<c:if test="${mainFavoritelist == null}">
+      <div class="col-12 col-md-4" style="margin-left: 33%;">
+        <div class="card mb-2" >
+          <img class="card-img-top" src="images/logo.png" alt="logo" alt="Card image cap">
+          <div class="card-body">
+          	<p><br><br></p>
+            <h4 class="card-title font-weight-bold">더 많은 정보를 보려면 로그인해주세요.<br>아이디가 없다면 회원가입해주세요.</h4>
+            <p class="card-text"><br></p>
+            <a class="btn btn-primary btn-md btn-rounded" href="${root }member/join">회원가입</a>
+            <p><br><br></p>
+          </div>
+        </div>
+      </div>
+</c:if>
+<c:if test="${mainFavoritelist != null}">
 <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
   <!--Controls-->
   <div class="controls-top">
@@ -210,11 +227,12 @@
   </div>
   <!--/.Controls-->
 
+
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>
     <% int i = 0; %>
-    <c:forEach items="${academyInfoTeacher}">
+    <c:forEach items="${mainFavoritelist}">
        <% i++; %>
        <li data-target="#carousel-example-multi" data-slide-to=<%=i %>></li>
     </c:forEach>
@@ -226,44 +244,42 @@
     <div class="carousel-item active">
       <div class="col-12 col-md-4">
         <div class="card mb-2">
-          <img class="card-img-top" src="images/logo.png" alt="logo"
-            alt="Card image cap">
+          <img class="card-img-top" src="images/logo.png" alt="logo" alt="Card image cap" style="width:100%">
           <div class="card-body">
           	<p><br><br></p>
-            <h4 class="card-title font-weight-bold">마음에 드는 강사에게 리뷰를 남겨주세요.</h4>
-            <p class="card-text"></p>
-            <!-- <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher">Button</a> -->
+            <h4 class="card-title font-weight-bold">더 많은 정보를 보려면 마이페이지를 확인해주세요.</h4>
+            <p class="card-text"><br></p>
+            <a class="btn btn-primary btn-md btn-rounded" href="${root }member/mypage">마이 페이지 바로가기</a>
             <p><br><br><br></p>
           </div>
         </div>
       </div>
     </div>
-    <c:forEach var="ait" items="${academyInfoTeacher}">
+    <c:forEach var="mfl" items="${mainFavoritelist}">
        <div class="carousel-item">
-         <div class="col-12 col-md-4" style="width:80%;height:80%;">
+         <div class="col-12 col-md-4">
            <div class="card mb-2">
 			<c:choose>
-				<c:when test="${ait.t_file != null }">
-					<img class="card-img-top rounded-0" src="${root }upload/${ait.t_file}" />
+				<c:when test="${mfl.a_mainImg != null }">
+					<img class="card-img-top rounded-0" src="${root }upload/${mfl.a_mainImg}" style="width:80%;height:80%;"/>
 				</c:when>
 				<c:otherwise>
-					<img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg" alt="Card image cap">
+					<img class="card-img-top" src="images/courses/course-1.jpg" alt="이미지 없음">
 				</c:otherwise>
 			</c:choose>
              <div class="card-body">
-               <h4 class="card-title font-weight-bold">${ait.t_name }</h4>
-               <p class="card-text" style="font-weight:bold">${ait.t_subject }</p>
+               <h4 class="card-title font-weight-bold">${mfl.a_name }</h4>
                <p class="card-text">
                		<c:choose>
-	               		<c:when test="${fn:length(ait.t_contents) <= 100}">
-	               			${ait.t_contents }
+	               		<c:when test="${fn:length(mfl.a_introduce) <= 100}">
+	               			${mfl.a_introduce }
 	               		</c:when>
-						<c:when test="${fn:length(ait.t_contents) > 100}">
-							${fn:substring(ait.t_contents, 0, 99)}...
+						<c:when test="${fn:length(mfl.a_introduce) > 100}">
+							${fn:substring(mfl.a_introduce, 0, 99)}...
 						</c:when>
 					</c:choose>
                </p>
-               <a class="btn btn-primary btn-md btn-rounded" href="gBoardRead_teacher?a_memberNo=${ait.a_memberNo}&t_name=${ait.t_name}">상세보기</a>
+               <a class="btn btn-primary btn-md btn-rounded" href="${root }/board/gBoardRead?a_memberNo=${mfl.a_memberNo}">상세보기</a>
              </div>
            </div>
          </div>
@@ -271,8 +287,9 @@
     </c:forEach>
   </div>
 </div>
+</c:if>
 </section>
-<!-- /teachers -->
+<!-- /즐겨찾기 학원 리스트 -->
 <!-- ===============================  footer  =============================== -->
  <c:import url="/WEB-INF/views/include/footer.jsp"/>
 <!-- ===============================  footer  =============================== -->
