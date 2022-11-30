@@ -45,108 +45,19 @@
 </head>
 
 <body>
-  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+//학년 출력 변환 json
+	var convertData = {
+		"grade": [
+			"미취학", "초1", "초2", "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3", "재수생 이상"
+		]
+	}
+  </script>
 
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
 <!-- ===============================  header  =============================== -->
-<!-- Modal -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>회원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id" name="id"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 학원 로그인 -->
-	<div class="modal fade" id="loginModal2" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header border-bottom-0">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-title text-center">
-						<h4>학원 로그인</h4>
-					</div>
-					<div class="d-flex flex-column text-center">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" id="id2" name="id2"
-									placeholder="ID">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password2"
-									name="password2" placeholder="Password">
-							</div>
-							<button type="button" class="btn btn-info btn-block btn-round"
-								type="submit">로그인</button>
-						</form>
-						<div class="text-center text-muted delimiter">다른 계정으로 로그인</div>
-						<div class="d-flex justify-content-center social-buttons">
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Google">
-								<i class="fab fa-google"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="Facebook">
-								<i class="fab fa-facebook"></i>
-							</button>
-							<button type="button" class="btn btn-secondary btn-round"
-								data-toggle="tooltip" data-placement="top" title="twitter">
-								<i class="fab fa-twitter"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 <!-- page title -->
 <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
@@ -185,6 +96,27 @@
 	<c:forEach var="str" items="${memberChildlist}">
 	<div class="text-center">
 	
+	<script type="text/javascript">
+$(document).ready(function() {
+			
+			
+			window.onload = convertPro();
+			
+			function convertPro() {
+				//alert("이건 되냐?");
+				
+				var level = ${str.c_grade};
+				//alert(convertData.grade[level]);
+				
+				var space = '#grade${str.c_name}';
+				
+				$(space).html(convertData.grade[level]);
+				//$('#a_classifySpace').html(convertData.a_classify[${academyInfoBasic.a_classify }]);
+				
+			}
+			
+		});
+	</script>
 			<table class="center">
 			<tr>
 				<td class="text-left"><strong>학생이름 :</strong></td>
@@ -192,7 +124,7 @@
 			</tr>
 			<tr>
 				<td class="text-left"><strong>학년 :</strong></td>
-				<td class="text-center">${str.c_grade}</td>
+				<td class="text-center"><a id="grade${str.c_name}">${str.c_grade}</a></td>
 			</tr>	
 			<tr>
 				<td class="text-left"><strong>성별 :</strong></td>

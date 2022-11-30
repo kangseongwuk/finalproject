@@ -105,64 +105,6 @@
 
 </table>
   
-  	<div class="d-none d-md-block">
-				<ul class="pagination">
-					<c:choose>
-						<c:when test="${pageCountBean.prevPage <= 0 }">
-							<li class="page-item disabled">
-								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
-							</li>
-						</c:when>
-					<c:otherwise>
-						<li class="page-item">
-						<a href="${root}blackList/blackListList?page=${pageCountBean.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
-						</li>					
-					</c:otherwise>					
-					</c:choose>
-														
-					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
-						<c:choose>
-							<c:when test="$idx == pageCountBean.currentPage">
-							<li class="page-item active">
-								<a href="${root}blackList/blackListList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
-							</li>		
-						</c:when>
-						
-						<c:otherwise>
-							<li class="page-item">
-								<a href="${root}blackList/blackListList?page=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
-							</li>						
-						</c:otherwise>						
-						</c:choose>									
-					</c:forEach>					
-					
-					<c:choose>
-						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
-							<li class="page-item disabled">
-								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
-							</li>
-						</c:when>
-					
-					<c:otherwise>
-						<li class="page-item">
-							<a href="${root}blackList/blackListList?page=${pageCountBean.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
-						</li>
-					</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
-  
-  
-  </div>
-  
-<%-- <c:forEach var="st" items="${bllist }">
-    <tr>
-        <td><a href="${root }blackList/blackListRead?m_memberNo=${st.m_memberNo}&a_memberNo=${st.a_memberNo}&page=${page}">${st.m_memberNo}</a></td>
-        <td>${st.a_memberNo} &nbsp;&nbsp;</td>
-        
-<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${st.black_time}" /></td>
-    </tr>
-</c:forEach> --%>
 		
 	
 

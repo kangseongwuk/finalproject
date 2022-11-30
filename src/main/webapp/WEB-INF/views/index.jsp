@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:url var='root' value='/'/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 
 <!--
@@ -279,7 +280,7 @@
 						</c:when>
 					</c:choose>
                </p>
-               <a class="btn btn-primary btn-md btn-rounded" href="${root }/board/gBoardRead?a_memberNo=${mfl.a_memberNo}">상세보기</a>
+               <a class="btn btn-primary btn-md btn-rounded" href="board/gBoardRead?a_memberNo=${mfl.a_memberNo}">상세보기</a>
              </div>
            </div>
          </div>

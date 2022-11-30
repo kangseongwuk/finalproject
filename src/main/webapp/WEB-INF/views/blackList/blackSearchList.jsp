@@ -80,7 +80,7 @@
 	          
     <div> 
     <form:form align="right" action="${root}blackList/blackSearchList_pro?page2=${requestScope.page }&searchKeyword=${requestScope.searchKeyword}" modelAttribute="blSearchBean" method="get">
-	<form:input class="search-txt btn-round btn-color"  path="searchKeyword" placeholder="   검색어를 입력해 주세요" value = "" />
+	<form:input class="search-txt btn-round btn-color"  path="searchKeyword" placeholder="   이름을 입력해 주세요" value = "" />
     <form:button class="search-btn btn-round btn-color" type="submit"><i class="fas fa-search"></i></form:button>
     </form:form>
     </div>

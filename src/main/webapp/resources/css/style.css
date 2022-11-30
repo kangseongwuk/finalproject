@@ -1568,9 +1568,8 @@ a {color: #333; text-decoration: none;}
 /* like button*/
 
 .like-btn {
-  display: flex;
-  justify-content: right;
-  align-items: right;
+  display: inline;
+  float: right;
 }
 .like-btn:active{
   transform: scale(0.9, 0.9);

@@ -21,7 +21,7 @@ var send = confirm("삭제하시겠습니까?");
 
 
 if(send == true) {
-   location.href="${root}member/deleteChild_pro"
+   location.href="${root}member/deleteChildPro?c_name=${c_name}"
 }
 else {
    history.back(-1);

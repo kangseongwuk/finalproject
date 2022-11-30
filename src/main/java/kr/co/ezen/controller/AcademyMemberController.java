@@ -151,7 +151,7 @@ public class AcademyMemberController {
 			modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
 			academyMemberService.getModifyAcademyMember(modifyAcademyMemberBean);
 			academyMemberService.insertAcademyIntroduce(infoIntroduce);
-			return "academymember/my_academypage";
+			return "academymember/academyinfo";
 		}
 	//학원소개확인
 	@GetMapping("/introduce_info")
@@ -184,7 +184,7 @@ public class AcademyMemberController {
 			academyMemberService.modifyAcademyIntroduce(infoIntroduce);
 			modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
 			academyMemberService.getModifyAcademyMember(modifyAcademyMemberBean);
-			return "academymember/my_academypage";
+			return "academymember/academyinfo";
 	}
 		
 	@GetMapping("/introduce_delete")
@@ -270,12 +270,13 @@ public class AcademyMemberController {
 		
 		//학원강사삭제
 		@GetMapping("academyteacher_deletePro")
-		public String academyteacher_deletePro(@RequestParam("t_name")String t_name, @ModelAttribute("deleteAcademyTeacherBean") AcademyTeacherBean deleteAcademyTeacherBean) {
+		public String academyteacher_deletePro(@RequestParam("t_name")String t_name, @ModelAttribute("deleteAcademyTeacherBean") AcademyTeacherBean deleteAcademyTeacherBean, Model model) {
 			
 			deleteAcademyTeacherBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
 			deleteAcademyTeacherBean.setT_name(t_name);
 			academyMemberService.deleteTeacher(deleteAcademyTeacherBean);
-			
+			List<AcademyTeacherBean> academyteacherlist = academyMemberService.academyTeacherList(loginAcademyMemberBean.getA_memberNo());
+			model.addAttribute("academyteacherlist", academyteacherlist);
 			
 			return "academymember/academyteacher";
 		}

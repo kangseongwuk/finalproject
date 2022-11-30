@@ -312,7 +312,7 @@ function reviewRemove(r_no, r_writerNo) {
 					</a>
 				</c:if>
 		<!--  /like button  -->
-				<a href="course-single.html" class="btn btn-primary">상담예약</a>
+				<!-- <a href="course-single.html" class="btn btn-primary">상담예약</a> -->
 			</div>
 		<!-- border -->
 			<div class="col-12 mt-4 order-4">

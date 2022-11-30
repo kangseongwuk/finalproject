@@ -81,7 +81,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="text-center">학원 강사 정보 입력</h3>
+					<h3 class="text-center">학원 정보 수정</h3>
 					<hr>
 				</div>
 			</div>

@@ -254,18 +254,19 @@ var convertData = {
 					<div class="card-body">
 						<ul class="list-inline mb-2">
 							<li class="list-inline-item"><i
-					         class="ti-calendar mr-1 text-color"></i>${fList.a_location }</li>
-							<li class="list-inline-item">
-								<a class="text-color" href="course-single.html" id="gradeSpace${fList.a_memberNo }">
+					         class="ti-calendar mr-1 text-color"></i>${fList.a_location }
+								&nbsp;<i class="text-color"id="gradeSpace${fList.a_memberNo }" style="
+    font-style: inherit;
+">
 									${fList.a_gradeMin } ~ ${fList.a_gradeMax }
 									<input type="hidden" id="gradeMin" value="${fList.a_gradeMin }">
 									<input type="hidden" id="gradeMax" value="${fList.a_gradeMax }">
-								</a>
-							</li>
+								</i>
+						</li>
 						</ul>
-						<a href="course-single.html">
+						
 							<h4 class="card-title">${fList.a_name }</h4>
-						</a>
+						
 						<p class="card-text mb-4">
 							<c:choose>
 								<c:when test="${fn:length(fList.a_introduce) <= 50}">
@@ -276,18 +277,14 @@ var convertData = {
 								</c:when>
 							</c:choose>
 						</p>
-						<a href="gBoardRead?a_memberNo=${fList.a_memberNo }" class="btn btn-primary btn-sm">상세 보기</a>
+						<a href="${root }board/gBoardRead?a_memberNo=${fList.a_memberNo }" class="btn btn-primary btn-sm">상세 보기</a>
 	   				<!--  like button  -->
-					   	<c:if test="${sessionScope.loginAcademyMemberBean == null }">
-							<p class="card-text mb-4">
-								<a class="like-btn" id="wish${fList.a_memberNo }" onclick="switchWishHeart(${fList.a_memberNo })">
-									<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
-										5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
-									</svg>
-								</a>
-							</p>
-						</c:if>
+						<a class="like-btn" id="wish${fList.a_memberNo }" onclick="switchWishHeart(${fList.a_memberNo })">
+							<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
+								5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
+							</svg>
+						</a>
 					<!--  /like button  -->
 	     				</div>
 	 			 	</div>

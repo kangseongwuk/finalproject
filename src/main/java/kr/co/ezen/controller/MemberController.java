@@ -83,8 +83,9 @@ public class MemberController {
 			return "member/modify";
 		}
 		memberService.updateMember(modifyMemberBean);
-		memberService.getMypageMember(mypageMemberBean, request);
-		return "member/mypage";
+		memberService.getModifyMember(modifyMemberBean);
+		
+		return "member/modify";
 	}
 	//회원탈퇴확인
 		@GetMapping("/delete")
@@ -141,12 +142,14 @@ public class MemberController {
 	}
 	//자녀정보입력
 	@PostMapping("/insertChild_pro")
-	public String insertChild_pro(@ModelAttribute("insertChildBean") MemberChildBean insertChildBean, BindingResult result) {
+	public String insertChild_pro(@ModelAttribute("insertChildBean") MemberChildBean insertChildBean, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "member/insertChild";
 		}
 		insertChildBean.setM_memberNo(loginMemberBean.getM_memberNo());
 		memberService.insertChild(insertChildBean);
+		List<MemberChildBean> memberChildlist = memberService.getMypageMemberChild(loginMemberBean.getM_memberNo());
+	 	model.addAttribute("memberChildlist", memberChildlist);
 		return "member/studentinfo";
 	}
 	//자녀정보수정페이지 이동
@@ -168,9 +171,18 @@ public class MemberController {
 	 	model.addAttribute("memberChildlist", memberChildlist);
 		return "member/studentinfo";
 	}
-	//자녀정보삭제
+	
+	//자녀정보삭제페이지
 	@GetMapping("deleteChild")
-	public String deleteChild(@ModelAttribute("deleteChildBean") MemberChildBean deleteChildBean, @RequestParam String c_name, Model model) {
+	public String deleteChild(@RequestParam("c_name") String c_name, Model model) {
+		model.addAttribute("c_name", c_name);
+		return "member/deleteChild";
+		
+	}
+	
+	//자녀정보삭제
+	@GetMapping("deleteChildPro")
+	public String deleteChildPro(@ModelAttribute("deleteChildBean") MemberChildBean deleteChildBean, @RequestParam("c_name") String c_name, Model model) {
 		deleteChildBean.setM_memberNo(loginMemberBean.getM_memberNo());
 		deleteChildBean.setC_name(c_name);
 		memberService.deleteChild(deleteChildBean);

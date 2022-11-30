@@ -67,6 +67,8 @@
           <ul class="list-inline text-center">
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/my_academypage"><h4>학원 정보</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyinfo"><h4>학원 소개</h4></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyteacher"><h4>학원 강사 조회</h4></a></li>
+			<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academypay"><h4>결제 내역 조회</h4></a></li>     
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/mypage_siteAcaAsk"><h4>내 문의사항</h4></a></li>
             <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
           </ul>
@@ -85,17 +87,19 @@
           </div>
       </div>
     </div>
-<div>
+<div class="row justify-content-center">
+<div class="col-lg-8 mb-5 mb-lg-0">
+					<div>
 						<label for="aa_title">제목</label>
-						<input type="text" id="aa_title" name="aa_title" value="${myaskreadBean.aa_title }" disabled="disabled"/>
+						<input class="form-control mb-3" type="text" id="aa_title" name="aa_title" value="${myaskreadBean.aa_title }" disabled="disabled"/>
 					</div>
 					<div>
 						<label for="aa_time">작성날짜</label>
-						<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${myaskreadBean.aa_time}" /><br>
+						<input class="form-control mb-3" value="<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${myaskreadBean.aa_time}" />" disabled="disabled"/><br>
 					</div>
 					<div>
 						<label for="aa_contents">내용</label>
-						<textarea id="aa_contents" name="aa_contents" rows="10" style="resize:none" disabled="disabled">${myaskreadBean.aa_contents }</textarea>
+						<textarea class="form-control mb-3" id="aa_contents" name="aa_contents" rows="10" style="resize:none" disabled="disabled">${myaskreadBean.aa_contents }</textarea>
 					</div>
 					<c:if test="${myaskreadBean.aa_file != null }">
 						<div>
@@ -104,10 +108,12 @@
 						</div>
 					</c:if>
 									
-						<div>
-							<a href="${root }academymember/mypage_siteAcaAsk">목록보기</a>
+						<div class="text-right">
+							<a class="btn btn-primary" href="${root }academymember/mypage_siteAcaAsk">목록보기</a>
 							
 						</div>
+			</div>
+			</div>
 			</div>
 		
 </section>

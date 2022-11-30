@@ -565,15 +565,17 @@ function fn_iframe(url) {
 						<ul class="list-inline mb-2">
 							<li class="list-inline-item"><i
 					         class="ti-calendar mr-1 text-color"></i>${gList.a_location }</li>
-							<li class="list-inline-item">
-								<li class="text-color" href="course-single.html" id="gradeSpace${gList.a_memberNo }" style="color:#5c5c77">
+							
+								<i class="text-color" id="gradeSpace${gList.a_memberNo }" style="
+    font-style: inherit;
+">
 									${gList.a_gradeMin } ~ ${gList.a_gradeMax }
 									<input type="hidden" id="gradeMin" value="${gList.a_gradeMin }">
 									<input type="hidden" id="gradeMax" value="${gList.a_gradeMax }">
-								</li>
+								</i>
 						</ul>
 						<a href="gBoardRead?a_memberNo=${gList.a_memberNo }">
-							<h4 class="card-title">${gList.a_name }</h4>
+							<h4>${gList.a_name }</h4>
 						</a>
 						<p class="card-text mb-4">
 							<c:choose>
@@ -588,14 +590,12 @@ function fn_iframe(url) {
 						<a href="gBoardRead?a_memberNo=${gList.a_memberNo }" class="btn btn-primary btn-sm">상세 보기</a>
 	   				<!--  like button  -->
 					   	<c:if test="${sessionScope.loginAcademyMemberBean == null }">
-							<p class="card-text mb-4">
-								<a class="like-btn" id="wish${gList.a_memberNo }" onclick="switchWishHeart(${gList.a_memberNo })">
-									<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
-										5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
-									</svg>
-								</a>
-							</p>
+							<a class="like-btn" id="wish${gList.a_memberNo }" onclick="switchWishHeart(${gList.a_memberNo })">
+								<svg class="like_icon" width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857
+									5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z"/>
+								</svg>
+							</a>
 						</c:if>
 					<!--  /like button  -->
 	     				</div>

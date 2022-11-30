@@ -103,30 +103,7 @@
 	</c:forEach>
 	
 </table>
-<br><br><br><br><br>
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&laquo;</font></font></a>
-    </li>
-    <li class="page-item active">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&raquo;</font></font></a>
-    </li>
-  </ul>
+
   
 </div>
 

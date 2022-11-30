@@ -22,7 +22,8 @@ public interface SiteAcaAskMapper {
 	//문의글 목록
 	@Select("select a1.a_memberNo, a1.a_name, a2.aa_title, a2.aa_time "
 			+ "from siteAcaAskT a2, AcademyMemberT a1 "
-			+ "where a2.a_memberNo = a1.a_memberNo ")	
+			+ "where a2.a_memberNo = a1.a_memberNo "
+			+ "order by a2.aa_time desc")	
 		List<SiteAcaAskBean> getAaList(); 
 	
 	//문의글 개수

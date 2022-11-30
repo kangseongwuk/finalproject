@@ -117,15 +117,11 @@
 							<form:input class="form-control mb-3" path="m_id" readonly="true"/><hr>
 						</div>
 						<div>
-							<form:label path="m_pw">비밀번호 </form:label>
+							<form:label path="m_pw">비밀번호 변경</form:label>
 							<form:input class="form-control mb-3" type="password" path="m_pw" placeholder="비밀번호"/>
 							<form:errors path="m_pw" style="color:red" /><hr>
 						</div>
-						<div>
-							<form:label path="m_pw2">비밀번호 확인 </form:label>
-							<form:input class="form-control mb-3" type="password" path="m_pw2"/>
-							<form:errors path="m_pw2" style="color:red" /><hr>
-						</div>
+						
 						<div>
 							<form:label path="m_tele">전화번호 </form:label>
 							<form:input class="form-control mb-3" type="tele" path="m_tele" value="${sessionScope.loginMemberBean.m_tele}" placeholder="'-'빼고 입력"/>
