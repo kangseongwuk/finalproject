@@ -1,16 +1,20 @@
 package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ServiceCenterBean{
 
 	private int nb_no;
 	
-	//@NotBlank
+	@Pattern(regexp = "^[가-힣0-9a-zA-Z#?!@$%^&*-.,~ ]{1,3000}$")
 	private String nb_title;
 	
-	//@NotBlank
+	@NotBlank
 	private String nb_contents;
 	
 	private Timestamp nb_writeTime;

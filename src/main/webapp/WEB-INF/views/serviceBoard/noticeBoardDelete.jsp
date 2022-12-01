@@ -13,7 +13,8 @@
 var send = confirm("삭제하시겠습니까?");
 
 if(send == true) {
-   location.href="${root}serviceBoard/noticeBoardList"
+   location.href="${root}serviceBoard/noticeBoardDelete_pro?nb_no=${nbSearchBean.nb_no}"
+		   
 }
 else {
    history.back(-1);

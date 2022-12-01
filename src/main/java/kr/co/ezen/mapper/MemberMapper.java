@@ -83,8 +83,8 @@ public interface MemberMapper {
 	//총 게시글 수
 	@Select("select count(*) "
 			+ "from siteAskT s, memberT m "
-			+ "where sa_memberNo = m_memberNo "
-			+ "and m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
+			+ "where s.sa_memberNo = m.m_memberNo "
+			+ "and m.m_memberNo = #{m_memberNo, jdbcType=VARCHAR}")
 	int getMyAskListCnt(MemberBean myAskBean);
 		
 	//페이징

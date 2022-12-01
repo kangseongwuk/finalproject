@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -130,21 +131,31 @@ public class ServiceCenterController {
 	}
 	
 	@PostMapping("/noticeBoardWrite_pro")
-	public String write_pro(@ModelAttribute("nbWriteBean") ServiceCenterBean nbWriteBean, BindingResult result) {
+	public String write_pro( 
+							@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean, 
+							@RequestParam(value = "page", defaultValue = "1") int page,
+							@Validated@ModelAttribute("nbWriteBean") ServiceCenterBean nbWriteBean,
+							BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
 			return "serviceBoard/noticeBoardWrite";
 		}
 		// upload 처리 
 		serviceCenterService.addNbContent(nbWriteBean);
+		
+		List<ServiceCenterBean> nblist = serviceCenterService.getNbList(page);		
+		model.addAttribute("nblist", nblist);
+		
+		int totCnt = serviceCenterService.getListCnt(nbSearchBean);
+		model.addAttribute("totCnt", totCnt);
+		
+		PageCountBean pageCountBean = serviceCenterService.getContentCnt(page);
+		model.addAttribute("pageCountBean", pageCountBean);
+		
+		model.addAttribute("page", page);
 	
-		return "serviceBoard/noticeBoardWrite_success";
+		return "serviceBoard/noticeBoardList";
 	}	
-	
-	@GetMapping("/noticeBoardWrite_fail")
-	public String noticeBoardWrite_fail() {
-		return "serviceBoard/noticeBoardWrite_fail";
-	}
 	
 	
 	//수정
@@ -164,7 +175,9 @@ public class ServiceCenterController {
 	}
 	
 	@PostMapping("/noticeBoardModify_pro")
-	public String modify_pro(@ModelAttribute("nbModifyBean") ServiceCenterBean nbModifyBean, 
+	public String modify_pro(@ModelAttribute("nbReadBean") ServiceCenterBean nbReadsBean, 
+							 @RequestParam("nb_no") int nb_no,
+							 @Validated@ModelAttribute("nbModifyBean") ServiceCenterBean nbModifyBean, 
 																				BindingResult result,
 																				Model model) {	
 		if(result.hasErrors()) {
@@ -173,18 +186,48 @@ public class ServiceCenterController {
 		// upload 처리 
 		serviceCenterService.modifyNbInfo(nbModifyBean);
 		
-		return "serviceBoard/noticeBoardModify_success";
+		ServiceCenterBean nbReadBean = serviceCenterService.getNbInfo(nb_no);
+		model.addAttribute("nbReadBean", nbReadBean);
+		
+		
+		return "serviceBoard/noticeBoardRead";
 	}
 		
 	
 	//삭제
-	@GetMapping("/noticeBoardDelete")
-	public String delete(@RequestParam("nb_no") int nb_no,
-						Model model) {
+		@GetMapping("/noticeBoardDelete")
+		public String delete(@RequestParam("nb_no") int nb_no, 
+								@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean,
+								Model model) {
+			
+			model.addAttribute("nbSearchBean", nbSearchBean);
+			
+			return "serviceBoard/noticeBoardDelete";
+		}
 		
-		serviceCenterService.delNbInfo(nb_no);
 		
-		return "serviceBoard/noticeBoardDelete";
-	}
+		//삭제
+		@GetMapping("/noticeBoardDelete_pro")
+		public String delete_pro(@ModelAttribute("nbSearchBean") ServiceCenterBean nbSearchBean, 
+								@RequestParam(value = "page", defaultValue = "1") int page,
+								@RequestParam("nb_no") int nb_no,
+								Model model) {
+			
+			serviceCenterService.delNbInfo(nbSearchBean.getNb_no());
+			
+			List<ServiceCenterBean> nblist = serviceCenterService.getNbList(page);		
+			model.addAttribute("nblist", nblist);
+			
+			int totCnt = serviceCenterService.getListCnt(nbSearchBean);
+			model.addAttribute("totCnt", totCnt);
+			
+			PageCountBean pageCountBean = serviceCenterService.getContentCnt(page);
+			model.addAttribute("pageCountBean", pageCountBean);
+			
+			model.addAttribute("page", page);
+			
+			
+			return "serviceBoard/noticeBoardList";
+		}
 	
 }

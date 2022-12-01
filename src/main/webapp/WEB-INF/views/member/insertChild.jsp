@@ -60,8 +60,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<ul class="list-inline custom-breadcrumb mb-2">
-						<li class="list-inline-item"><a
-							class="h2 text-primary font-secondary" href="${root}member/mypage">My Page</a></li>
+						<li class="list-inline-item h2 text-primary font-secondary">My page</li>
 						<li class="list-inline-item text-white h3 font-secondary nasted">자녀 정보 입력</li>
 					</ul>
 				</div>
@@ -97,6 +96,7 @@
 						<div>
 							<form:label path="c_name">학생이름</form:label>
 							<form:input class="form-control mb-3" path="c_name" style="text-align:center" />
+							<form:errors path="c_name" style="color:red"/>
 							<hr>
 						</div>
 						<div>
@@ -122,7 +122,7 @@
 						<div>
 							성별 &nbsp;&nbsp;
 							<form:label path="c_gender">남자</form:label>
-							<form:radiobutton path="c_gender" value="남"/>
+							<form:radiobutton path="c_gender" value="남" checked="checked"/>
 							<form:label path="c_gender">여자</form:label>
 							<form:radiobutton path="c_gender" value="여"/>
 							<hr>
@@ -130,7 +130,7 @@
 						<div>
 							학업수준 &nbsp;&nbsp;
 							<form:label path="c_level">상</form:label>
-							<form:radiobutton path="c_level" value="상"/> &nbsp;
+							<form:radiobutton path="c_level" checked="checked" value="상"/> &nbsp;
 							<form:label path="c_level">중상</form:label>
 							<form:radiobutton path="c_level" value="중상"/> &nbsp;
 							<form:label path="c_level">중</form:label>

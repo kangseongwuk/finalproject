@@ -1,14 +1,21 @@
 package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class SiteAskBean {
 	
 	private int sa_memberNo;
+	@Pattern(regexp = "^\\d{2,3}\\d{3,4}\\d{4}$")
 	private String sa_tele;
 	private Timestamp sa_time;
+	@Pattern(regexp = "^[ㄱ-ㅎㅏ-ㅢ가-힣0-9a-zA-Z#?!@$%^&*-.,~ ]{1,300}$")
 	private String sa_title;
+	@Pattern(regexp = "^[ㄱ-ㅎㅏ-ㅢ가-힣0-9a-zA-Z#?!@$%^&*-.,~ ]{1,500}$")
 	private String sa_contents;
 	private String sa_file;
 	

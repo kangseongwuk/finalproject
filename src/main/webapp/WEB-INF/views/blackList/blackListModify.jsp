@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">블랙리스트</li>
         </ul>
@@ -88,7 +88,7 @@
 		 <th class="th-writetitle"><form:label path="m_name">고객명</form:label></th>
 		 <th class="th-border">
 			<form:input path="m_name" class="write-width" readonly="true" />
-			<form:errors path="m_name" style="color:red"></form:errors>
+			<form:errors path="m_name" style="color:red; display: flex; padding-left: 15px;"></form:errors>
 		</th>
 		</tr>
 		
@@ -96,7 +96,7 @@
 		 <th class="th-writetitle"><form:label path="a_name" >학원명</form:label></th>
 		 <th class="th-border">
 			<form:input path="a_name" class="write-width" readonly="true" />
-			<form:errors path="a_name" style="color:red"></form:errors>
+			<form:errors path="a_name" style="color:red; display: flex; padding-left: 15px;"></form:errors>
 		</th>
 		</tr>
 		
@@ -104,7 +104,7 @@
 		 <th class="th-writetitle"><form:label path="black_contents">사유</form:label></th>
 		 <th class="th-border">
 		    <form:textarea path="black_contents" class="write-width" rows="10" style="resize:none"></form:textarea>
-			<form:errors path="black_contents" style="color:red"></form:errors>
+			<form:errors path="black_contents" style="color:red; display: flex; padding-left: 15px;"></form:errors>
 			</th>
 			</tr>
 	

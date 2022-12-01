@@ -205,7 +205,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 고객센터
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size:15px">
               <c:choose>
               
                    <c:when test="${sessionScope.loginMemberBean.m_memberNo != null }">

@@ -1,6 +1,10 @@
 package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class SiteAcaAskBean {
@@ -8,7 +12,9 @@ public class SiteAcaAskBean {
     private int a_memberNo; 
 	private String a_name; 
     private String a_tele;
+    @Pattern(regexp = "^[ㄱ-ㅎㅏ-ㅢ가-힣0-9a-zA-Z#?!@$%^&*-.,~ ]{1,300}$")
     private String aa_title;  
+    @Pattern(regexp = "^[ㄱ-ㅎㅏ-ㅢ가-힣0-9a-zA-Z#?!@$%^&*-.,~ ]{1,1500}$")
     private String aa_contents; 
     private Timestamp aa_time;
     private String aa_file; 

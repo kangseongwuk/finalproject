@@ -59,9 +59,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<ul class="list-inline custom-breadcrumb mb-2">
-						<li class="list-inline-item"><a
-							class="h2 text-primary font-secondary"
-							href="${root}member/mypage">My Page</a></li>
+						<li class="list-inline-item h2 text-primary font-secondary">My page</li>
 						<li class="list-inline-item text-white h3 font-secondary nasted">내 문의사항</li>
 
 					</ul>
@@ -115,7 +113,7 @@
 						</div>		
 						<div>
 							<label for="sa_contents">내용</label>
-							<textarea class="form-control mb-3" id="sa_contents" name="sa_contents" disabled="disabled">${myaskreadBean.sa_contents}</textarea>
+							<textarea class="form-control mb-3" id="sa_contents" name="sa_contents" disabled="disabled" style="resize:none">${myaskreadBean.sa_contents}</textarea>
 						</div>
 						<br>
 						<c:if test="${myaskreadBean.sa_file != null }">

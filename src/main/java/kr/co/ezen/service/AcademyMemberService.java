@@ -216,8 +216,8 @@ public class AcademyMemberService {
 		return academyMemberDAO.getMyaskRead(aa_time, a_memberNo);
 	}
 			
-	public int getMyAskListCnt(AcademyMemberBean myAskBean) {
-		return academyMemberDAO.getMyAskListCnt(myAskBean);
+	public int getMyAskListCnt(AcademyMemberBean myAcaAskBean) {
+		return academyMemberDAO.getMyAskListCnt(myAcaAskBean);
 	}
 			
 	public PageCountBean getMyAskContentCnt(int currentPage) {
@@ -225,9 +225,9 @@ public class AcademyMemberService {
 		int content_cnt = academyMemberDAO.getMyAskContentCnt(loginAcademyMemberBean.getA_memberNo());
 				 
 		//contentCnt: 전체글개수, currentPage: 현재글 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
-		PageCountBean mypageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		PageCountBean myAcapageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
 				 
-		return mypageCountBean;
+		return myAcapageCountBean;
 	}
 	
 	//관리자 학원 목록 페이지

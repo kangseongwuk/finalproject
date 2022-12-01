@@ -1,12 +1,24 @@
 package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class BlackListBean {
 
+	@Min(10000000) @Max(99999999)
 	private int m_memberNo;
+	
+	@Min(100000) @Max(999999)
 	private int a_memberNo;
+	
+	
+	@Pattern(regexp = "^[가-힣0-9a-zA-Z#?!@$%^&*-.,]{1,120}$")
 	private String black_contents;
 	private Timestamp black_time;
 	private MultipartFile upload_file;	

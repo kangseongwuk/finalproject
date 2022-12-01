@@ -13,7 +13,7 @@
 var send = confirm("삭제하시겠습니까?");
 
 if(send == true) {
-   location.href="${root}faq/faqBoard"
+   location.href="${root}faq/faqBoard?fb_no=${fbListBean.fb_no}"
 }
 else {
    history.back(-1);

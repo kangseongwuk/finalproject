@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,12 +84,20 @@ public class AcademyMemberController {
 		}
 		
 	}
+
 	//학원로그아웃
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public String logout() {
+		return "academymember/logout";
+	}
+	
+	//학원로그아웃처리
+	@GetMapping("logout_pro")
+	public String logout_pro(HttpSession session) {
 		session.invalidate();
 		return "index";
 	}
+	
 	
 	//학원정보조회(마이페이지)
 		@GetMapping("my_academypage")
@@ -107,7 +116,7 @@ public class AcademyMemberController {
 	}
 	//학원정보수정
 	@PostMapping("modify_pro")
-	public String modify_pro(@ModelAttribute("modifyAcademyMemberBean") AcademyMemberBean modifyAcademyMemberBean, BindingResult result) {
+	public String modify_pro(@Validated@ModelAttribute("modifyAcademyMemberBean") AcademyMemberBean modifyAcademyMemberBean, BindingResult result) {
 		if(result.hasErrors()) {
 			return "academymember/modify";
 		}
@@ -143,7 +152,7 @@ public class AcademyMemberController {
 	
 		//학원소개작성
 		@PostMapping("/academyinfo_write_pro")
-		public String academyinfo_write_pro(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce,@ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean, BindingResult result) {
+		public String academyinfo_write_pro(@ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean, @Validated@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce, BindingResult result) {
 			
 			if(result.hasErrors()) {
 				return "academymember/academyinfo";
@@ -176,9 +185,9 @@ public class AcademyMemberController {
 		}
 	//학원소개수정
 	@PostMapping("/introduce_modifyPro")
-	public String introduce_modifyPro(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce, @ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean , BindingResult result) {
+	public String introduce_modifyPro(@ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean , @Validated@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce, BindingResult result) {
 			if(result.hasErrors()) {
-				return "academymember/introduce_modify";
+				return "academymember/academyinfo_modify";
 			}
 			
 			academyMemberService.modifyAcademyIntroduce(infoIntroduce);
@@ -228,7 +237,7 @@ public class AcademyMemberController {
 		
 		//학원강사입력
 		@PostMapping("/academyteacher_insertPro")
-		public String academyteacher_insertPro(@ModelAttribute("teacherInsertBean")AcademyTeacherBean teacherInsertBean, BindingResult result, Model model) {
+		public String academyteacher_insertPro(@Validated@ModelAttribute("teacherInsertBean")AcademyTeacherBean teacherInsertBean, BindingResult result, Model model) {
 			if(result.hasErrors()) {
 				return "academymember/academyteacher_insert";
 			}
@@ -253,7 +262,11 @@ public class AcademyMemberController {
 		
 		//학원강사수정
 		@PostMapping("academyteacher_modifyPro")
-		public String academyteacher_modifyPro(@ModelAttribute("teacherModifyBean") AcademyTeacherBean teacherModifyBean, Model model) {
+		public String academyteacher_modifyPro(@Validated@ModelAttribute("teacherModifyBean") AcademyTeacherBean teacherModifyBean, BindingResult result, Model model) {
+			
+			if(result.hasErrors()) {
+				return "academymember/academyteacher_modify";
+			}
 			
 			academyMemberService.modifyTeacher(teacherModifyBean);
 			List<AcademyTeacherBean> academyteacherlist = academyMemberService.academyTeacherList(loginAcademyMemberBean.getA_memberNo());
@@ -296,20 +309,20 @@ public class AcademyMemberController {
 	
 	//내가 쓴 문의사항
 			@GetMapping("/mypage_siteAcaAsk")
-			public String myAsk(@ModelAttribute("myAskBean") AcademyMemberBean myAskBean,
-								@RequestParam(value = "myAskPage", defaultValue = "1") int myAskPage,
+			public String myAsk(@ModelAttribute("myAcaAskBean") AcademyMemberBean myAcaAskBean,
+								@RequestParam(value = "myAcaAskPage", defaultValue = "1") int myAcaAskPage,
 								Model model) {
 				
 				List<SiteAcaAskBean> myasklist = academyMemberService.getMyaskList(loginAcademyMemberBean.getA_memberNo());
 				model.addAttribute("myasklist", myasklist);
 				
-				int myasktotCnt = academyMemberService.getMyAskListCnt(myAskBean);
-				model.addAttribute("myasktotCnt", myasktotCnt);
+				int myAkaAskCnt = academyMemberService.getMyAskListCnt(myAcaAskBean);
+				model.addAttribute("myAkaAskCnt", myAkaAskCnt);
 				
-				PageCountBean mypageCountBean = academyMemberService.getMyAskContentCnt(myAskPage);
-				model.addAttribute("mypageCountBean", mypageCountBean);
+				PageCountBean myAcapageCountBean = academyMemberService.getMyAskContentCnt(myAcaAskPage);
+				model.addAttribute("myAcapageCountBean", myAcapageCountBean);
 				
-				model.addAttribute("myAskPage", myAskPage);
+				model.addAttribute("myAcaAskPage", myAcaAskPage);
 				
 				return "academymember/mypage_siteAcaAsk";
 			}

@@ -55,7 +55,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+           <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">문의사항</li>
         </ul>
@@ -78,9 +78,9 @@
       <div class="col-lg-7 mb-4 mb-lg-0 ">
         <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"
         enctype="multipart/form-data">
-          <form:input class="form-control mb-3" path="m_name" value="이름               ${sessionScope.loginMemberBean.m_name }" readonly="true" />
-          <form:input class="form-control mb-3" path="m_id"  value="아이디           ${sessionScope.loginMemberBean.m_id}"  readonly="true" />
-          <form:input class="form-control mb-3" path="m_email"  value="이메일           ${sessionScope.loginMemberBean.m_email }"  readonly="true" />
+          <form:input class="form-control mb-3" path="m_name" value="이름               ${sessionScope.loginMemberBean.m_name }" readonly="true" /><br>
+          <form:input class="form-control mb-3" path="m_id"  value="아이디           ${sessionScope.loginMemberBean.m_id}"  readonly="true" /><br>
+          <form:input class="form-control mb-3" path="m_email"  value="이메일           ${sessionScope.loginMemberBean.m_email }"  readonly="true" /><br>
           </form:form>
           
           <form:form action="${root }serviceBoard/siteAskWrite_pro" method="POST"  modelAttribute="saWriteBean"
@@ -89,9 +89,12 @@
           <table>
          
           <form:input class="form-control mb-3" path="sa_tele" placeholder="휴대폰" />
+          <form:errors path="sa_tele"  style="color:red; margin-left: 20px" /><br><br>
           <form:input class="form-control mb-3" path="sa_title" placeholder="제목" />
+          <form:errors path="sa_title"  style="color:red; margin-left: 20px" /><br><br>
          </table>
-          <form:textarea path="sa_contents" class="form-control mb-3" placeholder="문의내용" ></form:textarea>
+          <form:textarea path="sa_contents" class="form-control mb-3" style="resize:none" placeholder="문의내용" ></form:textarea>
+          <form:errors path="sa_contents" style="color:red; margin-left: 20px" /><br><br>
          <!-- 2022.11.11 01시 수정 -->
           <form:input type="file" class="form-control mb-3" path="upload_file" placeholder="첨부내용" accept="image/*"/>
           <form:button align="center" type="submit" class="btn btn-primary" >작성완료</form:button>

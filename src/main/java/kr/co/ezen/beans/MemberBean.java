@@ -2,24 +2,42 @@ package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class MemberBean {
 	private int m_classify;
 	private int m_memberNo;
+	
 	private String m_id;
+	
+	
+	@Pattern(regexp = "^[0-9a-zA-Z#?!@$%^&*-]{8,15}$")
 	private String m_pw;
+	
 	private String m_pw2;
+	
+	
+	@Pattern(regexp = "^[가-힣]{2,20}$")
 	private String m_name;
+	
 	private String m_birth;
 	private int m_gender;
+	
+	@Pattern(regexp = "^\\d{2,3}\\d{3,4}\\d{4}$")
 	private String m_tele;
+	
 	private Timestamp m_joinDate;
 	private String m_recommend;
+	
+	@Pattern(regexp = "^[0-9a-zA-Z]*@[0-9a-zA-Z]*.[a-zA-Z]{2,3}$")
 	private String m_email;
+	
 	private String m_confirm;
 	
 	private boolean memberlogin;
 	
-	private boolean userIdExist;
+	
 	
 	private boolean userlogin;
 	
@@ -27,7 +45,7 @@ public class MemberBean {
 	
 	//생성자 주입 단, 한번만 실행
 	public MemberBean() {
-		this.userIdExist = false;
+		
 		this.userlogin = false;
 	}
 	

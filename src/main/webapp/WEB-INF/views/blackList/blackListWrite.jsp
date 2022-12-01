@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">블랙리스트</li>
         </ul>
@@ -87,7 +87,7 @@
 		 <th class="th-writetitle">회원 번호</th>
 		 <th class="th-border">
 			<form:input class="write-width" path="m_memberNo"/>
-			<form:errors path="m_memberNo" style="color:red"></form:errors>
+			<form:errors path="m_memberNo" style="color:red; display: flex; padding-left: 15px;"></form:errors>
 		</th>
 		</tr>
 		
@@ -95,7 +95,7 @@
 		 <th class="th-writetitle">학원 번호</th>
 		 <th class="th-border">
 			<form:input class="write-width" path="a_memberNo"/>
-			<form:errors path="a_memberNo" style="color:red"></form:errors>
+			<form:errors path="a_memberNo" style="color:red; display: flex; padding-left: 15px;"></form:errors>
 		</th>
 		</tr>
 		
@@ -103,7 +103,7 @@
 		 <th class="th-writetitle">사유</th>
 		 <th class="th-border">
 			<form:textarea class="write-width"  path="black_contents" rows="10" style="resize:none"></form:textarea>
-			<form:errors path="black_contents" style="color:red"></form:errors>
+			<form:errors path="black_contents" style="color:red; display: flex; padding-left: 15px;"></form:errors>
 			</th>
 			</tr>
 	

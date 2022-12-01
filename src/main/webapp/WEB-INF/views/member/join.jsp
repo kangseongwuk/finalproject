@@ -15,6 +15,117 @@
 <html lang="ko">
 <!-- Main Stylesheet -->
   <link href="css/main.css" rel="stylesheet">
+<script type="text/javascript">
+function Validation() {
+
+//id 유효성 검사 (최소 4글자 ~ 최대 20글자 한글 X)
+var m_id_RegExp = /^[a-zA-Z0-9]{4,20}$/;
+
+// kakao id 유효성 검사 ( &&& 필요 없으면 지우셔도 됩니다 &&& )
+// var kakao_id_RegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; 
+
+// password 유효성 검사 (특수문자 없이 8~16글자)
+var m_pw_RegExp = /^[a-zA-Z#?!@$%^&*-]{8,15}$/;
+
+// 이름 유효성 검사 (한글만)
+var m_name_RegExp = /^[가-힣]{2,10}$/;
+
+// 생년월일 유효성 검사 (6자리 숫자)
+var m_birth_RegExp = /^[0-9]{6}$/;
+
+// 전화번호 유효성 검사 (01011112222 형식으로 "-" 빼고 입력)
+var m_tele_RegExp = /^[0-9]{10,11}$/;
+
+// 이메일 유효성 검사 (asdF0123(대소문자, 숫자) @naver.com 형식)
+var m_email_RegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; 
+
+
+
+
+
+/* var m_objKakaoId */
+var m_objId = document.getElementById("m_id"); // 아이디
+var m_objPw = document.getElementById("m_pw"); // 비밀번호
+var m_objName = document.getElementById("m_name"); // 이름
+var m_objBirth = document.getElementById("m_birth"); // 생년월일
+var m_objTele = document.getElementById("m_tele"); // 전화번호 
+var m_objEmail = document.getElementById("m_email"); // 이메일
+
+// ================ ID 유효성검사 ================ //
+if(m_objId.value=='') {
+	alert("아이디를 입력해주세요.");
+	return false;
+}	
+else if(!m_id_RegExp.test(m_objId.value)) {
+	alert("아이디는 영문 대소문자와 숫자로만 입력해 주세요.");
+	return false;
+}	
+// ============================================== //
+
+// ============== PASSWORD 유효성검사 ============== //
+else if(m_objPw.value=='') {
+	alert("비밀번호를 입력해주세요.");
+	return false;
+}
+else if(!m_pw_RegExp.test(m_objPw.value)) {
+	alert("비밀번호는 특수문자 없이 대소문자로 8~15자를 입력해주세요.");
+	return false;
+}
+else if(m_objPw.value == m_objId.value) {
+	alert("비밀번호는 아이디와 동일할 수 없습니다.");
+	return false;
+}
+// ============================================== //
+
+// ================ 이름 유효성 검사 ================ //
+else if(m_objName.value=='') { 
+	alert("이름을 입력해주세요.");
+	return false;
+}
+else if(!m_name_RegExp.test(m_objName.value)) { 
+	alert("이름의 형식이 올바르지 않습니다.");
+	return false;
+}
+// ============================================= //
+
+// ============== 생년월일 유효성 검사 ============== //
+else if(m_objBirth.value=='') {
+	alert("생년월일을 입력해주세요.");
+	return false;
+}
+else if(!m_birth_RegExp.test(m_objBirth.value)) { 
+	alert("생년월일의 형식이 올바르지 않습니다. 숫자 6글자로 입력해주세요.");
+	return false;
+}	
+// ============== 전화번호 유효성 검사 ============== //
+else if(m_objTele.value=='') {
+	alert("연락처를 입력해주세요.");
+	return false;
+}
+else if(!m_tele_RegExp.test(m_objTele.value)) {
+	alert("형식이 올바르지 않습니다. 10, 11자의 숫자만 입력해주세요.");
+	return false;
+}
+// ============================================= //
+
+// ==============  이메일 유효성 검사  ============== //
+else if(m_objEmail.value=='') {
+	alert("이메일을 입력해주세요.");
+	return false;
+}
+else if(!m_email_RegExp.test(m_objEmail.value)) {
+	alert("형식이 올바르지 않습니다. 이메일을 확인해주세요.");
+	return false;
+} else {
+	//$('#m_userjoin').submit();
+}
+
+
+
+}
+
+//================================================================================================
+</script>
 
  <main class="main">
   <section class="home">
@@ -41,7 +152,7 @@
       <!-- Form area Sign Up -->
       <div class="organize-form form-area-signup" style="opacity: 1;">
         <h2>회원가입</h2>
-        <form:form class="form" action="${root }member/join_pro" method="post" modelAttribute="joinMemberBean">
+        <form:form class="form" action="${root }member/join_pro" onsubmit="return Validation();" method="post" modelAttribute="joinMemberBean">
             <form:label path="m_id">ID</form:label>
           <div class="form-field">
             <form:input type="text" path="m_id"/>
@@ -84,14 +195,117 @@
 			<form:errors path="m_email" style="color:red"/>
           </div>
           <form:hidden path="m_classify" value="100"/>
-          <form:button class="btn-sign btn-up" type="submit">회원가입 완료</form:button>
+          <form:button class="btn-sign" type="submit">회원가입 완료</form:button>
         </form:form>
        
       </div>
+<script type="text/javascript">
+/* 회원가입 유효성 검사 (학원) */
+function Validation2(){
 
+// id 유효성 검사 (최소 4글자 ~ 최대 20글자 한글 X)
+var a_id_RegExp = /^[a-zA-Z0-9]{4,20}$/;
+
+// password 유효성 검사 (특수문자 없이 8~16글자)
+var a_pw_RegExp = /^[a-zA-Z#?!@$%^&*-]{8,15}$/;
+
+// 이름 유효성 검사 (한글만)
+var a_name_RegExp = /^[가-힣]{2,10}$/;
+
+// 사업자 등록번호 유효성 검사
+var a_CRN_RegExp = /^[0-9]{10}$/;
+
+// 지역 유효성 검사 
+// var a_location_RegExp = /^[가-힣]{30}$/;
+
+// 세부주소 유효성 검사
+var a_locationDetail_RegExp = /^[a-zA-Z0-9가-힣]{60}$/;
+
+// 전화번호 유효성 검사
+var a_tele_RegExp = /^[0-9]{11}$/;
+
+var a_objId = document.getElementById("a_id"); // 아이디
+var a_objPw = document.getElementById("a_pw"); // 비밀번호
+var a_objName = document.getElementById("a_name"); // 이름
+var a_objCRN = document.getElementById("a_CRN"); // 사업자등록번호
+var a_objLocationDetail = document.getElementById("a_locationDetail"); // 상세주소
+var a_objTele = document.getElementById("a_tele"); // 학원 전화번호
+
+// ================= ID 유효성검사 ================= //
+if(a_objId.value=='') {
+	alert("아이디를 입력해주세요.");
+	return false;
+}	
+else if(!a_id_RegExp.test(a_objId.value)) {
+	alert("아이디는 영문 대소문자와 숫자로만 입력해 주세요.");
+	return false;	
+}
+// ============================================== //
+
+// ============== PASSWORD 유효성검사 ============== //
+else if(a_objPw.value=='') {
+	alert("비밀번호를 입력해주세요.");
+	return false;
+}
+else if(!a_pw_RegExp.test(a_objPw.value)) {
+	alert("비밀번호는 특수문자 없이 대소문자로 8~16자를 입력해주세요.");
+	return false;
+}
+else if(a_objPw.value == a_objId.value) {
+	alert("비밀번호는 아이디와 동일할 수 없습니다.");
+	return false;
+}
+// ================================================ //
+
+// ================= 이름 유효성 검사 ================= //
+else if(a_objName.value=='') { 
+	alert("이름을 입력해주세요.");
+	return false;
+}
+else if(!a_name_RegExp.test(a_objName.value)) { 
+	alert("형식이 올바르지 않습니다.");
+	return false;
+}
+// ================================================ //
+
+// ============== 사업자등록번호 유효성 검사 ============== //
+else if(a_objCRN.value=='') {
+	alert("사업자등록번호를 입력해주세요.");
+	return false;
+}
+else if(!a_CRN_RegExp.test(a_objCRN.value)) {
+	alert("형식이 올바르지 않습니다.");
+	return false;
+}
+
+
+// ================ 상세주소 유효성 검사 ================ //
+else if(a_objLocationDetail.value=='') {
+	alert("상세주소를 입력해주세요.");
+	return false;
+}
+else if(a_locationDetail_RegExp.test(a_objLocationDetail.value)) {
+	alert("형식이 올바르지 않습니다. 특수문자를 제외하고 입력해주세요.");
+	return false;
+}
+// ================================================= //
+
+// ============== 전화번호 유효성 검사 ============== //
+else if(a_objTele.value=='') {
+	alert("연락처를 입력해주세요.");
+	return false;
+}
+else if(!a_tele_RegExp.test(a_objTele.value)) {
+	alert("형식이 올바르지 않습니다. 숫자만 입력해주세요.");
+	return false;
+}
+// ============================================= //
+}
+
+</script>
        <div class="organize-form form-area-signin">
          <h2>학원 회원가입</h2>
-       <form:form class="form" action="${root}academymember/join_pro" method="post" modelAttribute="joinAcademyMemberBean">
+       <form:form class="form" action="${root}academymember/join_pro" onsubmit="return Validation2();" method="post" modelAttribute="joinAcademyMemberBean">
          <form:label path="a_id">아이디</form:label>
       <div class="form-field">
          <form:input path="a_id"/>
@@ -144,7 +358,7 @@
          </form:select>
       </div>
    
-         <form:button class="btn-sign btn-in" type="submit">회원가입 완료</form:button>
+         <form:button class="btn-sign" type="submit">회원가입 완료</form:button>
       
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script type="application/javascript"

@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
         </ul>
@@ -76,6 +76,7 @@
       <div class="col-lg-12">
        <div class="section-title text-center">
        <h2 class="text-color">공지사항 </h2> 
+       				<p>게시글 ${totCnt} 개</p>
 		          </div>
 		      </div>
 		    </div>

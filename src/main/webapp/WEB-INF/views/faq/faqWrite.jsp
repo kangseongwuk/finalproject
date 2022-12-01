@@ -59,7 +59,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">FAQ</li>
         </ul>
@@ -71,6 +71,8 @@
 
 <!-- FAQWrite Board -->
 <section class="section bg-gray">
+
+
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -88,14 +90,14 @@
 		 <th class="th-writetitle">질문</th>
 		 <th class="th-border">
 			<form:input class="write-width" path="fb_contentsQ"/>
-			<form:errors path="fb_contentsQ" style="color:red"></form:errors>
+			<form:errors path="fb_contentsQ" style="color:red; display: flex; padding-left: 15px;" ></form:errors>
 		</th>
 		</tr>
 		<tr>
 		 <th class="th-writetitle">답변</th>
 		 <th class="th-border">
 			<form:textarea class="write-width"  path="fb_contentsA" rows="10" style="resize:none"></form:textarea>
-				<form:errors path="fb_contentsA" style="color:red"></form:errors>
+			<form:errors path="fb_contentsA" style="color:red; display: flex; padding-left: 15px;"></form:errors>
 			</th>
 			</tr>
 			
@@ -103,7 +105,7 @@
 		
 <br>
 <div align="right">
-    <form:button type="submit">작성 완료</form:button>
+    <form:button type="submit"  class="search-btn btn-color">작성 완료</form:button>
     <input type="button" value="목록" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }faq/faqBoard'"/>
   
 </div>

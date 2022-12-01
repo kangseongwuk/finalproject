@@ -1,21 +1,18 @@
 package kr.co.ezen.beans;
 
+import javax.validation.constraints.Pattern;
+
 public class FaqBoardBean {
 	private int fb_no;
-	private String fb_title;
+	@Pattern(regexp = "^[가-힣0-9a-zA-Z.,#?!@$%^&*-~ ]{1,900}$")
 	private String fb_contentsQ;
+	@Pattern(regexp = "^[가-힣0-9a-zA-Z.,#?!@$%^&*-~ ]{1,900}$")
 	private String fb_contentsA;
 	public int getFb_no() {
 		return fb_no;
 	}
 	public void setFb_no(int fb_no) {
 		this.fb_no = fb_no;
-	}
-	public String getFb_title() {
-		return fb_title;
-	}
-	public void setFb_title(String fb_title) {
-		this.fb_title = fb_title;
 	}
 	public String getFb_contentsQ() {
 		return fb_contentsQ;

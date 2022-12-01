@@ -62,7 +62,8 @@ public interface BlackListMapper {
 			+ "from memberT m, academyMemberT a, blacklistT b "
 			+ "where m.m_memberNo = b.m_memberNo "
 			+ "and a.a_memberNo = b.a_memberNo "
-			+ "and m.m_name like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'")
+			+ "and m.m_name like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%' "
+			+ "order by b.black_time desc ")
 	List<BlackListBean> getBLSearchList(String searchKeyword);
 			
 	

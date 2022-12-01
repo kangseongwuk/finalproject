@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,16 +77,15 @@ public class MemberController {
 	}
 	//회원정보수정
 	@PostMapping("/modify_pro")
-	public String modify_pro(@ModelAttribute("modifyMemberBean") MemberBean modifyMemberBean, 
-													@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean, 
+	public String modify_pro(@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean,@Validated@ModelAttribute("modifyMemberBean") MemberBean modifyMemberBean, 
 													BindingResult result, HttpServletRequest request) {
 		if(result.hasErrors()) {
 			return "member/modify";
 		}
 		memberService.updateMember(modifyMemberBean);
-		memberService.getModifyMember(modifyMemberBean);
+		memberService.getMypageMember(mypageMemberBean, request);
 		
-		return "member/modify";
+		return "member/mypage";
 	}
 	//회원탈퇴확인
 		@GetMapping("/delete")
@@ -120,11 +120,17 @@ public class MemberController {
 		return "index";
 	}
 	//로그아웃
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "index";
-	}
+		@GetMapping("/logout")
+		public String logout(){
+			return "member/logout";
+		}
+		
+		//로그아웃처리
+		@GetMapping("/logout_pro")
+		public String logout_pro(HttpSession session) {
+			session.invalidate();
+			return "index";
+		}
 	//mypage보기
 		@GetMapping("/mypage")
 		public String mypage(@ModelAttribute("mypageMemberBean") MemberBean mypageMemberBean, HttpServletRequest request, Model model) {
@@ -142,7 +148,7 @@ public class MemberController {
 	}
 	//자녀정보입력
 	@PostMapping("/insertChild_pro")
-	public String insertChild_pro(@ModelAttribute("insertChildBean") MemberChildBean insertChildBean, BindingResult result, Model model) {
+	public String insertChild_pro(@Validated@ModelAttribute("insertChildBean") MemberChildBean insertChildBean, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "member/insertChild";
 		}
@@ -161,7 +167,7 @@ public class MemberController {
 	}
 	//자녀정보수정
 	@PostMapping("modifyChild_pro")
-	public String modifyChild_pro(@ModelAttribute("modifyChildBean") MemberChildBean modifyChild, Model model, BindingResult result) {
+	public String modifyChild_pro(@Validated@ModelAttribute("modifyChildBean") MemberChildBean modifyChild, Model model, BindingResult result) {
 		if(result.hasErrors()) {
 			return "member/modifyChild";
 		}

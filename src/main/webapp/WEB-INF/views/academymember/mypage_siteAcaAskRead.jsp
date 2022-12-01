@@ -36,6 +36,10 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
 
 <body>
@@ -51,8 +55,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="${root}academymember/my_academypage">My Page</a></li>
-          
+           <li class="list-inline-item h2 text-primary font-secondary">My page</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">내 문의사항</li>
         </ul>
       </div>

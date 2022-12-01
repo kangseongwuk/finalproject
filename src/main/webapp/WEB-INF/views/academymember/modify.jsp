@@ -51,7 +51,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="${root}academymember/my_academypage">My Page</a></li>
+          <li class="list-inline-item h2 text-primary font-secondary">My page</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">학원 정보 수정</li>
         </ul>
       </div>
@@ -94,9 +94,19 @@
 							<form:label path="a_id"><strong>아이디 :&nbsp;&nbsp;&nbsp;</strong></form:label>
 							<form:input class="form-control mb-3" path="a_id" readonly="true"/><hr>
 						</div>
+						<%-- <div>
+							<form:label path="m_pw">비밀번호 변경</form:label>
+							<form:input class="form-control mb-3" type="password" path="a_pw" placeholder="비밀번호"/>
+							<form:errors path="a_pw" style="color:red" /><hr>
+						</div> --%>
 						<div>
 							<form:label path="a_name"><strong>이름 :</strong></form:label>
 							<form:input path="a_name" class="form-control mb-3" readonly="true"/><hr>
+						</div>
+						<div>
+							<form:label path="a_pw">비밀번호 변경</form:label>
+							<form:input class="form-control mb-3" type="password" path="a_pw" placeholder="비밀번호"/>
+							<form:errors path="a_pw" style="color:red" /><hr>
 						</div>
 							<form:label path="a_location">지역(동까지)</form:label>
      	 				<div>
@@ -107,13 +117,13 @@
 						</div>
 						<div>
 							<form:label path="a_locationDetail"><strong>상세주소</strong></form:label>
-							<form:input path="a_locationDetail" class="form-control mb-3"/><hr>
-							<form:errors path="a_locationDetail" />
+							<form:input path="a_locationDetail" class="form-control mb-3"/>
+							<form:errors path="a_locationDetail" style="color:red"/><hr>
 						</div>
 						<div>
 							<form:label path="a_tele"><strong>학원대표전화번호</strong></form:label>
-							<form:input path="a_tele" class="form-control mb-3"/><hr>
-							<form:errors path="a_tele" />
+							<form:input path="a_tele" class="form-control mb-3"/>
+							<form:errors path="a_tele" style="color:red"/><hr>
 						</div>
 						<div>
 						<form:label path="a_classify">학원분류</form:label> &nbsp;&nbsp;

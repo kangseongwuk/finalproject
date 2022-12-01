@@ -51,7 +51,8 @@ public interface ServiceCenterMapper {
 	//검색 : 쿼리문 주의 확실하지 않음
 	@Select("select nb_no, nb_title, nb_writeTime, nb_viewCount "
 			+ "from noticeBoardT "
-			+ "where nb_title like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%' ")
+			+ "where nb_title like '%'||#{searchKeyword, jdbcType=VARCHAR}||'%' "
+			+ "order by nb_writeTime desc ")
 		List<ServiceCenterBean> getNbSearchList(String searchKeyword);
 	
 	//총 게시글 갯수

@@ -1,13 +1,25 @@
 package kr.co.ezen.beans;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class AcademyTeacherBean {
 
 	private int a_memberNo;
+	
+	
+	@Pattern(regexp = "^[가-힣]{2,20}")
 	private String t_name;
+	
+	@NotBlank
 	private String t_subject;
+	
+	@Pattern(regexp = "^[가-힣0-9a-zA-Z#?!@$%^&*-.,~ ]{1,1000}$")
 	private String t_contents;
+	
 	private String t_file;
 	private String a_name;
 	

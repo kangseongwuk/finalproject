@@ -36,6 +36,10 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+    <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
 
 <body>
@@ -51,8 +55,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="${root}academymember/my_academypage">My Page</a></li>
-          
+            <li class="list-inline-item h2 text-primary font-secondary">My page</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">내 문의사항</li>
         </ul>
       </div>
@@ -84,6 +87,7 @@
       <div class="col-lg-12">
        <div class="section-title text-center">
           <h2>내 문의사항</h2>
+
           </div>
       </div>
     </div>
@@ -103,7 +107,57 @@
 	</c:forEach>
 	
 </table>
-
+<br><br><br>
+  <div>
+			 
+  				<div class="d-none d-md-block">
+				<ul class="pagination" >
+					<c:choose>
+						<c:when test="${myAcapageCountBean.prevPage <= 0 }">
+							<li class="page-item disabled">
+								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+							</li>
+						</c:when>
+					<c:otherwise>
+						<li class="page-item">
+						<a href="${root}academymember/mypage_siteAcaAsk?myAcaAskPage=${myAcapageCountBean.prevPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이전</font></font></a>
+						</li>					
+					</c:otherwise>					
+					</c:choose>
+														
+					<c:forEach var="idx" begin="${myAcapageCountBean.min }" end="${myAcapageCountBean.max }">
+						<c:choose>
+							<c:when test="${ idx == myAcapageCountBean.currentPage}">
+							<li class="page-item active">
+								<a href="${root}academymember/mypage_siteAcaAsk?myAcaAskPage=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+							</li>		
+						</c:when>
+						
+						<c:otherwise>
+							<li class="page-item">
+								<a href="${root}academymember/mypage_siteAcaAsk?myAcaAskPage=${idx}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${idx}</font></font></a>
+							</li>						
+						</c:otherwise>						
+						</c:choose>									
+					</c:forEach>					
+					
+					<c:choose>
+						<c:when test="${myAcapageCountBean.max >= mypageCountBean.pageCnt}">
+							<li class="page-item disabled">
+								<a href="#" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+							</li>
+						</c:when>
+					
+					<c:otherwise>
+						<li class="page-item">
+							<a href="${root}academymember/mypage_siteAcaAsk?myAcaAskPage=${myAcapageCountBean.nextPage}" class="page-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다음</font></font></a>
+						</li>
+					</c:otherwise>
+					</c:choose>
+				</ul>
+</div>
+</div>
+</div>
   
 </div>
 

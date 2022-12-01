@@ -52,7 +52,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">블랙리스트</li>
         </ul>
@@ -80,7 +80,7 @@
 	          
     <div> 
     <form:form align="right" action="${root}blackList/blackSearchList_pro?page2=${requestScope.page }&searchKeyword=${requestScope.searchKeyword}" modelAttribute="blSearchBean" method="get">
-	<form:input class="search-txt btn-round btn-color"  path="searchKeyword" placeholder="   이름을 입력해 주세요" value = "" />
+	<form:input class="search-txt btn-round btn-color"  path="searchKeyword" placeholder="   회원 이름을 입력해 주세요" value = "" />
     <form:button class="search-btn btn-round btn-color" type="submit"><i class="fas fa-search"></i></form:button>
     </form:form>
     </div>

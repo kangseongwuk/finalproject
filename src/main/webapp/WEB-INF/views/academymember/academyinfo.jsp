@@ -58,9 +58,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<ul class="list-inline custom-breadcrumb mb-2">
-						<li class="list-inline-item"><a
-							class="h2 text-primary font-secondary"
-							href="${root}academymember/my_academypage">My Page</a></li>
+						 <li class="list-inline-item h2 text-primary font-secondary">My page</li>
 						<li class="list-inline-item text-white h3 font-secondary nasted">학원 소개</li>
 
 					</ul>
@@ -80,7 +78,7 @@
 		            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyteacher"><h4>학원 강사 조회</h4></a></li>
 					<li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academypay"><h4>결제 내역 조회</h4></a></li>     
 		            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/mypage_siteAcaAsk"><h4>내 문의사항</h4></a></li>
-		            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>블랙리스트 등록 조회</h4></a></li>
+		            <li class="list-inline-item"><a class="d-inline-block p-2" href="${root}academymember/academyBlacklist"><h4>내 블랙리스트 조회</h4></a></li>
 				</ul>
 			</div>
 		</div>
@@ -114,7 +112,7 @@
 							value="전화번호 : ${sessionScope.loginAcademyMemberBean.a_tele}"
 							readonly="true" />
 						<form:textarea path="a_introduce" class="form-control mb-3"
-							placeholder="학원 소개글"></form:textarea>
+							placeholder="학원 소개글" style="resize:none"></form:textarea>
 						<div class="text-center">
 							<form:label path="a_gradeMin">
 								<strong>최소 수업 학년 :</strong>

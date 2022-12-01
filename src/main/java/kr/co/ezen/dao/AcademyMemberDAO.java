@@ -96,8 +96,8 @@ public class AcademyMemberDAO {
 		return academyMemberMapper.getMyaskRead(aa_time, a_memberNo);
 	}
 		//게시글 수
-	public int getMyAskListCnt(AcademyMemberBean myAskBean) {
-			return academyMemberMapper.getMyAskListCnt(myAskBean);
+	public int getMyAskListCnt(AcademyMemberBean myAcaAskBean) {
+			return academyMemberMapper.getMyAskListCnt(myAcaAskBean);
 	}
 		//페이징 처리
 	public int getMyAskContentCnt(int a_memberNo) { 	

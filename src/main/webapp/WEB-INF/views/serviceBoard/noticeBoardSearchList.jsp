@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+           <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
         </ul>
@@ -116,9 +116,11 @@
 		
 		
         <br>
+		<c:if test="${Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4 }">
 		<div align="right">
 		<button class="search-btn btn-color" onclick="location.href='${root }serviceBoard/noticeBoardWrite'">글쓰기</button>
 		</div>
+		</c:if>
 		<div>
 			 
   				<div class="d-none d-md-block">

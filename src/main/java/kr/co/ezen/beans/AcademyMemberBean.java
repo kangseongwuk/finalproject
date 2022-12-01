@@ -2,25 +2,43 @@ package kr.co.ezen.beans;
 
 import java.sql.Timestamp;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class AcademyMemberBean {
 
 	//학원 기본 정보
 	private int a_memberNo;
+	
+	
 	private String a_id;
+	
+	
+	@Pattern(regexp = "^[a-zA-Z#?!@$%^&*-]{8,15}")
 	private String a_pw;
+	
+	
 	private String a_name;
+	
 	private String a_CRN;
+	
 	private String a_location;
+	
+	@NotBlank
 	private String a_locationDetail;
+	@Pattern(regexp = "^^[0-9]{11}$")
 	private String a_tele;
+	
 	private Timestamp a_joinDate;
 	private int a_classify;
 	private String a_infoExpose;
 	
 	//학원 소개 정보
 	
+	@NotBlank
 	private String a_introduce;
 	private String a_mainImg;
 	private String a_file;

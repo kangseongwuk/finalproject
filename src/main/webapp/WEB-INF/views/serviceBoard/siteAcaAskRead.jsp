@@ -36,6 +36,10 @@
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  
 </head>
 
 <body>
@@ -51,7 +55,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="${root }index">Home</a></li>
+           <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">사이트관리</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">학원문의</li>
         </ul>
@@ -112,7 +116,7 @@
 				</div>
 				<div>
 					<label for="aa_contents">내용</label>
-					<textarea class="form-control mb-3" id="aa_contents" name="aa_contents" disabled="disabled">${aaReadBean.aa_contents }</textarea>
+					<textarea class="form-control mb-3" id="aa_contents" name="aa_contents" disabled="disabled" style="resize:none">${aaReadBean.aa_contents }</textarea>
 				</div>
 					<c:if test="${aaReadBean.aa_file != null }">
 					<div>		

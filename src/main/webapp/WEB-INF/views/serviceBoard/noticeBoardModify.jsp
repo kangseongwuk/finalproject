@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+           <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">공지사항</li>
         </ul>
@@ -86,17 +86,23 @@
 		<table>
 			<tr>
 			<th class="th-writetitle">제목</th>
-			<th class="th-border"><form:input class="write-width" path="nb_title" /></th>
+			<th class="th-border"><form:input class="write-width" path="nb_title" />
+			<form:errors path="nb_title" style="color:red; display: flex; padding-left: 15px;"></form:errors>
+			</th>
+			
 			</tr>
 			<tr>
 			<th class="th-writetitle">내용</th>
-			<th class="th-border"><form:textarea path="nb_contents" class="write-width" rows="10" style="resize:none"></form:textarea></th>
+			<th class="th-border"><form:textarea path="nb_contents" class="write-width" rows="10" style="resize:none"></form:textarea>
+			<form:errors path="nb_contents" style="color:red; display: flex; padding-left: 15px;"></form:errors>
+			</th>
 			</tr>
 			<tr>
 			<th class="th-writetitle"><form:label path="upload_file">첨부 이미지</form:label></th>
 			<th class="th-border"><form:input type="file" class="write-width" path="upload_file" accept="image/*"/></th>
 		</tr>
-		</table>			
+		</table>	
+		<br>		
 <div align="right">			
 <form:button type="submit" class="search-btn btn-color" style="cursor:pointer;" >수정 완료</form:button>
 <input type="button" value="목록" class="search-btn btn-color" style="cursor:pointer;" onclick="location.href='${root }serviceBoard/noticeBoardList'"/>

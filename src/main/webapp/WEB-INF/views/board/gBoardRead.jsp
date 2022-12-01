@@ -232,10 +232,8 @@ function reviewRemove(r_no, r_writerNo) {
 		<div class="row">
 			<div class="col-md-8">
 				<ul class="list-inline custom-breadcrumb mb-2">
-					<li class="list-inline-item">
-						<a class="h2 text-primary font-secondary" href="courses.html">Home</a>
-					</li>
-					<li class="list-inline-item text-white h3 font-secondary nasted">종합 학원</li>
+					<li class="list-inline-item h2 text-primary font-secondary">Home</li>
+					<li class="list-inline-item text-white h3 font-secondary nasted">학원</li>
 					<li class="list-inline-item text-white h3 font-secondary nasted">학원 상세페이지</li>
 				</ul>
 			</div>
@@ -350,7 +348,7 @@ function reviewRemove(r_no, r_writerNo) {
 						</c:when>
 					</c:choose>
 				</div>
-				<div class="col-12 mb-4">
+				<%-- <div class="col-12 mb-4">
 					<h3 class="mb-3">과목</h3>
 					<div class="col-12 px-0">
 						<div class="row">
@@ -363,7 +361,7 @@ function reviewRemove(r_no, r_writerNo) {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 				<div class="col-12 mb-4">
 					<h3 class="mb-3">상세주소</h3>
 					<div class="col-12 px-0">
@@ -423,7 +421,9 @@ function reviewRemove(r_no, r_writerNo) {
 
 <!-- teachers carousel -->
 <section class="section-sm">
+	<div class="scroll2" id="scroll2"></div>
 	<div class="container">
+
 	<h2>강사진</h2>
 	<div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
 		<!--Controls-->
@@ -506,7 +506,9 @@ function reviewRemove(r_no, r_writerNo) {
 <!-- /teachers carousel -->
 <!-- comment -->
 <div class="container">
+<div class="scroll3" id="scroll3"></div>
 	<div class="be-comment-block">
+	
 		<c:if test="${sessionScope.loginAcademyMemberBean == null }">
 			<form id="comment-form" method="post" class="form-block">
 				<h4 class="mb-4">리뷰남기기</h4>

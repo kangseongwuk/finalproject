@@ -32,7 +32,7 @@ public interface AcademyMemberMapper {
 	@Select("select * from academyMemberT where a_memberNo = #{a_memberNo}")
 	AcademyMemberBean getModifyAcademyMember(AcademyMemberBean modifyAcademyMemberBean);
 	//학원회원수정
-	@Update("update academyMemberT set a_location = #{a_location}, a_locationDetail = #{a_locationDetail},"
+	@Update("update academyMemberT set a_pw = #{a_pw}, a_location = #{a_location}, a_locationDetail = #{a_locationDetail},"
 			+ "a_tele = #{a_tele}, a_classify = #{a_classify} where a_memberNo = #{a_memberNo}")
 	void modifyAcademyMember(AcademyMemberBean modifyAcademyMemberBean);
 	//학원회원삭제
@@ -110,7 +110,7 @@ public interface AcademyMemberMapper {
 				+ "from siteAcaAskT a2, academyMemberT a1 "
 				+ "where a2.a_memberNo = a1.a_memberNo "
 				+ "and a2.a_memberNo = #{a_memberNo, jdbcType=VARCHAR}")
-		int getMyAskListCnt(AcademyMemberBean myAskBean);
+		int getMyAskListCnt(AcademyMemberBean myAcaAskBean);
 		//페이징
 		@Select("select count(*) "
 				+ "from siteAcaAskT a2, academyMemberT a1 "

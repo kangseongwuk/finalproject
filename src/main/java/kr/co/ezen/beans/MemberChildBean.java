@@ -1,12 +1,22 @@
 package kr.co.ezen.beans;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class MemberChildBean {
 
 	private int m_memberNo;
+	
+	
+	@Pattern(regexp = "^[가-힣]{2,20}")
 	private String c_name;
+	
 	private String c_grade;
+	
 	private String c_gender;
+	
 	private	String c_level;
+	
 	public int getM_memberNo() {
 		return m_memberNo;
 	}

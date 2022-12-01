@@ -55,7 +55,7 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="list-inline custom-breadcrumb mb-2">
-          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index">Home</a></li>
+          <li class="list-inline-item h2 text-primary font-secondary">Home</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">고객센터</li>
           <li class="list-inline-item text-white h3 font-secondary nasted">문의사항</li>
         </ul>
@@ -78,15 +78,17 @@
         <form:form action="${root }serviceBoard/siteAcaAskWrite_pro" method="POST"  modelAttribute="aaWriteBean"
         enctype="multipart/form-data">
         <form:hidden path="a_memberNo" value="${sessionScope.loginAcademyMemberBean.a_memberNo }" />
-          <form:input class="form-control mb-3" path="a_id" value="${sessionScope.loginAcademyMemberBean.a_id }" readonly="true" />
+          <form:input class="form-control mb-3" path="a_id" value="${sessionScope.loginAcademyMemberBean.a_id }" readonly="true" /><br>
          </form:form> 
           
        <form:form action="${root }serviceBoard/siteAcaAskWrite_pro" method="POST"  modelAttribute="aaWriteBean"
         enctype="multipart/form-data">   
-          <form:input class="form-control mb-3" path="a_name" readonly="true" />
-          <form:input class="form-control mb-3" path="a_tele" readonly="true"  />
+          <form:input class="form-control mb-3" path="a_name" readonly="true" /><br>
+          <form:input class="form-control mb-3" path="a_tele" readonly="true"  /><br>
           <form:input class="form-control mb-3" path="aa_title" placeholder="제목" />
-          <form:textarea path="aa_contents" class="form-control mb-3" placeholder="문의내용" ></form:textarea>
+          <form:errors path="aa_title" style="color:red; margin-left: 20px" /><br><br>
+          <form:textarea path="aa_contents" class="form-control mb-3" placeholder="문의내용" style="resize:none" ></form:textarea>
+          <form:errors path="aa_contents" style="color:red; margin-left: 20px" /><br><br>
           <form:input type="file" class="form-control mb-3" path="upload_file" placeholder="첨부내용" accept="image/*"/>
           <form:button type="submit" class="btn btn-primary" >작성완료</form:button>
         </form:form>
