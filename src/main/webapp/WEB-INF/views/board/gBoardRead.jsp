@@ -599,16 +599,22 @@ function reduplication() {
 			var ckeckVal = '#rating3-' + ${air.r_score };
 			$(space).find(ckeckVal).attr('checked','checked');
 			
+			count++;
+			total +=${air.r_score };
+		
+		});
+	</script>
+	<script type="text/javascript">
+		$(window).on("load", function() {
 			if(${air.r_writerNo} == ${sessionScope.loginMemberBean.m_memberNo}) {
 				//alert("있음");
 				//$('#reviewSubmit').removeAttr('onclick');
 				$('#reviewSubmit').attr('onclick','reduplication()');
 			}
-			
-			count++;
-			total +=${air.r_score };
 		});
 	</script>
+		
+	
 		</c:forEach>
 	</div>
 </div>

@@ -279,14 +279,19 @@ function reduplication() {
 			var ckeckVal = '#rating3-' + ${tri.t_score };
 			$(space).find(ckeckVal).attr('checked','checked');
 			
+			
+			
+			count++;
+			total +=${tri.t_score };
+		});
+	</script>
+	<script type="text/javascript">
+		$(window).on("load", function() {
 			if(${tri.t_reWriterNo} == ${sessionScope.loginMemberBean.m_memberNo}) {
 				//alert("있음");
 				//$('#reviewSubmit').removeAttr('onclick');
 				$('#reviewSubmit').attr('onclick','reduplication()');
 			}
-			
-			count++;
-			total +=${tri.t_score };
 		});
 	</script>
 		</c:forEach>
