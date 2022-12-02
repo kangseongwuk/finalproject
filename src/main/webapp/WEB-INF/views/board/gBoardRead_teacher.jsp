@@ -61,11 +61,7 @@ function reviewWriteT() {
 			"t_score" : $("input:radio[name=t_score]:checked").val()
 		},
 		error : function(e) {
-			if(e.responseText.indexOf("ConstraintViolationException")) {
-				alert("리뷰는 하나만 작성할 수 있습니다.\n새로 작성하기를 원하시면 내 정보에서 리뷰를 삭제해주세요.");
-			} else {
-				alert("안됨3");
-			}
+			alert("안됨3");
 		},
 		success : function(result) {
 			if(result=="false") {
@@ -119,6 +115,11 @@ function reviewRemoveT(t_reNo, t_reWriterNo) {
 	} else {
 		return false;
 	}
+}
+
+//리뷰 중복 체크
+function reduplication() {
+	alert("리뷰는 하나만 작성할 수 있습니다.\n새로 작성하기를 원하시면 기존의 리뷰를 삭제해주세요.");
 }
 
 
@@ -216,7 +217,7 @@ function reviewRemoveT(t_reNo, t_reWriterNo) {
 					<div class="form-group" style="width: 597px;margin-left: 1%;">
 						<textarea id="t_reContents" name="t_reContents" style="resize: none;width: 140%;" placeholder="강사에 대한 리뷰를 남겨주세요." class="form-group" rows="5" cols="30"></textarea>
 					</div>
-					<button onclick="reviewWriteT()" style="height: 105px;left: 24%;" type="button" class="btn btn-primary pull-right">댓글 쓰기</button>
+					<button id="reviewSubmit" onclick="reviewWriteT()" style="height: 105px;left: 24%;" type="button" class="btn btn-primary pull-right">댓글 쓰기</button>
 				</div>
 			</form>
 		</c:if>
@@ -265,7 +266,7 @@ function reviewRemoveT(t_reNo, t_reWriterNo) {
 				</span>
 				<p class="be-comment-text">${tri.t_reContents }</p>
 				<p align="right">
-				<c:if test="${tri.t_reWriterNo == sessionScope.loginMemberBean.m_memberNo  || Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4} ">
+				<c:if test="${tri.t_reWriterNo == sessionScope.loginMemberBean.m_memberNo || Integer.toString(sessionScope.loginMemberBean.m_memberNo).length() == 4}">
 					<button onclick="reviewRemoveT('${tri.t_reNo }', '${tri.t_reWriterNo }')" class="del-btn">삭제하기</button>
 				</c:if>
 				</p>
@@ -277,6 +278,12 @@ function reviewRemoveT(t_reNo, t_reWriterNo) {
 			var space = '#scoreStar' + ${tri.t_reWriterNo };
 			var ckeckVal = '#rating3-' + ${tri.t_score };
 			$(space).find(ckeckVal).attr('checked','checked');
+			
+			if(${tri.t_reWriterNo} == ${sessionScope.loginMemberBean.m_memberNo}) {
+				//alert("있음");
+				//$('#reviewSubmit').removeAttr('onclick');
+				$('#reviewSubmit').attr('onclick','reduplication()');
+			}
 			
 			count++;
 			total +=${tri.t_score };

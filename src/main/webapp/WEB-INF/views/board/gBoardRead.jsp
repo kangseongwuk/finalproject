@@ -156,11 +156,7 @@ function reviewWrite() {
 			"r_score" : $("input:radio[name=r_score]:checked").val()
 		},
 		error : function(e) {
-			if(e.responseText.indexOf("ConstraintViolationException")) {
-				alert("리뷰는 하나만 작성할 수 있습니다.\n새로 작성하기를 원하시면 내 정보에서 리뷰를 삭제해주세요.");
-			} else {
-				alert("안됨3");
-			}
+			alert("안됨3");
 		},
 		success : function(result) {
 			if(result=="false") {
@@ -213,6 +209,11 @@ function reviewRemove(r_no, r_writerNo) {
 	} else {
 		return false;
 	}
+}
+
+//리뷰 중복 체크
+function reduplication() {
+	alert("리뷰는 하나만 작성할 수 있습니다.\n새로 작성하기를 원하시면 기존의 리뷰를 삭제해주세요.");
 }
 
 
@@ -536,7 +537,7 @@ function reviewRemove(r_no, r_writerNo) {
 					<div class="form-group" style="width: 597px;margin-left: 1%;">
 						<textarea id="r_contents" name="r_contents" style="resize: none;width: 140%;" placeholder="학원에 대한 리뷰를 남겨주세요." class="form-group" rows="5" cols="30"></textarea>
 					</div>
-					<button onclick="reviewWrite()" style="height: 105px;left: 24%;" type="button" class="btn btn-primary pull-right">댓글 쓰기</button>
+					<button id="reviewSubmit" onclick="reviewWrite()" style="height: 105px;left: 24%;" type="button" class="btn btn-primary pull-right">댓글 쓰기</button>
 				</div>
 			</form>
 		</c:if>
@@ -597,6 +598,12 @@ function reviewRemove(r_no, r_writerNo) {
 			var space = '#scoreStar' + ${air.r_writerNo };
 			var ckeckVal = '#rating3-' + ${air.r_score };
 			$(space).find(ckeckVal).attr('checked','checked');
+			
+			if(${air.r_writerNo} == ${sessionScope.loginMemberBean.m_memberNo}) {
+				//alert("있음");
+				//$('#reviewSubmit').removeAttr('onclick');
+				$('#reviewSubmit').attr('onclick','reduplication()');
+			}
 			
 			count++;
 			total +=${air.r_score };
