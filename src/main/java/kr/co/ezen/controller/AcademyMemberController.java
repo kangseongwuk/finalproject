@@ -146,20 +146,22 @@ public class AcademyMemberController {
 	
 	@GetMapping("/academyinfo_write")
 	public String academyinfo_write(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce){
-		
+		infoIntroduce.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
 		return "academymember/academyinfo_write";
 	}
 	
 		//학원소개작성
 		@PostMapping("/academyinfo_write_pro")
-		public String academyinfo_write_pro(@ModelAttribute("modifyAcademyMemberBean")AcademyMemberBean modifyAcademyMemberBean, @Validated@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce, BindingResult result) {
+		public String academyinfo_write_pro(@ModelAttribute("infoIntroduce")AcademyMemberBean infoIntroduce, BindingResult result) {
 			
 			if(result.hasErrors()) {
-				return "academymember/academyinfo";
+				return "academymember/academyinfo_write";
 			}
-			modifyAcademyMemberBean.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
-			academyMemberService.getModifyAcademyMember(modifyAcademyMemberBean);
+		
+			infoIntroduce.setA_memberNo(loginAcademyMemberBean.getA_memberNo());
+			
 			academyMemberService.insertAcademyIntroduce(infoIntroduce);
+			academyMemberService.getModifyAcademyMember(infoIntroduce);
 			return "academymember/academyinfo";
 		}
 	//학원소개확인
@@ -313,7 +315,7 @@ public class AcademyMemberController {
 								@RequestParam(value = "myAcaAskPage", defaultValue = "1") int myAcaAskPage,
 								Model model) {
 				
-				List<SiteAcaAskBean> myasklist = academyMemberService.getMyaskList(loginAcademyMemberBean.getA_memberNo());
+				List<SiteAcaAskBean> myasklist = academyMemberService.getMyaskList(loginAcademyMemberBean.getA_memberNo(), myAcaAskPage);
 				model.addAttribute("myasklist", myasklist);
 				
 				int myAkaAskCnt = academyMemberService.getMyAskListCnt(myAcaAskBean);

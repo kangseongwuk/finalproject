@@ -36,7 +36,7 @@ public class SiteAcaAskController {
 						@RequestParam(value = "pageA", defaultValue = "1") int pageA,			
 						Model model) {
 			
-		List<SiteAcaAskBean> aalist =  siteAcaAskService.getAaList();		
+		List<SiteAcaAskBean> aalist =  siteAcaAskService.getAaList(pageA);		
 		model.addAttribute("aalist", aalist);
 		
 		int acaAskCnt = siteAcaAskService.getAacaListCnt(siteAcaAskBean);

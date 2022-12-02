@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.MemberBean;
@@ -72,7 +73,7 @@ public interface MemberMapper {
 			+ "from siteAskT join memberT on sa_memberNo = m_memberNo "
 			+ "where m_memberNo = #{m_memberNo} "
 			+ "order by sa_time desc")
-	List<SiteAskBean> getMyaskList(int m_memberNo);
+	List<SiteAskBean> getMyaskList(int m_memberNo, RowBounds rowBounds);
 		
 	@Select("select sa_tele, m_email, sa_time, sa_title, sa_contents, sa_file "
 			+ "from siteAskT join memberT on sa_memberNo = m_memberNo "

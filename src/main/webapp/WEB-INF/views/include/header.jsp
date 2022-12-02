@@ -286,7 +286,7 @@
 									<form:errors path="m_id" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<form:input path="m_pw" class="form-control"  placeholder="Password"/>
+								<form:input type="password" path="m_pw" class="form-control"  placeholder="Password"/>
 									<form:errors path="m_pw" style="color:red"/>
 							</div>
 							<form:button type="submit" class="btn btn-info btn-block btn-round" style="background-color:black;border-radius: 5px;width: 95%;left: 2.5%;padding: 12px 40px;">로 그 인</form:button>
@@ -329,7 +329,7 @@
 				</div>
 				<div class="form-group">
 					<form:label path="a_pw">비밀번호</form:label>
-					<form:input path="a_pw" class="form-control"/>
+					<form:input type="password" path="a_pw" class="form-control"/>
 					<form:errors path="a_pw"/>
 				</div>
 				<div>

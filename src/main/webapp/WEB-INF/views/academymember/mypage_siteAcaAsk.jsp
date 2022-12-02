@@ -87,7 +87,7 @@
       <div class="col-lg-12">
        <div class="section-title text-center">
           <h2>내 문의사항</h2>
-
+		
           </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
 
 import kr.co.ezen.beans.AcademyMemberBean;
 import kr.co.ezen.beans.ServiceCenterBean;
@@ -24,7 +25,7 @@ public interface SiteAcaAskMapper {
 			+ "from siteAcaAskT a2, AcademyMemberT a1 "
 			+ "where a2.a_memberNo = a1.a_memberNo "
 			+ "order by a2.aa_time desc")	
-		List<SiteAcaAskBean> getAaList(); 
+		List<SiteAcaAskBean> getAaList(RowBounds rowBounds); 
 	
 	//문의글 개수
 	@Select("select count(*) from siteAcaAskT")

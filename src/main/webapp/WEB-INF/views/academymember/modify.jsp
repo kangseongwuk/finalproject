@@ -39,7 +39,62 @@
 
 </head>
 <body>
+<script type="text/javascript">
+/* 회원가입 유효성 검사 (학원) */
+function Validation2(){
 
+
+// password 유효성 검사 (특수문자 없이 8~16글자)
+var a_pw_RegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+
+// 세부주소 유효성 검사
+var a_locationDetail_RegExp = /^[a-zA-Z0-9가-힣\s]{60}$/;
+
+// 전화번호 유효성 검사
+var a_tele_RegExp = /^[0-9]{10,11}$/;
+
+
+var a_objPw = document.getElementById("a_pw"); // 비밀번호
+var a_objLocationDetail = document.getElementById("a_locationDetail"); // 상세주소
+var a_objTele = document.getElementById("a_tele"); // 학원 전화번호
+
+
+// ============== PASSWORD 유효성검사 ============== //
+if(a_objPw.value=='') {
+	alert("비밀번호를 입력해주세요.");
+	return false;
+}
+else if(!a_pw_RegExp.test(a_objPw.value)) {
+	alert("비밀번호는 특수문자 포함(?!@$%^&*-) 숫자포함 영어 대소문자로 8~15자를 입력해주세요.");
+	return false;
+}
+// ================================================ //
+
+// ================ 상세주소 유효성 검사 ================ //
+else if(a_objLocationDetail.value=='') {
+	alert("상세주소를 입력해주세요.");
+	return false;
+}
+else if(a_locationDetail_RegExp.test(a_objLocationDetail.value)) {
+	alert("상세주소 형식이 올바르지 않습니다. 특수문자를 제외하고 입력해주세요.");
+	return false;
+}
+// ================================================= //
+
+// ============== 전화번호 유효성 검사 ============== //
+else if(a_objTele.value=='') {
+	alert("연락처를 입력해주세요.");
+	return false;
+}
+else if(!a_tele_RegExp.test(a_objTele.value)) {
+	alert("연락처 형식이 올바르지 않습니다. 숫자만 입력해주세요. 10, 11자의 숫자만 입력해주세요.");
+	return false;
+}
+// ============================================= //
+}
+
+</script>
 
 <!-- ===============================  header  =============================== -->
    <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -88,17 +143,12 @@
 			<div class="row justify-content-center">
 			<div class="col-lg-8 mb-5 mb-lg-0">
 					<form:form action="${root}academymember/modify_pro" method="post"
-						modelAttribute="modifyAcademyMemberBean">
+						modelAttribute="modifyAcademyMemberBean" onsubmit="return Validation2();">
 						<form:hidden path="a_memberNo" />
 						<div>
 							<form:label path="a_id"><strong>아이디 :&nbsp;&nbsp;&nbsp;</strong></form:label>
 							<form:input class="form-control mb-3" path="a_id" readonly="true"/><hr>
 						</div>
-						<%-- <div>
-							<form:label path="m_pw">비밀번호 변경</form:label>
-							<form:input class="form-control mb-3" type="password" path="a_pw" placeholder="비밀번호"/>
-							<form:errors path="a_pw" style="color:red" /><hr>
-						</div> --%>
 						<div>
 							<form:label path="a_name"><strong>이름 :</strong></form:label>
 							<form:input path="a_name" class="form-control mb-3" readonly="true"/><hr>
@@ -106,7 +156,7 @@
 						<div>
 							<form:label path="a_pw">비밀번호 변경</form:label>
 							<form:input class="form-control mb-3" type="password" path="a_pw" placeholder="비밀번호"/>
-							<form:errors path="a_pw" style="color:red" /><hr>
+							<form:errors path="a_pw" style="color:red"></form:errors><hr>
 						</div>
 							<form:label path="a_location">지역(동까지)</form:label>
      	 				<div>
@@ -117,13 +167,11 @@
 						</div>
 						<div>
 							<form:label path="a_locationDetail"><strong>상세주소</strong></form:label>
-							<form:input path="a_locationDetail" class="form-control mb-3"/>
-							<form:errors path="a_locationDetail" style="color:red"/><hr>
+							<form:input path="a_locationDetail" class="form-control mb-3"/><hr>
 						</div>
 						<div>
 							<form:label path="a_tele"><strong>학원대표전화번호</strong></form:label>
-							<form:input path="a_tele" class="form-control mb-3"/>
-							<form:errors path="a_tele" style="color:red"/><hr>
+							<form:input path="a_tele" class="form-control mb-3"/><hr>
 						</div>
 						<div>
 						<form:label path="a_classify">학원분류</form:label> &nbsp;&nbsp;

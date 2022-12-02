@@ -17,7 +17,7 @@ public class AcademyMemberBean {
 	private String a_id;
 	
 	
-	@Pattern(regexp = "^[a-zA-Z#?!@$%^&*-]{8,15}")
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,15}$")
 	private String a_pw;
 	
 	
@@ -27,9 +27,9 @@ public class AcademyMemberBean {
 	
 	private String a_location;
 	
-	@NotBlank
+	
 	private String a_locationDetail;
-	@Pattern(regexp = "^^[0-9]{11}$")
+	
 	private String a_tele;
 	
 	private Timestamp a_joinDate;
@@ -38,7 +38,7 @@ public class AcademyMemberBean {
 	
 	//학원 소개 정보
 	
-	@NotBlank
+	
 	private String a_introduce;
 	private String a_mainImg;
 	private String a_file;

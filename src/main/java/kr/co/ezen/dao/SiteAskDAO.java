@@ -3,6 +3,7 @@ package kr.co.ezen.dao;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,9 +26,9 @@ public class SiteAskDAO {
 	}	
 		  	  
 		 
-	public List<SiteAskBean> getSaList(){		   
+	public List<SiteAskBean> getSaList(RowBounds rowBounds){		   
 			
-		return siteAskMapper.getSaList(); 			  
+		return siteAskMapper.getSaList(rowBounds); 			  
 	}
 		  
 	public SiteAskBean getSaInfo(Timestamp sa_time) { 

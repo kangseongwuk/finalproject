@@ -96,20 +96,15 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-lg-8 mb-5 mb-lg-0">
+			<div class="col-lg-8 mb-5 mb-lg-0">
+			<input class="form-control mb-3" value="${sessionScope.loginAcademyMemberBean.a_name}" readonly="true" />
+			<input class="form-control mb-3" value="${sessionScope.loginAcademyMemberBean.a_id}" readonly="true" />
+			<input class="form-control mb-3" value="${sessionScope.loginAcademyMemberBean.a_tele}" readonly="true" />
 					<form:form action="${root}academymember/academyinfo_write_pro"
 						method="post" modelAttribute="infoIntroduce"
 						enctype="multipart/form-data">
-						<form:hidden path="a_memberNo" value="${sessionScope.loginAcademyMemberBean.a_memberNo}"/>
-						<form:input class="form-control mb-3" path="a_name"
-							value="${sessionScope.loginAcademyMemberBean.a_name}"
-							readonly="true" />
-						<form:input class="form-control mb-3" path="a_id"
-							value="${sessionScope.loginAcademyMemberBean.a_id}"
-							readonly="true" />
-						<form:input class="form-control mb-3" path="a_tele"
-							value="${sessionScope.loginAcademyMemberBean.a_tele}"
-							readonly="true" />
+						<form:hidden path="a_memberNo"/>
+						
 						<form:textarea path="a_introduce" class="form-control mb-3"
 							placeholder="학원 소개글" style="resize:none"></form:textarea>
 							<form:errors path="a_introduce" style="color:red" />

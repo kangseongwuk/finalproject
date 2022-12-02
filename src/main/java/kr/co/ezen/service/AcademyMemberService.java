@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -209,8 +210,12 @@ public class AcademyMemberService {
 	
 	
 	//내가 쓴 문의사항
-	public List<SiteAcaAskBean> getMyaskList(int a_memberNo){
-		return academyMemberDAO.getMyaskList(a_memberNo);
+	public List<SiteAcaAskBean> getMyaskList(int a_memberNo, int myAcaAskPage){
+			
+		int start = (myAcaAskPage -1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+			
+		return academyMemberDAO.getMyaskList(a_memberNo, rowBounds);
 	}	
 	public SiteAcaAskBean getMyaskRead(Timestamp aa_time, int a_memberNo){
 		return academyMemberDAO.getMyaskRead(aa_time, a_memberNo);

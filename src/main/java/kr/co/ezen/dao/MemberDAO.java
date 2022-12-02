@@ -3,6 +3,7 @@ package kr.co.ezen.dao;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -86,8 +87,8 @@ public class MemberDAO {
 	}
 	
 	//내가 쓴 문의사항
-	public List<SiteAskBean> getMyaskList(int m_memberNo){
-		return memberMapper.getMyaskList(m_memberNo);
+	public List<SiteAskBean> getMyaskList(int m_memberNo, RowBounds rowBounds){
+		return memberMapper.getMyaskList(m_memberNo, rowBounds);
 	}
 	public SiteAskBean getMyaskRead(Timestamp sa_time, int m_memberNo){
 		return memberMapper.getMyaskRead(sa_time, m_memberNo);

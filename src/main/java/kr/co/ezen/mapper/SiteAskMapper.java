@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
 
 import kr.co.ezen.beans.MemberBean;
 import kr.co.ezen.beans.SiteAcaAskBean;
@@ -23,7 +24,7 @@ public interface SiteAskMapper {
 	@Select("select sa_memberNo, sa_title, sa_time "
 			+ "from siteAskT "
 			+ "order by sa_time desc")	
-		List<SiteAskBean> getSaList(); 
+		List<SiteAskBean> getSaList(RowBounds rowBounds); 
 	
 	//문의글 개수
 	@Select("select count(*) from siteAskT")

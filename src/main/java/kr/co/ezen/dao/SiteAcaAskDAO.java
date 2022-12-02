@@ -3,6 +3,7 @@ package kr.co.ezen.dao;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,9 +26,9 @@ public class SiteAcaAskDAO {
 		}	
 		 		 		  
 		//글목록 
-		public List<SiteAcaAskBean> getAaList(){		   
+		public List<SiteAcaAskBean> getAaList(RowBounds rowBounds){		   
 			
-			return siteAcaAskMapper.getAaList(); 			  
+			return siteAcaAskMapper.getAaList(rowBounds); 			  
 		}
 		
 		//상세보기

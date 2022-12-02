@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
 import org.apache.commons.mail.HtmlEmail;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -294,9 +295,13 @@ public class MemberService {
 	}
 		
 	//내가 쓴 문의사항
-	public List<SiteAskBean> getMyaskList(int m_memberNo){
-		return memberDAO.getMyaskList(m_memberNo);
-	}	
+	public List<SiteAskBean> getMyaskList(int m_memberNo, int myAskPage){
+		
+		 int start = (myAskPage -1) * page_listcnt;
+		 RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		
+		return memberDAO.getMyaskList(m_memberNo, rowBounds);
+	}
 	public SiteAskBean getMyaskRead(Timestamp sa_time, int m_memberNo){
 		return memberDAO.getMyaskRead(sa_time, m_memberNo);
 	}

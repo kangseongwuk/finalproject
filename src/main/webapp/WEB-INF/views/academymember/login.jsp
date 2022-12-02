@@ -18,7 +18,7 @@
 		</div>
 		<div>
 			<form:label path="a_pw">비밀번호</form:label>
-			<form:input path="a_pw"/>
+			<form:input type="password" path="a_pw"  />
 			<form:errors path="a_pw"/>
 		</div>
 		<div>

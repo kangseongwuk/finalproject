@@ -38,7 +38,7 @@ public class SiteAskController {
 						@RequestParam(value = "pageM", defaultValue = "1") int pageM,			
 						Model model) {
 			
-		List<SiteAskBean> salist =  siteAskService.getSaList();		
+		List<SiteAskBean> salist =  siteAskService.getSaList(pageM);		
 		model.addAttribute("salist", salist);
 		
 		int saListCnt = siteAskService.getSaListCnt(saBean);

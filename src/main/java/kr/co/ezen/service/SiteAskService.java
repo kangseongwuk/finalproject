@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -66,8 +67,12 @@ public class SiteAskService {
 	}
 		
 	//글목록
-	 public List<SiteAskBean> getSaList(){		   
-		  return siteAskDAO.getSaList(); 			  
+	 public List<SiteAskBean> getSaList(int pageM){	
+		 
+		 int start = (pageM -1) * page_listcnt;
+		 RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		 
+		  return siteAskDAO.getSaList(rowBounds); 			  
 	  }
 	
 	

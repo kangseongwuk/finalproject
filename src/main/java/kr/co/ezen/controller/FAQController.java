@@ -18,7 +18,7 @@ import kr.co.ezen.service.FaqService;
 
 @RequestMapping("/faq")
 @Controller
-public class FAQController {
+public class FaqController {
 	
 	
 	//FAQ 게시판

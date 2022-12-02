@@ -215,7 +215,7 @@ public class MemberController {
 							@RequestParam(value = "myAskPage", defaultValue = "1") int myAskPage,
 							Model model) {
 			
-			List<SiteAskBean> myasklist = memberService.getMyaskList(loginMemberBean.getM_memberNo());
+			List<SiteAskBean> myasklist = memberService.getMyaskList(loginMemberBean.getM_memberNo(), myAskPage);
 			model.addAttribute("myasklist", myasklist);
 			
 			int myasktotCnt = memberService.getMyAskListCnt(myAskBean);

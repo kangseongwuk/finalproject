@@ -95,22 +95,19 @@
 				</div>
 			</div>
 		
-			<c:choose><c:when test="${infoIntroduce.a_introduce != null}"> 
+			<c:choose><c:when test="${infoIntroduce.a_introduce != null}">
 			<div class="row justify-content-center">
-				<div class="col-lg-8 mb-5 mb-lg-0">
+			<div class="col-lg-8 mb-5 mb-lg-0">
+			
+			<input class="form-control mb-3" value="${sessionScope.loginAcademyMemberBean.a_name}" readonly="true" />
+			<input class="form-control mb-3" value="${sessionScope.loginAcademyMemberBean.a_id}" readonly="true" />
+			<input class="form-control mb-3" value="${sessionScope.loginAcademyMemberBean.a_tele}" readonly="true" />
+			
+				
 					<form:form action="${root}academymember/introduce_modifyPro"
 						method="post" modelAttribute="infoIntroduce"
 						enctype="multipart/form-data">
 						<form:hidden path="a_memberNo" value="${sessionScope.loginAcademyMemberBean.a_memberNo }"/>
-						<form:input class="form-control mb-3" path="a_name"
-							value="학원 이름 : ${sessionScope.loginAcademyMemberBean.a_name}"
-							readonly="true" />
-						<form:input class="form-control mb-3" path="a_id"
-							value="아이디 : ${sessionScope.loginAcademyMemberBean.a_id}"
-							readonly="true" />
-						<form:input class="form-control mb-3" path="a_tele"
-							value="전화번호 : ${sessionScope.loginAcademyMemberBean.a_tele}"
-							readonly="true" />
 						<form:textarea path="a_introduce" class="form-control mb-3"
 							placeholder="학원 소개글" style="resize:none"></form:textarea>
 						<div class="text-center">
