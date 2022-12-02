@@ -70,7 +70,7 @@ public class BoardController {
 	
 	//종합 학원 게시판 상세보기
 	@GetMapping("/gBoardRead")
-	public String gBoardRead_temp(@RequestParam("a_memberNo") int a_memberNo,
+	public String gBoardRead(@RequestParam("a_memberNo") int a_memberNo,
 								HttpSession session,
 								Model model) {
 		int m_memberNo = 0;
@@ -117,15 +117,9 @@ public class BoardController {
 		return "board/gBoardRead_teacher";
 	}
 	
-	//문의게시판 목록 호출
-	@GetMapping("/askBoard")
-	public String askBoard() {
-		return "board/askBoard";
-	}
-	
 	//학원소개
 	@GetMapping("/about")
-	public String index() {
+	public String about() {
 		return "board/about";
 	}
 }
