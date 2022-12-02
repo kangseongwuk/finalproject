@@ -10,14 +10,9 @@
 </head>
 <body>
 <script type="text/javascript">
-var send = confirm("등록하시겠습니까?");
 
-if(send == true) {
-   location.href="${root}blackList/blackListList"
-}
-else {
-   history.back(-1);
-}
+alert("문의글이 등록되었습니다.");
+location.href="${root}serviceBoard/siteAcaAskWrite"  
 </script>
 </body>
 </html>

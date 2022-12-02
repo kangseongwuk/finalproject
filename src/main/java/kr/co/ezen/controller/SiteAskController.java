@@ -90,9 +90,4 @@ public class SiteAskController {
 		return "serviceBoard/siteAskWrite_success";
 	}	
 	
-	@GetMapping("/siteAskWrite_fail")
-	public String siteABoardWrite_fail() {
-		return "serviceBoard/siteAskWrite_fail";
-	}
-	
 }

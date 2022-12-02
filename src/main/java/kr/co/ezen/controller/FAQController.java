@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,11 +26,14 @@ public class FAQController {
 	public FaqService faqService;
 	
 	@GetMapping("/faqBoard")
-	public String faqlist(@ModelAttribute("fbListBean") FaqBoardBean fbListBean,
+	public String faqlist(@ModelAttribute("fbListBean") FaqBoardBean fbListBean, 
 							Model model) {
-	 	List<FaqBoardBean> faqlist = faqService.getFaqList();
+		
+	 	List<FaqBoardBean> faqlist = faqService.getFaqList(fbListBean);
 	 	model.addAttribute("faqlist", faqlist);
+	 	
 	 	model.addAttribute("fbListBean", fbListBean);
+	 	
 		return "faq/faqBoard";
 	}
 	
@@ -43,7 +45,8 @@ public class FAQController {
 	}
 	
 	@PostMapping("/faqWrite_pro")
-	public String write_pro(@Validated@ModelAttribute("fbWriteBean") FaqBoardBean fbWriteBean, 
+	public String write_pro(@ModelAttribute("fbListBean") FaqBoardBean fbListBean, 
+							@ModelAttribute("fbWriteBean") FaqBoardBean fbWriteBean, 
 							BindingResult result, 
 							Model model) {
 		
@@ -53,7 +56,7 @@ public class FAQController {
 		// upload 처리 
 		faqService.fbWrite(fbWriteBean);
 		
-		List<FaqBoardBean> faqlist = faqService.getFaqList();
+		List<FaqBoardBean> faqlist = faqService.getFaqList(fbListBean);
 	 	model.addAttribute("faqlist", faqlist);
 	
 		return "faq/faqBoard";
@@ -75,7 +78,8 @@ public class FAQController {
 	}
 	
 	@PostMapping("/faqModify_pro")
-	public String modify_pro(@Validated@ModelAttribute("fbModifyBean") FaqBoardBean fbModifyBean, 
+	public String modify_pro(@ModelAttribute("fbListBean") FaqBoardBean fbListBean, 
+							@ModelAttribute("fbModifyBean") FaqBoardBean fbModifyBean, 
 							  BindingResult result,
 							  Model model) {	
 		
@@ -86,34 +90,36 @@ public class FAQController {
 		// upload 처리 
 	 	faqService.fbModify(fbModifyBean);
 	 	
-	 	List<FaqBoardBean> faqlist = faqService.getFaqList();
+	 	List<FaqBoardBean> faqlist = faqService.getFaqList(fbListBean);
 	 	model.addAttribute("faqlist", faqlist);
+	 	
+	 	model.addAttribute("fbListBean", fbListBean);
 	 			
 	 	return "faq/faqBoard";
 	}
 	
 	//삭제
 	@GetMapping("/faqDelete")
-	public String delete(@RequestParam("fb_no") int fb_no,
-						Model model) {
+	public String delete(@ModelAttribute("fbListBean") FaqBoardBean fbListBean,
+						@RequestParam("fb_no") int fb_no,
+						Model model) {	
 		
 		return "faq/faqDelete";
 	}
 	
-	//삭제
 	@GetMapping("/faqDelete_pro")
-	public String delete_pro(@ModelAttribute("fbListBean") FaqBoardBean fbListBean,
+	public String delete_pro(@ModelAttribute("fbListBean") FaqBoardBean fbListBean, 
 							@RequestParam("fb_no") int fb_no,
-							Model model) {
+							 Model model) {
 		
 		faqService.fbDelete(fbListBean.getFb_no());
 		
-		List<FaqBoardBean> faqlist = faqService.getFaqList();
+		List<FaqBoardBean> faqlist = faqService.getFaqList(fbListBean);
 	 	model.addAttribute("faqlist", faqlist);
-	 	
+	 
 	 	model.addAttribute("fbListBean", fbListBean);
-					
+	 	
+	 	
 		return "faq/faqBoard";
 	}
-	
 }

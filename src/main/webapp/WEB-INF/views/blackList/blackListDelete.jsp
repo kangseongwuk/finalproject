@@ -13,7 +13,7 @@
 var send = confirm("삭제하시겠습니까?");
 
 if(send == true) {
-   location.href="${root}blackList/blackListList"
+   location.href="${root}blackList/blackListDelete_pro?m_memberNo=${blSearchBean.m_memberNo}&a_memberNo=${blSearchBean.a_memberNo}"
 }
 else {
    history.back(-1);

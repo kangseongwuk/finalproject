@@ -157,10 +157,10 @@ public class ServiceCenterController {
 		return "serviceBoard/noticeBoardList";
 	}	
 	
-	
 	//수정
 	@GetMapping("/noticeBoardModify")
-	public String modify(@RequestParam("nb_no") int nb_no, 
+	public String modify(@ModelAttribute("nbReadBean") ServiceCenterBean nbReadsBean, 
+						@RequestParam("nb_no") int nb_no, 
 						@ModelAttribute("nbModifyBean") ServiceCenterBean nbModifyBean,
 						Model model) {
 		
@@ -170,6 +170,9 @@ public class ServiceCenterController {
 				
 		//idx가 0인 오류는 아래처럼 해줍니다.
 		nbModifyBean.setNb_no(nb_no);	
+		
+		ServiceCenterBean nbReadBean = serviceCenterService.getNbInfo(nb_no);
+		model.addAttribute("nbReadBean", nbReadBean);
 		
 		return "serviceBoard/noticeBoardModify";
 	}

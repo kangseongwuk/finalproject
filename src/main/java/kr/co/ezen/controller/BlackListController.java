@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -122,16 +121,29 @@ public class BlackListController {
 	}
 
 	@PostMapping("blackListWrite_pro")
-	public String write_pro(@Validated@ModelAttribute("blWriteBean") BlackListBean blWriteBean, 
-							BindingResult result) {
+	public String write_pro(@ModelAttribute("blWriteBean") BlackListBean blWriteBean, 
+							@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
+							@ModelAttribute("blListBean") BlackListBean blListBean,
+						    @RequestParam(value = "page", defaultValue = "1") int page,
+							BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			return "blackList/blackListWrite";
 		}
 		
 		blackListService.addBlContent(blWriteBean);
+		
+		List<BlackListBean> bllist = blackListService.getBlList(page);
+		model.addAttribute("bllist", bllist); 
+			
+		PageCountBean pageCountBean = blackListService.getContentCnt(page);
+		model.addAttribute("pageCountBean", pageCountBean);
+		
+		model.addAttribute("page", page);
+		
+		model.addAttribute("blListBean", blListBean);
 	
-		return "blackList/blackListWrite_success";
+		return "blackList/blackListList";
 	}
 
 	@GetMapping("/blackListWrite_fail")
@@ -151,12 +163,17 @@ public class BlackListController {
 		model.addAttribute("a_memberNo", a_memberNo);
 		
 		model.addAttribute("blModifyBean", blModifyBean);
+		
+		BlackListBean blReadBean = blackListService.getBlackInfo(m_memberNo, a_memberNo);
+		model.addAttribute("blReadBean", blReadBean);
 	
 		return "blackList/blackListModify";
 	}
 	
 	@PostMapping("blackListModify_pro")
-	public String modify_pro(@Validated@ModelAttribute("blModifyBean") BlackListBean blModifyBean,
+	public String modify_pro(@RequestParam("m_memberNo") int m_memberNo, @RequestParam("a_memberNo") int a_memberNo,
+							 @ModelAttribute("blModifyBean") BlackListBean blModifyBean,
+							 @RequestParam(value = "page", defaultValue = "1") int page,
 							 BindingResult result,
 							 Model model) {
 		
@@ -166,20 +183,55 @@ public class BlackListController {
 		
 		blackListService.modifyBlInfo(blModifyBean);
 		
-		return "blackList/blackListModify_success";
+		BlackListBean blReadBean = blackListService.getBlackInfo(m_memberNo, a_memberNo);
+		model.addAttribute("blReadBean", blReadBean);
+		
+		return "blackList/blackListRead";
 	}
 	
 	
 	// 삭제
 	@GetMapping("/blackListDelete")
-	public String delete(@RequestParam("m_memberNo") int m_memberNo, @RequestParam("a_memberNo") int a_memberNo,
+	public String delete(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
+						 @ModelAttribute("blListBean") BlackListBean blListBean,
+						 @RequestParam("m_memberNo") int m_memberNo, @RequestParam("a_memberNo") int a_memberNo,
+						 Model model) {
+	
+	model.addAttribute("m_memberNo", m_memberNo);
+	model.addAttribute("a_memberNo", a_memberNo);
+
+	model.addAttribute("blSearchBean", blSearchBean);
+	model.addAttribute("blListBean", blListBean);
+	
+	return "blackList/blackListDelete";
+	}
+	
+	@GetMapping("/blackListDelete_pro")
+	public String delete_pro(@ModelAttribute("blSearchBean") BlackListBean blSearchBean,
+							@ModelAttribute("blListBean") BlackListBean blListBean,
+							@RequestParam("m_memberNo") int m_memberNo, @RequestParam("a_memberNo") int a_memberNo,
+							@RequestParam(value = "page", defaultValue = "1") int page,
 							Model model) {
+		
 	blackListService.delBlInfo(m_memberNo, a_memberNo);
 
 	model.addAttribute("m_memberNo", m_memberNo);
 	model.addAttribute("a_memberNo", a_memberNo);
+	
+	List<BlackListBean> bllist = blackListService.getBlList(page);
+	model.addAttribute("bllist", bllist); 
+		
+	PageCountBean pageCountBean = blackListService.getContentCnt(page);
+	model.addAttribute("pageCountBean", pageCountBean);
+	
+	model.addAttribute("page", page);
+	
+	model.addAttribute("blSearchBean", blSearchBean);
+	model.addAttribute("blListBean", blListBean);
 
-	return "blackList/blackListDelete";
+	return "blackList/blackListList";
 	}
+	
+	
 	
 }

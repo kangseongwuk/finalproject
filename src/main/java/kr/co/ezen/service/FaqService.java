@@ -14,9 +14,9 @@ public class FaqService {
 	@Autowired
 	public FaqDAO faqDAO;
 	
-	public List<FaqBoardBean> getFaqList(){
+	public List<FaqBoardBean> getFaqList(FaqBoardBean fbListBean){
 		
-		return faqDAO.getFaqList();
+		return faqDAO.getFaqList(fbListBean);
 	}
 	
 	//입력

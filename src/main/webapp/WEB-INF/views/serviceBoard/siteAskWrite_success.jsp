@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>::SKYCASTLE::</title>
 </head>
 <body>
-	<script>
-		alert("글 수정을 성공 했습니다.")
-		location.href="blackListRead?m_memberNo=${blModifyBean.m_memberNo}&a_memberNo=${blModifyBean.a_memberNo}"
+<script type="text/javascript">
 
-		</script>
+alert("문의글이 등록되었습니다.");
+location.href="${root}serviceBoard/siteAskWrite"  
+</script>
 </body>
-</html>	
+</html>

@@ -86,10 +86,4 @@ public class SiteAcaAskController {
 	
 		return "serviceBoard/siteAcaAskWrite_success";
 	}	
-	
-	@GetMapping("/siteAcaAskWrite_fail")
-	public String siteAcaAskWrite_fail() {
-		return "serviceBoard/siteAcaAskWrite_fail";
-	}
-	
 }

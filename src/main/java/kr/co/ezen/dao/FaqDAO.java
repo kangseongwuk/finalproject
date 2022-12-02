@@ -14,8 +14,8 @@ public class FaqDAO {
 	@Autowired
 	public FaqMapper faqMapper;
 	
-	public List<FaqBoardBean> getFaqList(){
-		return faqMapper.getFaqList();
+	public List<FaqBoardBean> getFaqList(FaqBoardBean fbListBean){
+		return faqMapper.getFaqList(fbListBean);
 	}
 	
 	//입력

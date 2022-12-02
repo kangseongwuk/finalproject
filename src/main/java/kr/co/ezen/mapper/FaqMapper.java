@@ -13,7 +13,7 @@ public interface FaqMapper {
 
 	@Select("select * from FAQboardT "
 			+ "order by fb_no")
-	List<FaqBoardBean> getFaqList();
+	List<FaqBoardBean> getFaqList(FaqBoardBean fbListBean);
 	
 	//입력
 	@Insert("insert into FAQboardT (fb_no, fb_contentsQ, fb_contentsA)"

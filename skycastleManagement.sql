@@ -257,13 +257,13 @@ CREATE TABLE reviewT(
 
 --학원 리뷰 예시
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,1,10000001,'user01','강의실이 친절하고, 강사님이 아늑해요',5);
+    values(100001,1,10000001,'user01','강의실이 아늑하고, 강사님이 친절해요',5);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,2,10000002,'user02','강의실이 친절하고, 강사님이 아늑해요',4);
+    values(100001,2,10000002,'user02','강의실이 아늑하고, 강사님이 친절해요',4);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,3,10000003,'user03','힘들어요',2);
+    values(100001,3,10000003,'user03','공부할 수 있는 분위기가 잘 갖추어져 있어요',2);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
-    values(100001,4,10000004,'user04','시끄러워요',5);
+    values(100001,4,10000004,'user04','선생님들이 성실하게 가르쳐주세요',5);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
     values(100004,1,10000002,'user02','그저 그래요.',3);
 insert into reviewT(a_memberNo,r_no,r_writerNo,r_writerId,r_contents,r_score)
@@ -384,19 +384,19 @@ CREATE TABLE teacherReviewT(
 
 --강사 리뷰 예시
 insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
-    values(100001,'박강산',1,10000001,'user01','오홓홓 좋아요','5');
+    values(100001,'박강산',1,10000001,'user01','모르는 걸 성실하게 답변해주십니다.','5');
 insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
-    values(100001,'박강산',2,10000002,'user02','그냥 싫어요','2');
+    values(100001,'박강산',2,10000002,'user02','수업중 목소리가 너무 작아요.','2');
 insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
-    values(100001,'박강산',3,10000003,'user03','그냥','3');
+    values(100001,'박강산',3,10000003,'user03','노멀합니다.','3');
 insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
-    values(100001,'박강산',4,10000004,'user04','사랑합니다','5');
+    values(100001,'박강산',4,10000004,'user04','선생님 덕분에 2등급이나 올렸어요.','5');
 insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
-    values(100001,'김강사',1,10000001,'user01','좋아요','5');
+    values(100001,'김강사',1,10000001,'user01','수업이 재밌어요.','5');
 insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
-    values(100001,'김강사',2,10000002,'user02','내가 악플러다','1');
+    values(100001,'김강사',2,10000002,'user02','숙제가 너무 많아요.','1');
 insert into teacherReviewT(a_memberNo,t_name,t_reNo,t_reWriterNo,t_reWriterId,t_reContents,t_score)
-    values(100001,'김강사',3,10000003,'user03','','4');
+    values(100001,'김강사',3,10000003,'user03','학생들을 하나하나 이끌어 주셔서 따라가기가 수월해요.','4');
 
 
 
@@ -415,13 +415,13 @@ CREATE TABLE blacklistT(
 
 -- 신고/블랙리스트 관리 예시
 insert into blacklistT(m_memberNo, a_memberNo, black_contents)
-    values(10000002, 100001, '돈 안 낸 진상');
+    values(10000002, 100001, '수업 중 면학 분위기를 헤치는 학생');
 insert into blacklistT(m_memberNo, a_memberNo, black_contents) 
-    values(10000003, 100001, '돈 안 낸 진상');
+    values(10000003, 100001, '아이의 성취도에 맞지 않는 클래스로 올려달라고 재차 요청하는 학부모');
 insert into blacklistT(m_memberNo, a_memberNo, black_contents) 
-    values(10000004, 100001, '돈 안 낸 진상');
+    values(10000004, 100001, '기물파손 2회');
 insert into blacklistT(m_memberNo, a_memberNo, black_contents) 
-    values(10000005, 100001, '돈 안 낸 진상');
+    values(10000005, 100001, '수업을 참관해서 봐야겠다고 우기는 어머니');
 
 
 --11. 학원 찜 목록 테이블
@@ -481,9 +481,9 @@ CREATE TABLE siteAskT(
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
     values('10000001', '01011112222', '빨리 해결해주세요', '아이디랑 비밀번호를 모르겠어요. 제 계정 정보 좀 알려주세요');
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
-    values('10000001', '01011112222', '아직인가요?', '저 로그인 해야해요');
+    values('10000001', '01011112222', '상담문의 관련 질문입니다.', '학원으로 다이렉트 연결되는 건가요? 아니면 사이트를 통해서 연락이 오는건가요?');
 insert into siteAskT(sa_memberno, sa_tele, sa_title, sa_contents) 
-    values('10000001', '01011112222', '아직도 처리 안 함?', 'ㄹㅈㄷ');
+    values('10000001', '01011112222', '탈퇴한 이메일 때문에 비밀번호 찾기가 안됩니다', '탈퇴한 임일 때문에 비밀번호 찾기를 이용할 수 없는데 다른 방법을 제시해주세요.');
 
 
 
@@ -514,9 +514,9 @@ CREATE TABLE noticeBoardT(
 
 --공지사항 게시판 예시
 insert into noticeBoardT(nb_no,nb_title,nb_contents,nb_file)
-    values(nb_sq.nextval,'공지사항 테스트1','공지사항 테스트입니다','');
+    values(nb_sq.nextval,'11월 영어마을 체험 관련 공지사항','공지사항 테스트입니다','');
 insert into noticeBoardT(nb_no,nb_title,nb_contents,nb_file)
-    values(nb_sq.nextval,'공지사항 테스트2','공지사항 테스트입니다아아ㅏㅏㅏㅏㅏㅏㅏ','');
+    values(nb_sq.nextval,'12월 공지사항','공지사항 테스트입니다.','');
 
 
 
@@ -540,7 +540,22 @@ CREATE TABLE FAQBoardT(
 
 --FAQ 게시판 예시
 insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
-    values(fb_sq.nextval,'이 사이트는 뭐 하는 곳이죠?','저도 모릅니다.');
+    values(fb_sq.nextval,'스카이캐슬은 어떤 사이트인가요?','스카이캐슬은 학원과 학부모,학생들의 연결을 돕는 서비스를 제공합니다. 더 자세한 내용은 회사 소개를 참고하시기 바랍니다.');
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'스카이캐슬의 이용방법은 무엇인가요?','일반회원(학생, 학부모)으로 가입하신 분이라면 모든 서비스를 차별없이 이용할 수 있습니다. 일반회원 로그인으로 모든 사이트 기능을 누려보세요.');
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'비밀번호 찾기 실패 관련','이메일을 더 이상 사용할 수 없는 경우 고객센터로 연락바랍니다.');
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'회원탈퇴는 어떻게 하나요?','회원탈퇴는 로그인 후 마이페이지를 통해 할 수 있습니다.');
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'[결제]결제 수단은 무엇이 있나요?','스카이캐슬은 기본적으로 이니시스 결제툴을 통해 서비스를 제공해드리며 카카오페이, 네이버페이 등의 방법도 이용하실 수 있습니다. ');
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'[결제]결제 내역을 확인할 수 있나요?','학원 회원이시라면 "마이페이지 - 결제 내역"에서 확인 가능합니다.');
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'한 학기는 몇 개월인가요?','한 학기는 3개월(13주)로 운영됩니다.');
+insert into FAQBoardT(fb_no,fb_contentsQ,fb_contentsA)
+    values(fb_sq.nextval,'학원 주소를 바꾸고 싶어요','학원 회원 - 마이페이지 정보 수정을 통해 주소, 상세주소 변경이 가능합니다.');
+    
 
 
 --16. 학원 문의 테이블
@@ -563,5 +578,5 @@ CREATE TABLE siteAcaAskT(
 commit;
 
     
-    select * from MEMBERT;
+    
     
